@@ -6,11 +6,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DairyPricesModule } from './prices/dairy-prices/dairy-prices.module';
 import { TomatoPricesModule } from './prices/tomato-prices/tomato-prices.module';
 import { WeatherModule } from './weather/weather.module';
+import { MailboxAppalachainPricesModule } from './prices/mailbox-appalachain-prices/mailbox-appalachain-prices.module';
 
 @Module({
   imports: [AuthModule,
     DairyPricesModule,
-    UserModule, TomatoPricesModule, WeatherModule,
+    UserModule, TomatoPricesModule, WeatherModule, MailboxAppalachainPricesModule,
     ConfigModule.forRoot({isGlobal: true}), 
     MongooseModule.forRootAsync({
       imports: [ConfigModule], // Ensure ConfigModule is available

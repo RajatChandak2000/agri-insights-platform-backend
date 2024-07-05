@@ -7,14 +7,14 @@ import { SignInDto, SignUpDto } from "./dto";
 export class AuthController{
     constructor(private authService: AuthService){}
 
-    @Post('signup')
+    @Post('signup') 
     signup(@Body() dto: SignUpDto): Promise<User>{
         console.log("Called");
         return this.authService.signup(dto);
     }
 
     @Post('signin')
-    signin(@Body() dto: SignInDto): Promise<{accessToken: string}>{
+    signin(@Body() dto: SignInDto): Promise<{accessToken: string, user:{username:string, email:string}}>{
         return this.authService.signin(dto);
     }
 }
