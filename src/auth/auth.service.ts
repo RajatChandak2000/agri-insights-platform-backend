@@ -39,7 +39,7 @@ export class AuthService{
         }
     }
 
-    async signin(dto: SignInDto): Promise<{accessToken: string}>{
+    async signin(dto: SignInDto): Promise<{accessToken: string, user:{username:string, email:string}}>{
         const { email, password } = dto;
         const user = await this.userModel.findOne({email}).exec();
 
@@ -48,6 +48,12 @@ export class AuthService{
         }
         const payload = { email: user.email, sub: user._id };
         const accessToken = await this.jwtService.sign(payload);
-        return {accessToken};
+        return {
+            accessToken,
+            user:{
+                username: user.username,
+                email: user.email
+            }
+        };
     }
 }
