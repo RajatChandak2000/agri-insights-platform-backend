@@ -5,13 +5,26 @@ import { InjectModel } from "@nestjs/mongoose";
 import { User } from "src/user/schemas/user.schema";
 import { Model } from "mongoose";
 import { SignInDto, SignUpDto } from "./dto";
-
+import * as nodemailer from 'nodemailer';
+import * as crypto from 'crypto';
+import { google } from 'googleapis'
 @Injectable()
 export class AuthService{
+    private oauth2Client;
+
     constructor(
         @InjectModel(User.name) private userModel: Model<User>, 
         private jwtService: JwtService
-    ){}
+    ){
+        this.oauth2Client = new google.auth.OAuth2(
+            process.env.CLIENT_ID,
+            process.env.CLIENT_SECRET,
+            process.env.REDIRECT_URI
+        )
+        this.oauth2Client.setCredentials({
+            refresh_token: process.env.REFRESH_TOKEN
+        });
+    }
 
     async signup(dto: SignUpDto): Promise<User>{
         const { username, email, password } = dto;
@@ -55,5 +68,69 @@ export class AuthService{
                 email: user.email
             }
         };
+    }
+
+    async sendPasswordResetLink(email:string) : Promise<void> {
+        const user = await this.userModel.findOne({email}).exec();
+        
+        if(!user){
+            throw new HttpException('User with this email does not exist', HttpStatus.NOT_FOUND)
+        }
+
+        const token = crypto.randomBytes(32).toString('hex')
+
+        user.resetToken = token;
+        user.resetTokenExpiry = Date.now() + 3600000 //1 hour
+        await user.save()
+
+        const resetLink = `http://localhost:3000/resetPassword?token=${token}`
+        
+        try{
+            const accessTokenResponse = await this.oauth2Client.getAccessToken();
+            console.log('accessToken', accessTokenResponse.token);
+            
+            const transporter = nodemailer.createTransport({
+                service:'gmail',
+                auth: {
+                    type: 'OAuth2',
+                    user: process.env.GMAIL_USER, // Your Gmail address
+                    clientId: process.env.CLIENT_ID,
+                    clientSecret: process.env.CLIENT_SECRET,
+                    refreshToken: process.env.REFRESH_TOKEN,
+                    accessToken: accessTokenResponse.token,
+                }
+            })
+            
+
+            const mailOptions = {
+                from: process.env.GMAIL_USER,
+                to: email,
+                subject: 'Password reset',
+                text: `You requested a password reset. Click here to reset your password: ${resetLink}`,
+                html: `<p>You requested a password reset. Click here to reset your password:</p><a href="${resetLink}">${resetLink}</a>`
+            };
+
+            await transporter.sendMail(mailOptions);
+        }catch(error){
+            console.error('Error sending email:', error);
+            throw new HttpException('Failed to send reset link. Please try again later.', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    async resetPassword(token: string, newPassword: string): Promise<void> {
+        const user = await this.userModel.findOne({
+            resetToken: token,
+            resetTokenExpiry: {$gt: Date.now()} //Checking if the token  is still valid
+        })
+
+        if(!user){
+            throw new HttpException('Invalid or expired token', HttpStatus.BAD_REQUEST);
+        }
+
+        const hashedPassword = await argon2.hash(newPassword);
+        user.password = hashedPassword;
+        user.resetToken = undefined; // Invalidate the token
+        user.resetTokenExpiry = undefined; // Invalidate the expiry date
+        await user.save();
     }
 }
