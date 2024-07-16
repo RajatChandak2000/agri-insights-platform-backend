@@ -41,13 +41,11 @@ export class AuthService{
         }catch(error){
             if (error.name === "MongoServerError" && error.code === 11000) {
                 // Handle duplicate key error
-                if (error.keyValue && error.keyValue.username) {
-                    throw new ForbiddenException('Username is already taken');
-                }else if(error.keyValue && error.keyValue.email){
+                if(error.keyValue && error.keyValue.email){
                     throw new ForbiddenException('Email is already taken');
                 }
             }else {
-                throw error; // Re-throw if it's an instance of HttpException
+                throw error;
             }
         }
     }
@@ -87,7 +85,6 @@ export class AuthService{
         
         try{
             const accessTokenResponse = await this.oauth2Client.getAccessToken();
-            console.log('accessToken', accessTokenResponse.token);
             
             const transporter = nodemailer.createTransport({
                 service:'gmail',
@@ -101,7 +98,6 @@ export class AuthService{
                 }
             })
             
-
             const mailOptions = {
                 from: process.env.GMAIL_USER,
                 to: email,
