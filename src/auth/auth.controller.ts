@@ -9,7 +9,6 @@ export class AuthController{
 
     @Post('signup') 
     signup(@Body() dto: SignUpDto): Promise<User>{
-        console.log("Called");
         return this.authService.signup(dto);
     }
 
@@ -27,7 +26,6 @@ export class AuthController{
     @Post('reset-password')
     @HttpCode(HttpStatus.OK)
     resetPassword(@Body() body: { token: string, password: string }): Promise<void> {
-        console.log('Entered');
         const { token, password } = body;
         return this.authService.resetPassword(token, password);
     }
