@@ -2,64 +2,53 @@ import { IsNumber, IsObject, IsOptional } from "class-validator";
 
 class MilkProductionInputsDto{
     @IsNumber()
-    @IsOptional()
-    totalNumberOfCows?: number;
+    totalNumberOfCows: number;
 
     @IsNumber()
-    @IsOptional()
-    calvingInterval?: number;
+    calvingInterval: number;
 
     @IsNumber()
-    @IsOptional()
     expectedMilkProduction?: number;
 }
 
 class HeiferProductionInputsDto{
     @IsNumber()
-    @IsOptional()
     cullingRate?: number;
 
-    @IsNumber()
-    @IsOptional()
+    @IsNumber() 
     cowDeathLossRate?: number;
 
     @IsNumber()
-    @IsOptional()
     heiferRaisingDeathLossRate?: number;
 
     @IsNumber()
-    @IsOptional()
-    numberOfHeifers?: number;
+    numberOfHeifersRaised?: number;
 
     @IsNumber()
-    @IsOptional()
     bullCalfDeath?: number;
 
     @IsNumber()
-    @IsOptional()
-    expectedPercentMale?: number;
+    expectedPercentMaleWithSexedSemen?: number;
+
+    @IsNumber()
+    expectedPercentMaleWithConventional?: number;
 }
 
 class BeefCrossProductionDetailsDto {
     @IsNumber()
-    @IsOptional()
     beefCrossPercent?: number;
 
     @IsNumber()
-    @IsOptional()
     beefCrossDeathRate?: number;
 }
 
 export class ProductionDetailsInputDto{
     @IsObject()
-    @IsOptional()
-    milkProduction?: MilkProductionInputsDto;
+    milkProduction: MilkProductionInputsDto;
 
     @IsObject()
-    @IsOptional()
-    heiferProduction?: HeiferProductionInputsDto;
+    heiferProduction: HeiferProductionInputsDto;
 
     @IsObject()
-    @IsOptional()
-    beefCrossDetails?: BeefCrossProductionDetailsDto;
+    beefCrossDetails: BeefCrossProductionDetailsDto;
 }
