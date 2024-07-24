@@ -25,13 +25,16 @@ class HeiferProductionInputs{
     heiferRaisingDeathLossRate: number;
 
     @Prop({ required: true })
-    numberOfHeifers: number;
+    numberOfHeifersRaised: number;
 
     @Prop({ required: true })
     bullCalfDeath: number;
 
     @Prop({ required: true })
-    expectedPercentMale: number;
+    expectedPercentMaleWithSexedSemen: number;
+
+    @Prop({ required: true })
+    expectedPercentMaleWithConventional: number;
 }
 
 @Schema()

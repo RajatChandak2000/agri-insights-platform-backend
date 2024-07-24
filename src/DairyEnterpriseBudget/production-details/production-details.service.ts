@@ -98,7 +98,7 @@ export class ProductionDetailsService {
         const rollingHerdAverage = ((expectedMilkProduction) / (calvingInterval / 12)).toFixed(2);
         const totalAnnualMilkProduction = ((numberOfLactationsPerYear * expectedMilkProduction) / 100).toFixed(2);
         const expectedAnnualMilkSales = ((parseFloat(rollingHerdAverage) / (100 * expectedMilkPrice)) * totalNumberOfCows).toFixed(2);
-        const numberOfReplacementHeifersNeeded = (totalNumberOfCows * (cullingRate + cowDeathLossRate + heiferRaisingDeathLossRate)).toFixed(2);
+        const numberOfReplacementHeifersNeeded = (totalNumberOfCows * (cullingRate/100 + cowDeathLossRate/100 + heiferRaisingDeathLossRate/100)).toFixed(2);
       
         // Convert to numbers for storage
         const updatedOutputDocument = {
@@ -142,5 +142,24 @@ export class ProductionDetailsService {
         }
 
         return outputDocument;
+    }
+
+    async getProductionDetailsInput(email:string): Promise<ProductionDetailsInput | null>{
+        //first find the user_id using the email, then find the document using the id
+        const user = await this.userModel.findOne({email}).exec();
+        if(!user){
+            throw new HttpException('User with this email does not exist', HttpStatus.NOT_FOUND)
+        }
+
+        const userId = user._id.toString();
+        console.log('userId ', userId);
+
+        const inputDocument = this.productionDetailsInputModel.findOne({userId}).exec();
+
+        if(!inputDocument){
+            throw new HttpException('Input record for this user not found', HttpStatus.NOT_FOUND)
+        }
+
+        return inputDocument;
     }
 }
