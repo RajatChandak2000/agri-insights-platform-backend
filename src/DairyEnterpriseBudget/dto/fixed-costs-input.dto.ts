@@ -53,7 +53,15 @@ class FacilitiesAndBuildingsFixedCostDto {
 
     @IsOptional()
     @IsNumber()
+    feedingEquipmentInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
     feedingEquipmentYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    freestallHousingAndLanesInitialInvestment?: number;
 
     @IsOptional()
     @IsNumber()
@@ -69,11 +77,79 @@ class FacilitiesAndBuildingsFixedCostDto {
 
     @IsOptional()
     @IsNumber()
+    waterSystemInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    waterSystemYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    hayShedInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    hayShedYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    trenchSilosInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    trenchSilosYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    fencesInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    fencesYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    commodityBarnInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    commodityBarnYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    calfOrHeiferBarnInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    calfOrHeiferBarnYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tiltTableInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tiltTableYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    cattleHandlingFacilitiesInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    cattleHandlingFacilitiesYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
     otherFacilitiesAndBuildings1InitialInvestment?: number
 
     @IsOptional()
     @IsNumber()
     otherFacilitiesAndBuildings1YearsOfUsefulLife?: number
+
+    @IsOptional()
+    @IsNumber()
+    otherFacilitiesAndBuildings2InitialInvestment?: number
 
     @IsOptional()
     @IsNumber()

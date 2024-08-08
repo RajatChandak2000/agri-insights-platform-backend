@@ -749,8 +749,8 @@ export class FixedCostsInput extends Document {
     @Prop({ type: MachineryFixedCostsInputs })
     machineryFixedCosts: MachineryFixedCostsInputs;
 
-    @Prop({ type: DetailedMachineryFixedCostsInputs, default: null })
-    detailedMachineryFixedCosts: DetailedMachineryFixedCostsInputs | null;
+    @Prop({ type: DetailedMachineryFixedCostsInputs, default: {} })
+    detailedMachineryFixedCosts: DetailedMachineryFixedCostsInputs;
 
     @Prop({ type: LandFixedCostsInputs, default: {} })
     landFixedCosts: LandFixedCostsInputs;
