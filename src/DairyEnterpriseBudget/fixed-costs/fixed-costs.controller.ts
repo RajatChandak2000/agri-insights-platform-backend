@@ -13,7 +13,6 @@ export class FixedCostsController{
         @Param('email') email: string,
         @Body() updateDto: FixedCostsInputDto
     ){
-        console.log("Data got from client is ", updateDto);
         return this.fixedCostsSerive.updateInput(email, updateDto)
     }
 

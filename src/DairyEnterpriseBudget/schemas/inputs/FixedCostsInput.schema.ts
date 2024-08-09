@@ -49,7 +49,7 @@ class FacilitiesAndBuildingsFixedCostInputs {
     feedingEquipmentYearsOfUsefulLife: number;
 
     @Prop({ required: true })
-    freestallHousingandLanesInitialInvestment: number;
+    freestallHousingAndLanesInitialInvestment: number;
 
     @Prop({ required: true })
     freestallHousingAndLanesYearsOfUsefulLife: number;

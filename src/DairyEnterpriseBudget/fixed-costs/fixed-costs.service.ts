@@ -178,7 +178,7 @@ export class FixedCostsService{
         //Facilities and Buildings
         const milkingParlorandEquipmentInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost?.milkingParlorAndEquipmentInitialInvestment || 1250000;
         const feedingEquipmentInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.feedingEquipmentInitialInvestment || 500000;
-        const freestallHousingandLanesInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.freestallHousingandLanesInitialInvestment || 800000;
+        const freestallHousingAndLanesInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.freestallHousingAndLanesInitialInvestment || 800000;
         const waterSystemInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.waterSystemInitialInvestment || 70000;
         const hayShedInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.hayShedInitialInvestment || 75000
         const trenchSilosInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.trenchSilosInitialInvestment || 200000;
@@ -506,10 +506,10 @@ export class FixedCostsService{
         const feedingEquipmentPropertyInsurance = (feedingEquipmentInitialInvestment) * (propertyInsuranceRate/100);
         const feedingEquipmentTotalAnnualEconomicCost = (feedingEquipmentAnnualAmortization) + (feedingEquipmentPropertyTax) + (feedingEquipmentPropertyInsurance);
         
-        const freestallHousingandLanesEstimatedSalvageValue = (freestallHousingandLanesInitialInvestment) * (3/10);
-        const freestallHousingandLanesAnnualAmortization = (((freestallHousingandLanesInitialInvestment)-(freestallHousingandLanesEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - (1 + (longTermInterestRate/100))^(-(freestallHousingAndLanesYearsOfUsefulLife))) + ((freestallHousingandLanesEstimatedSalvageValue) * (longTermInterestRate/100)) 
-        const freestallHousingandLanesPropertyTax = (freestallHousingandLanesInitialInvestment) * (propertyTaxRate/100);
-        const freestallHousingandLanesPropertyInsurance = (freestallHousingandLanesInitialInvestment) * (propertyInsuranceRate/100);
+        const freestallHousingandLanesEstimatedSalvageValue = (freestallHousingAndLanesInitialInvestment) * (3/10);
+        const freestallHousingandLanesAnnualAmortization = (((freestallHousingAndLanesInitialInvestment)-(freestallHousingandLanesEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - (1 + (longTermInterestRate/100))^(-(freestallHousingAndLanesYearsOfUsefulLife))) + ((freestallHousingandLanesEstimatedSalvageValue) * (longTermInterestRate/100)) 
+        const freestallHousingandLanesPropertyTax = (freestallHousingAndLanesInitialInvestment) * (propertyTaxRate/100);
+        const freestallHousingandLanesPropertyInsurance = (freestallHousingAndLanesInitialInvestment) * (propertyInsuranceRate/100);
         const freestallHousingandLanesTotalAnnualEconomicCost = (freestallHousingandLanesAnnualAmortization) + (freestallHousingandLanesPropertyTax) + (freestallHousingandLanesPropertyInsurance);
         
         const threePhasePowerSupplyEstimatedSalvageValue = (threePhasePowerSupplyInitialInvestment) * (3/10);
@@ -1082,14 +1082,15 @@ export class FixedCostsService{
                   
         // Convert to document object
         const updatedOutputDocument = {
-            totalCattleFixedCost,
-            totalFacilitiesAndBuildingsFixedCost,
-            totalWasteManagementSystemsFixedCost,
-            totalMachineryFixedCost,
-            totalLandFixedCost,
-            overheadCost,
-            totalDairyFixedCost
+            totalCattleFixedCost: Math.round(totalCattleFixedCost * 100) / 100,
+            totalFacilitiesAndBuildingsFixedCost: Math.round(totalFacilitiesAndBuildingsFixedCost * 100) / 100,
+            totalWasteManagementSystemsFixedCost: Math.round(totalWasteManagementSystemsFixedCost * 100) / 100,
+            totalMachineryFixedCost: Math.round(totalMachineryFixedCost * 100) / 100,
+            totalLandFixedCost: Math.round(totalLandFixedCost * 100) / 100,
+            overheadCost: Math.round(overheadCost * 100) / 100,
+            totalDairyFixedCost: Math.round(totalDairyFixedCost * 100) / 100
         };
+        
       
         try {
           const result = await this.fixedCostsOutputModel.findOneAndUpdate(
