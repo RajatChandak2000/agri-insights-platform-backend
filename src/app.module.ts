@@ -10,13 +10,14 @@ import { MailboxAppalachainPricesModule } from './prices/mailbox-appalachain-pri
 import { ProductionDetailsModule } from './DairyEnterpriseBudget/production-details/production-details.module';
 import { OperatingCostsModule } from './DairyEnterpriseBudget/operating-costs/operating-costs.module';
 import { ReceiptsModule } from './DairyEnterpriseBudget/receipts/receipts.module';
+import { LabourCostModule } from './DairyEnterpriseBudget/labour-cost/labour-cost.module';
 import { FixedCostsModule } from './DairyEnterpriseBudget/fixed-costs/fixed-costs.module';
 
 @Module({
   imports: [AuthModule,
     DairyPricesModule,
     UserModule, TomatoPricesModule, WeatherModule, MailboxAppalachainPricesModule,
-    ProductionDetailsModule,OperatingCostsModule, ReceiptsModule, FixedCostsModule,
+    ProductionDetailsModule,OperatingCostsModule, ReceiptsModule, LabourCostModule, FixedCostsModule,
     ConfigModule.forRoot({isGlobal: true}), 
     MongooseModule.forRootAsync({
       imports: [ConfigModule], // Ensure ConfigModule is available

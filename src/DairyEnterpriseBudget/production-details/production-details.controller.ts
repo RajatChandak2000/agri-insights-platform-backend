@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch } from "@nestjs/common";
+import { Body, Controller, Get, Param, Patch, Post } from "@nestjs/common";
 import { ProductionDetailsService } from "./production-details.service";
 import { ProductionDetailsInputDto } from "../dto";
 import { ProductionDetailsOutput } from "../schemas/outputs/ProductionDetailsOutput.schema";
@@ -27,5 +27,11 @@ export class ProductionDetailsController{
     async getProductionDetailsInput(@Param('email') email:string): Promise<ProductionDetailsInput | null>{
         console.log('Api got called');
         return this.productionDetailsService.getProductionDetailsInput(email);
+    }
+
+    @Post('calculateProductionDetails')
+    async calculateOutputs(@Body() inputDto: ProductionDetailsInputDto) {
+      console.log("Calculating outputs for non-authenticated user");
+      return this.productionDetailsService.calculateProductionDetailsOutput(inputDto);
     }
 }

@@ -1,8 +1,11 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Document, Types} from "mongoose";
 
 @Schema()
 export class OperatingCostsInput extends Document{
+    @Prop({type: Types.ObjectId, ref: 'User', required: true})
+    userId: Types.ObjectId;
+
     @Prop({required: true})
     haulingFees: number;
 
@@ -35,6 +38,21 @@ export class OperatingCostsInput extends Document{
 
     @Prop({required: true})
     bedding: number;
+
+    @Prop({ required: true })
+    raisedForageCost: number;
+
+    @Prop({ required: true })
+    purchasedFeedCost: number;
+
+    @Prop({ required: true })
+    additionalManagementCostsPercentage: number;
+
+    @Prop({required:true})
+    estimatedLabourCost: number;
+
+    @Prop({ required: true })
+    useDetailedLaborCost: boolean;
 }
 
 export const OperatingCostsInputSchema = SchemaFactory.createForClass(OperatingCostsInput); 

@@ -9,6 +9,7 @@ import { User, UserSchema } from "src/user/schemas/user.schema";
 @Module({
     providers: [ProductionDetailsService],
     controllers:[ProductionDetailsController],
+    exports: [ProductionDetailsService],
     imports: [
         MongooseModule.forFeature([
             {name: ProductionDetailsInput.name, schema: ProductionDetailsInputsSchema},

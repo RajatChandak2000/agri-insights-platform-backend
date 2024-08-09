@@ -5,7 +5,23 @@ import { Document, Types } from "mongoose";
 export class ProductionDetailsOutput extends Document{
     @Prop({ type: Types.ObjectId, ref: 'User', required: true })
     userId: Types.ObjectId;
-    
+
+    // New variables added
+    @Prop({ required: true })
+    heifersProduced: number;
+
+    @Prop({ required: true })
+    bullCalvesProduced: number;
+
+    @Prop({ required: true })
+    beefCrossBullsProduced: number;
+
+    @Prop({ required: true })
+    beefCrossHeifersProduced: number;
+
+    @Prop({required: true})
+    numberOfLactationsPerYear: number;
+
     @Prop({required: true})
     rollingHerdAverage: number;
 

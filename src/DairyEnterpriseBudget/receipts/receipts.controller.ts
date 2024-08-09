@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch } from "@nestjs/common";
+import { Body, Controller, Get, Param, Patch, Post } from "@nestjs/common";
 import { ProductionDetailsInputDto } from "../dto";
 import { ProductionDetailsOutput } from "../schemas/outputs/ProductionDetailsOutput.schema";
 import { ReceiptsService } from "./receipts.service";
@@ -31,4 +31,14 @@ export class ReceiptsController{
         console.log('Api got called');
         return this.receiptsService.getReceiptsInput(email);
     }
-}
+
+    @Post('calculateReciptsOutput')
+    async updateInputWithProductionDetails(
+      @Body() body: { inputs: ReceiptsInputDto, productionDetails: ProductionDetailsInputDto }
+    ) {
+      
+      const { inputs, productionDetails } = body;
+      console.log(inputs)
+      return this.receiptsService.calculateReceiptsOutput(inputs, productionDetails);
+    }
+  }

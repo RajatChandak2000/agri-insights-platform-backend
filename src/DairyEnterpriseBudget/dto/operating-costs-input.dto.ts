@@ -1,4 +1,4 @@
-import { IsNumber } from "class-validator";
+import { IsBoolean, IsNumber } from "class-validator";
 
 export class OperatingCostsInputDto{
     @IsNumber()
@@ -33,4 +33,20 @@ export class OperatingCostsInputDto{
 
     @IsNumber()
     bedding?: number;
+
+    @IsNumber()
+    raisedForageCost?: number;
+
+    @IsNumber()
+    purchasedFeedCost?: number;
+
+    @IsNumber()
+    additionalManagementCostsPercentage?: number;
+
+    @IsNumber()
+    estimatedLabourCost?: number;
+
+    @IsBoolean()
+    useDetailedLaborCost?:boolean;
+
 }

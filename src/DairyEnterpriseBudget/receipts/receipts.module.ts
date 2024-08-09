@@ -7,11 +7,13 @@ import { ReceiptsService } from "./receipts.service";
 import { ReceiptsController } from "./receipts.controller";
 import { ProductionDetailsInput, ProductionDetailsInputsSchema } from "../schemas/inputs/ProductionDetailsInput.schema";
 import { ProductionDetailsOutput, ProductionDetailsOutputSchema } from "../schemas/outputs/ProductionDetailsOutput.schema";
-
+import { ProductionDetailsModule } from "../production-details/production-details.module";
 @Module({
     providers: [ReceiptsService],
+    exports: [ReceiptsService],
     controllers:[ReceiptsController],
     imports: [
+        ProductionDetailsModule,
         MongooseModule.forFeature([
             {name: ReceiptsInput.name, schema: ReceiptsInputSchema},
             {name: ReceiptsOutput.name, schema: ReceiptsOutputSchema},
@@ -19,6 +21,7 @@ import { ProductionDetailsOutput, ProductionDetailsOutputSchema } from "../schem
             {name: ProductionDetailsOutput.name, schema: ProductionDetailsOutputSchema},
             {name: User.name, schema: UserSchema}
         ])
+        
     ]
 })
 export class ReceiptsModule{}

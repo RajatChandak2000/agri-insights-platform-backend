@@ -73,7 +73,7 @@ export class ProductionDetailsService {
             //If successful, we need to call another service that calculates the output
             //and updates the output schema accordingly
             
-            return await this.calculateProductionDetailsOutput(userId, updatedDocument);
+            return await this.calculateProductionDetailsOutput(updatedDocument);
             
         } catch (error) {
             this.logger.error(`Failed to update user inputs: ${error.message}`);
@@ -81,9 +81,14 @@ export class ProductionDetailsService {
         }
     }
 
-    async calculateProductionDetailsOutput(userId: string, updatedDocument: ProductionDetailsInput) {
-        this.logger.log(`Calculating production details output for user: ${userId}`);
-      
+    async calculateProductionDetailsOutput(updatedDocument: ProductionDetailsInput | ProductionDetailsInputDto) {
+
+        
+        if ('userId' in updatedDocument){
+            this.logger.log(`Calculating production details output for user: ${updatedDocument.userId}`);
+            
+        }
+        
         // Inputs and temp variables required to calculate the outputs
         const expectedMilkProduction = updatedDocument.milkProduction.expectedMilkProduction;
         const calvingInterval = updatedDocument.milkProduction.calvingInterval;
@@ -91,7 +96,7 @@ export class ProductionDetailsService {
         const totalNumberOfCows = updatedDocument.milkProduction.totalNumberOfCows;
         const cowDeathLossRate = updatedDocument.heiferProduction.cowDeathLossRate;
         const heiferRaisingDeathLossRate = updatedDocument.heiferProduction.heiferRaisingDeathLossRate;
-        const numberOfLactationsPerYear = (totalNumberOfCows * 12) / calvingInterval;
+        const numberOfLactationsPerYear = (totalNumberOfCows * 12) / calvingInterval; //Stored in database in output for a particular user if logged  in.
         const expectedMilkPrice = 100; // default, will change later, need to automate with data collected
       
         // Outputs calculated and rounded to 2 decimal points
@@ -102,26 +107,31 @@ export class ProductionDetailsService {
       
         // Convert to numbers for storage
         const updatedOutputDocument = {
+          numberOfLactationsPerYear : numberOfLactationsPerYear,
           rollingHerdAverage: parseFloat(rollingHerdAverage),
           totalAnnualMilkProduction: parseFloat(totalAnnualMilkProduction),
           expectedAnnualMilkSales: parseFloat(expectedAnnualMilkSales),
           numberOfReplacementHeifersNeeded: parseFloat(numberOfReplacementHeifersNeeded),
         };
       
-        try {
-          const result = await this.productionDetailsOutputModel.findOneAndUpdate(
-            { userId },
-            { $set: updatedOutputDocument },
-            { new: true, upsert: true }
-          );
-      
-          this.logger.log(`Successfully calculated and updated production details output for user: ${userId}`);
-          return result;
-        } catch (error) {
-          this.logger.error(`Failed to calculate production details output: ${error.message}`);
-          throw new Error(`Failed to calculate production details output: ${error.message}`);
+        if ('userId' in updatedDocument){
+            try {
+            const result = await this.productionDetailsOutputModel.findOneAndUpdate(
+                { 'userId': updatedDocument.userId },
+                { $set: updatedOutputDocument },
+                { new: true, upsert: true }
+            );
+        
+            this.logger.log(`Successfully calculated and updated production details output for user: ${updatedDocument.userId}`);
+            return result;
+            } catch (error) {
+            this.logger.error(`Failed to calculate production details output: ${error.message}`);
+            throw new Error(`Failed to calculate production details output: ${error.message}`);
+            }
         }
-      }      
+
+        return updatedOutputDocument;
+    }      
 
     async getProductionDetailsOutput(email: string): Promise<ProductionDetailsOutput|null>{
         //first find the user_id using the email, then find the document using the id
