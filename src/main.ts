@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const PORT = process.env.PORT || 3000
   app.enableCors({
     origin: '*', // replace with your frontend domain
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -12,6 +13,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true
   }))
-  await app.listen(3001);
+  await app.listen(PORT);
 }
 bootstrap();
