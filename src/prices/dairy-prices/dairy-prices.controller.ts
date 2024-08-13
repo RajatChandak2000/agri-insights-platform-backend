@@ -10,7 +10,7 @@ export class DairyPricesController {
     getHello(): string {
     // You can replace this with any logic to display alerts or messages
     console.log('Alert: The root route was accessed!');
-    return 'Welcome to the NestJS application!';
+    return 'Welcome to the NestJS application via rajat!';
     }
     @Get('allPrices')
     async getAllDairyPrices():Promise<DairyPrice[]>{
