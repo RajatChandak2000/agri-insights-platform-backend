@@ -6,6 +6,12 @@ import { DairyPrice } from '../schemas/dairy-prices.schema';
 export class DairyPricesController {
     constructor(private dairyPricesService: DairyPricesService){}
 
+    @Get()
+    getHello(): string {
+    // You can replace this with any logic to display alerts or messages
+    console.log('Alert: The root route was accessed!');
+    return 'Welcome to the NestJS application!';
+    }
     @Get('allPrices')
     async getAllDairyPrices():Promise<DairyPrice[]>{
         const dairyPrices = await this.dairyPricesService.getAllDairyPrices()
