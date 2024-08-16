@@ -4,7 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const PORT = process.env.PORT || 3000
+  const PORT = process.env.PORT || 3001
   app.enableCors({
     origin: '*', // replace with your frontend domain
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

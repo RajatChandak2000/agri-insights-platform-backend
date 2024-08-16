@@ -68,50 +68,55 @@ export class AuthService{
         };
     }
 
-    async sendPasswordResetLink(email:string) : Promise<void> {
-        const user = await this.userModel.findOne({email}).exec();
+    async sendPasswordResetLink(email: string): Promise<void> {
+        const user = await this.userModel.findOne({ email }).exec();
         
-        if(!user){
-            throw new HttpException('User with this email does not exist', HttpStatus.NOT_FOUND)
+        if (!user) {
+            throw new HttpException('User with this email does not exist', HttpStatus.NOT_FOUND);
         }
-
-        const token = crypto.randomBytes(32).toString('hex')
-
-        user.resetToken = token;
-        user.resetTokenExpiry = Date.now() + 3600000 //1 hour
-        await user.save()
-
-        const resetLink = `http://localhost:3000/resetPassword?token=${token}`
-        
-        try{
+    
+        const token = crypto.randomBytes(32).toString('hex');
+        const resetLink = `http://localhost:3000/resetPassword?token=${token}`;
+    
+        try {
             const accessTokenResponse = await this.oauth2Client.getAccessToken();
-            
+    
+            if (!accessTokenResponse.token) {
+                throw new Error('Failed to retrieve access token');
+            }
+    
             const transporter = nodemailer.createTransport({
-                service:'gmail',
+                service: 'gmail',
                 auth: {
                     type: 'OAuth2',
-                    user: process.env.GMAIL_USER, // Your Gmail address
+                    user: process.env.GMAIL_USER,
                     clientId: process.env.CLIENT_ID,
                     clientSecret: process.env.CLIENT_SECRET,
                     refreshToken: process.env.REFRESH_TOKEN,
                     accessToken: accessTokenResponse.token,
-                }
-            })
-            
+                },
+            });
+    
             const mailOptions = {
                 from: process.env.GMAIL_USER,
                 to: email,
                 subject: 'Password reset',
                 text: `You requested a password reset. Click here to reset your password: ${resetLink}`,
-                html: `<p>You requested a password reset. Click here to reset your password:</p><a href="${resetLink}">${resetLink}</a>`
+                html: `<p>You requested a password reset. Click here to reset your password:</p><a href="${resetLink}">${resetLink}</a>`,
             };
-
+    
             await transporter.sendMail(mailOptions);
-        }catch(error){
+    
+            // Save the token and expiry only after the email has been successfully sent
+            user.resetToken = token;
+            user.resetTokenExpiry = Date.now() + 3600000; // 1 hour
+            await user.save();
+    
+        } catch (error) {
             console.error('Error sending email:', error);
             throw new HttpException('Failed to send reset link. Please try again later.', HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }    
 
     async resetPassword(token: string, newPassword: string): Promise<void> {
         const user = await this.userModel.findOne({
