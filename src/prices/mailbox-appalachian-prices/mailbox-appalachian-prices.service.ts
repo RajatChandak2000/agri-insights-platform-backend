@@ -4,13 +4,13 @@ import { MailboxAppalachianPrice } from "../schemas/mailbox-appalachain-prices.s
 import { Model } from "mongoose";
 
 @Injectable()
-export class MailboxAppalachainPricesService{
+export class MailboxAppalachianPricesService{
     constructor(
-        @InjectModel(MailboxAppalachianPrice.name) private mailboxAppalachainPriceModel: Model<MailboxAppalachianPrice>
+        @InjectModel(MailboxAppalachianPrice.name) private mailboxAppalachianPriceModel: Model<MailboxAppalachianPrice>
     ){}
 
     async getAllYearsPrices(): Promise<MailboxAppalachianPrice[]>{
-        return await this.mailboxAppalachainPriceModel.find({}).exec()
+        return await this.mailboxAppalachianPriceModel.find({}).exec()
     }
 
 }

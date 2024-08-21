@@ -6,7 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DairyPricesModule } from './prices/dairy-prices/dairy-prices.module';
 import { TomatoPricesModule } from './prices/tomato-prices/tomato-prices.module';
 import { WeatherModule } from './weather/weather.module';
-import { MailboxAppalachainPricesModule } from './prices/mailbox-appalachain-prices/mailbox-appalachain-prices.module';
+import { MailboxAppalachianPricesModule } from './prices/mailbox-appalachian-prices/mailbox-appalachian-prices.module';
 import { ProductionDetailsModule } from './DairyEnterpriseBudget/production-details/production-details.module';
 import { OperatingCostsModule } from './DairyEnterpriseBudget/operating-costs/operating-costs.module';
 import { ReceiptsModule } from './DairyEnterpriseBudget/receipts/receipts.module';
@@ -16,7 +16,7 @@ import { FixedCostsModule } from './DairyEnterpriseBudget/fixed-costs/fixed-cost
 @Module({
   imports: [AuthModule,
     DairyPricesModule,
-    UserModule, TomatoPricesModule, WeatherModule, MailboxAppalachainPricesModule,
+    UserModule, TomatoPricesModule, WeatherModule, MailboxAppalachianPricesModule,
     ProductionDetailsModule,OperatingCostsModule, ReceiptsModule, LabourCostModule, FixedCostsModule,
     ConfigModule.forRoot({isGlobal: true}), 
     MongooseModule.forRootAsync({
