@@ -7,24 +7,12 @@ import { Model } from "mongoose";
 import { SignInDto, SignUpDto } from "./dto";
 import * as nodemailer from 'nodemailer';
 import * as crypto from 'crypto';
-import { google } from 'googleapis'
 @Injectable()
 export class AuthService{
-    private oauth2Client;
-
     constructor(
         @InjectModel(User.name) private userModel: Model<User>, 
         private jwtService: JwtService
-    ){
-        this.oauth2Client = new google.auth.OAuth2(
-            process.env.CLIENT_ID,
-            process.env.CLIENT_SECRET,
-            process.env.REDIRECT_URI
-        )
-        this.oauth2Client.setCredentials({
-            refresh_token: process.env.REFRESH_TOKEN
-        });
-    }
+    ){}
 
     async signup(dto: SignUpDto): Promise<User>{
         const { username, email, password } = dto;
@@ -76,42 +64,32 @@ export class AuthService{
         }
     
         const token = crypto.randomBytes(32).toString('hex');
+        user.resetToken = token;
+        user.resetTokenExpiry = Date.now() + 3600000; // 1 hour
+        await user.save();
+
         const resetLink = `http://localhost:3000/resetPassword?token=${token}`;
-    
+
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth:{
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_PASSWORD
+            },
+        });
+
+        const mailOptions = {
+            from: process.env.GMAIL_USER,
+            to: email,
+            subject: 'Password reset',
+            text: `You requested a password reset. Click here to reset your password: ${resetLink}`,
+            html: `<p>You requested a password reset. Click <a href="${resetLink}">here</a> to reset your password.</p>`,
+        }
+
         try {
-            const accessTokenResponse = await this.oauth2Client.getAccessToken();
-    
-            if (!accessTokenResponse.token) {
-                throw new Error('Failed to retrieve access token');
-            }
-    
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    type: 'OAuth2',
-                    user: process.env.GMAIL_USER,
-                    clientId: process.env.CLIENT_ID,
-                    clientSecret: process.env.CLIENT_SECRET,
-                    refreshToken: process.env.REFRESH_TOKEN,
-                    accessToken: accessTokenResponse.token,
-                },
-            });
-    
-            const mailOptions = {
-                from: process.env.GMAIL_USER,
-                to: email,
-                subject: 'Password reset',
-                text: `You requested a password reset. Click here to reset your password: ${resetLink}`,
-                html: `<p>You requested a password reset. Click here to reset your password:</p><a href="${resetLink}">${resetLink}</a>`,
-            };
-    
             await transporter.sendMail(mailOptions);
-    
-            // Save the token and expiry only after the email has been successfully sent
-            user.resetToken = token;
-            user.resetTokenExpiry = Date.now() + 3600000; // 1 hour
-            await user.save();
-    
         } catch (error) {
             console.error('Error sending email:', error);
             throw new HttpException('Failed to send reset link. Please try again later.', HttpStatus.INTERNAL_SERVER_ERROR);
