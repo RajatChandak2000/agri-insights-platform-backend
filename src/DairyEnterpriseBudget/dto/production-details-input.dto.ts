@@ -9,6 +9,9 @@ class MilkProductionInputsDto{
 
     @IsNumber()
     expectedMilkProduction?: number;
+
+    @IsNumber()
+    expectedMilkPrice?: number;
 }
 
 class HeiferProductionInputsDto{
