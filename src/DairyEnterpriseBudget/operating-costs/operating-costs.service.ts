@@ -219,7 +219,7 @@ export class OperatingCostsService{
           fetchedReceiptsOutputs.otherIncome1 +
           fetchedReceiptsOutputs.otherIncome2;
   
-        const additionalManagementCosts = additionalManagementCostsPercentage * totalReceipts;
+        const additionalManagementCosts = (additionalManagementCostsPercentage/100) * totalReceipts;
       
         // Calculate total operating cost
         const totalOperatingCosts = 

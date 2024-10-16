@@ -38,6 +38,9 @@ export class ReceiptsOutput extends Document {
 
     @Prop({ required: true })
     otherIncome2: number;
+
+    @Prop({ required: true })
+    totalReceipts: number;
 }
 
 export const ReceiptsOutputSchema = SchemaFactory.createForClass(ReceiptsOutput);
