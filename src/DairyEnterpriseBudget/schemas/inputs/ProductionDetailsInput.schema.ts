@@ -11,6 +11,9 @@ class MilkProductionInputs{
 
     @Prop({required: true})
     expectedMilkProduction: number;
+
+    @Prop({required: true})
+    expectedMilkPrice: number;
 }
 
 @Schema()

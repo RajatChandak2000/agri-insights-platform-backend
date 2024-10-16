@@ -2,9 +2,6 @@ import { IsNumber } from "class-validator";
 
 export class ReceiptsInputDto{
     @IsNumber()
-    milkPrice?: number;
-
-    @IsNumber()
     cullCowsPrice?: number;
 
     @IsNumber()

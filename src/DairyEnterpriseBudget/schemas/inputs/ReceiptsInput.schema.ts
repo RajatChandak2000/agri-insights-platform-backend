@@ -5,9 +5,6 @@ import { Document, Types } from "mongoose";
 export class ReceiptsInput extends Document{
     @Prop({type: Types.ObjectId, ref: 'User', required: true})
     userId: Types.ObjectId;
-    
-    @Prop({required: true})
-    milkPrice: number;
 
     @Prop({required: true})
     cullCowsPrice: number;

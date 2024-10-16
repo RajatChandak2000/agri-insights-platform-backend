@@ -91,13 +91,13 @@ export class ProductionDetailsService {
         
         // Inputs and temp variables required to calculate the outputs
         const expectedMilkProduction = updatedDocument.milkProduction.expectedMilkProduction;
-        const calvingInterval = updatedDocument.milkProduction.calvingInterval;
-        const cullingRate = updatedDocument.heiferProduction.cullingRate;
+        const calvingInterval = updatedDocument.milkProduction.calvingInterval
+        const expectedMilkPrice = updatedDocument.milkProduction.expectedMilkPrice; // default, will change later, need to automate with data collected;
         const totalNumberOfCows = updatedDocument.milkProduction.totalNumberOfCows;
+        const cullingRate = updatedDocument.heiferProduction.cullingRate;
         const cowDeathLossRate = updatedDocument.heiferProduction.cowDeathLossRate;
         const heiferRaisingDeathLossRate = updatedDocument.heiferProduction.heiferRaisingDeathLossRate;
         const numberOfLactationsPerYear = (totalNumberOfCows * 12) / calvingInterval; //Stored in database in output for a particular user if logged  in.
-        const expectedMilkPrice = 100; // default, will change later, need to automate with data collected
       
         // Outputs calculated and rounded to 2 decimal points
         const rollingHerdAverage = ((expectedMilkProduction) / (calvingInterval / 12)).toFixed(2);

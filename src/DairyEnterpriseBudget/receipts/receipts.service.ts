@@ -97,7 +97,7 @@ export class ReceiptsService{
         }
         
         // Inputs from Receipts
-        const { milkPrice, cullCowsPrice, heifersPrice, bullCalvesPrice, beefCrossPrice, otherIncome1, otherIncome2 } = updatedDocument;
+        const { cullCowsPrice, heifersPrice, bullCalvesPrice, beefCrossPrice, otherIncome1, otherIncome2 } = updatedDocument;
         
         // Extract values from productionDetailsInputs
         const { totalNumberOfCows, calvingInterval } = productionDetailsInputs.milkProduction;
@@ -111,10 +111,7 @@ export class ReceiptsService{
         const heifersProduced = ((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) + ((1 / 3) * lactations * (1 - (expectedPercentMaleWithConventional / 100)));
         const bullCalvesProduced = ((2 / 3) * lactations * (expectedPercentMaleWithSexedSemen / 100)) + ((1 / 3) * lactations * (expectedPercentMaleWithConventional / 100));
         const beefCrossBullsProduced = ((((1 / 3) * lactations * (expectedPercentMaleWithConventional / 100))) * (beefCrossPercent / 100));
-        // const beefCrossHeifersProduced = (
-        //   (((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) - numberOfHeifersRaised) +
-        //   ((1 / 3) * lactations * (1 - (expectedPercentMaleWithConventional / 100)))
-        // ) * (beefCrossPercent / 100) + ((heifersProduced - numberOfHeifersRaised) * (beefCrossPercent / 100));
+        
         const beefCrossHeifersProduced = (
           (((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) 
           - numberOfHeifersRaised) +
