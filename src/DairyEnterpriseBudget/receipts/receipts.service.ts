@@ -87,13 +87,7 @@ export class ReceiptsService{
           }
         } else {
           // Calculate production details if userId is not present
-        //   console.log("Production details input_________________________________________");
-          
-        //   console.log('Production Details Inputs:', productionDetailsInputs);
           fetchedproductionDetailsOutputs = await this.ProductionDetailsService.calculateProductionDetailsOutput(productionDetailsInputs);
-          
-        //   console.log("_________________________________________");
-        //   console.log(fetchedproductionDetailsOutputs);
         }
       
         // Ensure productionDetailsInputs has required structure
@@ -117,10 +111,16 @@ export class ReceiptsService{
         const heifersProduced = ((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) + ((1 / 3) * lactations * (1 - (expectedPercentMaleWithConventional / 100)));
         const bullCalvesProduced = ((2 / 3) * lactations * (expectedPercentMaleWithSexedSemen / 100)) + ((1 / 3) * lactations * (expectedPercentMaleWithConventional / 100));
         const beefCrossBullsProduced = ((((1 / 3) * lactations * (expectedPercentMaleWithConventional / 100))) * (beefCrossPercent / 100));
+        // const beefCrossHeifersProduced = (
+        //   (((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) - numberOfHeifersRaised) +
+        //   ((1 / 3) * lactations * (1 - (expectedPercentMaleWithConventional / 100)))
+        // ) * (beefCrossPercent / 100) + ((heifersProduced - numberOfHeifersRaised) * (beefCrossPercent / 100));
         const beefCrossHeifersProduced = (
-          (((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) - numberOfHeifersRaised) +
+          (((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) 
+          - numberOfHeifersRaised) +
           ((1 / 3) * lactations * (1 - (expectedPercentMaleWithConventional / 100)))
-        ) * (beefCrossPercent / 100) + ((heifersProduced - numberOfHeifersRaised) * (beefCrossPercent / 100));
+        ) * (beefCrossPercent / 100);
+        
       
         // Calculate sales
         const milkSales = expectedAnnualMilkSales;
@@ -128,7 +128,10 @@ export class ReceiptsService{
         const heifersSales = (heifersProduced - numberOfHeifersRaised - beefCrossHeifersProduced) * (1 - (heiferRaisingDeathLossRate / 100)) * heifersPrice;
         const bullCalvesSales = (bullCalvesProduced - beefCrossBullsProduced) * (1 - (bullCalfDeath / 100)) * bullCalvesPrice;
         const beefCrossSales = (beefCrossBullsProduced * (1 - (beefCrossDeathRate / 100))) + (beefCrossHeifersProduced * (1 - (beefCrossDeathRate / 100))) * beefCrossPrice;
-      
+        
+        //calculate the total receipts
+        const totalReceipts = milkSales + cullCowsSales + heifersSales + bullCalvesSales + beefCrossSales + otherIncome1 + otherIncome2
+
         // Prepare the updated output document
         const updatedOutputDocument = {
           heifersProduced: parseFloat(heifersProduced.toFixed(2)),
@@ -142,6 +145,7 @@ export class ReceiptsService{
           beefCrossSales: parseFloat(beefCrossSales.toFixed(2)),
           otherIncome1: parseFloat(otherIncome1.toFixed(2)),
           otherIncome2: parseFloat(otherIncome2.toFixed(2)),
+          totalReceipts: parseFloat(totalReceipts.toFixed(2))
         };
       
         console.log("updatedOutputDocument ", updatedOutputDocument);
