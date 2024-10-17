@@ -184,16 +184,16 @@ class WasteManagementFixedCostsInputs {
     manureSpreaderYearsOfUsefulLife: number;
 
     @Prop({ required: true })
-    otherManureManagementEquipment1InitialInvestment: number;
+    otherManureManagementStructure1InitialInvestment: number;
 
     @Prop({ required: true })
-    otherManureManagementEquipment1YearsOfUsefulLife: number;
+    otherManureManagementStructure1YearsOfUsefulLife: number;
 
     @Prop({ required: true })
-    otherManureManagementEquipment2InitialInvestment: number;
+    otherManureManagementStructure2InitialInvestment: number;
 
     @Prop({ required: true })
-    otherManureManagementEquipment2YearsOfUsefulLife: number;
+    otherManureManagementStructure2YearsOfUsefulLife: number;
 
 }
 

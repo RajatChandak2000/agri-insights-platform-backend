@@ -180,6 +180,79 @@ class WasteManagementFixedCostsDto {
     @IsOptional()
     @IsNumber()
     monitoringWellsYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    solidsSeparatorInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    solidsSeparatorYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    lagoonPumpInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    lagoonPumpYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    pipesInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    pipesYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    powerUnitInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    powerUnitYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    irrigationSystemInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    irrigationSystemYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    agitatorInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    agitatorYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    manureSpreaderInitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    manureSpreaderYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherManureManagementStructure1InitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherManureManagementStructure1YearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherManureManagementStructure2InitialInvestment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherManureManagementStructure2YearsOfUsefulLife?: number;
+
 }
 
 class MachineryFixedCostsDto {

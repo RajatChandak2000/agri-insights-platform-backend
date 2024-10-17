@@ -102,7 +102,7 @@ export class ProductionDetailsService {
         // Outputs calculated and rounded to 2 decimal points
         const rollingHerdAverage = ((expectedMilkProduction) / (calvingInterval / 12)).toFixed(2);
         const totalAnnualMilkProduction = ((numberOfLactationsPerYear * expectedMilkProduction) / 100).toFixed(2);
-        const expectedAnnualMilkSales = ((parseFloat(rollingHerdAverage) / (100 * expectedMilkPrice)) * totalNumberOfCows).toFixed(2);
+        const expectedAnnualMilkSales = ((parseFloat(rollingHerdAverage) / 100) * expectedMilkPrice * totalNumberOfCows).toFixed(2);
         const numberOfReplacementHeifersNeeded = (totalNumberOfCows * (cullingRate/100 + cowDeathLossRate/100 + heiferRaisingDeathLossRate/100)).toFixed(2);
       
         // Convert to numbers for storage
