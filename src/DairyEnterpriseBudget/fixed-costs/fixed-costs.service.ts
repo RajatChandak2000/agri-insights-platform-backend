@@ -139,19 +139,53 @@ export class FixedCostsService{
         const numberOfWeanedHeiferCalves = updatedDocument.cattleFixedCost.numberOfWeanedHeiferCalves;
         const weanedHeiferCalvesPurchaseValue = updatedDocument.cattleFixedCost.weanedHeiferCalvesPurchaseValue;
 
+        //Facilities and Buildings
         const farmShopAndGeneralRoadsInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.farmShopAndGeneralRoadsInitialInvestment;
         const farmShopAndGeneralRoadsYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.farmShopAndGeneralRoadsYearsOfUsefulLife;
         
         const milkingParlorAndEquipmentInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.milkingParlorAndEquipmentInitialInvestment;
         const milkingParlorAndEquipmentYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.milkingParlorAndEquipmentYearsOfUsefulLife;
         
+        const feedingEquipmentInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.feedingEquipmentInitialInvestment;
         const feedingEquipmentYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.feedingEquipmentYearsOfUsefulLife;
         
+        const freestallHousingAndLanesInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.freestallHousingAndLanesInitialInvestment;
         const freestallHousingAndLanesYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.freestallHousingAndLanesYearsOfUsefulLife;
         
         const threePhasePowerSupplyInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.threePhasePowerSupplyInitialInvestment;
         const threePhasePowerSupplyYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.threePhasePowerSupplyYearsOfUsefulLife;
+        
+        const waterSystemInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.waterSystemInitialInvestment;
+        const waterSystemYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.waterSystemYearsOfUsefulLife;
+        
+        const hayShedInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.hayShedInitialInvestment
+        const hayShedYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.hayShedYearsOfUsefulLife;
 
+        const trenchSilosInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.trenchSilosInitialInvestment;
+        const trenchSilosYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.trenchSilosYearsOfUsefulLife;
+        
+        const fencesInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.fencesInitialInvestment;
+        const fencesYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.fencesYearsOfUsefulLife;
+        
+        const commodityBarnInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.commodityBarnInitialInvestment;
+        const commodityBarnYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.commodityBarnYearsOfUsefulLife;
+        
+        const calfOrHeiferBarnInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.calfOrHeiferBarnInitialInvestment;
+        const calfOrHeiferBarnYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.calfOrHeiferBarnYearsOfUsefulLife;
+
+        const tiltTableInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.tiltTableInitialInvestment;
+        const tiltTableYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.tiltTableYearsOfUsefulLife;
+
+        const cattleHandlingFacilitiesInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.cattleHandlingFacilitiesInitialInvestment;
+        const cattleHandlingFacilitiesYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.cattleHandlingFacilitiesYearsOfUsefulLife;
+
+        const otherFacilitiesAndBuildings1InitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.otherFacilitiesAndBuildings1InitialInvestment;
+        const otherFacilitiesAndBuildings1YearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.otherFacilitiesAndBuildings1YearsOfUsefulLife;
+
+        const otherFacilitiesAndBuildings2InitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.otherFacilitiesAndBuildings2InitialInvestment;
+        const otherFacilitiesAndBuildings2YearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.otherFacilitiesAndBuildings2YearsOfUsefulLife;
+        
+        //Waste management
         const wasteStoragePondInitialInvestment = updatedDocument.wasteManagementFixedCosts.wasteStoragePondInitialInvestment;
         const wasteStoragePondYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.wasteStoragePondYearsOfUsefulLife;
         
@@ -161,10 +195,262 @@ export class FixedCostsService{
         const monitoringWellsInitialInvestment = updatedDocument.wasteManagementFixedCosts.monitoringWellsInitialInvestment;
         const monitoringWellsYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.monitoringWellsYearsOfUsefulLife;
 
+        const solidsSeparatorInitialInvestment = updatedDocument.wasteManagementFixedCosts.solidsSeparatorInitialInvestment;
+        const solidsSeparatorYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.solidsSeparatorYearsOfUsefulLife;
+
+        const lagoonPumpInitialInvestment = updatedDocument.wasteManagementFixedCosts.lagoonPumpInitialInvestment;
+        const lagoonPumpYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.lagoonPumpYearsOfUsefulLife;
+
+        const pipesInitialInvestment = updatedDocument.wasteManagementFixedCosts.pipesInitialInvestment;
+        const pipesYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.pipesYearsOfUsefulLife;
+
+        const powerUnitInitialInvestment = updatedDocument.wasteManagementFixedCosts.powerUnitInitialInvestment;
+        const powerUnitYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.powerUnitYearsOfUsefulLife;
+
+        const irrigationSystemInitialInvestment = updatedDocument.wasteManagementFixedCosts.irrigationSystemInitialInvestment;
+        const irrigationSystemYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.irrigationSystemYearsOfUsefulLife;
+
+        const agitatorInitialInvestment = updatedDocument.wasteManagementFixedCosts.agitatorInitialInvestment;
+        const agitatorYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.agitatorYearsOfUsefulLife;
+
+        const manureSpreaderInitialInvestment = updatedDocument.wasteManagementFixedCosts.manureSpreaderInitialInvestment;
+        const manureSpreaderYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.manureSpreaderYearsOfUsefulLife;
+
+        const otherManureManagementStructure1InitialInvestment = updatedDocument.wasteManagementFixedCosts.otherManureManagementStructure1InitialInvestment;
+        const otherManureManagementStructure1YearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.otherManureManagementStructure1YearsOfUsefulLife;
+
+        const otherManureManagementStructure2InitialInvestment = updatedDocument.wasteManagementFixedCosts.otherManureManagementStructure2InitialInvestment;
+        const otherManureManagementStructure2YearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.otherManureManagementStructure2YearsOfUsefulLife;
+
         const machineryFixedCostTotalEstimate = updatedDocument.machineryFixedCosts.machineryFixedCostTotalEstimate;
 
         const acres = updatedDocument.landFixedCosts.acres;
         const rentalCost = updatedDocument.landFixedCosts.rentalCost;
+
+        //DETAILED MACHINERY FIXED COSTS
+        // Articulated Loaders
+        const articulatedLoadersInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersInitialInvestmentPerUnit;
+        const numberOfArticulatedLoaders = updatedDocument.detailedMachineryFixedCosts?.numberOfArticulatedLoaders;
+        const articulatedLoadersTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersTotalHoursOfUse;
+        const articulatedLoadersDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersDairyHoursOfUse;
+        const articulatedLoadersEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersEquipmentAge;
+        const articulatedLoadersYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersYearsOfUsefulLife;
+        
+        // Skid Steer Loaders
+        const skidSteerLoadersInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersInitialInvestmentPerUnit;
+        const numberOfSkidSteerLoaders = updatedDocument.detailedMachineryFixedCosts?.numberOfSkidSteerLoaders;
+        const skidSteerLoadersTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersTotalHoursOfUse;
+        const skidSteerLoadersDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersDairyHoursOfUse;
+        const skidSteerLoadersEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersEquipmentAge;
+        const skidSteerLoadersYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersYearsOfUsefulLife;
+
+        // 130 hp Tractor - MFWD
+        const hpTractorMFWD130InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDInitialInvestmentPerUnit;
+        const numberOfHpTractorMFWD130 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractorMFWD130;
+        const hpTractorMFWD130TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDTotalHoursOfUse;
+        const hpTractorMFWD130DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDDairyHoursOfUse;
+        const hpTractorMFWD130EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDEquipmentAge;
+        const hpTractorMFWD130YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDYearsOfUsefulLife;
+
+        // 75 hp Tractor - 2wd
+        const hpTractor2wd75InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor75InitialInvestmentPerUnit;
+        const numberOfHpTractor2wd75 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractor75;
+        const hpTractor2wd75TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor75TotalHoursOfUse;
+        const hpTractor2wd75DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor75DairyHoursOfUse;
+        const hpTractor2wd75EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor75EquipmentAge;
+        const hpTractor2wd75YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor75YearsOfUsefulLife;
+
+        // 50 hp Tractor - 2wd
+        const tractor50Hp2wdInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor50InitialInvestmentPerUnit;
+        const numberOfHpTractor2wd50 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractor50;
+        const tractor50Hp2wdTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor50TotalHoursOfUse;
+        const tractor50Hp2wdDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor50DairyHoursOfUse;
+        const hpTractor2wd50EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor50EquipmentAge;
+        const hpTractor2wd50YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor50YearsOfUsefulLife;
+
+        // Mixer Wagon - 650 cubic feet
+        const mixerWagon650InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650InitialInvestmentPerUnit;
+        const numberOfMixerWagon650 = updatedDocument.detailedMachineryFixedCosts?.numberOfMixerWagon650;
+        const mixerWagon650TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650TotalHoursOfUse;
+        const mixerWagon650DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650DairyHoursOfUse;
+        const mixerWagon650EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650EquipmentAge;
+        const mixerWagon650YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650YearsOfUsefulLife;
+
+        // ¾ ton pickup
+        const threeQuarterTonPickupInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupInitialInvestmentPerUnit;
+        const numberOfThreeQuarterTonPickup = updatedDocument.detailedMachineryFixedCosts?.numberOfThreeQuarterTonPickup;
+        const threeQuarterTonPickupTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupTotalHoursOfUse;
+        const threeQuarterTonPickupDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupDairyHoursOfUse;
+        const threeQuarterTonPickupEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupEquipmentAge;
+        const threeQuarterTonPickupYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupYearsOfUsefulLife;
+
+        // ½ ton pickup
+        const halfTonPickupInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupInitialInvestmentPerUnit;
+        const numberOfHalfTonPickup = updatedDocument.detailedMachineryFixedCosts?.numberOfHalfTonPickup;
+        const halfTonPickupTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupTotalHoursOfUse;
+        const halfTonPickupDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupDairyHoursOfUse;
+        const halfTonPickupEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupEquipmentAge;
+        const halfTonPickupYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupYearsOfUsefulLife;
+
+        // JD Gator
+        const jdGatorInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.jdGatorInitialInvestmentPerUnit;
+        const numberOfJdGator = updatedDocument.detailedMachineryFixedCosts?.numberOfJdGator;
+        const jdGatorTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.jdGatorTotalHoursOfUse;
+        const jdGatorDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.jdGatorDairyHoursOfUse;
+        const jdGatorEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.jdGatorEquipmentAge;
+        const jdGatorYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.jdGatorYearsOfUsefulLife;
+
+        // Sand Spreader
+        const sandSpreaderInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderInitialInvestmentPerUnit;
+        const numberOfSandSpreader = updatedDocument.detailedMachineryFixedCosts?.numberOfSandSpreader;
+        const sandSpreaderTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderTotalHoursOfUse;
+        const sandSpreaderDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderDairyHoursOfUse;
+        const sandSpreaderEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderEquipmentAge;
+        const sandSpreaderYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderYearsOfUsefulLife;
+
+        // 300 hp Tractor - MFWD
+        const hpTractorMFWD300InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDInitialInvestmentPerUnit;
+        const numberOfHpTractorMFWD300 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractorMfwd300;
+        const hpTractorMFWD300TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDTotalHoursOfUse;
+        const hpTractorMFWD300DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDDairyHoursOfUse;
+        const hpTractorMFWD300EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDEquipmentAge;
+        const hpTractorMFWD300YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDYearsOfUsefulLife;
+
+        // 200 hp Tractor - MFWD
+        const hpTractorMFWD200InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDInitialInvestmentPerUnit;
+        const numberOfHpTractorMFWD200 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractorMFWD200;
+        const hpTractorMFWD200TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDTotalHoursOfUse;
+        const hpTractorMFWD200DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDDairyHoursOfUse;
+        const hpTractorMFWD200EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDEquipmentAge;
+        const hpTractorMFWD200YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDYearsOfUsefulLife;
+
+        // 24’ disk harrow
+        const diskHarrow24InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24InitialInvestmentPerUnit;
+        const numberOfDiskHarrow24 = updatedDocument.detailedMachineryFixedCosts?.numberOfDiskHarrow24;
+        const diskHarrow24TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24TotalHoursOfUse;
+        const diskHarrow24DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24DairyHoursOfUse;
+        const diskHarrow24EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24EquipmentAge;
+        const diskHarrow24YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24YearsOfUsefulLife;
+
+        // 8-row 30” strip-till planter
+        const stripTillPlanter8RowInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowInitialInvestmentPerUnit;
+        const numberOfStripTillPlanter8Row = updatedDocument.detailedMachineryFixedCosts?.numberOfStripTillPlanter8Row;
+        const stripTillPlanter8RowTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowTotalHoursOfUse;
+        const stripTillPlanter8RowDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowDairyHoursOfUse;
+        const stripTillPlanter8RowEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowEquipmentAge;
+        const stripTillPlanter8RowYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowYearsOfUsefulLife;
+
+        // 40’ folding sprayer
+        const foldingSprayer40InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40InitialInvestmentPerUnit;
+        const numberOfFoldingSprayer40 = updatedDocument.detailedMachineryFixedCosts?.numberOfFoldingSprayer40;
+        const foldingSprayer40TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40TotalHoursOfUse;
+        const foldingSprayer40DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40DairyHoursOfUse;
+        const foldingSprayer40EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40EquipmentAge;
+        const foldingSprayer40YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40YearsOfUsefulLife;
+
+        // Field Cultivator
+        const fieldCultivatorInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorInitialInvestmentPerUnit;
+        const numberOfFieldCultivator = updatedDocument.detailedMachineryFixedCosts?.numberOfFieldCultivator;
+        const fieldCultivatorTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorTotalHoursOfUse;
+        const fieldCultivatorDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorDairyHoursOfUse;
+        const fieldCultivatorEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorEquipmentAge;
+        const fieldCultivatorYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorYearsOfUsefulLife;
+
+        // Grain drill - 15’ no-till
+        const grainDrill15NoTillInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillInitialInvestmentPerUnit;
+        const numberOfGrainDrill15NoTill = updatedDocument.detailedMachineryFixedCosts?.numberOfGrainDrill15NoTill;
+        const grainDrill15NoTillTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillTotalHoursOfUse;
+        const grainDrill15NoTillDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillDairyHoursOfUse;
+        const grainDrill15NoTillEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillEquipmentAge;
+        const grainDrill15NoTillYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillYearsOfUsefulLife;
+
+        // Mower conditioner (self-propelled)
+        const mowerConditionerSelfPropelledInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledInitialInvestmentPerUnit;
+        const numberOfMowerConditionerSelfPropelled = updatedDocument.detailedMachineryFixedCosts?.numberOfMowerConditionerSelfPropelled;
+        const mowerConditionerSelfPropelledTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledTotalHoursOfUse;
+        const mowerConditionerSelfPropelledDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledDairyHoursOfUse;
+        const mowerConditionerSelfPropelledEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledEquipmentAge;
+        const mowerConditionerSelfPropelledYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledYearsOfUsefulLife;
+
+        // Tedder
+        const tedderInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.tedderInitialInvestmentPerUnit;
+        const numberOfTedder = updatedDocument.detailedMachineryFixedCosts?.numberOfTedder;
+        const tedderTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.tedderTotalHoursOfUse;
+        const tedderDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.tedderDairyHoursOfUse;
+        const tedderEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.tedderEquipmentAge;
+        const tedderYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.tedderYearsOfUsefulLife;
+
+        // Power Rake
+        const powerRakeInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.powerRakeInitialInvestmentPerUnit;
+        const numberOfPowerRake = updatedDocument.detailedMachineryFixedCosts?.numberOfPowerRake;
+        const powerRakeTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.powerRakeTotalHoursOfUse;
+        const powerRakeDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.powerRakeDairyHoursOfUse;
+        const powerRakeEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.powerRakeEquipmentAge;
+        const powerRakeYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.powerRakeYearsOfUsefulLife;
+
+        // 15’ Folding Rotary Mower
+        const foldingRotaryMower15InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15InitialInvestmentPerUnit;
+        const numberOfFoldingRotaryMower15 = updatedDocument.detailedMachineryFixedCosts?.numberOfFoldingRotaryMower15;
+        const foldingRotaryMower15TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15TotalHoursOfUse;
+        const foldingRotaryMower15DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15DairyHoursOfUse;
+        const foldingRotaryMower15EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15EquipmentAge;
+        const foldingRotaryMower15YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15YearsOfUsefulLife;
+
+        // Deep-ripper
+        const deepRipperInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.deepRipperInitialInvestmentPerUnit;
+        const numberOfDeepRipper = updatedDocument.detailedMachineryFixedCosts?.numberOfDeepRipper;
+        const deepRipperTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.deepRipperTotalHoursOfUse;
+        const deepRipperDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.deepRipperDairyHoursOfUse;
+        const deepRipperEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.deepRipperEquipmentAge;
+        const deepRipperYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.deepRipperYearsOfUsefulLife;
+
+        // 24’ Livestock Trailer
+        const livestockTrailer24InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24InitialInvestmentPerUnit;
+        const numberOfLivestockTrailer24 = updatedDocument.detailedMachineryFixedCosts?.numberOfLivestockTrailer24;
+        const livestockTrailer24TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24TotalHoursOfUse ;
+        const livestockTrailer24DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24DairyHoursOfUse;
+        const livestockTrailer24EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24EquipmentAge;
+        const livestockTrailer24YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24YearsOfUsefulLife;
+
+        // Round Baler
+        const roundBalerInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.roundBalerInitialInvestmentPerUnit;
+        const numberOfRoundBaler = updatedDocument.detailedMachineryFixedCosts?.numberOfRoundBaler;
+        const roundBalerTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.roundBalerTotalHoursOfUse;
+        const roundBalerDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.roundBalerDairyHoursOfUse;
+        const roundBalerEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.roundBalerEquipmentAge;
+        const roundBalerYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.roundBalerYearsOfUsefulLife;
+
+        // Tub Grinder
+        const tubGrinderInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.tubGrinderInitialInvestmentPerUnit;
+        const numberOfTubGrinder = updatedDocument.detailedMachineryFixedCosts?.numberOfTubGrinder;
+        const tubGrinderTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.tubGrinderTotalHoursOfUse;
+        const tubGrinderDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.tubGrinderDairyHoursOfUse;
+        const tubGrinderEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.tubGrinderEquipmentAge;
+        const tubGrinderYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.tubGrinderYearsOfUsefulLife;
+
+        // Miscellaneous Equipment
+        const miscellaneousEquipmentInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentInitialInvestmentPerUnit;
+        const numberOfMiscellaneousEquipment = updatedDocument.detailedMachineryFixedCosts?.numberOfMiscellaneousEquipment;
+        const miscellaneousEquipmentTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentTotalHoursOfUse;
+        const miscellaneousEquipmentDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentDairyHoursOfUse;
+        const miscellaneousEquipmentEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentEquipmentAge;
+        const miscellaneousEquipmentYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentYearsOfUsefulLife;
+
+        // Other Machinery and Equipment 1
+        const otherMachineryEquipment1InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1InitialInvestmentPerUnit;
+        const numberOfOtherMachineryEquipment1 = updatedDocument.detailedMachineryFixedCosts?.numberOfOtherMachineryEquipment1;
+        const otherMachineryEquipment1TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1TotalHoursOfUse;
+        const otherMachineryEquipment1DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1DairyHoursOfUse;
+        const otherMachineryEquipment1EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1EquipmentAge;
+        const otherMachineryEquipment1YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1YearsOfUsefulLife;
+
+        // Other Machinery and Equipment 2
+        const otherMachineryEquipment2InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2InitialInvestmentPerUnit;
+        const numberOfOtherMachineryEquipment2 = updatedDocument.detailedMachineryFixedCosts?.numberOfOtherMachineryEquipment2;
+        const otherMachineryEquipment2TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2TotalHoursOfUse;
+        const otherMachineryEquipment2DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2DairyHoursOfUse;
+        const otherMachineryEquipment2EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2EquipmentAge;
+        const otherMachineryEquipment2YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2YearsOfUsefulLife;
 
         //------->>>Temp variables required to calculate operating costs output
         const totalNumberOfCows = productionDetailsInputs.milkProduction.totalNumberOfCows;
@@ -175,56 +461,6 @@ export class FixedCostsService{
         const propertyTaxRate = 0.7;
         const propertyInsuranceRate = 0.25;
         
-        //Facilities and Buildings
-        const milkingParlorandEquipmentInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost?.milkingParlorAndEquipmentInitialInvestment || 1250000;
-        const feedingEquipmentInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.feedingEquipmentInitialInvestment || 500000;
-        const freestallHousingAndLanesInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.freestallHousingAndLanesInitialInvestment || 800000;
-        const waterSystemInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.waterSystemInitialInvestment || 70000;
-        const hayShedInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.hayShedInitialInvestment || 75000
-        const trenchSilosInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.trenchSilosInitialInvestment || 200000;
-        const fencesInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.fencesInitialInvestment || 100000;
-        const commodityBarnInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.commodityBarnInitialInvestment || 250000;
-        const calfOrHeiferBarnInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.calfOrHeiferBarnInitialInvestment || 115000;
-        const tiltTableInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.tiltTableInitialInvestment || 10000;
-        const cattleHandlingFacilitiesInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.cattleHandlingFacilitiesInitialInvestment || 50000;
-        const otherFacilitiesAndBuildings1InitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.otherFacilitiesAndBuildings1InitialInvestment || 0;
-        const otherFacilitiesAndBuildings2InitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.otherFacilitiesAndBuildings2InitialInvestment || 0;
-        
-        //Waste management
-        const solidsSeparatorInitialInvestment = updatedDocument.wasteManagementFixedCosts.solidsSeparatorInitialInvestment || 110000;
-        const lagoonPumpInitialInvestment = updatedDocument.wasteManagementFixedCosts.lagoonPumpInitialInvestment || 15000;
-        const pipesInitialInvestment = updatedDocument.wasteManagementFixedCosts.pipesInitialInvestment || 20000;
-        const powerUnitInitialInvestment = updatedDocument.wasteManagementFixedCosts.powerUnitInitialInvestment || 20000;
-        const irrigationSystemInitialInvestment = updatedDocument.wasteManagementFixedCosts.irrigationSystemInitialInvestment || 1000000;
-        const agitatorInitialInvestment = updatedDocument.wasteManagementFixedCosts.agitatorInitialInvestment || 35000;
-        const manureSpreaderInitialInvestment = updatedDocument.wasteManagementFixedCosts.manureSpreaderInitialInvestment || 40000;
-        const otherManureManagementStructure1InitialInvestment = updatedDocument.wasteManagementFixedCosts.otherManureManagementEquipment1InitialInvestment || 0;
-        const otherManureManagementStructure2InitialInvestment = updatedDocument.wasteManagementFixedCosts.otherManureManagementEquipment2InitialInvestment || 0;
-
-        //years of useful life default values
-        // Facilities and Buildings
-        const waterSystemYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.waterSystemYearsOfUsefulLife || 15;
-        const hayShedYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.hayShedYearsOfUsefulLife || 20;
-        const trenchSilosYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.trenchSilosYearsOfUsefulLife || 15;
-        const fencesYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.fencesYearsOfUsefulLife || 15;
-        const commodityBarnYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.commodityBarnYearsOfUsefulLife || 20;
-        const calfOrHeiferBarnYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.calfOrHeiferBarnYearsOfUsefulLife || 5;
-        const tiltTableYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.tiltTableYearsOfUsefulLife || 5;
-        const cattleHandlingFacilitiesYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.cattleHandlingFacilitiesYearsOfUsefulLife || 5;
-        const otherFacilitiesAndBuildings1YearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.otherFacilitiesAndBuildings1YearsOfUsefulLife || 0;
-        const otherFacilitiesAndBuildings2YearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.otherFacilitiesAndBuildings2YearsOfUsefulLife || 0;
-
-        // Waste Management
-        const solidsSeparatorYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.solidsSeparatorYearsOfUsefulLife || 10;
-        const lagoonPumpYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.lagoonPumpYearsOfUsefulLife || 7;
-        const pipesYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.pipesYearsOfUsefulLife || 10;
-        const powerUnitYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.powerUnitYearsOfUsefulLife || 10;
-        const irrigationSystemYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.irrigationSystemYearsOfUsefulLife || 15;
-        const agitatorYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.agitatorYearsOfUsefulLife || 15;
-        const manureSpreaderYearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.manureSpreaderYearsOfUsefulLife || 15;
-        const otherManureManagementStructure1YearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.otherManureManagementEquipment1YearsOfUsefulLife || 15;
-        const otherManureManagementStructure2YearsOfUsefulLife = updatedDocument.wasteManagementFixedCosts.otherManureManagementEquipment2YearsOfUsefulLife || 15;
-
         const machineryInsuranceRate = 20;
         const longTermInterestRate = 30;
         const shortTermInterestRate = 30;
@@ -245,236 +481,9 @@ export class FixedCostsService{
             [12, { HarvestingCrop: 18, HarvestingForage: 25, Misc: 26, Planters: 38, Tilage: 26, Tractor_150hp: 28, Tractors_80_149hp: 34 }]
         ]);
 
-        // if(updatedDocument.isDetailedMachineryCosts?){
-        //DETAILED MACHINERY FIXED COSTS
-        // Articulated Loaders
-        const articulatedLoadersInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersInitialInvestmentPerUnit || 125000;
-        const numberOfArticulatedLoaders = updatedDocument.detailedMachineryFixedCosts?.numberOfArticulatedLoaders || 1;
-        const articulatedLoadersTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersTotalHoursOfUse || 500;
-        const articulatedLoadersDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersDairyHoursOfUse || 500;
-        const articulatedLoadersEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersEquipmentAge || 1;
-        const articulatedLoadersYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.articulatedLoadersYearsOfUsefulLife || 12;
-
-        // Skid Steer Loaders
-        const skidSteerLoadersInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersInitialInvestmentPerUnit || 45000;
-        const numberOfSkidSteerLoaders = updatedDocument.detailedMachineryFixedCosts?.numberOfSkidSteerLoaders || 1;
-        const skidSteerLoadersTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersTotalHoursOfUse || 500;
-        const skidSteerLoadersDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersDairyHoursOfUse || 500;
-        const skidSteerLoadersEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersEquipmentAge || 1;
-        const skidSteerLoadersYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.skidSteerLoadersYearsOfUsefulLife || 12;
-
-        // 130 hp Tractor - MFWD
-        const hpTractorMFWD130InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDInitialInvestmentPerUnit || 80000;
-        const numberOfHpTractorMFWD130 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractorMFWD130 || 1;
-        const hpTractorMFWD130TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDTotalHoursOfUse || 500;
-        const hpTractorMFWD130DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDDairyHoursOfUse || 150;
-        const hpTractorMFWD130EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDEquipmentAge || 1;
-        const hpTractorMFWD130YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor130MfwDYearsOfUsefulLife || 12;
-
-        // 75 hp Tractor - 2wd
-        const hpTractor2wd75InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor75InitialInvestmentPerUnit || 30000;
-        const numberOfHpTractor2wd75 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractor75 || 1;
-        const hpTractor2wd75TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor75TotalHoursOfUse || 500;
-        const hpTractor2wd75DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor75DairyHoursOfUse || 200;
-        const hpTractor2wd75EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor75EquipmentAge || 1;
-        const hpTractor2wd75YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor75YearsOfUsefulLife || 12;
-
-        // 50 hp Tractor - 2wd
-        const tractor50Hp2wdInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor50InitialInvestmentPerUnit || 20000;
-        const numberOfHpTractor2wd50 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractor50 || 1;
-        const tractor50Hp2wdTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor50TotalHoursOfUse || 500;
-        const tractor50Hp2wdDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor50DairyHoursOfUse || 250;
-        const hpTractor2wd50EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor50EquipmentAge || 1;
-        const hpTractor2wd50YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor50YearsOfUsefulLife || 12;
-
-        // Mixer Wagon - 650 cubic feet
-        const mixerWagon650InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650InitialInvestmentPerUnit || 60000;
-        const numberOfMixerWagon650 = updatedDocument.detailedMachineryFixedCosts?.numberOfMixerWagon650 || 1;
-        const mixerWagon650TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650TotalHoursOfUse || 500;
-        const mixerWagon650DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650DairyHoursOfUse || 500;
-        const mixerWagon650EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650EquipmentAge || 1;
-        const mixerWagon650YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.mixerWagon650YearsOfUsefulLife || 12;
-
-        // ¾ ton pickup
-        const threeQuarterTonPickupInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupInitialInvestmentPerUnit || 45000;
-        const numberOfThreeQuarterTonPickup = updatedDocument.detailedMachineryFixedCosts?.numberOfThreeQuarterTonPickup || 1;
-        const threeQuarterTonPickupTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupTotalHoursOfUse || 500;
-        const threeQuarterTonPickupDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupDairyHoursOfUse || 400;
-        const threeQuarterTonPickupEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupEquipmentAge || 1;
-        const threeQuarterTonPickupYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.threeQuarterTonPickupYearsOfUsefulLife || 12;
-
-        // ½ ton pickup
-        const halfTonPickupInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupInitialInvestmentPerUnit || 40000;
-        const numberOfHalfTonPickup = updatedDocument.detailedMachineryFixedCosts?.numberOfHalfTonPickup || 1;
-        const halfTonPickupTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupTotalHoursOfUse || 500;
-        const halfTonPickupDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupDairyHoursOfUse || 250;
-        const halfTonPickupEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupEquipmentAge || 1;
-        const halfTonPickupYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.halfTonPickupYearsOfUsefulLife || 12;
-
-        // JD Gator
-        const jdGatorInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.jdGatorInitialInvestmentPerUnit || 10000;
-        const numberOfJdGator = updatedDocument.detailedMachineryFixedCosts?.numberOfJdGator || 1;
-        const jdGatorTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.jdGatorTotalHoursOfUse || 500;
-        const jdGatorDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.jdGatorDairyHoursOfUse || 300;
-        const jdGatorEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.jdGatorEquipmentAge || 1;
-        const jdGatorYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.jdGatorYearsOfUsefulLife || 12;
-
-        // Sand Spreader
-        const sandSpreaderInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderInitialInvestmentPerUnit || 20000;
-        const numberOfSandSpreader = updatedDocument.detailedMachineryFixedCosts?.numberOfSandSpreader || 1;
-        const sandSpreaderTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderTotalHoursOfUse || 500;
-        const sandSpreaderDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderDairyHoursOfUse || 500;
-        const sandSpreaderEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderEquipmentAge || 1;
-        const sandSpreaderYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.sandSpreaderYearsOfUsefulLife || 12;
-
-        // 300 hp Tractor - MFWD
-        const hpTractorMFWD300InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDInitialInvestmentPerUnit || 250000;
-        const numberOfHpTractorMFWD300 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractorMfwd300 || 1;
-        const hpTractorMFWD300TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDTotalHoursOfUse || 500;
-        const hpTractorMFWD300DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDDairyHoursOfUse || 200;
-        const hpTractorMFWD300EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDEquipmentAge || 1;
-        const hpTractorMFWD300YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor300MfwDYearsOfUsefulLife || 12;
-
-        // 200 hp Tractor - MFWD
-        const hpTractorMFWD200InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDInitialInvestmentPerUnit || 210000;
-        const numberOfHpTractorMFWD200 = updatedDocument.detailedMachineryFixedCosts?.numberOfHpTractorMFWD200 || 1;
-        const hpTractorMFWD200TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDTotalHoursOfUse || 500;
-        const hpTractorMFWD200DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDDairyHoursOfUse || 150;
-        const hpTractorMFWD200EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDEquipmentAge || 1;
-        const hpTractorMFWD200YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.hpTractor200MfwDYearsOfUsefulLife || 12;
-
-        // 24’ disk harrow
-        const diskHarrow24InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24InitialInvestmentPerUnit || 35000;
-        const numberOfDiskHarrow24 = updatedDocument.detailedMachineryFixedCosts?.numberOfDiskHarrow24 || 1;
-        const diskHarrow24TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24TotalHoursOfUse || 500;
-        const diskHarrow24DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24DairyHoursOfUse || 0;
-        const diskHarrow24EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24EquipmentAge || 1;
-        const diskHarrow24YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.diskHarrow24YearsOfUsefulLife || 12;
-
-        // 8-row 30” strip-till planter
-        const stripTillPlanter8RowInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowInitialInvestmentPerUnit || 70000;
-        const numberOfStripTillPlanter8Row = updatedDocument.detailedMachineryFixedCosts?.numberOfStripTillPlanter8Row || 1;
-        const stripTillPlanter8RowTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowTotalHoursOfUse || 500;
-        const stripTillPlanter8RowDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowDairyHoursOfUse || 0;
-        const stripTillPlanter8RowEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowEquipmentAge || 1;
-        const stripTillPlanter8RowYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.stripTillPlanter8RowYearsOfUsefulLife || 12;
-
-        // 40’ folding sprayer
-        const foldingSprayer40InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40InitialInvestmentPerUnit || 20000;
-        const numberOfFoldingSprayer40 = updatedDocument.detailedMachineryFixedCosts?.numberOfFoldingSprayer40 || 1;
-        const foldingSprayer40TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40TotalHoursOfUse || 500;
-        const foldingSprayer40DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40DairyHoursOfUse || 0;
-        const foldingSprayer40EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40EquipmentAge || 1;
-        const foldingSprayer40YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.foldingSprayer40YearsOfUsefulLife || 12;
-
-        // Field Cultivator
-        const fieldCultivatorInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorInitialInvestmentPerUnit || 15000;
-        const numberOfFieldCultivator = updatedDocument.detailedMachineryFixedCosts?.numberOfFieldCultivator || 1;
-        const fieldCultivatorTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorTotalHoursOfUse || 500;
-        const fieldCultivatorDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorDairyHoursOfUse || 0;
-        const fieldCultivatorEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorEquipmentAge || 1;
-        const fieldCultivatorYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.fieldCultivatorYearsOfUsefulLife || 12;
-
-        // Grain drill - 15’ no-till
-        const grainDrill15NoTillInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillInitialInvestmentPerUnit || 60000;
-        const numberOfGrainDrill15NoTill = updatedDocument.detailedMachineryFixedCosts?.numberOfGrainDrill15NoTill || 1;
-        const grainDrill15NoTillTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillTotalHoursOfUse || 500;
-        const grainDrill15NoTillDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillDairyHoursOfUse || 0;
-        const grainDrill15NoTillEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillEquipmentAge || 1;
-        const grainDrill15NoTillYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.grainDrill15NoTillYearsOfUsefulLife || 12;
-
-        // Mower conditioner (self-propelled)
-        const mowerConditionerSelfPropelledInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledInitialInvestmentPerUnit || 165000;
-        const numberOfMowerConditionerSelfPropelled = updatedDocument.detailedMachineryFixedCosts?.numberOfMowerConditionerSelfPropelled || 1;
-        const mowerConditionerSelfPropelledTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledTotalHoursOfUse || 500;
-        const mowerConditionerSelfPropelledDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledDairyHoursOfUse || 0;
-        const mowerConditionerSelfPropelledEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledEquipmentAge || 1;
-        const mowerConditionerSelfPropelledYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.mowerConditionerSelfPropelledYearsOfUsefulLife || 12;
-
-        // Tedder
-        const tedderInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.tedderInitialInvestmentPerUnit || 10000;
-        const numberOfTedder = updatedDocument.detailedMachineryFixedCosts?.numberOfTedder || 1;
-        const tedderTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.tedderTotalHoursOfUse || 500;
-        const tedderDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.tedderDairyHoursOfUse || 0;
-        const tedderEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.tedderEquipmentAge || 1;
-        const tedderYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.tedderYearsOfUsefulLife || 12;
-
-        // Power Rake
-        const powerRakeInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.powerRakeInitialInvestmentPerUnit || 40000;
-        const numberOfPowerRake = updatedDocument.detailedMachineryFixedCosts?.numberOfPowerRake || 1;
-        const powerRakeTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.powerRakeTotalHoursOfUse || 500;
-        const powerRakeDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.powerRakeDairyHoursOfUse || 0;
-        const powerRakeEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.powerRakeEquipmentAge || 1;
-        const powerRakeYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.powerRakeYearsOfUsefulLife || 12;
-
-        // 15’ Folding Rotary Mower
-        const foldingRotaryMower15InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15InitialInvestmentPerUnit || 25000;
-        const numberOfFoldingRotaryMower15 = updatedDocument.detailedMachineryFixedCosts?.numberOfFoldingRotaryMower15 || 1;
-        const foldingRotaryMower15TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15TotalHoursOfUse || 500;
-        const foldingRotaryMower15DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15DairyHoursOfUse || 0;
-        const foldingRotaryMower15EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15EquipmentAge || 1;
-        const foldingRotaryMower15YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.foldingRotaryMower15YearsOfUsefulLife || 12;
-
-        // Deep-ripper
-        const deepRipperInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.deepRipperInitialInvestmentPerUnit || 20000;
-        const numberOfDeepRipper = updatedDocument.detailedMachineryFixedCosts?.numberOfDeepRipper || 1;
-        const deepRipperTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.deepRipperTotalHoursOfUse || 500;
-        const deepRipperDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.deepRipperDairyHoursOfUse || 0;
-        const deepRipperEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.deepRipperEquipmentAge || 1;
-        const deepRipperYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.deepRipperYearsOfUsefulLife || 12;
-
-        // 24’ Livestock Trailer
-        const livestockTrailer24InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24InitialInvestmentPerUnit || 20000;
-        const numberOfLivestockTrailer24 = updatedDocument.detailedMachineryFixedCosts?.numberOfLivestockTrailer24 || 1;
-        const livestockTrailer24TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24TotalHoursOfUse || 500;
-        const livestockTrailer24DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24DairyHoursOfUse || 500;
-        const livestockTrailer24EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24EquipmentAge || 1;
-        const livestockTrailer24YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.livestockTrailer24YearsOfUsefulLife || 12;
-
-        // Round Baler
-        const roundBalerInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.roundBalerInitialInvestmentPerUnit || 40000;
-        const numberOfRoundBaler = updatedDocument.detailedMachineryFixedCosts?.numberOfRoundBaler || 1;
-        const roundBalerTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.roundBalerTotalHoursOfUse || 500;
-        const roundBalerDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.roundBalerDairyHoursOfUse || 0;
-        const roundBalerEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.roundBalerEquipmentAge || 1;
-        const roundBalerYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.roundBalerYearsOfUsefulLife || 12;
-
-        // Tub Grinder
-        const tubGrinderInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.tubGrinderInitialInvestmentPerUnit || 35000;
-        const numberOfTubGrinder = updatedDocument.detailedMachineryFixedCosts?.numberOfTubGrinder || 1;
-        const tubGrinderTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.tubGrinderTotalHoursOfUse || 500;
-        const tubGrinderDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.tubGrinderDairyHoursOfUse || 500;
-        const tubGrinderEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.tubGrinderEquipmentAge || 1;
-        const tubGrinderYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.tubGrinderYearsOfUsefulLife || 12;
-
-        // Miscellaneous Equipment
-        const miscellaneousEquipmentInitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentInitialInvestmentPerUnit || 0;
-        const numberOfMiscellaneousEquipment = updatedDocument.detailedMachineryFixedCosts?.numberOfMiscellaneousEquipment || 0;
-        const miscellaneousEquipmentTotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentTotalHoursOfUse || 0;
-        const miscellaneousEquipmentDairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentDairyHoursOfUse || 0;
-        const miscellaneousEquipmentEquipmentAge = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentEquipmentAge || 1;
-        const miscellaneousEquipmentYearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.miscellaneousEquipmentYearsOfUsefulLife || 12;
-
-        // Other Machinery and Equipment 1
-        const otherMachineryEquipment1InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1InitialInvestmentPerUnit || 0;
-        const numberOfOtherMachineryEquipment1 = updatedDocument.detailedMachineryFixedCosts?.numberOfOtherMachineryEquipment1 || 0;
-        const otherMachineryEquipment1TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1TotalHoursOfUse || 0;
-        const otherMachineryEquipment1DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1DairyHoursOfUse || 0;
-        const otherMachineryEquipment1EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1EquipmentAge || 1;
-        const otherMachineryEquipment1YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment1YearsOfUsefulLife || 12;
-
-        // Other Machinery and Equipment 2
-        const otherMachineryEquipment2InitialInvestmentPerUnit = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2InitialInvestmentPerUnit || 0;
-        const numberOfOtherMachineryEquipment2 = updatedDocument.detailedMachineryFixedCosts?.numberOfOtherMachineryEquipment2 || 0;
-        const otherMachineryEquipment2TotalHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2TotalHoursOfUse || 0;
-        const otherMachineryEquipment2DairyHoursOfUse = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2DairyHoursOfUse || 0;
-        const otherMachineryEquipment2EquipmentAge = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2EquipmentAge || 1;
-        const otherMachineryEquipment2YearsOfUsefulLife = updatedDocument.detailedMachineryFixedCosts?.otherMachineryEquipment2YearsOfUsefulLife || 12;
-        // }
-
-        //------->>>Some other Variables required to calculate operating costs output
+        //------->>>Few other Variables required to calculate operating costs output
         const cowInitialInvestmentValue = (totalNumberOfCows)*(cowPurchaseValue);
-        const cowEstimatedSalvageValue = ((totalNumberOfCows) * (cullCowsPrice)) *(1 - (cowDeathLossRate/100));
+        const cowEstimatedSalvageValue = ((totalNumberOfCows) * (cullCowsPrice))*(1 - (cowDeathLossRate/100));
         const cowYearsOfUsefulLife = 1/(cullingRate/100)
         const cowAnnualAmortization = (((cowInitialInvestmentValue) - (cowEstimatedSalvageValue)) * (shortTermInterestRate)) / (1 - (1 + (shortTermInterestRate)) ** (-(cowYearsOfUsefulLife))) + ((cowEstimatedSalvageValue) * (shortTermInterestRate));
         const cowInsurance = (cowInitialInvestmentValue)*(livestockInsuranceRate);
@@ -494,11 +503,11 @@ export class FixedCostsService{
         const farmShopandGeneralRoadsPropertyInsurance =  (farmShopAndGeneralRoadsInitialInvestment) * (propertyTaxRate/100);
         const farmShopandGeneralRoadsTotalAnnualEconomicCost = (farmShopandGeneralRoadsAnnualAmortization) + (farmShopandGeneralRoadsPropertyTax) + (farmShopandGeneralRoadsPropertyInsurance);
 
-        const milkingParlorandEquipmentEstimatedSalvageValue = (milkingParlorandEquipmentInitialInvestment) * (3/10) ;
-        const milkingParlorandEquipmentAnnualAmortization =  (((milkingParlorAndEquipmentInitialInvestment)-(milkingParlorandEquipmentEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - (1 + (longTermInterestRate/100))^(-(milkingParlorAndEquipmentYearsOfUsefulLife))) + ((milkingParlorandEquipmentEstimatedSalvageValue) * (longTermInterestRate/100)) 
-        const milkingParlorandEquipmentPropertyTax = (milkingParlorAndEquipmentInitialInvestment)*(propertyInsuranceRate);
-        const milkingParlorandEquipmentPropertyInsurance = (milkingParlorAndEquipmentInitialInvestment)*(propertyInsuranceRate/100);
-        const milkingParlorandEquipmentTotalAnnualEconomicCost = (milkingParlorandEquipmentAnnualAmortization) + (milkingParlorandEquipmentPropertyTax) + (milkingParlorandEquipmentPropertyInsurance);
+        const milkingParlorAndEquipmentEstimatedSalvageValue = (milkingParlorAndEquipmentInitialInvestment) * (3/10) ;
+        const milkingParlorAndEquipmentAnnualAmortization =  (((milkingParlorAndEquipmentInitialInvestment)-(milkingParlorAndEquipmentEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - (1 + (longTermInterestRate/100))^(-(milkingParlorAndEquipmentYearsOfUsefulLife))) + ((milkingParlorAndEquipmentEstimatedSalvageValue) * (longTermInterestRate/100)) 
+        const milkingParlorAndEquipmentPropertyTax = (milkingParlorAndEquipmentInitialInvestment)*(propertyInsuranceRate);
+        const milkingParlorAndEquipmentPropertyInsurance = (milkingParlorAndEquipmentInitialInvestment)*(propertyInsuranceRate/100);
+        const milkingParlorAndEquipmentTotalAnnualEconomicCost = (milkingParlorAndEquipmentAnnualAmortization) + (milkingParlorAndEquipmentPropertyTax) + (milkingParlorAndEquipmentPropertyInsurance);
         
         const feedingEquipmentEstimatedSalvageValue = (feedingEquipmentInitialInvestment)*(3/10);
         const feedingEquipmentAnnualAmortization = (((feedingEquipmentInitialInvestment)-(feedingEquipmentEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - (1 + (longTermInterestRate/100))^(-(feedingEquipmentYearsOfUsefulLife))) + ((feedingEquipmentEstimatedSalvageValue) * (longTermInterestRate/100));
@@ -1015,7 +1024,7 @@ export class FixedCostsService{
         // -------->>>>Outputs calculated and rounded to 2 decimal points
         const totalCattleFixedCost = cowTotalAnnualEconomicCost + bredHeiferTotalAnnualEconomicCost;
         console.log("Farm Shop and General Roads Total Annual Economic Cost:", farmShopandGeneralRoadsTotalAnnualEconomicCost);
-        console.log("Milking Parlor and Equipment Total Annual Economic Cost:", milkingParlorandEquipmentTotalAnnualEconomicCost);
+        console.log("Milking Parlor and Equipment Total Annual Economic Cost:", milkingParlorAndEquipmentTotalAnnualEconomicCost);
         console.log("Feeding Equipment Total Annual Economic Cost:", feedingEquipmentTotalAnnualEconomicCost);
         console.log("Freestall Housing and Lanes Total Annual Economic Cost:", freestallHousingandLanesTotalAnnualEconomicCost);
         console.log("Three-Phase Power Supply Total Annual Economic Cost:", threePhasePowerSupplyTotalAnnualEconomicCost);
@@ -1032,7 +1041,7 @@ export class FixedCostsService{
 
         const totalFacilitiesAndBuildingsFixedCost = 
                         farmShopandGeneralRoadsTotalAnnualEconomicCost +
-                        milkingParlorandEquipmentTotalAnnualEconomicCost +
+                        milkingParlorAndEquipmentTotalAnnualEconomicCost +
                         feedingEquipmentTotalAnnualEconomicCost +
                         freestallHousingandLanesTotalAnnualEconomicCost +
                         threePhasePowerSupplyTotalAnnualEconomicCost +

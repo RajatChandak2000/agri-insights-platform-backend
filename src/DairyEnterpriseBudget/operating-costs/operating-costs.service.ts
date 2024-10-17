@@ -156,9 +156,6 @@ export class OperatingCostsService{
         const numberOfLactationsPerYear = Number(fetchedProductionDetailsOutputs.numberOfLactationsPerYear);
         const beefCrossBullsProduced = Number(fetchedReceiptsOutputs.beefCrossBullsProduced);
         const beefCrossHeifersProduced = Number(fetchedReceiptsOutputs.beefCrossHeifersProduced);
-      
-
-
 
         const haulingCosts = haulingFees * totalAnnualMilkProduction;
         const organizationalCosts = organizationalFees * totalAnnualMilkProduction;
@@ -170,8 +167,6 @@ export class OperatingCostsService{
         const inseminationConventionalBeefCosts = inseminationConventionalBeefFees * ((1/0.57) * (beefCrossBullsProduced + beefCrossHeifersProduced));
         const wasteManagementCosts = wasteManagement * totalNumberOfCows;
         const beddingCosts = bedding * totalNumberOfCows;
-      
-      
        
         // Calculate total dairy operating costs
         const dairyOperatingCosts = 

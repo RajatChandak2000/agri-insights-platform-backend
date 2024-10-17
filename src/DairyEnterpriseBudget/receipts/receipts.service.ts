@@ -131,10 +131,6 @@ export class ReceiptsService{
 
         // Prepare the updated output document
         const updatedOutputDocument = {
-          heifersProduced: parseFloat(heifersProduced.toFixed(2)),
-          bullCalvesProduced:parseFloat(bullCalvesProduced.toFixed(2)),
-          beefCrossBullsProduced:parseFloat(beefCrossBullsProduced.toFixed(2)),
-          beefCrossHeifersProduced:parseFloat(beefCrossHeifersProduced.toFixed(2)),
           milkSales: parseFloat(milkSales.toFixed(2)),
           cullCowsSales: parseFloat(cullCowsSales.toFixed(2)),
           heifersSales: parseFloat(heifersSales.toFixed(2)),
@@ -144,8 +140,6 @@ export class ReceiptsService{
           otherIncome2: parseFloat(otherIncome2.toFixed(2)),
           totalReceipts: parseFloat(totalReceipts.toFixed(2))
         };
-      
-        console.log("updatedOutputDocument ", updatedOutputDocument);
       
         if ('userId' in updatedDocument) {
           try {
