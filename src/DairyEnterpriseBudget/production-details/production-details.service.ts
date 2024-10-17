@@ -92,18 +92,19 @@ export class ProductionDetailsService {
         // Inputs and temp variables required to calculate the outputs
         const expectedMilkProduction = updatedDocument.milkProduction.expectedMilkProduction;
         const calvingInterval = updatedDocument.milkProduction.calvingInterval
-        const expectedMilkPrice = updatedDocument.milkProduction.expectedMilkPrice; // default, will change later, need to automate with data collected;
+        //const expectedMilkPrice = updatedDocument.milkProduction.expectedMilkPrice; // default, will change later, need to automate with data collected;
         const totalNumberOfCows = updatedDocument.milkProduction.totalNumberOfCows;
         const cullingRate = updatedDocument.heiferProduction.cullingRate;
         const cowDeathLossRate = updatedDocument.heiferProduction.cowDeathLossRate;
         const heiferRaisingDeathLossRate = updatedDocument.heiferProduction.heiferRaisingDeathLossRate;
         const numberOfLactationsPerYear = (totalNumberOfCows * 12) / calvingInterval; //Stored in database in output for a particular user if logged  in.
+        const expectedMilkPrice = 22; // default, will change later, need to automate with data collected
       
         // Outputs calculated and rounded to 2 decimal points
         const rollingHerdAverage = ((expectedMilkProduction) / (calvingInterval / 12)).toFixed(2);
         const totalAnnualMilkProduction = ((numberOfLactationsPerYear * expectedMilkProduction) / 100).toFixed(2);
-        const expectedAnnualMilkSales = ((parseFloat(rollingHerdAverage) / 100) * expectedMilkPrice * totalNumberOfCows).toFixed(2);
-        const numberOfReplacementHeifersNeeded = (totalNumberOfCows * (cullingRate/100 + cowDeathLossRate/100 + heiferRaisingDeathLossRate/100)).toFixed(2);
+        const expectedAnnualMilkSales = (((parseFloat(rollingHerdAverage) /100 ) * (expectedMilkPrice)) * totalNumberOfCows).toFixed(2);
+        const numberOfReplacementHeifersNeeded = Math.round((totalNumberOfCows * (cullingRate/100 + cowDeathLossRate/100 + heiferRaisingDeathLossRate/100)));
       
         // Convert to numbers for storage
         const updatedOutputDocument = {
@@ -111,7 +112,7 @@ export class ProductionDetailsService {
           rollingHerdAverage: parseFloat(rollingHerdAverage),
           totalAnnualMilkProduction: parseFloat(totalAnnualMilkProduction),
           expectedAnnualMilkSales: parseFloat(expectedAnnualMilkSales),
-          numberOfReplacementHeifersNeeded: parseFloat(numberOfReplacementHeifersNeeded),
+          numberOfReplacementHeifersNeeded: (numberOfReplacementHeifersNeeded),
         };
       
         if ('userId' in updatedDocument){

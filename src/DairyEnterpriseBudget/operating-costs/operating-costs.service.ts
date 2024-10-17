@@ -162,9 +162,9 @@ export class OperatingCostsService{
         const dhiaCosts = dhiaFees * totalNumberOfCows;
         const vetCosts = vetExpenses * totalNumberOfCows;
         const utilityCosts = utilities * totalNumberOfCows;
-        const inseminationSexedCosts = inseminationSexedFees * ((1/0.47) * (2/3) * (numberOfLactationsPerYear - (beefCrossBullsProduced + beefCrossHeifersProduced)));
-        const inseminationConventionalCosts = inseminationConventionalFees * ((1/0.57) * (1/3) * (numberOfLactationsPerYear - (beefCrossBullsProduced + beefCrossHeifersProduced)));
-        const inseminationConventionalBeefCosts = inseminationConventionalBeefFees * ((1/0.57) * (beefCrossBullsProduced + beefCrossHeifersProduced));
+        const inseminationSexedCosts = inseminationSexedFees * ((1/0.47) * (2/3) * (numberOfLactationsPerYear - (Math.round(beefCrossBullsProduced)+ Math.round(beefCrossHeifersProduced))));
+        const inseminationConventionalCosts = inseminationConventionalFees * ((1/0.57) * (1/3) * (numberOfLactationsPerYear - (Math.round(beefCrossBullsProduced)+ Math.round(beefCrossHeifersProduced))));
+        const inseminationConventionalBeefCosts = inseminationConventionalBeefFees * ((1/0.57) * (Math.round(beefCrossBullsProduced)+ Math.round(beefCrossHeifersProduced)));
         const wasteManagementCosts = wasteManagement * totalNumberOfCows;
         const beddingCosts = bedding * totalNumberOfCows;
        
@@ -217,17 +217,19 @@ export class OperatingCostsService{
         const additionalManagementCosts = (additionalManagementCostsPercentage/100) * totalReceipts;
       
         // Calculate total operating cost
-        const totalOperatingCosts = 
-          raisedForageCost +
-          purchasedFeedCost +
-          dairyOperatingCosts +
-          dairyPayroll +
-          additionalManagementCosts;
+       
 
 
         const totalRaisedForageCost = raisedForageCost*totalNumberOfCows;
 
         const totalPurchasedFeedCost = purchasedFeedCost*totalNumberOfCows;
+
+        const totalOperatingCosts = 
+        totalRaisedForageCost +
+        totalPurchasedFeedCost+
+        dairyOperatingCosts +
+        dairyPayroll +
+        additionalManagementCosts;
 
         //to confirm with cooper
         const totalFeedCost = totalRaisedForageCost + totalPurchasedFeedCost;
