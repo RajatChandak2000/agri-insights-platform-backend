@@ -111,13 +111,19 @@ export class ReceiptsService{
         
         console.log("Number of heifers rased : ",numberOfHeifersRaised);
         const cullcows = Math.round((cullingRate / 100) * totalNumberOfCows * (1 - (cowDeathLossRate / 100)));
-        const heifersProduced =((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) + ((1 / 3) * lactations * (1 - (expectedPercentMaleWithConventional / 100)));
-        const bullCalvesProduced =((2 / 3) * lactations * (expectedPercentMaleWithSexedSemen / 100)) + ((1 / 3) * lactations * (expectedPercentMaleWithConventional / 100));
-        const beefCrossBullsProduced = ((((1 / 3) * lactations * (expectedPercentMaleWithConventional / 100))) * (beefCrossPercent / 100));
-        const beefCrossHeifersProduced =(
+        const heifersProduced = Math.round(((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) + ((1 / 3) * lactations * (1 - (expectedPercentMaleWithConventional / 100))));
+        const bullCalvesProduced = Math.round(((2 / 3) * lactations * (expectedPercentMaleWithSexedSemen / 100)) + ((1 / 3) * lactations * (expectedPercentMaleWithConventional / 100)));
+        const beefCrossBullsProduced = Math.round(((((1 / 3) * lactations * (expectedPercentMaleWithConventional / 100))) * (beefCrossPercent / 100)));
+        const beefCrossHeifersProduced = Math.round((
           (((2 / 3) * lactations * (1 - (expectedPercentMaleWithSexedSemen / 100))) - numberOfHeifersRaised) +
           ((1 / 3) * lactations * (1 - (expectedPercentMaleWithConventional / 100)))
-        ) * (beefCrossPercent / 100);
+        ) * (beefCrossPercent / 100));
+
+        console.log("cullcows: ", cullcows);
+        console.log("heifersProduced: ", heifersProduced);
+        console.log("bullCalvesProduced: ", bullCalvesProduced);
+        console.log("beefCrossBullsProduced: ", beefCrossBullsProduced);
+        console.log("beefCrossHeifersProduced: ", beefCrossHeifersProduced);
       
         // Calculate sales
         const milkSales = expectedAnnualMilkSales;
@@ -136,10 +142,15 @@ export class ReceiptsService{
           heifersSales: parseFloat(heifersSales.toFixed(2)),
           bullCalvesSales: parseFloat(bullCalvesSales.toFixed(2)),
           beefCrossSales: parseFloat(beefCrossSales.toFixed(2)),
+          heifersProduced: parseFloat(heifersProduced.toFixed(2)),
+          bullCalvesProduced: parseFloat(bullCalvesProduced.toFixed(2)),
+          beefCrossBullsProduced: parseFloat(beefCrossBullsProduced.toFixed(2)),
+          beefCrossHeifersProduced: parseFloat(beefCrossHeifersProduced.toFixed(2)),
           otherIncome1: parseFloat(otherIncome1.toFixed(2)),
           otherIncome2: parseFloat(otherIncome2.toFixed(2)),
           totalReceipts: parseFloat(totalReceipts.toFixed(2))
         };
+        
       
         if ('userId' in updatedDocument) {
           try {

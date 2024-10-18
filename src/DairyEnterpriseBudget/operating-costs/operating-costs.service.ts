@@ -167,6 +167,18 @@ export class OperatingCostsService{
         const inseminationConventionalBeefCosts = inseminationConventionalBeefFees * ((1/0.57) * (Math.round(beefCrossBullsProduced)+ Math.round(beefCrossHeifersProduced)));
         const wasteManagementCosts = wasteManagement * totalNumberOfCows;
         const beddingCosts = bedding * totalNumberOfCows;
+
+        console.log("haulingCosts ", haulingCosts);
+        console.log("organizationalCosts: ", organizationalCosts);
+        console.log("dhiaCosts: ", dhiaCosts);
+        console.log("vetCosts: ", vetCosts);
+        console.log("insurance: ", insurance);
+        console.log("utilityCosts: ", utilityCosts);
+        console.log("inseminationSexedCosts: ", inseminationSexedCosts);
+        console.log("inseminationConventionalCosts: ", inseminationConventionalCosts);
+        console.log("inseminationConventionalBeefCosts: ", inseminationConventionalBeefCosts);
+        console.log("wasteManagementCosts: ", wasteManagementCosts);
+        console.log("beddingCosts: ", beddingCosts);
        
         // Calculate total dairy operating costs
         const dairyOperatingCosts = 
@@ -218,12 +230,8 @@ export class OperatingCostsService{
       
         // Calculate total operating cost
        
-
-
         const totalRaisedForageCost = raisedForageCost*totalNumberOfCows;
-
         const totalPurchasedFeedCost = purchasedFeedCost*totalNumberOfCows;
-
         const totalOperatingCosts = 
         totalRaisedForageCost +
         totalPurchasedFeedCost+
@@ -235,24 +243,23 @@ export class OperatingCostsService{
         const totalFeedCost = totalRaisedForageCost + totalPurchasedFeedCost;
         // Create the output document
         const operatingCostsOutput = {
-          totalFeedCost,
-          totalRaisedForageCost,
-          totalPurchasedFeedCost,
-          dairyOperatingCosts,
-          dairyPayroll,
-          additionalManagementCosts,
-          totalOperatingCosts, 
-          haulingCosts,
-          organizationalCosts,
-          dhiaCosts,
-          vetCosts,
-          utilityCosts,
-          inseminationSexedCosts,
-          inseminationConventionalCosts,
-          inseminationConventionalBeefCosts,
-          wasteManagementCosts,
-          beddingCosts,
-                    
+          totalFeedCost: parseFloat(totalFeedCost.toFixed(2)),
+          totalRaisedForageCost: parseFloat(totalRaisedForageCost.toFixed(2)),
+          totalPurchasedFeedCost: parseFloat(totalPurchasedFeedCost.toFixed(2)),
+          dairyOperatingCosts: parseFloat(dairyOperatingCosts.toFixed(2)),
+          dairyPayroll: parseFloat(dairyPayroll.toFixed(2)),
+          additionalManagementCosts: parseFloat(additionalManagementCosts.toFixed(2)),
+          totalOperatingCosts: parseFloat(totalOperatingCosts.toFixed(2)),
+          haulingCosts: parseFloat(haulingCosts.toFixed(2)),
+          organizationalCosts: parseFloat(organizationalCosts.toFixed(2)),
+          dhiaCosts: parseFloat(dhiaCosts.toFixed(2)),
+          vetCosts: parseFloat(vetCosts.toFixed(2)),
+          utilityCosts: parseFloat(utilityCosts.toFixed(2)),
+          inseminationSexedCosts: parseFloat(inseminationSexedCosts.toFixed(2)),
+          inseminationConventionalCosts: parseFloat(inseminationConventionalCosts.toFixed(2)),
+          inseminationConventionalBeefCosts: parseFloat(inseminationConventionalBeefCosts.toFixed(2)),
+          wasteManagementCosts: parseFloat(wasteManagementCosts.toFixed(2)),
+          beddingCosts: parseFloat(beddingCosts.toFixed(2))          
         };
       
         // Save the output to the database
