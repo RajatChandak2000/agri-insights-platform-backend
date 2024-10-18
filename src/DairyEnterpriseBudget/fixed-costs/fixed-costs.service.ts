@@ -457,13 +457,13 @@ export class FixedCostsService{
         const cullCowsPrice = receiptsInput.cullCowsPrice;
         const cowDeathLossRate = productionDetailsInputs.heiferProduction.cowDeathLossRate;
         const cullingRate = productionDetailsInputs.heiferProduction.cullingRate;
+        
         const livestockInsuranceRate = 0.35;
         const propertyTaxRate = 0.7;
         const propertyInsuranceRate = 0.25;
-        
-        const machineryInsuranceRate = 20;
-        const longTermInterestRate = 30;
-        const shortTermInterestRate = 30;
+        const machineryInsuranceRate = 0.29;
+        const longTermInterestRate = 4.5;
+        const shortTermInterestRate = 5.5;
 
         //Map for Age and its categories
         const ageCategories = new Map([
@@ -481,18 +481,18 @@ export class FixedCostsService{
             [12, { HarvestingCrop: 18, HarvestingForage: 25, Misc: 26, Planters: 38, Tilage: 26, Tractor_150hp: 28, Tractors_80_149hp: 34 }]
         ]);
 
-        //------->>>Few other Variables required to calculate operating costs output
-        const cowInitialInvestmentValue = (totalNumberOfCows)*(cowPurchaseValue);
-        const cowEstimatedSalvageValue = ((totalNumberOfCows) * (cullCowsPrice))*(1 - (cowDeathLossRate/100));
+        //------->>>Few other variables required to calculate operating costs output
+        const cowInitialInvestmentValue = totalNumberOfCows*cowPurchaseValue;
+        const cowEstimatedSalvageValue = (totalNumberOfCows*cullCowsPrice)*(1 - (cowDeathLossRate/100));
         const cowYearsOfUsefulLife = 1/(cullingRate/100)
-        const cowAnnualAmortization = (((cowInitialInvestmentValue) - (cowEstimatedSalvageValue)) * (shortTermInterestRate)) / (1 - (1 + (shortTermInterestRate)) ** (-(cowYearsOfUsefulLife))) + ((cowEstimatedSalvageValue) * (shortTermInterestRate));
-        const cowInsurance = (cowInitialInvestmentValue)*(livestockInsuranceRate);
-        const cowTotalAnnualEconomicCost = (cowAnnualAmortization) + (cowInsurance);
+        const cowAnnualAmortization = (((cowInitialInvestmentValue - cowEstimatedSalvageValue) * (shortTermInterestRate/100)) / (1 - Math.pow(1 + (shortTermInterestRate/100), -cowYearsOfUsefulLife))) + ((cowEstimatedSalvageValue) * (shortTermInterestRate/100));
+        const cowInsurance = cowInitialInvestmentValue*(livestockInsuranceRate/100);
+        const cowTotalAnnualEconomicCost = cowAnnualAmortization + cowInsurance;
         
         const bredHeiferInitialInvestment = (numberOfBredHeifers)*(bredHeiferPurchaseValue);
         const bredHeiferSalvageValue = (numberOfBredHeifers)*(cullCowsPrice)*(1-(cowDeathLossRate/100));
         const bredHeiferYearsofUsefulLife =  1/(cullingRate/100) + 1;
-        const bredHeiferAnnualAmortization = (((bredHeiferInitialInvestment - bredHeiferSalvageValue) * shortTermInterestRate) /(1 - (1 + shortTermInterestRate) ** (-bredHeiferYearsofUsefulLife))) + (bredHeiferSalvageValue * shortTermInterestRate);
+        const bredHeiferAnnualAmortization = (((bredHeiferInitialInvestment - bredHeiferSalvageValue) * (shortTermInterestRate/100)) / (1 - Math.pow(1 + (shortTermInterestRate/100), -bredHeiferYearsofUsefulLife))) + (bredHeiferSalvageValue * (shortTermInterestRate/100));
         const bredHeiferInsurance = (bredHeiferInitialInvestment)*(livestockInsuranceRate/100);
         const bredHeiferTotalAnnualEconomicCost = (bredHeiferAnnualAmortization) + (bredHeiferInsurance);
         
@@ -500,23 +500,23 @@ export class FixedCostsService{
         const farmShopandGeneralRoadsEstimatedSalvageValue = (farmShopAndGeneralRoadsInitialInvestment) * (3/10);
         const farmShopandGeneralRoadsAnnualAmortization = (((farmShopAndGeneralRoadsInitialInvestment - farmShopandGeneralRoadsEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -farmShopAndGeneralRoadsYearsOfUsefulLife))) + (farmShopandGeneralRoadsEstimatedSalvageValue * (longTermInterestRate / 100));
         const farmShopandGeneralRoadsPropertyTax = (farmShopAndGeneralRoadsInitialInvestment) * (propertyTaxRate/100);
-        const farmShopandGeneralRoadsPropertyInsurance =  (farmShopAndGeneralRoadsInitialInvestment) * (propertyTaxRate/100);
+        const farmShopandGeneralRoadsPropertyInsurance =  (farmShopAndGeneralRoadsInitialInvestment) * (propertyInsuranceRate/100);
         const farmShopandGeneralRoadsTotalAnnualEconomicCost = (farmShopandGeneralRoadsAnnualAmortization) + (farmShopandGeneralRoadsPropertyTax) + (farmShopandGeneralRoadsPropertyInsurance);
 
         const milkingParlorAndEquipmentEstimatedSalvageValue = (milkingParlorAndEquipmentInitialInvestment) * (3/10) ;
-        const milkingParlorAndEquipmentAnnualAmortization =  (((milkingParlorAndEquipmentInitialInvestment)-(milkingParlorAndEquipmentEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - (1 + (longTermInterestRate/100))^(-(milkingParlorAndEquipmentYearsOfUsefulLife))) + ((milkingParlorAndEquipmentEstimatedSalvageValue) * (longTermInterestRate/100)) 
-        const milkingParlorAndEquipmentPropertyTax = (milkingParlorAndEquipmentInitialInvestment)*(propertyInsuranceRate);
+        const milkingParlorAndEquipmentAnnualAmortization =  (((milkingParlorAndEquipmentInitialInvestment)-(milkingParlorAndEquipmentEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - Math.pow(1 + (longTermInterestRate/100), -milkingParlorAndEquipmentYearsOfUsefulLife)) + (milkingParlorAndEquipmentEstimatedSalvageValue * (longTermInterestRate/100));
+        const milkingParlorAndEquipmentPropertyTax = (milkingParlorAndEquipmentInitialInvestment)*(propertyTaxRate/100);
         const milkingParlorAndEquipmentPropertyInsurance = (milkingParlorAndEquipmentInitialInvestment)*(propertyInsuranceRate/100);
         const milkingParlorAndEquipmentTotalAnnualEconomicCost = (milkingParlorAndEquipmentAnnualAmortization) + (milkingParlorAndEquipmentPropertyTax) + (milkingParlorAndEquipmentPropertyInsurance);
         
         const feedingEquipmentEstimatedSalvageValue = (feedingEquipmentInitialInvestment)*(3/10);
-        const feedingEquipmentAnnualAmortization = (((feedingEquipmentInitialInvestment)-(feedingEquipmentEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - (1 + (longTermInterestRate/100))^(-(feedingEquipmentYearsOfUsefulLife))) + ((feedingEquipmentEstimatedSalvageValue) * (longTermInterestRate/100));
+        const feedingEquipmentAnnualAmortization = (((feedingEquipmentInitialInvestment)-(feedingEquipmentEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - Math.pow(1 + (longTermInterestRate/100), -feedingEquipmentYearsOfUsefulLife)) + (feedingEquipmentEstimatedSalvageValue * (longTermInterestRate/100));
         const feedingEquipmentPropertyTax = (feedingEquipmentInitialInvestment) * (propertyTaxRate/100);
         const feedingEquipmentPropertyInsurance = (feedingEquipmentInitialInvestment) * (propertyInsuranceRate/100);
         const feedingEquipmentTotalAnnualEconomicCost = (feedingEquipmentAnnualAmortization) + (feedingEquipmentPropertyTax) + (feedingEquipmentPropertyInsurance);
         
         const freestallHousingandLanesEstimatedSalvageValue = (freestallHousingAndLanesInitialInvestment) * (3/10);
-        const freestallHousingandLanesAnnualAmortization = (((freestallHousingAndLanesInitialInvestment)-(freestallHousingandLanesEstimatedSalvageValue)) * (longTermInterestRate/100)) / (1 - (1 + (longTermInterestRate/100))^(-(freestallHousingAndLanesYearsOfUsefulLife))) + ((freestallHousingandLanesEstimatedSalvageValue) * (longTermInterestRate/100)) 
+        const freestallHousingandLanesAnnualAmortization = (((freestallHousingAndLanesInitialInvestment-freestallHousingandLanesEstimatedSalvageValue) * (longTermInterestRate/100)) / (1 - Math.pow(1 + (longTermInterestRate/100),-freestallHousingAndLanesYearsOfUsefulLife))) + (freestallHousingandLanesEstimatedSalvageValue * (longTermInterestRate/100));
         const freestallHousingandLanesPropertyTax = (freestallHousingAndLanesInitialInvestment) * (propertyTaxRate/100);
         const freestallHousingandLanesPropertyInsurance = (freestallHousingAndLanesInitialInvestment) * (propertyInsuranceRate/100);
         const freestallHousingandLanesTotalAnnualEconomicCost = (freestallHousingandLanesAnnualAmortization) + (freestallHousingandLanesPropertyTax) + (freestallHousingandLanesPropertyInsurance);
@@ -535,7 +535,7 @@ export class FixedCostsService{
         
         const hayShedEstimatedSalvageValue = (hayShedInitialInvestment) * (3/10);
         const hayShedAnnualAmortization = (((hayShedInitialInvestment - hayShedEstimatedSalvageValue) * (longTermInterestRate / 100)) / 
-                                  (1 - Math.pow((1 + (longTermInterestRate / 100)), -hayShedYearsOfUsefulLife))) + 
+                                  (1 - Math.pow(1 + (longTermInterestRate / 100), -hayShedYearsOfUsefulLife))) + 
                                   (hayShedEstimatedSalvageValue * (longTermInterestRate / 100));
         const hayShedPropertyTax = (hayShedInitialInvestment) * (propertyTaxRate/100);
         const hayShedPropertyInsurance = (hayShedInitialInvestment) * (propertyInsuranceRate/100);
@@ -543,7 +543,7 @@ export class FixedCostsService{
         
         const trenchSilosEstimatedSalvageValue = (trenchSilosInitialInvestment) * (3/10);
         const trenchSilosAnnualAmortization = (((trenchSilosInitialInvestment - trenchSilosEstimatedSalvageValue) * (longTermInterestRate / 100)) / 
-                                      (1 - Math.pow((1 + (longTermInterestRate / 100)), -trenchSilosYearsOfUsefulLife))) + 
+                                      (1 - Math.pow(1 + (longTermInterestRate / 100), -trenchSilosYearsOfUsefulLife))) + 
                                       (trenchSilosEstimatedSalvageValue * (longTermInterestRate / 100));
         const trenchSilosPropertyTax = (trenchSilosInitialInvestment) * (propertyTaxRate/100);
         const trenchSilosPropertyInsurance = (trenchSilosInitialInvestment) * (propertyInsuranceRate/100);
@@ -551,123 +551,123 @@ export class FixedCostsService{
         
         const fencesEstimatedSalvageValue = (fencesInitialInvestment) * (3/10);
         const fencesAnnualAmortization = (((fencesInitialInvestment - fencesEstimatedSalvageValue) * (longTermInterestRate / 100)) / 
-                                  (1 - Math.pow((1 + (longTermInterestRate / 100)), -fencesYearsOfUsefulLife))) + 
+                                  (1 - Math.pow(1 + (longTermInterestRate / 100), -fencesYearsOfUsefulLife))) + 
                                   (fencesEstimatedSalvageValue * (longTermInterestRate / 100));
         const fencesPropertyTax = (fencesInitialInvestment) * (propertyTaxRate/100);
         const fencesPropertyInsurance = (fencesInitialInvestment) * (propertyInsuranceRate/100);
         const fencesTotalAnnualEconomicCost = (fencesAnnualAmortization) + (fencesPropertyTax) + (fencesPropertyInsurance);
         
         const commodityBarnEstimatedSalvageValue = (commodityBarnInitialInvestment) * (3 / 10);
-        const commodityBarnAnnualAmortization = (((commodityBarnInitialInvestment - commodityBarnEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-commodityBarnYearsOfUsefulLife))) + (commodityBarnEstimatedSalvageValue * (longTermInterestRate / 100));
+        const commodityBarnAnnualAmortization = (((commodityBarnInitialInvestment - commodityBarnEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100),-commodityBarnYearsOfUsefulLife))) + (commodityBarnEstimatedSalvageValue * (longTermInterestRate / 100));
         const commodityBarnPropertyTax = (commodityBarnInitialInvestment) * (propertyTaxRate / 100);
         const commodityBarnPropertyInsurance = (commodityBarnInitialInvestment) * (propertyInsuranceRate / 100);
         const commodityBarnTotalAnnualEconomicCost = (commodityBarnAnnualAmortization) + (commodityBarnPropertyTax) + (commodityBarnPropertyInsurance);
         
         const calfOrHeiferBarnEstimatedSalvageValue = (calfOrHeiferBarnInitialInvestment) * (3 / 10);
-        const calfOrHeiferBarnAnnualAmortization = (((calfOrHeiferBarnInitialInvestment - calfOrHeiferBarnEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-calfOrHeiferBarnYearsOfUsefulLife))) + (calfOrHeiferBarnEstimatedSalvageValue * (longTermInterestRate / 100));
+        const calfOrHeiferBarnAnnualAmortization = (((calfOrHeiferBarnInitialInvestment - calfOrHeiferBarnEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -calfOrHeiferBarnYearsOfUsefulLife))) + (calfOrHeiferBarnEstimatedSalvageValue * (longTermInterestRate / 100));
         const calfOrHeiferBarnPropertyTax = (calfOrHeiferBarnInitialInvestment) * (propertyTaxRate / 100);
         const calfOrHeiferBarnPropertyInsurance = (calfOrHeiferBarnInitialInvestment) * (propertyInsuranceRate / 100);
         const calfOrHeiferBarnTotalAnnualEconomicCost = (calfOrHeiferBarnAnnualAmortization) + (calfOrHeiferBarnPropertyTax) + (calfOrHeiferBarnPropertyInsurance);
         
         const tiltTableEstimatedSalvageValue = (tiltTableInitialInvestment) * (3 / 10);
-        const tiltTableAnnualAmortization = (((tiltTableInitialInvestment - tiltTableEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-tiltTableYearsOfUsefulLife))) + (tiltTableEstimatedSalvageValue * (longTermInterestRate / 100)); 
+        const tiltTableAnnualAmortization = (((tiltTableInitialInvestment - tiltTableEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100),-tiltTableYearsOfUsefulLife))) + (tiltTableEstimatedSalvageValue * (longTermInterestRate / 100)); 
         const tiltTablePropertyTax = (tiltTableInitialInvestment) * (propertyTaxRate / 100);
         const tiltTablePropertyInsurance = (tiltTableInitialInvestment) * (propertyInsuranceRate / 100);
         const tiltTableTotalAnnualEconomicCost = (tiltTableAnnualAmortization) + (tiltTablePropertyTax) + (tiltTablePropertyInsurance);
         
         const cattleHandlingFacilitiesEstimatedSalvageValue = (cattleHandlingFacilitiesInitialInvestment) * (3 / 10);
-        const cattleHandlingFacilitiesAnnualAmortization = (((cattleHandlingFacilitiesInitialInvestment - cattleHandlingFacilitiesEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-cattleHandlingFacilitiesYearsOfUsefulLife))) + (cattleHandlingFacilitiesEstimatedSalvageValue * (longTermInterestRate / 100));
+        const cattleHandlingFacilitiesAnnualAmortization = (((cattleHandlingFacilitiesInitialInvestment - cattleHandlingFacilitiesEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100),-cattleHandlingFacilitiesYearsOfUsefulLife))) + (cattleHandlingFacilitiesEstimatedSalvageValue * (longTermInterestRate / 100));
         const cattleHandlingFacilitiesPropertyTax = (cattleHandlingFacilitiesInitialInvestment) * (propertyTaxRate / 100);
         const cattleHandlingFacilitiesPropertyInsurance = (cattleHandlingFacilitiesInitialInvestment) * (propertyInsuranceRate / 100);
         const cattleHandlingFacilitiesTotalAnnualEconomicCost = (cattleHandlingFacilitiesAnnualAmortization) + (cattleHandlingFacilitiesPropertyTax) + (cattleHandlingFacilitiesPropertyInsurance);
 
         const otherFacilitiesAndBuildings1EstimatedSalvageValue = (otherFacilitiesAndBuildings1InitialInvestment) * (3 / 10);
-        const otherFacilitiesAndBuildings1AnnualAmortization = (((otherFacilitiesAndBuildings1InitialInvestment - otherFacilitiesAndBuildings1EstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-otherFacilitiesAndBuildings1YearsOfUsefulLife))) + (otherFacilitiesAndBuildings1EstimatedSalvageValue * (longTermInterestRate / 100));
+        const otherFacilitiesAndBuildings1AnnualAmortization = (((otherFacilitiesAndBuildings1InitialInvestment - otherFacilitiesAndBuildings1EstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -otherFacilitiesAndBuildings1YearsOfUsefulLife))) + (otherFacilitiesAndBuildings1EstimatedSalvageValue * (longTermInterestRate / 100));
         const otherFacilitiesAndBuildings1PropertyTax = (otherFacilitiesAndBuildings1InitialInvestment) * (propertyTaxRate / 100);
         const otherFacilitiesAndBuildings1PropertyInsurance = (otherFacilitiesAndBuildings1InitialInvestment) * (propertyInsuranceRate / 100);
         const otherFacilitiesAndBuildings1TotalAnnualEconomicCost = (otherFacilitiesAndBuildings1AnnualAmortization) + (otherFacilitiesAndBuildings1PropertyTax) + (otherFacilitiesAndBuildings1PropertyInsurance);
 
         const otherFacilitiesAndBuildings2EstimatedSalvageValue = (otherFacilitiesAndBuildings2InitialInvestment) * (3 / 10);
-        const otherFacilitiesAndBuildings2AnnualAmortization = (((otherFacilitiesAndBuildings2InitialInvestment - otherFacilitiesAndBuildings2EstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-otherFacilitiesAndBuildings2YearsOfUsefulLife))) + (otherFacilitiesAndBuildings2EstimatedSalvageValue * (longTermInterestRate / 100));
+        const otherFacilitiesAndBuildings2AnnualAmortization = (((otherFacilitiesAndBuildings2InitialInvestment - otherFacilitiesAndBuildings2EstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -otherFacilitiesAndBuildings2YearsOfUsefulLife))) + (otherFacilitiesAndBuildings2EstimatedSalvageValue * (longTermInterestRate / 100));
         const otherFacilitiesAndBuildings2PropertyTax = (otherFacilitiesAndBuildings2InitialInvestment) * (propertyTaxRate / 100);
         const otherFacilitiesAndBuildings2PropertyInsurance = (otherFacilitiesAndBuildings2InitialInvestment) * (propertyInsuranceRate / 100);
         const otherFacilitiesAndBuildings2TotalAnnualEconomicCost = (otherFacilitiesAndBuildings2AnnualAmortization) + (otherFacilitiesAndBuildings2PropertyTax) + (otherFacilitiesAndBuildings2PropertyInsurance);
 
         //WASTE MANAGEMENT
         const wasteStoragePondEstimatedSalvageValue = wasteStoragePondInitialInvestment * (3 / 10);
-        const wasteStoragePondAnnualAmortization = (((wasteStoragePondInitialInvestment - wasteStoragePondEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-wasteStoragePondYearsOfUsefulLife))) + (wasteStoragePondEstimatedSalvageValue * (longTermInterestRate / 100));
+        const wasteStoragePondAnnualAmortization = (((wasteStoragePondInitialInvestment - wasteStoragePondEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -wasteStoragePondYearsOfUsefulLife))) + (wasteStoragePondEstimatedSalvageValue * (longTermInterestRate / 100));
         const wasteStoragePondPropertyTax = wasteStoragePondInitialInvestment * (propertyTaxRate / 100);
         const wasteStoragePondPropertyInsurance = wasteStoragePondInitialInvestment * (propertyInsuranceRate / 100);
         const wasteStoragePondTotalAnnualEconomicCost = wasteStoragePondAnnualAmortization + wasteStoragePondPropertyTax + wasteStoragePondPropertyInsurance;
 
         const compactClayLinerEstimatedSalvageValue = compactClayLinerInitialInvestment * (3 / 10);
-        const compactClayLinerAnnualAmortization = (((compactClayLinerInitialInvestment - compactClayLinerEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-compactClayLinerYearsOfUsefulLife))) + (compactClayLinerEstimatedSalvageValue * (longTermInterestRate / 100));
+        const compactClayLinerAnnualAmortization = (((compactClayLinerInitialInvestment - compactClayLinerEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -compactClayLinerYearsOfUsefulLife))) + (compactClayLinerEstimatedSalvageValue * (longTermInterestRate / 100));
         const compactClayLinerPropertyTax = compactClayLinerInitialInvestment * (propertyTaxRate / 100);
         const compactClayLinerPropertyInsurance = compactClayLinerInitialInvestment * (propertyInsuranceRate / 100);
         const compactClayLinerTotalAnnualEconomicCost = compactClayLinerAnnualAmortization + compactClayLinerPropertyTax + compactClayLinerPropertyInsurance;
 
         const monitoringWellsEstimatedSalvageValue = monitoringWellsInitialInvestment * (3 / 10);
-        const monitoringWellsAnnualAmortization = (((monitoringWellsInitialInvestment - monitoringWellsEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-monitoringWellsYearsOfUsefulLife))) + (monitoringWellsEstimatedSalvageValue * (longTermInterestRate / 100));
+        const monitoringWellsAnnualAmortization = (((monitoringWellsInitialInvestment - monitoringWellsEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -monitoringWellsYearsOfUsefulLife))) + (monitoringWellsEstimatedSalvageValue * (longTermInterestRate / 100));
         const monitoringWellsPropertyTax = monitoringWellsInitialInvestment * (propertyTaxRate / 100);
         const monitoringWellsPropertyInsurance = monitoringWellsInitialInvestment * (propertyInsuranceRate / 100);
         const monitoringWellsTotalAnnualEconomicCost = monitoringWellsAnnualAmortization + monitoringWellsPropertyTax + monitoringWellsPropertyInsurance;
 
         const solidsSeparatorEstimatedSalvageValue = solidsSeparatorInitialInvestment * (3 / 10);
-        const solidsSeparatorAnnualAmortization = (((solidsSeparatorInitialInvestment - solidsSeparatorEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-solidsSeparatorYearsOfUsefulLife))) + (solidsSeparatorEstimatedSalvageValue * (longTermInterestRate / 100));
+        const solidsSeparatorAnnualAmortization = (((solidsSeparatorInitialInvestment - solidsSeparatorEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -solidsSeparatorYearsOfUsefulLife))) + (solidsSeparatorEstimatedSalvageValue * (longTermInterestRate / 100));
         const solidsSeparatorPropertyTax = solidsSeparatorInitialInvestment * (propertyTaxRate / 100);
         const solidsSeparatorPropertyInsurance = solidsSeparatorInitialInvestment * (propertyInsuranceRate / 100);
         const solidsSeparatorTotalAnnualEconomicCost = solidsSeparatorAnnualAmortization + solidsSeparatorPropertyTax + solidsSeparatorPropertyInsurance;
 
         const lagoonPumpEstimatedSalvageValue = lagoonPumpInitialInvestment * (3 / 10);
-        const lagoonPumpAnnualAmortization = (((lagoonPumpInitialInvestment - lagoonPumpEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-lagoonPumpYearsOfUsefulLife))) + (lagoonPumpEstimatedSalvageValue * (longTermInterestRate / 100));
+        const lagoonPumpAnnualAmortization = (((lagoonPumpInitialInvestment - lagoonPumpEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -lagoonPumpYearsOfUsefulLife))) + (lagoonPumpEstimatedSalvageValue * (longTermInterestRate / 100));
         const lagoonPumpPropertyTax = lagoonPumpInitialInvestment * (propertyTaxRate / 100);
         const lagoonPumpPropertyInsurance = lagoonPumpInitialInvestment * (propertyInsuranceRate / 100);
         const lagoonPumpTotalAnnualEconomicCost = lagoonPumpAnnualAmortization + lagoonPumpPropertyTax + lagoonPumpPropertyInsurance;
 
         const pipesEstimatedSalvageValue = pipesInitialInvestment * (3 / 10);
-        const pipesAnnualAmortization = (((pipesInitialInvestment - pipesEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-pipesYearsOfUsefulLife))) + (pipesEstimatedSalvageValue * (longTermInterestRate / 100));
+        const pipesAnnualAmortization = (((pipesInitialInvestment - pipesEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -pipesYearsOfUsefulLife))) + (pipesEstimatedSalvageValue * (longTermInterestRate / 100));
         const pipesPropertyTax = pipesInitialInvestment * (propertyTaxRate / 100);
         const pipesPropertyInsurance = pipesInitialInvestment * (propertyInsuranceRate / 100);
         const pipesTotalAnnualEconomicCost = pipesAnnualAmortization + pipesPropertyTax + pipesPropertyInsurance;
 
         const powerUnitEstimatedSalvageValue = powerUnitInitialInvestment * (3 / 10);
-        const powerUnitAnnualAmortization = (((powerUnitInitialInvestment - powerUnitEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-powerUnitYearsOfUsefulLife))) + (powerUnitEstimatedSalvageValue * (longTermInterestRate / 100));
+        const powerUnitAnnualAmortization = (((powerUnitInitialInvestment - powerUnitEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -powerUnitYearsOfUsefulLife))) + (powerUnitEstimatedSalvageValue * (longTermInterestRate / 100));
         const powerUnitPropertyTax = powerUnitInitialInvestment * (propertyTaxRate / 100);
         const powerUnitPropertyInsurance = powerUnitInitialInvestment * (propertyInsuranceRate / 100);
         const powerUnitTotalAnnualEconomicCost = powerUnitAnnualAmortization + powerUnitPropertyTax + powerUnitPropertyInsurance;
 
         const irrigationSystemEstimatedSalvageValue = irrigationSystemInitialInvestment * (3 / 10);
-        const irrigationSystemAnnualAmortization = (((irrigationSystemInitialInvestment - irrigationSystemEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-irrigationSystemYearsOfUsefulLife))) + (irrigationSystemEstimatedSalvageValue * (longTermInterestRate / 100));
+        const irrigationSystemAnnualAmortization = (((irrigationSystemInitialInvestment - irrigationSystemEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -irrigationSystemYearsOfUsefulLife))) + (irrigationSystemEstimatedSalvageValue * (longTermInterestRate / 100));
         const irrigationSystemPropertyTax = irrigationSystemInitialInvestment * (propertyTaxRate / 100);
         const irrigationSystemPropertyInsurance = irrigationSystemInitialInvestment * (propertyInsuranceRate / 100);
         const irrigationSystemTotalAnnualEconomicCost = irrigationSystemAnnualAmortization + irrigationSystemPropertyTax + irrigationSystemPropertyInsurance;
 
         const agitatorEstimatedSalvageValue = agitatorInitialInvestment * (3 / 10);
-        const agitatorAnnualAmortization = (((agitatorInitialInvestment - agitatorEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-agitatorYearsOfUsefulLife))) + (agitatorEstimatedSalvageValue * (longTermInterestRate / 100));
+        const agitatorAnnualAmortization = (((agitatorInitialInvestment - agitatorEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -agitatorYearsOfUsefulLife))) + (agitatorEstimatedSalvageValue * (longTermInterestRate / 100));
         const agitatorPropertyTax = agitatorInitialInvestment * (propertyTaxRate / 100);
         const agitatorPropertyInsurance = agitatorInitialInvestment * (propertyInsuranceRate / 100);
         const agitatorTotalAnnualEconomicCost = agitatorAnnualAmortization + agitatorPropertyTax + agitatorPropertyInsurance;
 
         const manureSpreaderEstimatedSalvageValue = manureSpreaderInitialInvestment * (3 / 10);
-        const manureSpreaderAnnualAmortization = (((manureSpreaderInitialInvestment - manureSpreaderEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-manureSpreaderYearsOfUsefulLife))) + (manureSpreaderEstimatedSalvageValue * (longTermInterestRate / 100));
+        const manureSpreaderAnnualAmortization = (((manureSpreaderInitialInvestment - manureSpreaderEstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -manureSpreaderYearsOfUsefulLife))) + (manureSpreaderEstimatedSalvageValue * (longTermInterestRate / 100));
         const manureSpreaderPropertyTax = manureSpreaderInitialInvestment * (propertyTaxRate / 100);
         const manureSpreaderPropertyInsurance = manureSpreaderInitialInvestment * (propertyInsuranceRate / 100);
         const manureSpreaderTotalAnnualEconomicCost = manureSpreaderAnnualAmortization + manureSpreaderPropertyTax + manureSpreaderPropertyInsurance;
 
         const otherManureManagementStructure1EstimatedSalvageValue = otherManureManagementStructure1InitialInvestment * (3 / 10);
-        const otherManureManagementStructure1AnnualAmortization = (((otherManureManagementStructure1InitialInvestment - otherManureManagementStructure1EstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-otherManureManagementStructure1YearsOfUsefulLife))) + (otherManureManagementStructure1EstimatedSalvageValue * (longTermInterestRate / 100));
+        const otherManureManagementStructure1AnnualAmortization = (((otherManureManagementStructure1InitialInvestment - otherManureManagementStructure1EstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -otherManureManagementStructure1YearsOfUsefulLife))) + (otherManureManagementStructure1EstimatedSalvageValue * (longTermInterestRate / 100));
         const otherManureManagementStructure1PropertyTax = otherManureManagementStructure1InitialInvestment * (propertyTaxRate / 100);
         const otherManureManagementStructure1PropertyInsurance = otherManureManagementStructure1InitialInvestment * (propertyInsuranceRate / 100);
         const otherManureManagementStructure1TotalAnnualEconomicCost = otherManureManagementStructure1AnnualAmortization + otherManureManagementStructure1PropertyTax + otherManureManagementStructure1PropertyInsurance;
 
         const otherManureManagementStructure2EstimatedSalvageValue = otherManureManagementStructure2InitialInvestment * (3 / 10);
-        const otherManureManagementStructure2AnnualAmortization = (((otherManureManagementStructure2InitialInvestment - otherManureManagementStructure2EstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-otherManureManagementStructure2YearsOfUsefulLife))) + (otherManureManagementStructure2EstimatedSalvageValue * (longTermInterestRate / 100));
+        const otherManureManagementStructure2AnnualAmortization = (((otherManureManagementStructure2InitialInvestment - otherManureManagementStructure2EstimatedSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -otherManureManagementStructure2YearsOfUsefulLife))) + (otherManureManagementStructure2EstimatedSalvageValue * (longTermInterestRate / 100));
         const otherManureManagementStructure2PropertyTax = otherManureManagementStructure2InitialInvestment * (propertyTaxRate / 100);
         const otherManureManagementStructure2PropertyInsurance = otherManureManagementStructure2InitialInvestment * (propertyInsuranceRate / 100);
         const otherManureManagementStructure2TotalAnnualEconomicCost = otherManureManagementStructure2AnnualAmortization + otherManureManagementStructure2PropertyTax + otherManureManagementStructure2PropertyInsurance;
 
         //LAND FIXED COSTS
-        const totalLandRentalCost = (acres)*(rentalCost)
+        const totalLandRentalCost = (acres)*(rentalCost);
 
         var totalMachineryFixedCost: number = machineryFixedCostTotalEstimate;
         if(updatedDocument.isDetailedMachineryCosts){
@@ -676,7 +676,7 @@ export class FixedCostsService{
             const articulatedLoadersInitialInvestment = numberOfArticulatedLoaders * articulatedLoadersInitialInvestmentPerUnit;
             const articulatedLoadersEstimatedCurrentSalvageValue = articulatedLoadersInitialInvestment * ageCategories.get(articulatedLoadersEquipmentAge).Misc;
             const articulatedLoadersEstimatedFinalSalvageValue = articulatedLoadersInitialInvestment * ageCategories.get(articulatedLoadersYearsOfUsefulLife).Misc;
-            const articulatedLoadersAnnualAmortization = ((articulatedLoadersEstimatedCurrentSalvageValue - articulatedLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-((articulatedLoadersYearsOfUsefulLife) - (articulatedLoadersEquipmentAge)))) + ((articulatedLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100));
+            const articulatedLoadersAnnualAmortization = ((articulatedLoadersEstimatedCurrentSalvageValue - articulatedLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(articulatedLoadersYearsOfUsefulLife - articulatedLoadersEquipmentAge))) + ((articulatedLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const articulatedLoadersPropertyTax = articulatedLoadersEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const articulatedLoadersPropertyInsurance = articulatedLoadersInitialInvestment * (machineryInsuranceRate / 100);
             const articulatedLoadersTotalAnnualEconomicCost = (articulatedLoadersAnnualAmortization + articulatedLoadersPropertyTax + articulatedLoadersPropertyInsurance) * (articulatedLoadersDairyHoursOfUse / articulatedLoadersTotalHoursOfUse);
@@ -685,7 +685,7 @@ export class FixedCostsService{
             const skidSteerLoadersInitialInvestment = numberOfSkidSteerLoaders * skidSteerLoadersInitialInvestmentPerUnit;
             const skidSteerLoadersEstimatedCurrentSalvageValue = skidSteerLoadersInitialInvestment * ageCategories.get(skidSteerLoadersEquipmentAge).Misc;
             const skidSteerLoadersEstimatedFinalSalvageValue = skidSteerLoadersInitialInvestment * ageCategories.get(skidSteerLoadersYearsOfUsefulLife).Misc;
-            const skidSteerLoadersAnnualAmortization = ((skidSteerLoadersEstimatedCurrentSalvageValue - skidSteerLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-((skidSteerLoadersYearsOfUsefulLife) - (skidSteerLoadersEquipmentAge)))) + ((skidSteerLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100));
+            const skidSteerLoadersAnnualAmortization = ((skidSteerLoadersEstimatedCurrentSalvageValue - skidSteerLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(skidSteerLoadersYearsOfUsefulLife - skidSteerLoadersEquipmentAge))) + ((skidSteerLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const skidSteerLoadersPropertyTax = skidSteerLoadersEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const skidSteerLoadersPropertyInsurance = skidSteerLoadersInitialInvestment * (machineryInsuranceRate / 100);
             const skidSteerLoadersTotalAnnualEconomicCost = (skidSteerLoadersAnnualAmortization + skidSteerLoadersPropertyTax + skidSteerLoadersPropertyInsurance) * (skidSteerLoadersDairyHoursOfUse / skidSteerLoadersTotalHoursOfUse);
@@ -694,7 +694,7 @@ export class FixedCostsService{
             const hpTractorMFWD130InitialInvestment = numberOfHpTractorMFWD130 * hpTractorMFWD130InitialInvestmentPerUnit;
             const hpTractorMFWD130EstimatedCurrentSalvageValue = hpTractorMFWD130InitialInvestment * ageCategories.get(hpTractorMFWD130EquipmentAge).Tractors_80_149hp;
             const hpTractorMFWD130EstimatedFinalSalvageValue = hpTractorMFWD130InitialInvestment * ageCategories.get(hpTractorMFWD130YearsOfUsefulLife).Tractors_80_149hp;
-            const hpTractorMFWD130AnnualAmortization = ((hpTractorMFWD130EstimatedCurrentSalvageValue - hpTractorMFWD130EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-((hpTractorMFWD130YearsOfUsefulLife) - (hpTractorMFWD130EquipmentAge)))) + ((hpTractorMFWD130EstimatedFinalSalvageValue) * (longTermInterestRate / 100));
+            const hpTractorMFWD130AnnualAmortization = ((hpTractorMFWD130EstimatedCurrentSalvageValue - hpTractorMFWD130EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(hpTractorMFWD130YearsOfUsefulLife - hpTractorMFWD130EquipmentAge))) + ((hpTractorMFWD130EstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const hpTractorMFWD130PropertyTax = hpTractorMFWD130EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const hpTractorMFWD130PropertyInsurance = hpTractorMFWD130InitialInvestment * (machineryInsuranceRate / 100);
             const hpTractorMFWD130TotalAnnualEconomicCost = (hpTractorMFWD130AnnualAmortization + hpTractorMFWD130PropertyTax + hpTractorMFWD130PropertyInsurance) * (hpTractorMFWD130DairyHoursOfUse / hpTractorMFWD130TotalHoursOfUse);
@@ -704,7 +704,7 @@ export class FixedCostsService{
             const hpTractor2wd75InitialInvestment = numberOfHpTractor2wd75 * hpTractor2wd75InitialInvestmentPerUnit;
             const hpTractor2wd75EstimatedCurrentSalvageValue = hpTractor2wd75InitialInvestment * ageCategories.get(hpTractor2wd75EquipmentAge).Tractors_80_149hp;
             const hpTractor2wd75EstimatedFinalSalvageValue = hpTractor2wd75InitialInvestment * ageCategories.get(hpTractor2wd75YearsOfUsefulLife).Tractors_80_149hp;
-            const hpTractor2wd75AnnualAmortization = ((hpTractor2wd75EstimatedCurrentSalvageValue - hpTractor2wd75EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-((hpTractor2wd75YearsOfUsefulLife) - (hpTractor2wd75EquipmentAge)))) + ((hpTractor2wd75EstimatedFinalSalvageValue) * (longTermInterestRate / 100));
+            const hpTractor2wd75AnnualAmortization = ((hpTractor2wd75EstimatedCurrentSalvageValue - hpTractor2wd75EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(hpTractor2wd75YearsOfUsefulLife - hpTractor2wd75EquipmentAge))) + ((hpTractor2wd75EstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const hpTractor2wd75PropertyTax = hpTractor2wd75EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const hpTractor2wd75PropertyInsurance = hpTractor2wd75InitialInvestment * (machineryInsuranceRate / 100);
             const hpTractor2wd75TotalAnnualEconomicCost = (hpTractor2wd75AnnualAmortization + hpTractor2wd75PropertyTax + hpTractor2wd75PropertyInsurance) * (hpTractor2wd75DairyHoursOfUse / hpTractor2wd75TotalHoursOfUse);
@@ -713,7 +713,7 @@ export class FixedCostsService{
             const tractor50Hp2wdInitialInvestment = numberOfHpTractor2wd50 * tractor50Hp2wdInitialInvestmentPerUnit;
             const tractor50Hp2wdEstimatedCurrentSalvageValue = tractor50Hp2wdInitialInvestment * ageCategories.get(hpTractor2wd50EquipmentAge).Tractors_80_149hp;
             const tractor50Hp2wdEstimatedFinalSalvageValue = tractor50Hp2wdInitialInvestment * ageCategories.get(hpTractor2wd50YearsOfUsefulLife).Tractors_80_149hp;
-            const tractor50Hp2wdAnnualAmortization = ((tractor50Hp2wdEstimatedCurrentSalvageValue - tractor50Hp2wdEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - (1 + (longTermInterestRate / 100)) ** (-((hpTractor2wd50YearsOfUsefulLife) - (hpTractor2wd50EquipmentAge)))) + ((tractor50Hp2wdEstimatedFinalSalvageValue) * (longTermInterestRate / 100));
+            const tractor50Hp2wdAnnualAmortization = ((tractor50Hp2wdEstimatedCurrentSalvageValue - tractor50Hp2wdEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(hpTractor2wd50YearsOfUsefulLife - hpTractor2wd50EquipmentAge))) + ((tractor50Hp2wdEstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const tractor50Hp2wdPropertyTax = tractor50Hp2wdEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const tractor50Hp2wdPropertyInsurance = tractor50Hp2wdInitialInvestment * (machineryInsuranceRate / 100);
             const hpTractor2wd50TotalAnnualEconomicCost = (tractor50Hp2wdAnnualAmortization + tractor50Hp2wdPropertyTax + tractor50Hp2wdPropertyInsurance) * (tractor50Hp2wdDairyHoursOfUse / tractor50Hp2wdTotalHoursOfUse);
@@ -1022,7 +1022,7 @@ export class FixedCostsService{
 
 
         // -------->>>>Outputs calculated and rounded to 2 decimal points
-        const totalCattleFixedCost = cowTotalAnnualEconomicCost + bredHeiferTotalAnnualEconomicCost;
+        const totalCattleFixedCost = (cowTotalAnnualEconomicCost + bredHeiferTotalAnnualEconomicCost)*(1+(cowDeathLossRate/100));
         console.log("Farm Shop and General Roads Total Annual Economic Cost:", farmShopandGeneralRoadsTotalAnnualEconomicCost);
         console.log("Milking Parlor and Equipment Total Annual Economic Cost:", milkingParlorAndEquipmentTotalAnnualEconomicCost);
         console.log("Feeding Equipment Total Annual Economic Cost:", feedingEquipmentTotalAnnualEconomicCost);
