@@ -461,7 +461,7 @@ export class FixedCostsService{
         const livestockInsuranceRate = 0.35;
         const propertyTaxRate = 0.7;
         const propertyInsuranceRate = 0.25;
-        const machineryInsuranceRate = 0.29;
+        const machineryInsuranceRate = 0.286;
         const longTermInterestRate = 4.5;
         const shortTermInterestRate = 5.5;
 
@@ -671,11 +671,12 @@ export class FixedCostsService{
 
         var totalMachineryFixedCost: number = machineryFixedCostTotalEstimate;
         if(updatedDocument.isDetailedMachineryCosts){
+            
             //DETAILED MACHINERY FIXED COSTS
             // Articulated Loaders
             const articulatedLoadersInitialInvestment = numberOfArticulatedLoaders * articulatedLoadersInitialInvestmentPerUnit;
-            const articulatedLoadersEstimatedCurrentSalvageValue = articulatedLoadersInitialInvestment * ageCategories.get(articulatedLoadersEquipmentAge).Misc;
-            const articulatedLoadersEstimatedFinalSalvageValue = articulatedLoadersInitialInvestment * ageCategories.get(articulatedLoadersYearsOfUsefulLife).Misc;
+            const articulatedLoadersEstimatedCurrentSalvageValue = articulatedLoadersInitialInvestment * (ageCategories.get(articulatedLoadersEquipmentAge).Misc/100);
+            const articulatedLoadersEstimatedFinalSalvageValue = articulatedLoadersInitialInvestment * (ageCategories.get(articulatedLoadersYearsOfUsefulLife).Misc/100);
             const articulatedLoadersAnnualAmortization = ((articulatedLoadersEstimatedCurrentSalvageValue - articulatedLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(articulatedLoadersYearsOfUsefulLife - articulatedLoadersEquipmentAge))) + ((articulatedLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const articulatedLoadersPropertyTax = articulatedLoadersEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const articulatedLoadersPropertyInsurance = articulatedLoadersInitialInvestment * (machineryInsuranceRate / 100);
@@ -683,8 +684,8 @@ export class FixedCostsService{
 
             // Skid Steer Loaders
             const skidSteerLoadersInitialInvestment = numberOfSkidSteerLoaders * skidSteerLoadersInitialInvestmentPerUnit;
-            const skidSteerLoadersEstimatedCurrentSalvageValue = skidSteerLoadersInitialInvestment * ageCategories.get(skidSteerLoadersEquipmentAge).Misc;
-            const skidSteerLoadersEstimatedFinalSalvageValue = skidSteerLoadersInitialInvestment * ageCategories.get(skidSteerLoadersYearsOfUsefulLife).Misc;
+            const skidSteerLoadersEstimatedCurrentSalvageValue = skidSteerLoadersInitialInvestment * (ageCategories.get(skidSteerLoadersEquipmentAge).Misc/100);
+            const skidSteerLoadersEstimatedFinalSalvageValue = skidSteerLoadersInitialInvestment * (ageCategories.get(skidSteerLoadersYearsOfUsefulLife).Misc/100);
             const skidSteerLoadersAnnualAmortization = ((skidSteerLoadersEstimatedCurrentSalvageValue - skidSteerLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(skidSteerLoadersYearsOfUsefulLife - skidSteerLoadersEquipmentAge))) + ((skidSteerLoadersEstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const skidSteerLoadersPropertyTax = skidSteerLoadersEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const skidSteerLoadersPropertyInsurance = skidSteerLoadersInitialInvestment * (machineryInsuranceRate / 100);
@@ -692,18 +693,17 @@ export class FixedCostsService{
             
             // 130 hp Tractor - MFWD   
             const hpTractorMFWD130InitialInvestment = numberOfHpTractorMFWD130 * hpTractorMFWD130InitialInvestmentPerUnit;
-            const hpTractorMFWD130EstimatedCurrentSalvageValue = hpTractorMFWD130InitialInvestment * ageCategories.get(hpTractorMFWD130EquipmentAge).Tractors_80_149hp;
-            const hpTractorMFWD130EstimatedFinalSalvageValue = hpTractorMFWD130InitialInvestment * ageCategories.get(hpTractorMFWD130YearsOfUsefulLife).Tractors_80_149hp;
+            const hpTractorMFWD130EstimatedCurrentSalvageValue = hpTractorMFWD130InitialInvestment * (ageCategories.get(hpTractorMFWD130EquipmentAge).Tractors_80_149hp/100);
+            const hpTractorMFWD130EstimatedFinalSalvageValue = hpTractorMFWD130InitialInvestment * (ageCategories.get(hpTractorMFWD130YearsOfUsefulLife).Tractors_80_149hp/100);
             const hpTractorMFWD130AnnualAmortization = ((hpTractorMFWD130EstimatedCurrentSalvageValue - hpTractorMFWD130EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(hpTractorMFWD130YearsOfUsefulLife - hpTractorMFWD130EquipmentAge))) + ((hpTractorMFWD130EstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const hpTractorMFWD130PropertyTax = hpTractorMFWD130EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const hpTractorMFWD130PropertyInsurance = hpTractorMFWD130InitialInvestment * (machineryInsuranceRate / 100);
             const hpTractorMFWD130TotalAnnualEconomicCost = (hpTractorMFWD130AnnualAmortization + hpTractorMFWD130PropertyTax + hpTractorMFWD130PropertyInsurance) * (hpTractorMFWD130DairyHoursOfUse / hpTractorMFWD130TotalHoursOfUse);
-
             
             // 75 hp Tractor - 2wd
             const hpTractor2wd75InitialInvestment = numberOfHpTractor2wd75 * hpTractor2wd75InitialInvestmentPerUnit;
-            const hpTractor2wd75EstimatedCurrentSalvageValue = hpTractor2wd75InitialInvestment * ageCategories.get(hpTractor2wd75EquipmentAge).Tractors_80_149hp;
-            const hpTractor2wd75EstimatedFinalSalvageValue = hpTractor2wd75InitialInvestment * ageCategories.get(hpTractor2wd75YearsOfUsefulLife).Tractors_80_149hp;
+            const hpTractor2wd75EstimatedCurrentSalvageValue = hpTractor2wd75InitialInvestment * (ageCategories.get(hpTractor2wd75EquipmentAge).Tractors_80_149hp/100);
+            const hpTractor2wd75EstimatedFinalSalvageValue = hpTractor2wd75InitialInvestment * (ageCategories.get(hpTractor2wd75YearsOfUsefulLife).Tractors_80_149hp/100);
             const hpTractor2wd75AnnualAmortization = ((hpTractor2wd75EstimatedCurrentSalvageValue - hpTractor2wd75EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(hpTractor2wd75YearsOfUsefulLife - hpTractor2wd75EquipmentAge))) + ((hpTractor2wd75EstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const hpTractor2wd75PropertyTax = hpTractor2wd75EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const hpTractor2wd75PropertyInsurance = hpTractor2wd75InitialInvestment * (machineryInsuranceRate / 100);
@@ -711,8 +711,8 @@ export class FixedCostsService{
 
             // 50 hp Tractor - 2wd
             const tractor50Hp2wdInitialInvestment = numberOfHpTractor2wd50 * tractor50Hp2wdInitialInvestmentPerUnit;
-            const tractor50Hp2wdEstimatedCurrentSalvageValue = tractor50Hp2wdInitialInvestment * ageCategories.get(hpTractor2wd50EquipmentAge).Tractors_80_149hp;
-            const tractor50Hp2wdEstimatedFinalSalvageValue = tractor50Hp2wdInitialInvestment * ageCategories.get(hpTractor2wd50YearsOfUsefulLife).Tractors_80_149hp;
+            const tractor50Hp2wdEstimatedCurrentSalvageValue = tractor50Hp2wdInitialInvestment * (ageCategories.get(hpTractor2wd50EquipmentAge).Tractors_80_149hp/100);
+            const tractor50Hp2wdEstimatedFinalSalvageValue = tractor50Hp2wdInitialInvestment * (ageCategories.get(hpTractor2wd50YearsOfUsefulLife).Tractors_80_149hp/100);
             const tractor50Hp2wdAnnualAmortization = ((tractor50Hp2wdEstimatedCurrentSalvageValue - tractor50Hp2wdEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(hpTractor2wd50YearsOfUsefulLife - hpTractor2wd50EquipmentAge))) + ((tractor50Hp2wdEstimatedFinalSalvageValue) * (longTermInterestRate / 100));
             const tractor50Hp2wdPropertyTax = tractor50Hp2wdEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const tractor50Hp2wdPropertyInsurance = tractor50Hp2wdInitialInvestment * (machineryInsuranceRate / 100);
@@ -720,8 +720,8 @@ export class FixedCostsService{
 
             // Mixer Wagon - 650 cubic feet
             const mixerWagon650InitialInvestment = numberOfMixerWagon650 * mixerWagon650InitialInvestmentPerUnit;
-            const mixerWagon650EstimatedCurrentSalvageValue = mixerWagon650InitialInvestment * ageCategories.get(mixerWagon650EquipmentAge).Misc;
-            const mixerWagon650EstimatedFinalSalvageValue = mixerWagon650InitialInvestment * ageCategories.get(mixerWagon650YearsOfUsefulLife).Misc;
+            const mixerWagon650EstimatedCurrentSalvageValue = mixerWagon650InitialInvestment * (ageCategories.get(mixerWagon650EquipmentAge).Misc/100);
+            const mixerWagon650EstimatedFinalSalvageValue = mixerWagon650InitialInvestment * (ageCategories.get(mixerWagon650YearsOfUsefulLife).Misc/100);
             const mixerWagon650AnnualAmortization = (
                 ((mixerWagon650EstimatedCurrentSalvageValue - mixerWagon650EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) /
                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(mixerWagon650YearsOfUsefulLife - mixerWagon650EquipmentAge)))
@@ -732,8 +732,8 @@ export class FixedCostsService{
 
             // ¾ ton pickup
             const threeQuarterTonPickupInitialInvestment = numberOfThreeQuarterTonPickup * threeQuarterTonPickupInitialInvestmentPerUnit;
-            const threeQuarterTonPickupEstimatedCurrentSalvageValue = threeQuarterTonPickupInitialInvestment * ageCategories.get(threeQuarterTonPickupEquipmentAge).Misc;
-            const threeQuarterTonPickupEstimatedFinalSalvageValue = threeQuarterTonPickupInitialInvestment * ageCategories.get(threeQuarterTonPickupYearsOfUsefulLife).Misc;
+            const threeQuarterTonPickupEstimatedCurrentSalvageValue = threeQuarterTonPickupInitialInvestment * (ageCategories.get(threeQuarterTonPickupEquipmentAge).Misc/100);
+            const threeQuarterTonPickupEstimatedFinalSalvageValue = threeQuarterTonPickupInitialInvestment * (ageCategories.get(threeQuarterTonPickupYearsOfUsefulLife).Misc/100);
             const threeQuarterTonPickupAnnualAmortization = ((threeQuarterTonPickupEstimatedCurrentSalvageValue - threeQuarterTonPickupEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(threeQuarterTonPickupYearsOfUsefulLife - threeQuarterTonPickupEquipmentAge))) + (threeQuarterTonPickupEstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const threeQuarterTonPickupPropertyTax = threeQuarterTonPickupEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const threeQuarterTonPickupPropertyInsurance = threeQuarterTonPickupInitialInvestment * (machineryInsuranceRate / 100);
@@ -741,8 +741,8 @@ export class FixedCostsService{
 
             // ½ ton pickup
             const halfTonPickupInitialInvestment = numberOfHalfTonPickup * halfTonPickupInitialInvestmentPerUnit;
-            const halfTonPickupEstimatedCurrentSalvageValue = halfTonPickupInitialInvestment * ageCategories.get(halfTonPickupEquipmentAge).Misc;
-            const halfTonPickupEstimatedFinalSalvageValue = halfTonPickupInitialInvestment * ageCategories.get(halfTonPickupYearsOfUsefulLife).Misc;
+            const halfTonPickupEstimatedCurrentSalvageValue = halfTonPickupInitialInvestment * (ageCategories.get(halfTonPickupEquipmentAge).Misc/100);
+            const halfTonPickupEstimatedFinalSalvageValue = halfTonPickupInitialInvestment * (ageCategories.get(halfTonPickupYearsOfUsefulLife).Misc/100);
             const halfTonPickupAnnualAmortization = ((halfTonPickupEstimatedCurrentSalvageValue - halfTonPickupEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(halfTonPickupYearsOfUsefulLife - halfTonPickupEquipmentAge))) + (halfTonPickupEstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const halfTonPickupPropertyTax = halfTonPickupEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const halfTonPickupPropertyInsurance = halfTonPickupInitialInvestment * (machineryInsuranceRate / 100);
@@ -750,8 +750,8 @@ export class FixedCostsService{
 
             // JD Gator
             const jdGatorInitialInvestment = numberOfJdGator * jdGatorInitialInvestmentPerUnit;
-            const jdGatorEstimatedCurrentSalvageValue = jdGatorInitialInvestment * ageCategories.get(jdGatorEquipmentAge).Misc;
-            const jdGatorEstimatedFinalSalvageValue = jdGatorInitialInvestment * ageCategories.get(jdGatorYearsOfUsefulLife).Misc;
+            const jdGatorEstimatedCurrentSalvageValue = jdGatorInitialInvestment * (ageCategories.get(jdGatorEquipmentAge).Misc/100);
+            const jdGatorEstimatedFinalSalvageValue = jdGatorInitialInvestment * (ageCategories.get(jdGatorYearsOfUsefulLife).Misc/100);
             const jdGatorAnnualAmortization = ((jdGatorEstimatedCurrentSalvageValue - jdGatorEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(jdGatorYearsOfUsefulLife - jdGatorEquipmentAge))) + (jdGatorEstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const jdGatorPropertyTax = jdGatorEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const jdGatorPropertyInsurance = jdGatorInitialInvestment * (machineryInsuranceRate / 100);
@@ -759,8 +759,8 @@ export class FixedCostsService{
 
             // Sand Spreader
             const sandSpreaderInitialInvestment = numberOfSandSpreader * sandSpreaderInitialInvestmentPerUnit;
-            const sandSpreaderEstimatedCurrentSalvageValue = sandSpreaderInitialInvestment * ageCategories.get(sandSpreaderEquipmentAge).Misc;
-            const sandSpreaderEstimatedFinalSalvageValue = sandSpreaderInitialInvestment * ageCategories.get(sandSpreaderYearsOfUsefulLife).Misc;
+            const sandSpreaderEstimatedCurrentSalvageValue = sandSpreaderInitialInvestment * (ageCategories.get(sandSpreaderEquipmentAge).Misc/100);
+            const sandSpreaderEstimatedFinalSalvageValue = sandSpreaderInitialInvestment * (ageCategories.get(sandSpreaderYearsOfUsefulLife).Misc/100);
             const sandSpreaderAnnualAmortization = ((sandSpreaderEstimatedCurrentSalvageValue - sandSpreaderEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(sandSpreaderYearsOfUsefulLife - sandSpreaderEquipmentAge))) + (sandSpreaderEstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const sandSpreaderPropertyTax = sandSpreaderEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const sandSpreaderPropertyInsurance = sandSpreaderInitialInvestment * (machineryInsuranceRate / 100);
@@ -768,8 +768,8 @@ export class FixedCostsService{
 
             // 300 hp Tractor - MFWD
             const hpTractorMFWD300InitialInvestment = numberOfHpTractorMFWD300 * hpTractorMFWD300InitialInvestmentPerUnit;
-            const hpTractorMFWD300EstimatedCurrentSalvageValue = hpTractorMFWD300InitialInvestment * ageCategories.get(hpTractorMFWD300EquipmentAge).Misc;
-            const hpTractorMFWD300EstimatedFinalSalvageValue = hpTractorMFWD300InitialInvestment * ageCategories.get(hpTractorMFWD300YearsOfUsefulLife).Misc;
+            const hpTractorMFWD300EstimatedCurrentSalvageValue = hpTractorMFWD300InitialInvestment * (ageCategories.get(hpTractorMFWD300EquipmentAge).Tractor_150hp/100);
+            const hpTractorMFWD300EstimatedFinalSalvageValue = hpTractorMFWD300InitialInvestment * (ageCategories.get(hpTractorMFWD300YearsOfUsefulLife).Tractor_150hp/100);
             const hpTractorMFWD300AnnualAmortization = ((hpTractorMFWD300EstimatedCurrentSalvageValue - hpTractorMFWD300EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(hpTractorMFWD300YearsOfUsefulLife - hpTractorMFWD300EquipmentAge))) + (hpTractorMFWD300EstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const hpTractorMFWD300PropertyTax = hpTractorMFWD300EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const hpTractorMFWD300PropertyInsurance = hpTractorMFWD300InitialInvestment * (machineryInsuranceRate / 100);
@@ -777,8 +777,8 @@ export class FixedCostsService{
 
             // 200 hp Tractor - MFWD
             const hpTractorMFWD200InitialInvestment = numberOfHpTractorMFWD200 * hpTractorMFWD200InitialInvestmentPerUnit;
-            const hpTractorMFWD200EstimatedCurrentSalvageValue = hpTractorMFWD200InitialInvestment * ageCategories.get(hpTractorMFWD200EquipmentAge).Misc;
-            const hpTractorMFWD200EstimatedFinalSalvageValue = hpTractorMFWD200InitialInvestment * ageCategories.get(hpTractorMFWD200YearsOfUsefulLife).Misc;
+            const hpTractorMFWD200EstimatedCurrentSalvageValue = hpTractorMFWD200InitialInvestment * (ageCategories.get(hpTractorMFWD200EquipmentAge).Tractor_150hp/100);
+            const hpTractorMFWD200EstimatedFinalSalvageValue = hpTractorMFWD200InitialInvestment * (ageCategories.get(hpTractorMFWD200YearsOfUsefulLife).Tractor_150hp/100);
             const hpTractorMFWD200AnnualAmortization = ((hpTractorMFWD200EstimatedCurrentSalvageValue - hpTractorMFWD200EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(hpTractorMFWD200YearsOfUsefulLife - hpTractorMFWD200EquipmentAge))) + (hpTractorMFWD200EstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const hpTractorMFWD200PropertyTax = hpTractorMFWD200EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const hpTractorMFWD200PropertyInsurance = hpTractorMFWD200InitialInvestment * (machineryInsuranceRate / 100);
@@ -786,8 +786,8 @@ export class FixedCostsService{
 
             // 24’ Disk Harrow
             const diskHarrow24InitialInvestment = numberOfDiskHarrow24 * diskHarrow24InitialInvestmentPerUnit;
-            const diskHarrow24EstimatedCurrentSalvageValue = diskHarrow24InitialInvestment * ageCategories.get(diskHarrow24EquipmentAge).Tilage;
-            const diskHarrow24EstimatedFinalSalvageValue = diskHarrow24InitialInvestment * ageCategories.get(diskHarrow24YearsOfUsefulLife).Tilage;
+            const diskHarrow24EstimatedCurrentSalvageValue = diskHarrow24InitialInvestment * (ageCategories.get(diskHarrow24EquipmentAge).Tilage/100);
+            const diskHarrow24EstimatedFinalSalvageValue = diskHarrow24InitialInvestment * (ageCategories.get(diskHarrow24YearsOfUsefulLife).Tilage/100);
             const diskHarrow24AnnualAmortization = ((diskHarrow24EstimatedCurrentSalvageValue - diskHarrow24EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(diskHarrow24YearsOfUsefulLife - diskHarrow24EquipmentAge))) + (diskHarrow24EstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const diskHarrow24PropertyTax = diskHarrow24EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const diskHarrow24PropertyInsurance = diskHarrow24InitialInvestment * (machineryInsuranceRate / 100);
@@ -795,8 +795,8 @@ export class FixedCostsService{
 
             // 8-row 30” Strip-Till Planter
             const stripTillPlanter8RowInitialInvestment = numberOfStripTillPlanter8Row * stripTillPlanter8RowInitialInvestmentPerUnit;
-            const stripTillPlanter8RowEstimatedCurrentSalvageValue = stripTillPlanter8RowInitialInvestment * ageCategories.get(stripTillPlanter8RowEquipmentAge).Planters;
-            const stripTillPlanter8RowEstimatedFinalSalvageValue = stripTillPlanter8RowInitialInvestment * ageCategories.get(stripTillPlanter8RowYearsOfUsefulLife).Planters;
+            const stripTillPlanter8RowEstimatedCurrentSalvageValue = stripTillPlanter8RowInitialInvestment * (ageCategories.get(stripTillPlanter8RowEquipmentAge).Planters/100);
+            const stripTillPlanter8RowEstimatedFinalSalvageValue = stripTillPlanter8RowInitialInvestment * (ageCategories.get(stripTillPlanter8RowYearsOfUsefulLife).Planters/100);
             const stripTillPlanter8RowAnnualAmortization = ((stripTillPlanter8RowEstimatedCurrentSalvageValue - stripTillPlanter8RowEstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(stripTillPlanter8RowYearsOfUsefulLife - stripTillPlanter8RowEquipmentAge))) + (stripTillPlanter8RowEstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const stripTillPlanter8RowPropertyTax = stripTillPlanter8RowEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const stripTillPlanter8RowPropertyInsurance = stripTillPlanter8RowInitialInvestment * (machineryInsuranceRate / 100);
@@ -804,8 +804,8 @@ export class FixedCostsService{
 
             // 40’ Folding Sprayer
             const foldingSprayer40InitialInvestment = numberOfFoldingSprayer40 * foldingSprayer40InitialInvestmentPerUnit;
-            const foldingSprayer40EstimatedCurrentSalvageValue = foldingSprayer40InitialInvestment * ageCategories.get(foldingSprayer40EquipmentAge).Misc;
-            const foldingSprayer40EstimatedFinalSalvageValue = foldingSprayer40InitialInvestment * ageCategories.get(foldingSprayer40YearsOfUsefulLife).Misc;
+            const foldingSprayer40EstimatedCurrentSalvageValue = foldingSprayer40InitialInvestment * (ageCategories.get(foldingSprayer40EquipmentAge).Misc/100);
+            const foldingSprayer40EstimatedFinalSalvageValue = foldingSprayer40InitialInvestment * (ageCategories.get(foldingSprayer40YearsOfUsefulLife).Misc/100);
             const foldingSprayer40AnnualAmortization = ((foldingSprayer40EstimatedCurrentSalvageValue - foldingSprayer40EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(foldingSprayer40YearsOfUsefulLife - foldingSprayer40EquipmentAge))) + (foldingSprayer40EstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const foldingSprayer40PropertyTax = foldingSprayer40EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const foldingSprayer40PropertyInsurance = foldingSprayer40InitialInvestment * (machineryInsuranceRate / 100);
@@ -813,8 +813,8 @@ export class FixedCostsService{
 
             // Field Cultivator
             const fieldCultivatorInitialInvestment = numberOfFieldCultivator * fieldCultivatorInitialInvestmentPerUnit;
-            const fieldCultivatorEstimatedCurrentSalvageValue = fieldCultivatorInitialInvestment * ageCategories.get(fieldCultivatorEquipmentAge).HarvestingCrop;
-            const fieldCultivatorEstimatedFinalSalvageValue = fieldCultivatorInitialInvestment * ageCategories.get(fieldCultivatorYearsOfUsefulLife).HarvestingCrop;
+            const fieldCultivatorEstimatedCurrentSalvageValue = fieldCultivatorInitialInvestment * (ageCategories.get(fieldCultivatorEquipmentAge).HarvestingCrop/100);
+            const fieldCultivatorEstimatedFinalSalvageValue = fieldCultivatorInitialInvestment * (ageCategories.get(fieldCultivatorYearsOfUsefulLife).HarvestingCrop/100);
             const fieldCultivatorAnnualAmortization = 
                                 (((fieldCultivatorEstimatedCurrentSalvageValue) - (fieldCultivatorEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(fieldCultivatorYearsOfUsefulLife - fieldCultivatorEquipmentAge))) +
@@ -825,8 +825,8 @@ export class FixedCostsService{
 
             //Grain Drill - 15’ No-Till
             const grainDrill15NoTillInitialInvestment = numberOfGrainDrill15NoTill * grainDrill15NoTillInitialInvestmentPerUnit;
-            const grainDrill15NoTillEstimatedCurrentSalvageValue = grainDrill15NoTillInitialInvestment * ageCategories.get(grainDrill15NoTillEquipmentAge).Misc;
-            const grainDrill15NoTillEstimatedFinalSalvageValue = grainDrill15NoTillInitialInvestment * ageCategories.get(grainDrill15NoTillYearsOfUsefulLife).Misc;
+            const grainDrill15NoTillEstimatedCurrentSalvageValue = grainDrill15NoTillInitialInvestment * (ageCategories.get(grainDrill15NoTillEquipmentAge).Misc/100);
+            const grainDrill15NoTillEstimatedFinalSalvageValue = grainDrill15NoTillInitialInvestment * (ageCategories.get(grainDrill15NoTillYearsOfUsefulLife).Misc/100);
             const grainDrill15NoTillAnnualAmortization = 
                                 (((grainDrill15NoTillEstimatedCurrentSalvageValue) - (grainDrill15NoTillEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(grainDrill15NoTillYearsOfUsefulLife - grainDrill15NoTillEquipmentAge))) +
@@ -837,8 +837,8 @@ export class FixedCostsService{
 
             //Mower Conditioner (Self-Propelled)
             const mowerConditionerSelfPropelledInitialInvestment = numberOfMowerConditionerSelfPropelled * mowerConditionerSelfPropelledInitialInvestmentPerUnit;
-            const mowerConditionerSelfPropelledEstimatedCurrentSalvageValue = mowerConditionerSelfPropelledInitialInvestment * ageCategories.get(mowerConditionerSelfPropelledEquipmentAge).HarvestingForage;
-            const mowerConditionerSelfPropelledEstimatedFinalSalvageValue = mowerConditionerSelfPropelledInitialInvestment * ageCategories.get(mowerConditionerSelfPropelledYearsOfUsefulLife).HarvestingForage;
+            const mowerConditionerSelfPropelledEstimatedCurrentSalvageValue = mowerConditionerSelfPropelledInitialInvestment * (ageCategories.get(mowerConditionerSelfPropelledEquipmentAge).HarvestingForage/100);
+            const mowerConditionerSelfPropelledEstimatedFinalSalvageValue = mowerConditionerSelfPropelledInitialInvestment * (ageCategories.get(mowerConditionerSelfPropelledYearsOfUsefulLife).HarvestingForage/100);
             const mowerConditionerSelfPropelledAnnualAmortization = 
                                 (((mowerConditionerSelfPropelledEstimatedCurrentSalvageValue) - (mowerConditionerSelfPropelledEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(mowerConditionerSelfPropelledYearsOfUsefulLife - mowerConditionerSelfPropelledEquipmentAge))) +
@@ -849,8 +849,8 @@ export class FixedCostsService{
 
             // Tedder Calculations
             const tedderInitialInvestment = numberOfTedder * tedderInitialInvestmentPerUnit;
-            const tedderEstimatedCurrentSalvageValue = tedderInitialInvestment * ageCategories.get(tedderEquipmentAge).HarvestingCrop;
-            const tedderEstimatedFinalSalvageValue = tedderInitialInvestment * ageCategories.get(tedderYearsOfUsefulLife).HarvestingCrop;
+            const tedderEstimatedCurrentSalvageValue = tedderInitialInvestment * (ageCategories.get(tedderEquipmentAge).HarvestingCrop/100);
+            const tedderEstimatedFinalSalvageValue = tedderInitialInvestment * (ageCategories.get(tedderYearsOfUsefulLife).HarvestingCrop/100);
             const tedderAnnualAmortization = 
                                 (((tedderEstimatedCurrentSalvageValue) - (tedderEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(tedderYearsOfUsefulLife - tedderEquipmentAge))) +
@@ -861,8 +861,8 @@ export class FixedCostsService{
 
             // Power Rake Calculations
             const powerRakeInitialInvestment = numberOfPowerRake * powerRakeInitialInvestmentPerUnit;
-            const powerRakeEstimatedCurrentSalvageValue = powerRakeInitialInvestment * ageCategories.get(powerRakeEquipmentAge).HarvestingCrop;
-            const powerRakeEstimatedFinalSalvageValue = powerRakeInitialInvestment * ageCategories.get(powerRakeYearsOfUsefulLife).HarvestingCrop;
+            const powerRakeEstimatedCurrentSalvageValue = powerRakeInitialInvestment * (ageCategories.get(powerRakeEquipmentAge).HarvestingCrop/100);
+            const powerRakeEstimatedFinalSalvageValue = powerRakeInitialInvestment * (ageCategories.get(powerRakeYearsOfUsefulLife).HarvestingCrop/100);
             const powerRakeAnnualAmortization = 
                                 (((powerRakeEstimatedCurrentSalvageValue) - (powerRakeEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(powerRakeYearsOfUsefulLife - powerRakeEquipmentAge))) +
@@ -874,8 +874,8 @@ export class FixedCostsService{
 
             // 15’ Folding Rotary Mower Calculations
             const foldingRotaryMower15InitialInvestment = numberOfFoldingRotaryMower15 * foldingRotaryMower15InitialInvestmentPerUnit;
-            const foldingRotaryMower15EstimatedCurrentSalvageValue = foldingRotaryMower15InitialInvestment * ageCategories.get(foldingRotaryMower15EquipmentAge).HarvestingCrop;
-            const foldingRotaryMower15EstimatedFinalSalvageValue = foldingRotaryMower15InitialInvestment * ageCategories.get(foldingRotaryMower15YearsOfUsefulLife).HarvestingCrop;
+            const foldingRotaryMower15EstimatedCurrentSalvageValue = foldingRotaryMower15InitialInvestment * (ageCategories.get(foldingRotaryMower15EquipmentAge).HarvestingCrop/100);
+            const foldingRotaryMower15EstimatedFinalSalvageValue = foldingRotaryMower15InitialInvestment * (ageCategories.get(foldingRotaryMower15YearsOfUsefulLife).HarvestingCrop/100);
             const foldingRotaryMower15AnnualAmortization = ((foldingRotaryMower15EstimatedCurrentSalvageValue - foldingRotaryMower15EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(foldingRotaryMower15YearsOfUsefulLife - foldingRotaryMower15EquipmentAge))) + (foldingRotaryMower15EstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const foldingRotaryMower15PropertyTax = foldingRotaryMower15EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const foldingRotaryMower15PropertyInsurance = foldingRotaryMower15InitialInvestment * (machineryInsuranceRate / 100);
@@ -883,8 +883,8 @@ export class FixedCostsService{
 
             // Deep-ripper Calculations
             const deepRipperInitialInvestment = numberOfDeepRipper * deepRipperInitialInvestmentPerUnit;
-            const deepRipperEstimatedCurrentSalvageValue = deepRipperInitialInvestment * ageCategories.get(deepRipperEquipmentAge).Tilage;
-            const deepRipperEstimatedFinalSalvageValue = deepRipperInitialInvestment * ageCategories.get(deepRipperYearsOfUsefulLife).Tilage;
+            const deepRipperEstimatedCurrentSalvageValue = deepRipperInitialInvestment * (ageCategories.get(deepRipperEquipmentAge).Tilage/100);
+            const deepRipperEstimatedFinalSalvageValue = deepRipperInitialInvestment * (ageCategories.get(deepRipperYearsOfUsefulLife).Tilage/100);
             const deepRipperAnnualAmortization = 
                                 (((deepRipperEstimatedCurrentSalvageValue) - (deepRipperEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(deepRipperYearsOfUsefulLife - deepRipperEquipmentAge))) +
@@ -895,8 +895,8 @@ export class FixedCostsService{
 
             // 24’ Livestock Trailer Calculations
             const livestockTrailer24InitialInvestment = numberOfLivestockTrailer24 * livestockTrailer24InitialInvestmentPerUnit;
-            const livestockTrailer24EstimatedCurrentSalvageValue = livestockTrailer24InitialInvestment * ageCategories.get(livestockTrailer24EquipmentAge).Misc;
-            const livestockTrailer24EstimatedFinalSalvageValue = livestockTrailer24InitialInvestment * ageCategories.get(livestockTrailer24YearsOfUsefulLife).Misc;
+            const livestockTrailer24EstimatedCurrentSalvageValue = livestockTrailer24InitialInvestment * (ageCategories.get(livestockTrailer24EquipmentAge).Misc/100);
+            const livestockTrailer24EstimatedFinalSalvageValue = livestockTrailer24InitialInvestment * (ageCategories.get(livestockTrailer24YearsOfUsefulLife).Misc/100);
             const livestockTrailer24AnnualAmortization = ((livestockTrailer24EstimatedCurrentSalvageValue - livestockTrailer24EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(livestockTrailer24YearsOfUsefulLife - livestockTrailer24EquipmentAge))) + (livestockTrailer24EstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const livestockTrailer24PropertyTax = livestockTrailer24EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const livestockTrailer24PropertyInsurance = livestockTrailer24InitialInvestment * (machineryInsuranceRate / 100);
@@ -904,8 +904,8 @@ export class FixedCostsService{
 
             // Round Baler Calculations
             const roundBalerInitialInvestment = numberOfRoundBaler * roundBalerInitialInvestmentPerUnit;
-            const roundBalerEstimatedCurrentSalvageValue = roundBalerInitialInvestment * ageCategories.get(roundBalerEquipmentAge).HarvestingCrop;
-            const roundBalerEstimatedFinalSalvageValue = roundBalerInitialInvestment * ageCategories.get(roundBalerYearsOfUsefulLife).HarvestingCrop;
+            const roundBalerEstimatedCurrentSalvageValue = roundBalerInitialInvestment * (ageCategories.get(roundBalerEquipmentAge).HarvestingCrop/100);
+            const roundBalerEstimatedFinalSalvageValue = roundBalerInitialInvestment * (ageCategories.get(roundBalerYearsOfUsefulLife).HarvestingCrop/100);
             const roundBalerAnnualAmortization = 
                                 (((roundBalerEstimatedCurrentSalvageValue) - (roundBalerEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(roundBalerYearsOfUsefulLife - roundBalerEquipmentAge))) +
@@ -917,8 +917,8 @@ export class FixedCostsService{
 
             // Tub Grinder Calculations
             const tubGrinderInitialInvestment = numberOfTubGrinder * tubGrinderInitialInvestmentPerUnit;
-            const tubGrinderEstimatedCurrentSalvageValue = tubGrinderInitialInvestment * ageCategories.get(tubGrinderEquipmentAge).Misc;
-            const tubGrinderEstimatedFinalSalvageValue = tubGrinderInitialInvestment * ageCategories.get(tubGrinderYearsOfUsefulLife).Misc;
+            const tubGrinderEstimatedCurrentSalvageValue = tubGrinderInitialInvestment * (ageCategories.get(tubGrinderEquipmentAge).Misc/100);
+            const tubGrinderEstimatedFinalSalvageValue = tubGrinderInitialInvestment * (ageCategories.get(tubGrinderYearsOfUsefulLife).Misc/100);
             const tubGrinderAnnualAmortization = 
                                 (((tubGrinderEstimatedCurrentSalvageValue) - (tubGrinderEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(tubGrinderYearsOfUsefulLife - tubGrinderEquipmentAge))) +
@@ -930,8 +930,8 @@ export class FixedCostsService{
 
             // Miscellaneous Equipment Calculations
             const miscellaneousEquipmentInitialInvestment = numberOfMiscellaneousEquipment * miscellaneousEquipmentInitialInvestmentPerUnit;
-            const miscellaneousEquipmentEstimatedCurrentSalvageValue = miscellaneousEquipmentInitialInvestment * ageCategories.get(miscellaneousEquipmentEquipmentAge).Misc;
-            const miscellaneousEquipmentEstimatedFinalSalvageValue = miscellaneousEquipmentInitialInvestment * ageCategories.get(miscellaneousEquipmentYearsOfUsefulLife).Misc;
+            const miscellaneousEquipmentEstimatedCurrentSalvageValue = miscellaneousEquipmentInitialInvestment * (ageCategories.get(miscellaneousEquipmentEquipmentAge).Misc/100);
+            const miscellaneousEquipmentEstimatedFinalSalvageValue = miscellaneousEquipmentInitialInvestment * (ageCategories.get(miscellaneousEquipmentYearsOfUsefulLife).Misc/100);
             const miscellaneousEquipmentAnnualAmortization = 
                                 (((miscellaneousEquipmentEstimatedCurrentSalvageValue) - (miscellaneousEquipmentEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(miscellaneousEquipmentYearsOfUsefulLife - miscellaneousEquipmentEquipmentAge))) +
@@ -942,8 +942,8 @@ export class FixedCostsService{
 
             // Other Machinery and Equipment 1
             const otherMachineryEquipment1InitialInvestment = numberOfOtherMachineryEquipment1 * otherMachineryEquipment1InitialInvestmentPerUnit;
-            const otherMachineryEquipment1EstimatedCurrentSalvageValue = otherMachineryEquipment1InitialInvestment * ageCategories.get(otherMachineryEquipment1EquipmentAge).Misc;
-            const otherMachineryEquipment1EstimatedFinalSalvageValue = otherMachineryEquipment1InitialInvestment * ageCategories.get(otherMachineryEquipment1YearsOfUsefulLife).Misc;
+            const otherMachineryEquipment1EstimatedCurrentSalvageValue = otherMachineryEquipment1InitialInvestment * (ageCategories.get(otherMachineryEquipment1EquipmentAge).Misc/100);
+            const otherMachineryEquipment1EstimatedFinalSalvageValue = otherMachineryEquipment1InitialInvestment * (ageCategories.get(otherMachineryEquipment1YearsOfUsefulLife).Misc/100);
             const otherMachineryEquipment1AnnualAmortization = ((otherMachineryEquipment1EstimatedCurrentSalvageValue - otherMachineryEquipment1EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(otherMachineryEquipment1YearsOfUsefulLife - otherMachineryEquipment1EquipmentAge))) + (otherMachineryEquipment1EstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const otherMachineryEquipment1PropertyTax = otherMachineryEquipment1EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const otherMachineryEquipment1PropertyInsurance = otherMachineryEquipment1InitialInvestment * (machineryInsuranceRate / 100);
@@ -951,8 +951,8 @@ export class FixedCostsService{
 
             // Other Machinery and Equipment 2
             const otherMachineryEquipment2InitialInvestment = numberOfOtherMachineryEquipment2 * otherMachineryEquipment2InitialInvestmentPerUnit;
-            const otherMachineryEquipment2EstimatedCurrentSalvageValue = otherMachineryEquipment2InitialInvestment * ageCategories.get(otherMachineryEquipment2EquipmentAge).Misc;
-            const otherMachineryEquipment2EstimatedFinalSalvageValue = otherMachineryEquipment2InitialInvestment * ageCategories.get(otherMachineryEquipment2YearsOfUsefulLife).Misc;
+            const otherMachineryEquipment2EstimatedCurrentSalvageValue = otherMachineryEquipment2InitialInvestment * (ageCategories.get(otherMachineryEquipment2EquipmentAge).Misc/100);
+            const otherMachineryEquipment2EstimatedFinalSalvageValue = otherMachineryEquipment2InitialInvestment * (ageCategories.get(otherMachineryEquipment2YearsOfUsefulLife).Misc/100);
             const otherMachineryEquipment2AnnualAmortization = ((otherMachineryEquipment2EstimatedCurrentSalvageValue - otherMachineryEquipment2EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(otherMachineryEquipment2YearsOfUsefulLife - otherMachineryEquipment2EquipmentAge))) + (otherMachineryEquipment2EstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const otherMachineryEquipment2PropertyTax = otherMachineryEquipment2EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const otherMachineryEquipment2PropertyInsurance = otherMachineryEquipment2InitialInvestment * (machineryInsuranceRate / 100);
@@ -1019,8 +1019,6 @@ export class FixedCostsService{
                 console.log('otherMachineryEquipment2TotalAnnualEconomicCost:', otherMachineryEquipment2TotalAnnualEconomicCost);
         }
         
-
-
         // -------->>>>Outputs calculated and rounded to 2 decimal points
         const totalCattleFixedCost = (cowTotalAnnualEconomicCost + bredHeiferTotalAnnualEconomicCost)*(1+(cowDeathLossRate/100));
         console.log("Farm Shop and General Roads Total Annual Economic Cost:", farmShopandGeneralRoadsTotalAnnualEconomicCost);
@@ -1124,11 +1122,8 @@ export class FixedCostsService{
         }
 
         const userId = user._id.toString();
-        console.log('userId ', userId);
 
         const outputDocument = await this.fixedCostsOutputModel.findOne({userId}).exec();
-        console.log("outputDocument ",outputDocument);
-        
 
         if(!outputDocument){
             throw new HttpException('Output record for this user not found', HttpStatus.NOT_FOUND)
@@ -1145,7 +1140,6 @@ export class FixedCostsService{
         }
 
         const userId = user._id.toString();
-        console.log('userId ', userId);
 
         const inputDocument = this.fixedCostsInputModel.findOne({userId}).exec();
 
