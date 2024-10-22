@@ -813,8 +813,8 @@ export class FixedCostsService{
 
             // Field Cultivator
             const fieldCultivatorInitialInvestment = numberOfFieldCultivator * fieldCultivatorInitialInvestmentPerUnit;
-            const fieldCultivatorEstimatedCurrentSalvageValue = fieldCultivatorInitialInvestment * (ageCategories.get(fieldCultivatorEquipmentAge).HarvestingCrop/100);
-            const fieldCultivatorEstimatedFinalSalvageValue = fieldCultivatorInitialInvestment * (ageCategories.get(fieldCultivatorYearsOfUsefulLife).HarvestingCrop/100);
+            const fieldCultivatorEstimatedCurrentSalvageValue = fieldCultivatorInitialInvestment * (ageCategories.get(fieldCultivatorEquipmentAge).Tilage/100);
+            const fieldCultivatorEstimatedFinalSalvageValue = fieldCultivatorInitialInvestment * (ageCategories.get(fieldCultivatorYearsOfUsefulLife).Tilage/100);
             const fieldCultivatorAnnualAmortization = 
                                 (((fieldCultivatorEstimatedCurrentSalvageValue) - (fieldCultivatorEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(fieldCultivatorYearsOfUsefulLife - fieldCultivatorEquipmentAge))) +
@@ -825,8 +825,8 @@ export class FixedCostsService{
 
             //Grain Drill - 15’ No-Till
             const grainDrill15NoTillInitialInvestment = numberOfGrainDrill15NoTill * grainDrill15NoTillInitialInvestmentPerUnit;
-            const grainDrill15NoTillEstimatedCurrentSalvageValue = grainDrill15NoTillInitialInvestment * (ageCategories.get(grainDrill15NoTillEquipmentAge).Misc/100);
-            const grainDrill15NoTillEstimatedFinalSalvageValue = grainDrill15NoTillInitialInvestment * (ageCategories.get(grainDrill15NoTillYearsOfUsefulLife).Misc/100);
+            const grainDrill15NoTillEstimatedCurrentSalvageValue = grainDrill15NoTillInitialInvestment * (ageCategories.get(grainDrill15NoTillEquipmentAge).Planters/100);
+            const grainDrill15NoTillEstimatedFinalSalvageValue = grainDrill15NoTillInitialInvestment * (ageCategories.get(grainDrill15NoTillYearsOfUsefulLife).Planters/100);
             const grainDrill15NoTillAnnualAmortization = 
                                 (((grainDrill15NoTillEstimatedCurrentSalvageValue) - (grainDrill15NoTillEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(grainDrill15NoTillYearsOfUsefulLife - grainDrill15NoTillEquipmentAge))) +
@@ -849,8 +849,8 @@ export class FixedCostsService{
 
             // Tedder Calculations
             const tedderInitialInvestment = numberOfTedder * tedderInitialInvestmentPerUnit;
-            const tedderEstimatedCurrentSalvageValue = tedderInitialInvestment * (ageCategories.get(tedderEquipmentAge).HarvestingCrop/100);
-            const tedderEstimatedFinalSalvageValue = tedderInitialInvestment * (ageCategories.get(tedderYearsOfUsefulLife).HarvestingCrop/100);
+            const tedderEstimatedCurrentSalvageValue = tedderInitialInvestment * (ageCategories.get(tedderEquipmentAge).HarvestingForage/100);
+            const tedderEstimatedFinalSalvageValue = tedderInitialInvestment * (ageCategories.get(tedderYearsOfUsefulLife).HarvestingForage/100);
             const tedderAnnualAmortization = 
                                 (((tedderEstimatedCurrentSalvageValue) - (tedderEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(tedderYearsOfUsefulLife - tedderEquipmentAge))) +
@@ -861,8 +861,8 @@ export class FixedCostsService{
 
             // Power Rake Calculations
             const powerRakeInitialInvestment = numberOfPowerRake * powerRakeInitialInvestmentPerUnit;
-            const powerRakeEstimatedCurrentSalvageValue = powerRakeInitialInvestment * (ageCategories.get(powerRakeEquipmentAge).HarvestingCrop/100);
-            const powerRakeEstimatedFinalSalvageValue = powerRakeInitialInvestment * (ageCategories.get(powerRakeYearsOfUsefulLife).HarvestingCrop/100);
+            const powerRakeEstimatedCurrentSalvageValue = powerRakeInitialInvestment * (ageCategories.get(powerRakeEquipmentAge).HarvestingForage/100);
+            const powerRakeEstimatedFinalSalvageValue = powerRakeInitialInvestment * (ageCategories.get(powerRakeYearsOfUsefulLife).HarvestingForage/100);
             const powerRakeAnnualAmortization = 
                                 (((powerRakeEstimatedCurrentSalvageValue) - (powerRakeEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(powerRakeYearsOfUsefulLife - powerRakeEquipmentAge))) +
@@ -874,8 +874,8 @@ export class FixedCostsService{
 
             // 15’ Folding Rotary Mower Calculations
             const foldingRotaryMower15InitialInvestment = numberOfFoldingRotaryMower15 * foldingRotaryMower15InitialInvestmentPerUnit;
-            const foldingRotaryMower15EstimatedCurrentSalvageValue = foldingRotaryMower15InitialInvestment * (ageCategories.get(foldingRotaryMower15EquipmentAge).HarvestingCrop/100);
-            const foldingRotaryMower15EstimatedFinalSalvageValue = foldingRotaryMower15InitialInvestment * (ageCategories.get(foldingRotaryMower15YearsOfUsefulLife).HarvestingCrop/100);
+            const foldingRotaryMower15EstimatedCurrentSalvageValue = foldingRotaryMower15InitialInvestment * (ageCategories.get(foldingRotaryMower15EquipmentAge).HarvestingForage/100);
+            const foldingRotaryMower15EstimatedFinalSalvageValue = foldingRotaryMower15InitialInvestment * (ageCategories.get(foldingRotaryMower15YearsOfUsefulLife).HarvestingForage/100);
             const foldingRotaryMower15AnnualAmortization = ((foldingRotaryMower15EstimatedCurrentSalvageValue - foldingRotaryMower15EstimatedFinalSalvageValue) * (longTermInterestRate / 100)) / (1 - Math.pow(1 + (longTermInterestRate / 100), -(foldingRotaryMower15YearsOfUsefulLife - foldingRotaryMower15EquipmentAge))) + (foldingRotaryMower15EstimatedFinalSalvageValue * (longTermInterestRate / 100));
             const foldingRotaryMower15PropertyTax = foldingRotaryMower15EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
             const foldingRotaryMower15PropertyInsurance = foldingRotaryMower15InitialInvestment * (machineryInsuranceRate / 100);
@@ -905,7 +905,7 @@ export class FixedCostsService{
             // Round Baler Calculations
             const roundBalerInitialInvestment = numberOfRoundBaler * roundBalerInitialInvestmentPerUnit;
             const roundBalerEstimatedCurrentSalvageValue = roundBalerInitialInvestment * (ageCategories.get(roundBalerEquipmentAge).HarvestingCrop/100);
-            const roundBalerEstimatedFinalSalvageValue = roundBalerInitialInvestment * (ageCategories.get(roundBalerYearsOfUsefulLife).HarvestingCrop/100);
+            const roundBalerEstimatedFinalSalvageValue = roundBalerInitialInvestment * (ageCategories.get(roundBalerYearsOfUsefulLife).HarvestingForage/100);
             const roundBalerAnnualAmortization = 
                                 (((roundBalerEstimatedCurrentSalvageValue) - (roundBalerEstimatedFinalSalvageValue)) * (longTermInterestRate / 100)) /
                                 (1 - Math.pow(1 + (longTermInterestRate / 100), -(roundBalerYearsOfUsefulLife - roundBalerEquipmentAge))) +
