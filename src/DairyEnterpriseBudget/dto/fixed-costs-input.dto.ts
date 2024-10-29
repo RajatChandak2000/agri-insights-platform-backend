@@ -280,6 +280,10 @@ class DetailedMachineryFixedCostsDto {
 
     @IsOptional()
     @IsNumber()
+    articulatedLoadersCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
     articulatedLoadersEquipmentAge?: number;
 
     @IsOptional()
@@ -304,6 +308,10 @@ class DetailedMachineryFixedCostsDto {
 
     @IsOptional()
     @IsNumber()
+    skidSteerLoadersCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
     skidSteerLoadersEquipmentAge?: number;
 
     @IsOptional()
@@ -321,6 +329,10 @@ class DetailedMachineryFixedCostsDto {
     @IsOptional()
     @IsNumber()
     hpTractor130MfwDDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    hpTractor130MfwDCroppingHoursOfUse?: number;
 
     @IsOptional()
     @IsNumber()
@@ -344,6 +356,10 @@ class DetailedMachineryFixedCostsDto {
 
     @IsOptional()
     @IsNumber()
+    hpTractor75CroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
     hpTractor75EquipmentAge?: number;
 
     @IsOptional()
@@ -361,6 +377,10 @@ class DetailedMachineryFixedCostsDto {
     @IsOptional()
     @IsNumber()
     hpTractor50DairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    hpTractor50CroppingHoursOfUse?: number;
 
     @IsOptional()
     @IsNumber()
@@ -384,6 +404,10 @@ class DetailedMachineryFixedCostsDto {
 
     @IsOptional()
     @IsNumber()
+    mixerWagon650CroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
     mixerWagon650EquipmentAge?: number;
 
     @IsOptional()
@@ -401,6 +425,10 @@ class DetailedMachineryFixedCostsDto {
     @IsOptional()
     @IsNumber()
     threeQuarterTonPickupDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    threeQuarterTonPickupCroppingHoursOfUse?: number;
 
     @IsOptional()
     @IsNumber()
@@ -424,6 +452,10 @@ class DetailedMachineryFixedCostsDto {
 
     @IsOptional()
     @IsNumber()
+    halfTonPickupCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
     halfTonPickupEquipmentAge?: number;
 
     @IsOptional()
@@ -441,6 +473,10 @@ class DetailedMachineryFixedCostsDto {
     @IsOptional()
     @IsNumber()
     jdGatorDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    jdGatorCroppingHoursOfUse?: number;
 
     @IsOptional()
     @IsNumber()
@@ -464,6 +500,10 @@ class DetailedMachineryFixedCostsDto {
 
     @IsOptional()
     @IsNumber()
+    sandSpreaderCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
     sandSpreaderEquipmentAge?: number;
 
     @IsOptional()
@@ -481,6 +521,10 @@ class DetailedMachineryFixedCostsDto {
     @IsOptional()
     @IsNumber()
     hpTractor300MfwDDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    hpTractor300MfwDCroppingHoursOfUse?: number;
 
     @IsOptional()
     @IsNumber()
@@ -504,6 +548,10 @@ class DetailedMachineryFixedCostsDto {
 
     @IsOptional()
     @IsNumber()
+    hpTractor200MfwDCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
     hpTractor200MfwDEquipmentAge?: number;
 
     @IsOptional()
@@ -521,6 +569,10 @@ class DetailedMachineryFixedCostsDto {
     @IsOptional()
     @IsNumber()
     diskHarrow24DairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    diskHarrow24CroppingHoursOfUse?: number;
 
     @IsOptional()
     @IsNumber()
@@ -544,6 +596,10 @@ class DetailedMachineryFixedCostsDto {
 
     @IsOptional()
     @IsNumber()
+    foldingSprayer40CroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
     foldingSprayer40EquipmentAge?: number;
 
     @IsOptional()
@@ -552,23 +608,367 @@ class DetailedMachineryFixedCostsDto {
 
     @IsOptional()
     @IsNumber()
-    cornPicker6RowInitialInvestmentPerUnit?: number;
+    fieldCultivatorInitialInvestmentPerUnit?: number;
 
     @IsOptional()
     @IsNumber()
-    cornPicker6RowTotalHoursOfUse?: number;
+    numberOfFieldCultivator?: number;
 
     @IsOptional()
     @IsNumber()
-    cornPicker6RowDairyHoursOfUse?: number;
+    fieldCultivatorTotalHoursOfUse?: number;
 
     @IsOptional()
     @IsNumber()
-    cornPicker6RowEquipmentAge?: number;
+    fieldCultivatorDairyHoursOfUse?: number;
 
     @IsOptional()
     @IsNumber()
-    cornPicker6RowYearsOfUsefulLife?: number;
+    fieldCultivatorCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    fieldCultivatorEquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    fieldCultivatorYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    grainDrill15NoTillInitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfGrainDrill15NoTill?: number;
+
+    @IsOptional()
+    @IsNumber()
+    grainDrill15NoTillTotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    grainDrill15NoTillDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    grainDrill15NoTillCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    grainDrill15NoTillEquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    grainDrill15NoTillYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    mowerConditionerSelfPropelledInitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfMowerConditionerSelfPropelled?: number;
+
+    @IsOptional()
+    @IsNumber()
+    mowerConditionerSelfPropelledTotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    mowerConditionerSelfPropelledDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    mowerConditionerSelfPropelledCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    mowerConditionerSelfPropelledEquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    mowerConditionerSelfPropelledYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tedderInitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfTedder?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tedderTotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tedderDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tedderCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tedderEquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tedderYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    powerRakeInitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfPowerRake?: number;
+
+    @IsOptional()
+    @IsNumber()
+    powerRakeTotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    powerRakeDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    powerRakeCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    powerRakeEquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    powerRakeYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    foldingRotaryMower15InitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfFoldingRotaryMower15?: number;
+
+    @IsOptional()
+    @IsNumber()
+    foldingRotaryMower15TotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    foldingRotaryMower15DairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    foldingRotaryMower15CroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    foldingRotaryMower15EquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    foldingRotaryMower15YearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    deepRipperInitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfDeepRipper?: number;
+
+    @IsOptional()
+    @IsNumber()
+    deepRipperTotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    deepRipperDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    deepRipperCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    deepRipperEquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    deepRipperYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    livestockTrailer24InitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfLivestockTrailer24?: number;
+
+    @IsOptional()
+    @IsNumber()
+    livestockTrailer24TotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    livestockTrailer24DairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    livestockTrailer24CroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    livestockTrailer24EquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    livestockTrailer24YearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    roundBalerInitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfRoundBaler?: number;
+
+    @IsOptional()
+    @IsNumber()
+    roundBalerTotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    roundBalerDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    roundBalerCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    roundBalerEquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    roundBalerYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tubGrinderInitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfTubGrinder?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tubGrinderTotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tubGrinderDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tubGrinderCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tubGrinderEquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    tubGrinderYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    miscellaneousEquipmentInitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfMiscellaneousEquipment?: number;
+
+    @IsOptional()
+    @IsNumber()
+    miscellaneousEquipmentTotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    miscellaneousEquipmentDairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    miscellaneousEquipmentCroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    miscellaneousEquipmentEquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    miscellaneousEquipmentYearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment1InitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfOtherMachineryEquipment1?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment1TotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment1DairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment1CroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment1EquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment1YearsOfUsefulLife?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment2InitialInvestmentPerUnit?: number;
+
+    @IsOptional()
+    @IsNumber()
+    numberOfOtherMachineryEquipment2?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment2TotalHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment2DairyHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment2CroppingHoursOfUse?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment2EquipmentAge?: number;
+
+    @IsOptional()
+    @IsNumber()
+    otherMachineryEquipment2YearsOfUsefulLife?: number;
 }
 
 class LandFixedCostsDto {

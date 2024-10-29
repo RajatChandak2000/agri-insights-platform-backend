@@ -218,6 +218,9 @@ class DetailedMachineryFixedCostsInputs {
     articulatedLoadersDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    articulatedLoadersCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     articulatedLoadersEquipmentAge: number;
 
     @Prop({ required: true })
@@ -234,6 +237,9 @@ class DetailedMachineryFixedCostsInputs {
 
     @Prop({ required: true })
     skidSteerLoadersDairyHoursOfUse: number;
+
+    @Prop({ required: true })
+    skidSteerLoadersCroppingHoursOfUse: number;
 
     @Prop({ required: true })
     skidSteerLoadersEquipmentAge: number;
@@ -254,6 +260,9 @@ class DetailedMachineryFixedCostsInputs {
     hpTractor130MfwDDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    hpTractor130MfwDCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     hpTractor130MfwDEquipmentAge: number;
 
     @Prop({ required: true })
@@ -270,6 +279,9 @@ class DetailedMachineryFixedCostsInputs {
 
     @Prop({ required: true })
     hpTractor75DairyHoursOfUse: number;
+
+    @Prop({ required: true })
+    hpTractor75CroppingHoursOfUse: number;
 
     @Prop({ required: true })
     hpTractor75EquipmentAge: number;
@@ -290,6 +302,9 @@ class DetailedMachineryFixedCostsInputs {
     hpTractor50DairyHoursOfUse: number;
 
     @Prop({ required: true })
+    hpTractor50CroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     hpTractor50EquipmentAge: number;
 
     @Prop({ required: true })
@@ -306,6 +321,9 @@ class DetailedMachineryFixedCostsInputs {
 
     @Prop({ required: true })
     mixerWagon650DairyHoursOfUse: number;
+
+    @Prop({ required: true })
+    mixerWagon650CroppingHoursOfUse: number;
 
     @Prop({ required: true })
     mixerWagon650EquipmentAge: number;
@@ -326,6 +344,9 @@ class DetailedMachineryFixedCostsInputs {
     threeQuarterTonPickupDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    threeQuarterTonPickupCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     threeQuarterTonPickupEquipmentAge: number;
 
     @Prop({ required: true })
@@ -342,6 +363,9 @@ class DetailedMachineryFixedCostsInputs {
 
     @Prop({ required: true })
     halfTonPickupDairyHoursOfUse: number;
+
+    @Prop({ required: true })
+    halfTonPickupCroppingHoursOfUse: number;
 
     @Prop({ required: true })
     halfTonPickupEquipmentAge: number;
@@ -362,6 +386,9 @@ class DetailedMachineryFixedCostsInputs {
     jdGatorDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    jdGatorCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     jdGatorEquipmentAge: number;
 
     @Prop({ required: true })
@@ -378,6 +405,9 @@ class DetailedMachineryFixedCostsInputs {
 
     @Prop({ required: true })
     sandSpreaderDairyHoursOfUse: number;
+
+    @Prop({ required: true })
+    sandSpreaderCroppingHoursOfUse: number;
 
     @Prop({ required: true })
     sandSpreaderEquipmentAge: number;
@@ -398,6 +428,9 @@ class DetailedMachineryFixedCostsInputs {
     hpTractor300MfwDDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    hpTractor300MfwDCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     hpTractor300MfwDEquipmentAge: number;
 
     @Prop({ required: true })
@@ -414,6 +447,9 @@ class DetailedMachineryFixedCostsInputs {
 
     @Prop({ required: true })
     hpTractor200MfwDDairyHoursOfUse: number;
+
+    @Prop({ required: true })
+    hpTractor200MfwDCroppingHoursOfUse: number;
 
     @Prop({ required: true })
     hpTractor200MfwDEquipmentAge: number;
@@ -434,6 +470,9 @@ class DetailedMachineryFixedCostsInputs {
     diskHarrow24DairyHoursOfUse: number;
 
     @Prop({ required: true })
+    diskHarrow24CroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     diskHarrow24EquipmentAge: number;
 
     @Prop({ required: true })
@@ -450,6 +489,9 @@ class DetailedMachineryFixedCostsInputs {
 
     @Prop({ required: true })
     stripTillPlanter8RowDairyHoursOfUse: number;
+
+    @Prop({ required: true })
+    stripTillPlanter8RowCroppingHoursOfUse: number;
 
     @Prop({ required: true })
     stripTillPlanter8RowEquipmentAge: number;
@@ -470,12 +512,14 @@ class DetailedMachineryFixedCostsInputs {
     foldingSprayer40DairyHoursOfUse: number;
 
     @Prop({ required: true })
+    foldingSprayer40CroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     foldingSprayer40EquipmentAge: number;
 
     @Prop({ required: true })
     foldingSprayer40YearsOfUsefulLife: number;
 
-    // Field Cultivator
     @Prop({ required: true })
     fieldCultivatorInitialInvestmentPerUnit: number;
 
@@ -489,12 +533,14 @@ class DetailedMachineryFixedCostsInputs {
     fieldCultivatorDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    fieldCultivatorCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     fieldCultivatorEquipmentAge: number;
 
     @Prop({ required: true })
     fieldCultivatorYearsOfUsefulLife: number;
 
-    // Grain drill - 15’ no-till
     @Prop({ required: true })
     grainDrill15NoTillInitialInvestmentPerUnit: number;
 
@@ -508,12 +554,14 @@ class DetailedMachineryFixedCostsInputs {
     grainDrill15NoTillDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    grainDrill15NoTillCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     grainDrill15NoTillEquipmentAge: number;
 
     @Prop({ required: true })
     grainDrill15NoTillYearsOfUsefulLife: number;
 
-    // Mower conditioner (self-propelled)
     @Prop({ required: true })
     mowerConditionerSelfPropelledInitialInvestmentPerUnit: number;
 
@@ -527,12 +575,14 @@ class DetailedMachineryFixedCostsInputs {
     mowerConditionerSelfPropelledDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    mowerConditionerSelfPropelledCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     mowerConditionerSelfPropelledEquipmentAge: number;
 
     @Prop({ required: true })
     mowerConditionerSelfPropelledYearsOfUsefulLife: number;
 
-    // Tedder
     @Prop({ required: true })
     tedderInitialInvestmentPerUnit: number;
 
@@ -546,12 +596,14 @@ class DetailedMachineryFixedCostsInputs {
     tedderDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    tedderCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     tedderEquipmentAge: number;
 
     @Prop({ required: true })
     tedderYearsOfUsefulLife: number;
 
-    // Power Rake
     @Prop({ required: true })
     powerRakeInitialInvestmentPerUnit: number;
 
@@ -565,12 +617,14 @@ class DetailedMachineryFixedCostsInputs {
     powerRakeDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    powerRakeCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     powerRakeEquipmentAge: number;
 
     @Prop({ required: true })
     powerRakeYearsOfUsefulLife: number;
 
-    // 15’ folding rotary mower
     @Prop({ required: true })
     foldingRotaryMower15InitialInvestmentPerUnit: number;
 
@@ -584,12 +638,14 @@ class DetailedMachineryFixedCostsInputs {
     foldingRotaryMower15DairyHoursOfUse: number;
 
     @Prop({ required: true })
+    foldingRotaryMower15CroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     foldingRotaryMower15EquipmentAge: number;
 
     @Prop({ required: true })
     foldingRotaryMower15YearsOfUsefulLife: number;
 
-    // Deep-ripper
     @Prop({ required: true })
     deepRipperInitialInvestmentPerUnit: number;
 
@@ -603,12 +659,14 @@ class DetailedMachineryFixedCostsInputs {
     deepRipperDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    deepRipperCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     deepRipperEquipmentAge: number;
 
     @Prop({ required: true })
     deepRipperYearsOfUsefulLife: number;
 
-    // 24’ Livestock trailer
     @Prop({ required: true })
     livestockTrailer24InitialInvestmentPerUnit: number;
 
@@ -622,12 +680,14 @@ class DetailedMachineryFixedCostsInputs {
     livestockTrailer24DairyHoursOfUse: number;
 
     @Prop({ required: true })
+    livestockTrailer24CroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     livestockTrailer24EquipmentAge: number;
 
     @Prop({ required: true })
     livestockTrailer24YearsOfUsefulLife: number;
 
-    // Round baler
     @Prop({ required: true })
     roundBalerInitialInvestmentPerUnit: number;
 
@@ -641,12 +701,14 @@ class DetailedMachineryFixedCostsInputs {
     roundBalerDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    roundBalerCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     roundBalerEquipmentAge: number;
 
     @Prop({ required: true })
     roundBalerYearsOfUsefulLife: number;
 
-    // Tub grinder
     @Prop({ required: true })
     tubGrinderInitialInvestmentPerUnit: number;
 
@@ -660,12 +722,14 @@ class DetailedMachineryFixedCostsInputs {
     tubGrinderDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    tubGrinderCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     tubGrinderEquipmentAge: number;
 
     @Prop({ required: true })
     tubGrinderYearsOfUsefulLife: number;
 
-    // Miscellaneous equipment
     @Prop({ required: true })
     miscellaneousEquipmentInitialInvestmentPerUnit: number;
 
@@ -679,12 +743,14 @@ class DetailedMachineryFixedCostsInputs {
     miscellaneousEquipmentDairyHoursOfUse: number;
 
     @Prop({ required: true })
+    miscellaneousEquipmentCroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     miscellaneousEquipmentEquipmentAge: number;
 
     @Prop({ required: true })
     miscellaneousEquipmentYearsOfUsefulLife: number;
 
-    // Other 1
     @Prop({ required: true })
     otherMachineryEquipment1InitialInvestmentPerUnit: number;
 
@@ -698,12 +764,14 @@ class DetailedMachineryFixedCostsInputs {
     otherMachineryEquipment1DairyHoursOfUse: number;
 
     @Prop({ required: true })
+    otherMachineryEquipment1CroppingHoursOfUse: number;
+
+    @Prop({ required: true })
     otherMachineryEquipment1EquipmentAge: number;
 
     @Prop({ required: true })
     otherMachineryEquipment1YearsOfUsefulLife: number;
 
-    // Other 2
     @Prop({ required: true })
     otherMachineryEquipment2InitialInvestmentPerUnit: number;
 
@@ -715,6 +783,9 @@ class DetailedMachineryFixedCostsInputs {
 
     @Prop({ required: true })
     otherMachineryEquipment2DairyHoursOfUse: number;
+
+    @Prop({ required: true })
+    otherMachineryEquipment2CroppingHoursOfUse: number;
 
     @Prop({ required: true })
     otherMachineryEquipment2EquipmentAge: number;
