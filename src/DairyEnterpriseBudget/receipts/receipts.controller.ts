@@ -32,7 +32,7 @@ export class ReceiptsController{
         return this.receiptsService.getReceiptsInput(email);
     }
 
-    @Post('calculateReciptsOutput')
+    @Post('calculateReceiptsOutput')
     async updateInputWithProductionDetails(
       @Body() body: { inputs: ReceiptsInputDto, productionDetails: ProductionDetailsInputDto }
     ) {

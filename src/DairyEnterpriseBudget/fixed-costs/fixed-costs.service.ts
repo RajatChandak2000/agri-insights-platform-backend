@@ -125,7 +125,7 @@ export class FixedCostsService{
     async calculateFixedCostsOutput(userId: string, updatedDocument: FixedCostsInput) {
         this.logger.log(`Calculating fixed costs output for user: ${userId}`);
         
-        //Get the required documents from ProductionDetails Inputs and Outputs
+        //Get any other required documents from other tables
         const productionDetailsInputs = await this.productionDetailsInputModel.findOne({userId}).exec();
         const receiptsInput = await this.receiptsInputModel.findOne({userId}).exec();
       
