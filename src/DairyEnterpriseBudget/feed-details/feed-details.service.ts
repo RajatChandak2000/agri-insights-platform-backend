@@ -7,7 +7,6 @@ import { User } from "src/user/schemas/user.schema";
 import { FeedDetailsInputDto } from "../dto/feed-details-input.dto";
 import { ProductionDetailsInput } from "../schemas/inputs/ProductionDetailsInput.schema";
 import { ProductionDetailsOutput } from "../schemas/outputs/ProductionDetailsOutput.schema";
-import { RaisedForageInput } from "../schemas/inputs/RaisedForageInput.schema";
 
 @Injectable()
 export class FeedDetailsService{
@@ -16,7 +15,6 @@ export class FeedDetailsService{
     constructor(
         @InjectModel(FeedDetailsInput.name) private feedDetailsInputModel: Model<FeedDetailsInput>,
         @InjectModel(FeedDetailsOutput.name) private feedDetailsOutputModel: Model<FeedDetailsOutput>,
-        @InjectModel(RaisedForageInput.name) private raisedForageInputModel: Model<RaisedForageInput>,
         @InjectModel(ProductionDetailsInput.name) private productionDetailsInputModel: Model<ProductionDetailsInput>,
         @InjectModel(ProductionDetailsOutput.name) private productionDetailsOutputModel: Model<ProductionDetailsOutput>,
         @InjectModel(User.name) private userModel: Model<User>
@@ -84,6 +82,76 @@ export class FeedDetailsService{
             this.logger.log(`Calves Data: ${JSON.stringify(updateDto.calves)}`);
         }
 
+        //Handling Corn Silage Inputs
+        if (updateDto.cornSilage) {
+            for (const [key, value] of Object.entries(updateDto.cornSilage)) {
+                if (value !== undefined) {
+                    updateData[`cornSilage.${key}`] = value;
+                }
+            }
+            this.logger.log(`Corn Silage Data: ${JSON.stringify(updateDto.cornSilage)}`);
+        }
+
+        //Handling Sorghum Silage Inputs
+        if (updateDto.sorghumSilage) {
+            for (const [key, value] of Object.entries(updateDto.sorghumSilage)) {
+                if (value !== undefined) {
+                    updateData[`sorghumSilage.${key}`] = value;
+                }
+            }
+            this.logger.log(`Sorghum Silage Data: ${JSON.stringify(updateDto.sorghumSilage)}`);
+        }
+
+        //Handling SmallGrain Silage Inputs
+        if (updateDto.smallGrainSilage) {
+            for (const [key, value] of Object.entries(updateDto.smallGrainSilage)) {
+                if (value !== undefined) {
+                    updateData[`smallGrainSilage.${key}`] = value;
+                }
+            }
+            this.logger.log(`SmallGrain Silage Data: ${JSON.stringify(updateDto.smallGrainSilage)}`);
+        }
+
+        //Handling Grass Hay Inputs
+        if (updateDto.grassHay) {
+            for (const [key, value] of Object.entries(updateDto.grassHay)) {
+                if (value !== undefined) {
+                    updateData[`grassHay.${key}`] = value;
+                }
+            }
+            this.logger.log(`Corn Silage Data: ${JSON.stringify(updateDto.grassHay)}`);
+        }
+        
+        //Handling Alfalfa Hay Establishment Inputs
+        if (updateDto.alfalfaHayEstablishment) {
+            for (const [key, value] of Object.entries(updateDto.alfalfaHayEstablishment)) {
+                if (value !== undefined) {
+                    updateData[`alfalfaHayEstablishment.${key}`] = value;
+                }
+            }
+            this.logger.log(`Alfalfa Hay Establishment Data: ${JSON.stringify(updateDto.alfalfaHayEstablishment)}`);
+        }
+
+        //Handling Alfalfa Hay Stand Inputs
+        if (updateDto.alfalfaHayStand) {
+            for (const [key, value] of Object.entries(updateDto.alfalfaHayStand)) {
+                if (value !== undefined) {
+                    updateData[`alfalfaHayStand.${key}`] = value;
+                }
+            }
+            this.logger.log(`Alfalfa Hay Stand Data: ${JSON.stringify(updateDto.alfalfaHayStand)}`);
+        }
+
+        //Handling Alfalfa Hay Shrink Loss Inputs
+        if (updateDto.alfalfaHayShrinkLoss) {
+            for (const [key, value] of Object.entries(updateDto.alfalfaHayShrinkLoss)) {
+                if (value !== undefined) {
+                    updateData[`alfalfaHayShrinkLoss.${key}`] = value;
+                }
+            }
+            this.logger.log(`Alfalfa Hay Shrink Loss Data: ${JSON.stringify(updateDto.alfalfaHayShrinkLoss)}`);
+        }
+
         console.log("updateData ", updateData);
         
         this.logger.log(`Update data received: ${JSON.stringify(updateData)}`);
@@ -119,7 +187,6 @@ export class FeedDetailsService{
         //Get any other required documents from other tables
         const productionDetailsInputs = await this.productionDetailsInputModel.findOne({userId}).exec();
         const productionDetailsOutputs = await this.productionDetailsOutputModel.findOne({userId}).exec();
-        const raisedForageInputs = await this.raisedForageInputModel.findOne({userId}).exec();
 
         // ---->Temp variables required to calculate the outputs
         const numberOfHeifersRaised = productionDetailsInputs.heiferProduction.numberOfHeifersRaised;
@@ -276,33 +343,33 @@ export class FeedDetailsService{
         const calvesCalfStarterFeedDaysOnFeed = updatedDocument.calves.calvesCalfStarterFeedDaysOnFeed;
 
         // ----> Raised Forage inputs required to calculate the outputs
-        const cornSilageYieldTonPerAcre = raisedForageInputs.cornSilage.cornSilageExpectedYieldTonsPerAcre;
-        const cornSilageAcres = raisedForageInputs.cornSilage.cornSilageHarvestedAcres;
-        const cornSilageShrinkLossPercentage = raisedForageInputs.cornSilage.cornSilageShrinkLossPercentage;
+        const cornSilageYieldTonPerAcre = updatedDocument.cornSilage.cornSilageExpectedYieldTonsPerAcre;
+        const cornSilageAcres = updatedDocument.cornSilage.cornSilageHarvestedAcres;
+        const cornSilageShrinkLossPercentage = updatedDocument.cornSilage.cornSilageShrinkLossPercentage;
 
         // Sorghum Silage
-        const sorghumSilageYieldTonPerAcre = raisedForageInputs.sorghumSilage.sorghumSilageExpectedYieldTonsPerAcre;
-        const sorghumSilageAcres = raisedForageInputs.sorghumSilage.sorghumSilageHarvestedAcres;
-        const sorghumSilageShrinkLossPercentage = raisedForageInputs.sorghumSilage.sorghumSilageShrinkLossPercentage;
+        const sorghumSilageYieldTonPerAcre = updatedDocument.sorghumSilage.sorghumSilageExpectedYieldTonsPerAcre;
+        const sorghumSilageAcres = updatedDocument.sorghumSilage.sorghumSilageHarvestedAcres;
+        const sorghumSilageShrinkLossPercentage = updatedDocument.sorghumSilage.sorghumSilageShrinkLossPercentage;
 
         // Small Grain Silage
-        const smallGrainSilageYieldTonPerAcre = raisedForageInputs.smallGrainSilage.smallGrainSilageExpectedYieldTonsPerAcre;
-        const smallGrainSilageAcres = raisedForageInputs.smallGrainSilage.smallGrainSilageHarvestedAcres;
-        const smallGrainSilageShrinkLossPercentage = raisedForageInputs.smallGrainSilage.smallGrainSilageShrinkLossPercentage;
+        const smallGrainSilageYieldTonPerAcre = updatedDocument.smallGrainSilage.smallGrainSilageExpectedYieldTonsPerAcre;
+        const smallGrainSilageAcres = updatedDocument.smallGrainSilage.smallGrainSilageHarvestedAcres;
+        const smallGrainSilageShrinkLossPercentage = updatedDocument.smallGrainSilage.smallGrainSilageShrinkLossPercentage;
 
         // Grass Hay
-        const grassHayYieldTonPerAcre = raisedForageInputs.grassHay.grassHayExpectedYieldTonsPerAcre;
-        const grassHayAcres = raisedForageInputs.grassHay.grassHayHarvestedAcres;
-        const grassHayShrinkLossPercentage = raisedForageInputs.grassHay.grassHayShrinkLossPercentage;
+        const grassHayYieldTonPerAcre = updatedDocument.grassHay.grassHayExpectedYieldTonsPerAcre;
+        const grassHayAcres = updatedDocument.grassHay.grassHayHarvestedAcres;
+        const grassHayShrinkLossPercentage = updatedDocument.grassHay.grassHayShrinkLossPercentage;
 
         // Alfalfa Hay Establishment
-        const alfalfaHayEstablishmentYieldTonPerAcre = raisedForageInputs.alfalfaHayEstablishment.alfalfaHayEstablishmentExpectedYieldTonsPerAcre;
-        const alfalfaHayEstablishmentAcres = raisedForageInputs.alfalfaHayEstablishment.alfalfaHayEstablishmentHarvestedAcres;
+        const alfalfaHayEstablishmentYieldTonPerAcre = updatedDocument.alfalfaHayEstablishment.alfalfaHayEstablishmentExpectedYieldTonsPerAcre;
+        const alfalfaHayEstablishmentAcres = updatedDocument.alfalfaHayEstablishment.alfalfaHayEstablishmentHarvestedAcres;
 
         // Alfalfa Hay Stand
-        const alfalfaHayStandYieldTonPerAcre = raisedForageInputs.alfalfaHayStand.alfalfaHayStandExpectedYieldTonsPerAcre;
-        const alfalfaHayStandAcres = raisedForageInputs.alfalfaHayStand.alfalfaHayStandHarvestedAcres;
-        const alfalfaHayShrinkLossPercentage = raisedForageInputs.alfalfaHayShrinkLoss.alfalfaHayShrinkLossPercentage;
+        const alfalfaHayStandYieldTonPerAcre = updatedDocument.alfalfaHayStand.alfalfaHayStandExpectedYieldTonsPerAcre;
+        const alfalfaHayStandAcres = updatedDocument.alfalfaHayStand.alfalfaHayStandHarvestedAcres;
+        const alfalfaHayShrinkLossPercentage = updatedDocument.alfalfaHayShrinkLoss.alfalfaHayShrinkLossPercentage;
 
         // ----> Calculating the outputs here
         const cornSilageTonsRequired = 
