@@ -7,8 +7,6 @@ import { FeedDetailsOutput, FeedDetailsOutputSchema } from "../schemas/outputs/F
 import { User, UserSchema } from "src/user/schemas/user.schema";
 import { ProductionDetailsInput, ProductionDetailsInputsSchema } from "../schemas/inputs/ProductionDetailsInput.schema";
 import { ProductionDetailsOutput, ProductionDetailsOutputSchema } from "../schemas/outputs/ProductionDetailsOutput.schema";
-import { RaisedForageInput, RaisedForageInputsSchema } from "../schemas/inputs/RaisedForageInput.schema";
-
 @Module({
     providers: [FeedDetailsService],
     controllers: [FeedDetailsController],
@@ -19,7 +17,6 @@ import { RaisedForageInput, RaisedForageInputsSchema } from "../schemas/inputs/R
             {name: FeedDetailsOutput.name, schema: FeedDetailsOutputSchema},
             {name: ProductionDetailsInput.name, schema: ProductionDetailsInputsSchema},
             {name: ProductionDetailsOutput.name, schema: ProductionDetailsOutputSchema},
-            {name: RaisedForageInput.name, schema: RaisedForageInputsSchema},
             {name: User.name, schema: UserSchema}
         ])
     ],
