@@ -513,6 +513,173 @@ class AlfalfaHayShrinkLossDto {
   alfalfaHayShrinkLossPercentage: number;
 }
 
+class CornSilageTransportAndCostDetailsDto {
+  @IsNumber()
+  cornSilageCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  cornSilageAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  cornSilageAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class SorghumSilageTransportAndCostDetailsDto {
+  @IsNumber()
+  sorghumSilageCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  sorghumSilageAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  sorghumSilageAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class SmallGrainSilageTransportAndCostDetailsDto {
+  @IsNumber()
+  smallGrainSilageCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  smallGrainSilageAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class GrassHayTransportAndCostDetailsDto {
+  @IsNumber()
+  grassHayCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  grassHayAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  grassHayAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class AlfalfaHayTransportAndCostDetailsDto {
+  @IsNumber()
+  alfalfaHayCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  alfalfaHayAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  alfalfaHayAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class PeanutHullsTransportAndCostDetailsDto {
+  @IsNumber()
+  peanutHullsCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  peanutHullsAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  peanutHullsAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class ApplePomaceTransportAndCostDetailsDto {
+  @IsNumber()
+  applePomaceCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  applePomaceAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  applePomaceAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class BrewersGrainTransportAndCostDetailsDto {
+  @IsNumber()
+  brewersGrainCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  brewersGrainAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  brewersGrainAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class CitrusPulpTransportAndCostDetailsDto {
+  @IsNumber()
+  citrusPulpCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  citrusPulpAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  citrusPulpAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class CornGlutenTransportAndCostDetailsDto {
+  @IsNumber()
+  cornGlutenCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  cornGlutenAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  cornGlutenAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class WholeCottonseedTransportAndCostDetailsDto {
+  @IsNumber()
+  wholeCottonseedCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  wholeCottonseedAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class CottonseedHullsTransportAndCostDetailsDto {
+  @IsNumber()
+  cottonseedHullsCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  cottonseedHullsAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class SoybeanMealTransportAndCostDetailsDto {
+  @IsNumber()
+  soybeanMealCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  soybeanMealAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  soybeanMealAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class CustomFeedMixTransportAndCostDetailsDto {
+  @IsNumber()
+  customFeedMixCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  customFeedMixAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  customFeedMixAvgGrownForageMilesTruckedToDairy: number;
+}
+
+class CustomMineralMixTransportAndCostDetailsDto {
+  @IsNumber()
+  customMineralMixCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  customMineralMixAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  customMineralMixAvgGrownForageMilesTruckedToDairy: number;
+}
+
+
+
 export class FeedDetailsInputDto {
   @IsObject()
   milkingHerd: MilkingHerdFeedDetailsDto;
@@ -550,4 +717,50 @@ export class FeedDetailsInputDto {
 
   @IsObject()
   alfalfaHayShrinkLoss: AlfalfaHayShrinkLossDto;
+
+  //Commodity and Trucking Cost
+  @IsObject()
+  cornSilageTransportAndCost: CornSilageTransportAndCostDetailsDto;
+
+  @IsObject()
+  sorghumSilageTransportAndCost: SorghumSilageTransportAndCostDetailsDto;
+
+  @IsObject()
+  smallGrainSilageTransportAndCost: SmallGrainSilageTransportAndCostDetailsDto;
+
+  @IsObject()
+  grassHayTransportAndCost: GrassHayTransportAndCostDetailsDto;
+
+  @IsObject()
+  alfalfaHayTransportAndCost: AlfalfaHayTransportAndCostDetailsDto;
+
+  @IsObject()
+  peanutHullsTransportAndCost: PeanutHullsTransportAndCostDetailsDto;
+
+  @IsObject()
+  applePomaceTransportAndCost: ApplePomaceTransportAndCostDetailsDto;
+
+  @IsObject()
+  brewersGrainTransportAndCost: BrewersGrainTransportAndCostDetailsDto;
+
+  @IsObject()
+  citrusPulpTransportAndCost: CitrusPulpTransportAndCostDetailsDto;
+
+  @IsObject()
+  cornGlutenTransportAndCost: CornGlutenTransportAndCostDetailsDto;
+
+  @IsObject()
+  wholeCottonseedTransportAndCost: WholeCottonseedTransportAndCostDetailsDto;
+
+  @IsObject()
+  cottonseedHullsTransportAndCost: CottonseedHullsTransportAndCostDetailsDto;
+
+  @IsObject()
+  soybeanMealTransportAndCost: SoybeanMealTransportAndCostDetailsDto;
+
+  @IsObject()
+  customFeedMixTransportAndCost: CustomFeedMixTransportAndCostDetailsDto;
+
+  @IsObject()
+  customMineralMixTransportAndCost: CustomMineralMixTransportAndCostDetailsDto;
 }
