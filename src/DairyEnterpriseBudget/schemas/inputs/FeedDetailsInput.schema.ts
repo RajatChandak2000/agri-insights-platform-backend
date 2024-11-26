@@ -756,50 +756,53 @@ export class FeedDetailsInput extends Document{
     updatedAt: Date;
 
     //Commodity and Trucking Costs Classes
+    @Prop({ required: true })
+    averageCostOfTruckingPerTonMile: number;
+
     @Prop({ type: CornSilageTransportAndCostInputs, default: {} })
-  cornSilageTransportAndCost: CornSilageTransportAndCostInputs;
+    cornSilageTransportAndCost: CornSilageTransportAndCostInputs;
 
-  @Prop({ type: SorghumSilageTransportAndCostInputs, default: {} })
-  sorghumSilageTransportAndCost: SorghumSilageTransportAndCostInputs;
+    @Prop({ type: SorghumSilageTransportAndCostInputs, default: {} })
+    sorghumSilageTransportAndCost: SorghumSilageTransportAndCostInputs;
 
-  @Prop({ type: SmallGrainSilageTransportAndCostInputs, default: {} })
-  smallGrainSilageTransportAndCost: SmallGrainSilageTransportAndCostInputs;
+    @Prop({ type: SmallGrainSilageTransportAndCostInputs, default: {} })
+    smallGrainSilageTransportAndCost: SmallGrainSilageTransportAndCostInputs;
 
-  @Prop({ type: GrassHayTransportAndCostInputs, default: {} })
-  grassHayTransportAndCost: GrassHayTransportAndCostInputs;
+    @Prop({ type: GrassHayTransportAndCostInputs, default: {} })
+    grassHayTransportAndCost: GrassHayTransportAndCostInputs;
 
-  @Prop({ type: AlfalfaHayTransportAndCostInputs, default: {} })
-  alfalfaHayTransportAndCost: AlfalfaHayTransportAndCostInputs;
+    @Prop({ type: AlfalfaHayTransportAndCostInputs, default: {} })
+    alfalfaHayTransportAndCost: AlfalfaHayTransportAndCostInputs;
 
-  @Prop({ type: PeanutHullsTransportAndCostInputs, default: {} })
-  peanutHullsTransportAndCost: PeanutHullsTransportAndCostInputs;
+    @Prop({ type: PeanutHullsTransportAndCostInputs, default: {} })
+    peanutHullsTransportAndCost: PeanutHullsTransportAndCostInputs;
 
-  @Prop({ type: ApplePomaceTransportAndCostInputs, default: {} })
-  applePomaceTransportAndCost: ApplePomaceTransportAndCostInputs;
+    @Prop({ type: ApplePomaceTransportAndCostInputs, default: {} })
+    applePomaceTransportAndCost: ApplePomaceTransportAndCostInputs;
 
-  @Prop({ type: BrewersGrainTransportAndCostInputs, default: {} })
-  brewersGrainTransportAndCost: BrewersGrainTransportAndCostInputs;
+    @Prop({ type: BrewersGrainTransportAndCostInputs, default: {} })
+    brewersGrainTransportAndCost: BrewersGrainTransportAndCostInputs;
 
-  @Prop({ type: CitrusPulpTransportAndCostInputs, default: {} })
-  citrusPulpTransportAndCost: CitrusPulpTransportAndCostInputs;
+    @Prop({ type: CitrusPulpTransportAndCostInputs, default: {} })
+    citrusPulpTransportAndCost: CitrusPulpTransportAndCostInputs;
 
-  @Prop({ type: CornGlutenTransportAndCostInputs, default: {} })
-  cornGlutenTransportAndCost: CornGlutenTransportAndCostInputs;
+    @Prop({ type: CornGlutenTransportAndCostInputs, default: {} })
+    cornGlutenTransportAndCost: CornGlutenTransportAndCostInputs;
 
-  @Prop({ type: WholeCottonseedTransportAndCostInputs, default: {} })
-  wholeCottonseedTransportAndCost: WholeCottonseedTransportAndCostInputs;
+    @Prop({ type: WholeCottonseedTransportAndCostInputs, default: {} })
+    wholeCottonseedTransportAndCost: WholeCottonseedTransportAndCostInputs;
 
-  @Prop({ type: CottonseedHullsTransportAndCostInputs, default: {} })
-  cottonseedHullsTransportAndCost: CottonseedHullsTransportAndCostInputs;
+    @Prop({ type: CottonseedHullsTransportAndCostInputs, default: {} })
+    cottonseedHullsTransportAndCost: CottonseedHullsTransportAndCostInputs;
 
-  @Prop({ type: SoybeanMealTransportAndCostInputs, default: {} })
-  soybeanMealTransportAndCost: SoybeanMealTransportAndCostInputs;
+    @Prop({ type: SoybeanMealTransportAndCostInputs, default: {} })
+    soybeanMealTransportAndCost: SoybeanMealTransportAndCostInputs;
 
-  @Prop({ type: CustomFeedMixTransportAndCostInputs, default: {} })
-  customFeedMixTransportAndCost: CustomFeedMixTransportAndCostInputs;
+    @Prop({ type: CustomFeedMixTransportAndCostInputs, default: {} })
+    customFeedMixTransportAndCost: CustomFeedMixTransportAndCostInputs;
 
-  @Prop({ type: CustomMineralMixTransportAndCostInputs, default: {} })
-  customMineralMixTransportAndCost: CustomMineralMixTransportAndCostInputs;
+    @Prop({ type: CustomMineralMixTransportAndCostInputs, default: {} })
+    customMineralMixTransportAndCost: CustomMineralMixTransportAndCostInputs;
 }
 
 export const FeedDetailsInputsSchema = SchemaFactory.createForClass(FeedDetailsInput);
