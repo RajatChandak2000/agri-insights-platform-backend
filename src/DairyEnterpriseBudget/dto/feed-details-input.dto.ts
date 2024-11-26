@@ -719,6 +719,10 @@ export class FeedDetailsInputDto {
   alfalfaHayShrinkLoss: AlfalfaHayShrinkLossDto;
 
   //Commodity and Trucking Cost
+  @IsNumber()
+  averageCostOfTruckingPerTonMile: number;
+
+
   @IsObject()
   cornSilageTransportAndCost: CornSilageTransportAndCostDetailsDto;
 

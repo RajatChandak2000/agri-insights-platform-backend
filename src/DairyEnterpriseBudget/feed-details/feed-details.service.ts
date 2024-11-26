@@ -152,6 +152,163 @@ export class FeedDetailsService{
             this.logger.log(`Alfalfa Hay Shrink Loss Data: ${JSON.stringify(updateDto.alfalfaHayShrinkLoss)}`);
         }
 
+        // Handling Average Cost of Trucking Per Ton-Mile
+        if (updateDto.averageCostOfTruckingPerTonMile !== undefined) {
+            updateData['averageCostOfTruckingPerTonMile'] = updateDto.averageCostOfTruckingPerTonMile;
+            this.logger.log(`Average Cost of Trucking Per Ton-Mile: ${updateDto.averageCostOfTruckingPerTonMile}`);
+        }
+
+        // Handling Corn Silage Trucking Costs
+        if (updateDto.cornSilageTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.cornSilageTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`cornSilageTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Corn Silage Trucking Costs: ${JSON.stringify(updateDto.cornSilageTransportAndCost)}`);
+        }
+
+        // Handling Sorghum Silage Trucking Costs
+        if (updateDto.sorghumSilageTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.sorghumSilageTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`sorghumSilageTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Sorghum Silage Trucking Costs: ${JSON.stringify(updateDto.sorghumSilageTransportAndCost)}`);
+        }
+
+        // Handling Small Grain Silage Trucking Costs
+        if (updateDto.smallGrainSilageTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.smallGrainSilageTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`smallGrainSilageTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Small Grain Silage Trucking Costs: ${JSON.stringify(updateDto.smallGrainSilageTransportAndCost)}`);
+        }
+
+        // Handling Grass Hay Trucking Costs
+        if (updateDto.grassHayTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.grassHayTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`grassHayTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Grass Hay Trucking Costs: ${JSON.stringify(updateDto.grassHayTransportAndCost)}`);
+        }
+
+        // Handling Alfalfa Hay Trucking Costs
+        if (updateDto.alfalfaHayTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.alfalfaHayTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`alfalfaHayTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Alfalfa Hay Trucking Costs: ${JSON.stringify(updateDto.alfalfaHayTransportAndCost)}`);
+        }
+
+        // Handling Peanut Hulls Trucking Costs
+        if (updateDto.peanutHullsTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.peanutHullsTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`peanutHullsTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Peanut Hulls Trucking Costs: ${JSON.stringify(updateDto.peanutHullsTransportAndCost)}`);
+        }
+
+        // Handling Apple Pomace Trucking Costs
+        if (updateDto.applePomaceTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.applePomaceTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`applePomaceTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Apple Pomace Trucking Costs: ${JSON.stringify(updateDto.applePomaceTransportAndCost)}`);
+        }
+
+        // Handling Brewers Grain Trucking Costs
+        if (updateDto.brewersGrainTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.brewersGrainTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`brewersGrainTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Brewers Grain Trucking Costs: ${JSON.stringify(updateDto.brewersGrainTransportAndCost)}`);
+        }
+
+        // Handling Citrus Pulp Trucking Costs
+        if (updateDto.citrusPulpTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.citrusPulpTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`citrusPulpTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Citrus Pulp Trucking Costs: ${JSON.stringify(updateDto.citrusPulpTransportAndCost)}`);
+        }
+
+        // Handling Corn Gluten Trucking Costs
+        if (updateDto.cornGlutenTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.cornGlutenTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`cornGlutenTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Corn Gluten Trucking Costs: ${JSON.stringify(updateDto.cornGlutenTransportAndCost)}`);
+        }
+
+        // Handling Whole Cottonseed Trucking Costs
+        if (updateDto.wholeCottonseedTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.wholeCottonseedTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`wholeCottonseedTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Whole Cottonseed Trucking Costs: ${JSON.stringify(updateDto.wholeCottonseedTransportAndCost)}`);
+        }
+
+        // Handling Cottonseed Hulls Trucking Costs
+        if (updateDto.cottonseedHullsTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.cottonseedHullsTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`cottonseedHullsTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Cottonseed Hulls Trucking Costs: ${JSON.stringify(updateDto.cottonseedHullsTransportAndCost)}`);
+        }
+
+        // Handling Soybean Meal Trucking Costs
+        if (updateDto.soybeanMealTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.soybeanMealTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`soybeanMealTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Soybean Meal Trucking Costs: ${JSON.stringify(updateDto.soybeanMealTransportAndCost)}`);
+        }
+
+        // Handling Custom Feed Mix Trucking Costs
+        if (updateDto.customFeedMixTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.customFeedMixTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`customFeedMixTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Custom Feed Mix Trucking Costs: ${JSON.stringify(updateDto.customFeedMixTransportAndCost)}`);
+        }
+
+        // Handling Custom Mineral Mix Trucking Costs
+        if (updateDto.customMineralMixTransportAndCost) {
+            for (const [key, value] of Object.entries(updateDto.customMineralMixTransportAndCost)) {
+                if (value !== undefined) {
+                    updateData[`customMineralMixTransportAndCost.${key}`] = value;
+                }
+            }
+            this.logger.log(`Custom Mineral Mix Trucking Costs: ${JSON.stringify(updateDto.customMineralMixTransportAndCost)}`);
+        }
+
+
         console.log("updateData ", updateData);
         
         this.logger.log(`Update data received: ${JSON.stringify(updateData)}`);
@@ -344,6 +501,7 @@ export class FeedDetailsService{
         const calvesCalfStarterFeedLbsAsFedPerDay = updatedDocument.calves.calvesCalfStarterFeedLbsAsFedPerDay;
         const calvesCalfStarterFeedDaysOnFeed = updatedDocument.calves.calvesCalfStarterFeedDaysOnFeed;
 
+        //Inputs for Forage Cost Production
         // Corn Silage
         const cornSilageExpectedYieldTonsPerAcre = updatedDocument.cornSilage.cornSilageExpectedYieldTonsPerAcre;
         const cornSilageHarvestedAcres = updatedDocument.cornSilage.cornSilageHarvestedAcres;
@@ -387,6 +545,85 @@ export class FeedDetailsService{
         //Alfafa Hay Shrink Loss Percentage
         const alfalfaHayShrinkLossPercentage = updatedDocument.alfalfaHayShrinkLoss. alfalfaHayShrinkLossPercentage
 
+        //Inputs for Commodity and Trucking Costs Inputs
+        // Average Cost of Trucking Per Ton-Mile
+        const averageCostOfTruckingPerTonMile = updatedDocument.averageCostOfTruckingPerTonMile;
+
+        // Corn Silage Trucking Costs
+        const cornSilageCostOfCommodityPerTon = updatedDocument.cornSilageTransportAndCost.cornSilageCostOfCommodityPerTon;
+        const cornSilageAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.cornSilageTransportAndCost.cornSilageAvgPurchasedFeedMilesTruckedToDairy;
+        const cornSilageAvgGrownForageMilesTruckedToDairy = updatedDocument.cornSilageTransportAndCost.cornSilageAvgGrownForageMilesTruckedToDairy;
+
+        // Sorghum Silage Trucking Costs
+        const sorghumSilageCostOfCommodityPerTon = updatedDocument.sorghumSilageTransportAndCost.sorghumSilageCostOfCommodityPerTon;
+        const sorghumSilageAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.sorghumSilageTransportAndCost.sorghumSilageAvgPurchasedFeedMilesTruckedToDairy;
+        const sorghumSilageAvgGrownForageMilesTruckedToDairy = updatedDocument.sorghumSilageTransportAndCost.sorghumSilageAvgGrownForageMilesTruckedToDairy;
+
+        // Small Grain Silage Trucking Costs
+        const smallGrainSilageCostOfCommodityPerTon = updatedDocument.smallGrainSilageTransportAndCost.smallGrainSilageCostOfCommodityPerTon;
+        const smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.smallGrainSilageTransportAndCost.smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy;
+        const smallGrainSilageAvgGrownForageMilesTruckedToDairy = updatedDocument.smallGrainSilageTransportAndCost.smallGrainSilageAvgGrownForageMilesTruckedToDairy;
+
+        // Grass Hay Trucking Costs
+        const grassHayCostOfCommodityPerTon = updatedDocument.grassHayTransportAndCost.grassHayCostOfCommodityPerTon;
+        const grassHayAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.grassHayTransportAndCost.grassHayAvgPurchasedFeedMilesTruckedToDairy;
+        const grassHayAvgGrownForageMilesTruckedToDairy = updatedDocument.grassHayTransportAndCost.grassHayAvgGrownForageMilesTruckedToDairy;
+
+        // Alfalfa Hay Trucking Costs
+        const alfalfaHayCostOfCommodityPerTon = updatedDocument.alfalfaHayTransportAndCost.alfalfaHayCostOfCommodityPerTon;
+        const alfalfaHayAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.alfalfaHayTransportAndCost.alfalfaHayAvgPurchasedFeedMilesTruckedToDairy;
+        const alfalfaHayAvgGrownForageMilesTruckedToDairy = updatedDocument.alfalfaHayTransportAndCost.alfalfaHayAvgGrownForageMilesTruckedToDairy;
+
+        // Peanut Hulls Trucking Costs
+        const peanutHullsCostOfCommodityPerTon = updatedDocument.peanutHullsTransportAndCost.peanutHullsCostOfCommodityPerTon;
+        const peanutHullsAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.peanutHullsTransportAndCost.peanutHullsAvgPurchasedFeedMilesTruckedToDairy;
+        const peanutHullsAvgGrownForageMilesTruckedToDairy = updatedDocument.peanutHullsTransportAndCost.peanutHullsAvgGrownForageMilesTruckedToDairy;
+
+        // Apple Pomace Trucking Costs
+        const applePomaceCostOfCommodityPerTon = updatedDocument.applePomaceTransportAndCost.applePomaceCostOfCommodityPerTon;
+        const applePomaceAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.applePomaceTransportAndCost.applePomaceAvgPurchasedFeedMilesTruckedToDairy;
+        const applePomaceAvgGrownForageMilesTruckedToDairy = updatedDocument.applePomaceTransportAndCost.applePomaceAvgGrownForageMilesTruckedToDairy;
+
+        // Brewers Grain Trucking Costs
+        const brewersGrainCostOfCommodityPerTon = updatedDocument.brewersGrainTransportAndCost.brewersGrainCostOfCommodityPerTon;
+        const brewersGrainAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.brewersGrainTransportAndCost.brewersGrainAvgPurchasedFeedMilesTruckedToDairy;
+        const brewersGrainAvgGrownForageMilesTruckedToDairy = updatedDocument.brewersGrainTransportAndCost.brewersGrainAvgGrownForageMilesTruckedToDairy;
+
+        // Citrus Pulp Trucking Costs
+        const citrusPulpCostOfCommodityPerTon = updatedDocument.citrusPulpTransportAndCost.citrusPulpCostOfCommodityPerTon;
+        const citrusPulpAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.citrusPulpTransportAndCost.citrusPulpAvgPurchasedFeedMilesTruckedToDairy;
+        const citrusPulpAvgGrownForageMilesTruckedToDairy = updatedDocument.citrusPulpTransportAndCost.citrusPulpAvgGrownForageMilesTruckedToDairy;
+
+        // Corn Gluten Trucking Costs
+        const cornGlutenCostOfCommodityPerTon = updatedDocument.cornGlutenTransportAndCost.cornGlutenCostOfCommodityPerTon;
+        const cornGlutenAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.cornGlutenTransportAndCost.cornGlutenAvgPurchasedFeedMilesTruckedToDairy;
+        const cornGlutenAvgGrownForageMilesTruckedToDairy = updatedDocument.cornGlutenTransportAndCost.cornGlutenAvgGrownForageMilesTruckedToDairy;
+
+        // Whole Cottonseed Trucking Costs
+        const wholeCottonseedCostOfCommodityPerTon = updatedDocument.wholeCottonseedTransportAndCost.wholeCottonseedCostOfCommodityPerTon;
+        const wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.wholeCottonseedTransportAndCost.wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy;
+        const wholeCottonseedAvgGrownForageMilesTruckedToDairy = updatedDocument.wholeCottonseedTransportAndCost.wholeCottonseedAvgGrownForageMilesTruckedToDairy;
+
+        // Cottonseed Hulls Trucking Costs
+        const cottonseedHullsCostOfCommodityPerTon = updatedDocument.cottonseedHullsTransportAndCost.cottonseedHullsCostOfCommodityPerTon;
+        const cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.cottonseedHullsTransportAndCost.cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy;
+        const cottonseedHullsAvgGrownForageMilesTruckedToDairy = updatedDocument.cottonseedHullsTransportAndCost.cottonseedHullsAvgGrownForageMilesTruckedToDairy;
+
+        // Soybean Meal Trucking Costs
+        const soybeanMealCostOfCommodityPerTon = updatedDocument.soybeanMealTransportAndCost.soybeanMealCostOfCommodityPerTon;
+        const soybeanMealAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.soybeanMealTransportAndCost.soybeanMealAvgPurchasedFeedMilesTruckedToDairy;
+        const soybeanMealAvgGrownForageMilesTruckedToDairy = updatedDocument.soybeanMealTransportAndCost.soybeanMealAvgGrownForageMilesTruckedToDairy;
+
+        // Custom Feed Mix Trucking Costs
+        const customFeedMixCostOfCommodityPerTon = updatedDocument.customFeedMixTransportAndCost.customFeedMixCostOfCommodityPerTon;
+        const customFeedMixAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.customFeedMixTransportAndCost.customFeedMixAvgPurchasedFeedMilesTruckedToDairy;
+        const customFeedMixAvgGrownForageMilesTruckedToDairy = updatedDocument.customFeedMixTransportAndCost.customFeedMixAvgGrownForageMilesTruckedToDairy;
+
+        // Custom Mineral Mix Trucking Costs
+        const customMineralMixCostOfCommodityPerTon = updatedDocument.customMineralMixTransportAndCost.customMineralMixCostOfCommodityPerTon;
+        const customMineralMixAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.customMineralMixTransportAndCost.customMineralMixAvgPurchasedFeedMilesTruckedToDairy;
+        const customMineralMixAvgGrownForageMilesTruckedToDairy = updatedDocument.customMineralMixTransportAndCost.customMineralMixAvgGrownForageMilesTruckedToDairy;
+
         // ----> Calculating the outputs here
         const cornSilageTonsRequired = 
                     ((milkingHerdCornSilageLbsAsFedPerDay * milkingHerdCornSilageDaysOnFeed * numberOfMilkingCowsOnFeed) +
@@ -400,8 +637,6 @@ export class FeedDetailsService{
         console.log("Corn Silage Tons Produced:", cornSilageTonsProduced);
         console.log("Corn Silage Balance to be Purchased or Sold:", cornSilageBalanceToBePurchasedOrSold);
 
-
-      
         // Sorghum Silage Calculations
         const sorghumSilageTonsRequired = 
                     ((milkingHerdSorghumSilageLbsAsFedPerDay * milkingHerdSorghumSilageDaysOnFeed * numberOfMilkingCowsOnFeed) +
@@ -487,6 +722,13 @@ export class FeedDetailsService{
                     (bredHeifersWholeCottonseedLbsAsFedPerDay * bredHeifersWholeCottonseedDaysOnFeed * numberOfBredHeifersCowsOnFeed) +
                     (youngHeifersWholeCottonseedLbsAsFedPerDay * youngHeifersWholeCottonseedDaysOnFeed * numberOfYoungHeifersCowsOnFeed))/2000;
 
+        // Cotton Seed Hulls Calculations
+        const cottonseedHullsTonsRequired = 
+                    ((milkingHerdCottonseedHullsLbsAsFedPerDay * milkingHerdCottonseedHullsDaysOnFeed * numberOfMilkingCowsOnFeed) +
+                    (dryHerdCottonseedHullsLbsAsFedPerDay * dryHerdCottonseedHullsDaysOnFeed * numberOfDryCowsOnFeed) +
+                    (bredHeifersCottonseedHullsLbsAsFedPerDay * bredHeifersCottonseedHullsDaysOnFeed * numberOfBredHeifersCowsOnFeed) +
+                    (youngHeifersCottonseedHullsLbsAsFedPerDay * youngHeifersCottonseedHullsDaysOnFeed * numberOfYoungHeifersCowsOnFeed))/2000;
+
         // Soybean Meal 48 Calculations
         const soybeanMeal48TonsRequired = 
                     ((milkingHerdSoybeanMeal48LbsAsFedPerDay * milkingHerdSoybeanMeal48DaysOnFeed * numberOfMilkingCowsOnFeed) +
@@ -522,118 +764,125 @@ export class FeedDetailsService{
         const alfalfaHayStandTVC = alfalfaHayStandEstimatedTotalOperatingCost;
         const alfalfaHayStandTVCPerTon = (alfalfaHayStandTVC) / (alfalfaHayTonsProduced);
 
+
+        //TEMPPPPPP
+        const totalCroppingEconomicFixedCost = 100;
+
         //Raised Forage Fixed Costs
-        // const cornSilageFixedCostAllocation = (totalCroppingEconomicFixedCost) * (cornSilagePercentOfForageFixedCostAllocated);
-        // const cornSilageFixedCostPerTon = (cornSilageFixedCostAllocation) / (cornSilageTonsProduced);
-        // const sorghumSilageFixedCostAllocation = (totalCroppingEconomicFixedCost) * (sorghumSilagePercentOfForageFixedCostAllocated);
-        // const sorghumSilageFixedCostPerTon = (sorghumSilageFixedCostAllocation) / (sorghumSilageTonsProduced);
-        // const smallGrainSilageFixedCostAllocation = (totalCroppingEconomicFixedCost) * (smallGrainSilagePercentOfForageFixedCostAllocated);
-        // const smallGrainSilageFixedCostPerTon = (smallGrainSilageFixedCostAllocation) / (smallGrainSilageTonsProduced);
-        // const grassHayFixedCostAllocation = (totalCroppingEconomicFixedCost) * (grassHayPercentOfForageFixedCostAllocated);
-        // const grassHayFixedCostPerTon = (grassHayFixedCostAllocation) / (grassHayTonsProduced);
-        // const alfalfaHayEstablishmentFixedCostAllocation = (totalCroppingEconomicFixedCost) * (alfalfaHayEstablishmentPercentOfForageFixedCostAllocated);
-        // const alfalfaHayEstablishmentFixedCostPerTon = (alfalfaHayEstablishmentFixedCostAllocation) / (alfalfaHayTonsProduced);
-        // const alfalfaHayStandFixedCostAllocation = (totalCroppingEconomicFixedCost) * (alfalfaHayStandPercentOfForageFixedCostAllocated);
-        // const alfalfaHayStandFixedCostPerTon = (alfalfaHayStandFixedCostAllocation) / (alfalfaHayTonsProduced);
+        const cornSilageFixedCostAllocation = (totalCroppingEconomicFixedCost) * (cornSilagePercentOfForageFixedCostAllocated);
+        const cornSilageFixedCostPerTon = (cornSilageFixedCostAllocation) / (cornSilageTonsProduced);
+        const sorghumSilageFixedCostAllocation = (totalCroppingEconomicFixedCost) * (sorghumSilagePercentOfForageFixedCostAllocated);
+        const sorghumSilageFixedCostPerTon = (sorghumSilageFixedCostAllocation) / (sorghumSilageTonsProduced);
+        const smallGrainSilageFixedCostAllocation = (totalCroppingEconomicFixedCost) * (smallGrainSilagePercentOfForageFixedCostAllocated);
+        const smallGrainSilageFixedCostPerTon = (smallGrainSilageFixedCostAllocation) / (smallGrainSilageTonsProduced);
+        const grassHayFixedCostAllocation = (totalCroppingEconomicFixedCost) * (grassHayPercentOfForageFixedCostAllocated);
+        const grassHayFixedCostPerTon = (grassHayFixedCostAllocation) / (grassHayTonsProduced);
+        const alfalfaHayEstablishmentFixedCostAllocation = (totalCroppingEconomicFixedCost) * (alfalfaHayEstablishmentPercentOfForageFixedCostAllocated);
+        const alfalfaHayEstablishmentFixedCostPerTon = (alfalfaHayEstablishmentFixedCostAllocation) / (alfalfaHayTonsProduced);
+        const alfalfaHayStandFixedCostAllocation = (totalCroppingEconomicFixedCost) * (alfalfaHayStandPercentOfForageFixedCostAllocated);
+        const alfalfaHayStandFixedCostPerTon = (alfalfaHayStandFixedCostAllocation) / (alfalfaHayTonsProduced);
         
         // Raised Forage Total Cost
-        // const cornSilageTotalCost = (cornSilageTVC) + (cornSilageFixedCostAllocation);
-        // const cornSilageTotalCostPerTon = (cornSilageTotalCost) / (cornSilageTonsProduced);
-        // const sorghumSilageTotalCost = (sorghumSilageTVC) + (sorghumSilageFixedCostAllocation);
-        // const sorghumSilageTotalCostPerTon = (sorghumSilageTotalCost) / (sorghumSilageTonsProduced);
-        // const smallGrainSilageTotalCost = (smallGrainSilageTVC) + (smallGrainSilageFixedCostAllocation);
-        // const smallGrainSilageTotalCostPerTon = (smallGrainSilageTotalCost) / (smallGrainSilageTonsProduced);
-        // const grassHayTotalCost = (grassHayTVC) + (grassHayFixedCostAllocation);
-        // const grassHayTotalCostPerTon = (grassHayTotalCost) / (grassHayTonsProduced);
-        // const alfalfaHayEstablishmentTotalCost = (alfalfaHayEstablishmentTVC) + (alfalfaHayEstablishmentFixedCostAllocation);
-        // const alfalfaHayEstablishmentTotalCostPerTon = (alfalfaHayEstablishmentTotalCost) / (alfalfaHayTonsProduced);
-        // const alfalfaHayStandTotalCost = (alfalfaHayStandTVC) + (alfalfaHayStandFixedCostAllocation);
-        // const alfalfaHayStandTotalCostPerTon = (alfalfaHayStandTotalCost) / (alfalfaHayTonsProduced);
+        const cornSilageTotalCost = (cornSilageTVC) + (cornSilageFixedCostAllocation);
+        const cornSilageTotalCostPerTon = (cornSilageTotalCost) / (cornSilageTonsProduced);
+        const sorghumSilageTotalCost = (sorghumSilageTVC) + (sorghumSilageFixedCostAllocation);
+        const sorghumSilageTotalCostPerTon = (sorghumSilageTotalCost) / (sorghumSilageTonsProduced);
+        const smallGrainSilageTotalCost = (smallGrainSilageTVC) + (smallGrainSilageFixedCostAllocation);
+        const smallGrainSilageTotalCostPerTon = (smallGrainSilageTotalCost) / (smallGrainSilageTonsProduced);
+        const grassHayTotalCost = (grassHayTVC) + (grassHayFixedCostAllocation);
+        const grassHayTotalCostPerTon = (grassHayTotalCost) / (grassHayTonsProduced);
+        const alfalfaHayEstablishmentTotalCost = (alfalfaHayEstablishmentTVC) + (alfalfaHayEstablishmentFixedCostAllocation);
+        const alfalfaHayEstablishmentTotalCostPerTon = (alfalfaHayEstablishmentTotalCost) / (alfalfaHayTonsProduced);
+        const alfalfaHayStandTotalCost = (alfalfaHayStandTVC) + (alfalfaHayStandFixedCostAllocation);
+        const alfalfaHayStandTotalCostPerTon = (alfalfaHayStandTotalCost) / (alfalfaHayTonsProduced);
 
         // Purchased Feed Expenses
-        // const cornSilageTonsToBePurchased = cornSilageBalanceToBePurchasedOrSold;
-        // const cornSilageCostOfCommodity = cornSilageTonsToBePurchased * cornSilageCostOfCommodityPerTon;
-        // const cornSilageCostOfTrucking = cornSilageTonsToBePurchased * cornSilageAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedCornSilageTotalCost = (cornSilageCostOfCommodity) + (cornSilageCostOfTrucking);
+        const cornSilageTonsToBePurchased = cornSilageBalanceToBePurchasedOrSold;
+        const cornSilageCostOfCommodity = cornSilageTonsToBePurchased * cornSilageCostOfCommodityPerTon;
+        const cornSilageCostOfTrucking = cornSilageTonsToBePurchased * cornSilageAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedCornSilageTotalCost = (cornSilageCostOfCommodity) + (cornSilageCostOfTrucking);
 
-        // const sorghumSilageTonsToBePurchased = sorghumSilageBalanceToBePurchasedOrSold;
-        // const sorghumSilageCostOfCommodity = sorghumSilageTonsToBePurchased * sorghumSilageCostOfCommodityPerTon;
-        // const sorghumSilageCostOfTrucking = sorghumSilageTonsToBePurchased * sorghumSilageAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedSorghumSilageTotalCost = (sorghumSilageCostOfCommodity) + (sorghumSilageCostOfTrucking);
+        const sorghumSilageTonsToBePurchased = sorghumSilageBalanceToBePurchasedOrSold;
+        const sorghumSilageCostOfCommodity = sorghumSilageTonsToBePurchased * sorghumSilageCostOfCommodityPerTon;
+        const sorghumSilageCostOfTrucking = sorghumSilageTonsToBePurchased * sorghumSilageAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedSorghumSilageTotalCost = (sorghumSilageCostOfCommodity) + (sorghumSilageCostOfTrucking);
 
-        // const smallGrainSilageTonsToBePurchased = smallGrainSilageBalanceToBePurchasedOrSold;
-        // const smallGrainSilageCostOfCommodity = smallGrainSilageTonsToBePurchased * smallGrainSilageCostOfCommodityPerTon;
-        // const smallGrainSilageCostOfTrucking = smallGrainSilageTonsToBePurchased * smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedSmallGrainSilageTotalCost = (smallGrainSilageCostOfCommodity) + (smallGrainSilageCostOfTrucking);
+        const smallGrainSilageTonsToBePurchased = smallGrainSilageBalanceToBePurchasedOrSold;
+        const smallGrainSilageCostOfCommodity = smallGrainSilageTonsToBePurchased * smallGrainSilageCostOfCommodityPerTon;
+        const smallGrainSilageCostOfTrucking = smallGrainSilageTonsToBePurchased * smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedSmallGrainSilageTotalCost = (smallGrainSilageCostOfCommodity) + (smallGrainSilageCostOfTrucking);
 
-        // const grassHayTonsToBePurchased = grassHayBalanceToBePurchasedOrSold;
-        // const grassHayCostOfCommodity = grassHayTonsToBePurchased * grassHayCostOfCommodityPerTon;
-        // const grassHayCostOfTrucking = grassHayTonsToBePurchased * grassHayAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedGrassHayTotalCost = (grassHayCostOfCommodity) + (grassHayCostOfTrucking);
+        const grassHayTonsToBePurchased = grassHayBalanceToBePurchasedOrSold;
+        const grassHayCostOfCommodity = grassHayTonsToBePurchased * grassHayCostOfCommodityPerTon;
+        const grassHayCostOfTrucking = grassHayTonsToBePurchased * grassHayAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedGrassHayTotalCost = (grassHayCostOfCommodity) + (grassHayCostOfTrucking);
 
-        // const alfalfaHayTonsToBePurchased = alfalfaHayBalanceToBePurchasedOrSold;
-        // const alfalfaHayCostOfCommodity = alfalfaHayTonsToBePurchased * alfalfaHayCostOfCommodityPerTon;
-        // const alfalfaHayCostOfTrucking = alfalfaHayTonsToBePurchased * alfalfaHayAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedAlfalfaHayTotalCost = (alfalfaHayCostOfCommodity) + (alfalfaHayCostOfTrucking);
+        const alfalfaHayTonsToBePurchased = alfalfaHayBalanceToBePurchasedOrSold;
+        const alfalfaHayCostOfCommodity = alfalfaHayTonsToBePurchased * alfalfaHayCostOfCommodityPerTon;
+        const alfalfaHayCostOfTrucking = alfalfaHayTonsToBePurchased * alfalfaHayAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedAlfalfaHayTotalCost = (alfalfaHayCostOfCommodity) + (alfalfaHayCostOfTrucking);
 
-        // const peanutHullsTonsToBePurchased = peanutHullsBalanceToBePurchasedOrSold;
-        // const peanutHullsCostOfCommodity = peanutHullsTonsToBePurchased * peanutHullsCostOfCommodityPerTon;
-        // const peanutHullsCostOfTrucking = peanutHullsTonsToBePurchased * peanutHullsAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedPeanutHullsTotalCost = (peanutHullsCostOfCommodity) + (peanutHullsCostOfTrucking);
+        const peanutHullsTonsToBePurchased = peanutHullsTonsRequired;
+        const peanutHullsCostOfCommodity = peanutHullsTonsToBePurchased * peanutHullsCostOfCommodityPerTon;
+        const peanutHullsCostOfTrucking = peanutHullsTonsToBePurchased * peanutHullsAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedPeanutHullsTotalCost = (peanutHullsCostOfCommodity) + (peanutHullsCostOfTrucking);
 
-        // const applePomaceNoHullsTonsToBePurchased = applePomaceNoHullsBalanceToBePurchasedOrSold;
-        // const applePomaceNoHullsCostOfCommodity = applePomaceNoHullsTonsToBePurchased * applePomaceNoHullsCostOfCommodityPerTon;
-        // const applePomaceNoHullsCostOfTrucking = applePomaceNoHullsTonsToBePurchased * applePomaceNoHullsAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedApplePomaceNoHullsTotalCost = (applePomaceNoHullsCostOfCommodity) + (applePomaceNoHullsCostOfTrucking);
+        const applePomaceNoHullsTonsToBePurchased = applePomaceTonsRequired;
+        const applePomaceNoHullsCostOfCommodity = applePomaceNoHullsTonsToBePurchased * applePomaceCostOfCommodityPerTon;
+        const applePomaceNoHullsCostOfTrucking = applePomaceNoHullsTonsToBePurchased * applePomaceAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedApplePomaceNoHullsTotalCost = (applePomaceNoHullsCostOfCommodity) + (applePomaceNoHullsCostOfTrucking);
 
-        // const brewersGrainWetTonsToBePurchased = brewersGrainWetBalanceToBePurchasedOrSold;
-        // const brewersGrainWetCostOfCommodity = brewersGrainWetTonsToBePurchased * brewersGrainWetCostOfCommodityPerTon;
-        // const brewersGrainWetCostOfTrucking = brewersGrainWetTonsToBePurchased * brewersGrainWetAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedBrewersGrainWetTotalCost = (brewersGrainWetCostOfCommodity) + (brewersGrainWetCostOfTrucking);
+        const distillersGrainWetTonsToBePurchased = distillersGrainTonsRequired;
+        const distillersGrainWetCostOfCommodity = distillersGrainWetTonsToBePurchased * brewersGrainCostOfCommodityPerTon;
+        const distillersGrainWetCostOfTrucking = distillersGrainWetTonsToBePurchased * brewersGrainAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedDistillersGrainWetTotalCost = (distillersGrainWetCostOfCommodity) + (distillersGrainWetCostOfTrucking);
 
-        // const citrusPulpDryTonsToBePurchased = citrusPulpDryBalanceToBePurchasedOrSold;
-        // const citrusPulpDryCostOfCommodity = citrusPulpDryTonsToBePurchased * citrusPulpDryCostOfCommodityPerTon;
-        // const citrusPulpDryCostOfTrucking = citrusPulpDryTonsToBePurchased * citrusPulpDryAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedCitrusPulpDryTotalCost = (citrusPulpDryCostOfCommodity) + (citrusPulpDryCostOfTrucking);
+        const brewersGrainWetTonsToBePurchased = brewersGrainTonsRequired;
+        const brewersGrainWetCostOfCommodity = brewersGrainWetTonsToBePurchased * brewersGrainCostOfCommodityPerTon;
+        const brewersGrainWetCostOfTrucking = brewersGrainWetTonsToBePurchased * brewersGrainAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedBrewersGrainWetTotalCost = (brewersGrainWetCostOfCommodity) + (brewersGrainWetCostOfTrucking);
 
-        // const cornGlutenFeedTonsToBePurchased = cornGlutenFeedBalanceToBePurchasedOrSold;
-        // const cornGlutenFeedCostOfCommodity = cornGlutenFeedTonsToBePurchased * cornGlutenFeedCostOfCommodityPerTon;
-        // const cornGlutenFeedCostOfTrucking = cornGlutenFeedTonsToBePurchased * cornGlutenFeedAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedCornGlutenFeedTotalCost = (cornGlutenFeedCostOfCommodity) + (cornGlutenFeedCostOfTrucking);
+        const citrusPulpDryTonsToBePurchased = citrusPulpTonsRequired;
+        const citrusPulpDryCostOfCommodity = citrusPulpDryTonsToBePurchased * citrusPulpCostOfCommodityPerTon;
+        const citrusPulpDryCostOfTrucking = citrusPulpDryTonsToBePurchased * citrusPulpAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedCitrusPulpDryTotalCost = (citrusPulpDryCostOfCommodity) + (citrusPulpDryCostOfTrucking);
 
-        // const wholeCottonseedTonsToBePurchased = wholeCottonseedBalanceToBePurchasedOrSold;
-        // const wholeCottonseedCostOfCommodity = wholeCottonseedTonsToBePurchased * wholeCottonseedCostOfCommodityPerTon;
-        // const wholeCottonseedCostOfTrucking = wholeCottonseedTonsToBePurchased * wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedWholeCottonseedTotalCost = (wholeCottonseedCostOfCommodity) + (wholeCottonseedCostOfTrucking);
+        const cornGlutenFeedTonsToBePurchased = cornGlutenTonsRequired;
+        const cornGlutenFeedCostOfCommodity = cornGlutenFeedTonsToBePurchased * cornGlutenCostOfCommodityPerTon;
+        const cornGlutenFeedCostOfTrucking = cornGlutenFeedTonsToBePurchased * cornGlutenAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedCornGlutenFeedTotalCost = (cornGlutenFeedCostOfCommodity) + (cornGlutenFeedCostOfTrucking);
 
-        // const cottonseedHullsTonsToBePurchased = cottonseedHullsBalanceToBePurchasedOrSold;
-        // const cottonseedHullsCostOfCommodity = cottonseedHullsTonsToBePurchased * cottonseedHullsCostOfCommodityPerTon;
-        // const cottonseedHullsCostOfTrucking = cottonseedHullsTonsToBePurchased * cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedCottonseedHullsTotalCost = (cottonseedHullsCostOfCommodity) + (cottonseedHullsCostOfTrucking);
+        const wholeCottonseedTonsToBePurchased = wholeCottonseedTonsRequired;
+        const wholeCottonseedCostOfCommodity = wholeCottonseedTonsToBePurchased * wholeCottonseedCostOfCommodityPerTon;
+        const wholeCottonseedCostOfTrucking = wholeCottonseedTonsToBePurchased * wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedWholeCottonseedTotalCost = (wholeCottonseedCostOfCommodity) + (wholeCottonseedCostOfTrucking);
 
-        // const soybeanMeal48TonsToBePurchased = soybeanMeal48BalanceToBePurchasedOrSold;
-        // const soybeanMeal48CostOfCommodity = soybeanMeal48TonsToBePurchased * soybeanMeal48CostOfCommodityPerTon;
-        // const soybeanMeal48CostOfTrucking = soybeanMeal48TonsToBePurchased * soybeanMeal48AvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedSoybeanMeal48TotalCost = (soybeanMeal48CostOfCommodity) + (soybeanMeal48CostOfTrucking);
+        const cottonseedHullsTonsToBePurchased = cottonseedHullsTonsRequired;
+        const cottonseedHullsCostOfCommodity = cottonseedHullsTonsToBePurchased * cottonseedHullsCostOfCommodityPerTon;
+        const cottonseedHullsCostOfTrucking = cottonseedHullsTonsToBePurchased * cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedCottonseedHullsTotalCost = (cottonseedHullsCostOfCommodity) + (cottonseedHullsCostOfTrucking);
 
-        // const customFeedMixTonsToBePurchased = customFeedMixBalanceToBePurchasedOrSold;
-        // const customFeedMixCostOfCommodity = customFeedMixTonsToBePurchased * customFeedMixCostOfCommodityPerTon;
-        // const customFeedMixCostOfTrucking = customFeedMixTonsToBePurchased * customFeedMixAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedCustomFeedMixTotalCost = (customFeedMixCostOfCommodity) + (customFeedMixCostOfTrucking);
+        const soybeanMeal48TonsToBePurchased = soybeanMeal48TonsRequired;
+        const soybeanMeal48CostOfCommodity = soybeanMeal48TonsToBePurchased * soybeanMealCostOfCommodityPerTon;
+        const soybeanMeal48CostOfTrucking = soybeanMeal48TonsToBePurchased * soybeanMealAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedSoybeanMeal48TotalCost = (soybeanMeal48CostOfCommodity) + (soybeanMeal48CostOfTrucking);
 
-        // const customMineralMixTonsToBePurchased = customMineralMixBalanceToBePurchasedOrSold;
-        // const customMineralMixCostOfCommodity = customMineralMixTonsToBePurchased * customMineralMixCostOfCommodityPerTon;
-        // const customMineralMixCostOfTrucking = customMineralMixTonsToBePurchased * customMineralMixAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const purchasedCustomMineralMixTotalCost = (customMineralMixCostOfCommodity) + (customMineralMixCostOfTrucking);
+        const customFeedMixTonsToBePurchased = customFeedMixTonsRequired;
+        const customFeedMixCostOfCommodity = customFeedMixTonsToBePurchased * customFeedMixCostOfCommodityPerTon;
+        const customFeedMixCostOfTrucking = customFeedMixTonsToBePurchased * customFeedMixAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedCustomFeedMixTotalCost = (customFeedMixCostOfCommodity) + (customFeedMixCostOfTrucking);
+
+        const customMineralMixTonsToBePurchased = customMineralMixTonsRequired;
+        const customMineralMixCostOfCommodity = customMineralMixTonsToBePurchased * customMineralMixCostOfCommodityPerTon;
+        const customMineralMixCostOfTrucking = customMineralMixTonsToBePurchased * customMineralMixAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const purchasedCustomMineralMixTotalCost = (customMineralMixCostOfCommodity) + (customMineralMixCostOfTrucking);
 
         // Growth Forage Trucking Costs
-        // const cornSilageGrownForageTruckingCost = cornSilageTonsProduced * cornSilageAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const sorghumSilageGrownForageTruckingCost = sorghumSilageTonsProduced * sorghumSilageAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const smallGrainSilageGrownForageTruckingCost = smallGrainSilageTonsProduced * smallGrainSilageAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const grassHayGrownForageTruckingCost = grassHayTonsProduced * grassHayAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const alfalfaHayEstablishmentGrownForageTruckingCost = alfalfaHayEstablishmentTonsProduced * alfalfaHayEstablishmentAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-        // const alfalfaHayStandGrownForageTruckingCost = alfalfaHayStandTonsProduced * alfalfaHayStandAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-
+        const cornSilageGrownForageTruckingCost = cornSilageTonsProduced * cornSilageAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const sorghumSilageGrownForageTruckingCost = sorghumSilageTonsProduced * sorghumSilageAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const smallGrainSilageGrownForageTruckingCost = smallGrainSilageTonsProduced * smallGrainSilageAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const grassHayGrownForageTruckingCost = grassHayTonsProduced * grassHayAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+        const alfalfaHayGrownForageTruckingCost = alfalfaHayTonsProduced * alfalfaHayAvgGrownForageMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
 
         // Outputs calculated and rounded to 2 decimal points
         const updatedOutputDocument = {
