@@ -528,6 +528,186 @@ class AlfalfaHayShrinkLoss {
 }
 
 @Schema()
+class CornSilageTransportAndCostInputs {
+  @Prop({ required: true })
+  cornSilageCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  cornSilageAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  cornSilageAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class SorghumSilageTransportAndCostInputs {
+  @Prop({ required: true })
+  sorghumSilageCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  sorghumSilageAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  sorghumSilageAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class SmallGrainSilageTransportAndCostInputs {
+  @Prop({ required: true })
+  smallGrainSilageCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  smallGrainSilageAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class GrassHayTransportAndCostInputs {
+  @Prop({ required: true })
+  grassHayCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  grassHayAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  grassHayAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class AlfalfaHayTransportAndCostInputs {
+  @Prop({ required: true })
+  alfalfaHayCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  alfalfaHayAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  alfalfaHayAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class PeanutHullsTransportAndCostInputs {
+  @Prop({ required: true })
+  peanutHullsCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  peanutHullsAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  peanutHullsAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class ApplePomaceTransportAndCostInputs {
+  @Prop({ required: true })
+  applePomaceCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  applePomaceAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  applePomaceAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class BrewersGrainTransportAndCostInputs {
+  @Prop({ required: true })
+  brewersGrainCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  brewersGrainAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  brewersGrainAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class CitrusPulpTransportAndCostInputs {
+  @Prop({ required: true })
+  citrusPulpCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  citrusPulpAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  citrusPulpAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class CornGlutenTransportAndCostInputs {
+  @Prop({ required: true })
+  cornGlutenCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  cornGlutenAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  cornGlutenAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class WholeCottonseedTransportAndCostInputs {
+  @Prop({ required: true })
+  wholeCottonseedCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  wholeCottonseedAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class CottonseedHullsTransportAndCostInputs {
+  @Prop({ required: true })
+  cottonseedHullsCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  cottonseedHullsAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class SoybeanMealTransportAndCostInputs {
+  @Prop({ required: true })
+  soybeanMealCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  soybeanMealAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  soybeanMealAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class CustomFeedMixTransportAndCostInputs {
+  @Prop({ required: true })
+  customFeedMixCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  customFeedMixAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  customFeedMixAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
+class CustomMineralMixTransportAndCostInputs {
+  @Prop({ required: true })
+  customMineralMixCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  customMineralMixAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  customMineralMixAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
 export class FeedDetailsInput extends Document{
     @Prop({type: Types.ObjectId, ref: 'User', required: true})
     userId: Types.ObjectId;
@@ -574,6 +754,52 @@ export class FeedDetailsInput extends Document{
 
     @Prop({ default: Date.now })
     updatedAt: Date;
+
+    //Commodity and Trucking Costs Classes
+    @Prop({ type: CornSilageTransportAndCostInputs, default: {} })
+  cornSilageTransportAndCost: CornSilageTransportAndCostInputs;
+
+  @Prop({ type: SorghumSilageTransportAndCostInputs, default: {} })
+  sorghumSilageTransportAndCost: SorghumSilageTransportAndCostInputs;
+
+  @Prop({ type: SmallGrainSilageTransportAndCostInputs, default: {} })
+  smallGrainSilageTransportAndCost: SmallGrainSilageTransportAndCostInputs;
+
+  @Prop({ type: GrassHayTransportAndCostInputs, default: {} })
+  grassHayTransportAndCost: GrassHayTransportAndCostInputs;
+
+  @Prop({ type: AlfalfaHayTransportAndCostInputs, default: {} })
+  alfalfaHayTransportAndCost: AlfalfaHayTransportAndCostInputs;
+
+  @Prop({ type: PeanutHullsTransportAndCostInputs, default: {} })
+  peanutHullsTransportAndCost: PeanutHullsTransportAndCostInputs;
+
+  @Prop({ type: ApplePomaceTransportAndCostInputs, default: {} })
+  applePomaceTransportAndCost: ApplePomaceTransportAndCostInputs;
+
+  @Prop({ type: BrewersGrainTransportAndCostInputs, default: {} })
+  brewersGrainTransportAndCost: BrewersGrainTransportAndCostInputs;
+
+  @Prop({ type: CitrusPulpTransportAndCostInputs, default: {} })
+  citrusPulpTransportAndCost: CitrusPulpTransportAndCostInputs;
+
+  @Prop({ type: CornGlutenTransportAndCostInputs, default: {} })
+  cornGlutenTransportAndCost: CornGlutenTransportAndCostInputs;
+
+  @Prop({ type: WholeCottonseedTransportAndCostInputs, default: {} })
+  wholeCottonseedTransportAndCost: WholeCottonseedTransportAndCostInputs;
+
+  @Prop({ type: CottonseedHullsTransportAndCostInputs, default: {} })
+  cottonseedHullsTransportAndCost: CottonseedHullsTransportAndCostInputs;
+
+  @Prop({ type: SoybeanMealTransportAndCostInputs, default: {} })
+  soybeanMealTransportAndCost: SoybeanMealTransportAndCostInputs;
+
+  @Prop({ type: CustomFeedMixTransportAndCostInputs, default: {} })
+  customFeedMixTransportAndCost: CustomFeedMixTransportAndCostInputs;
+
+  @Prop({ type: CustomMineralMixTransportAndCostInputs, default: {} })
+  customMineralMixTransportAndCost: CustomMineralMixTransportAndCostInputs;
 }
 
 export const FeedDetailsInputsSchema = SchemaFactory.createForClass(FeedDetailsInput);
