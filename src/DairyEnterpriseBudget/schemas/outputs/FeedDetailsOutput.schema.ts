@@ -1,5 +1,5 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, Types } from 'mongoose';
 
 @Schema()
 export class FeedDetailsOutput extends Document {
@@ -180,7 +180,8 @@ export class FeedDetailsOutput extends Document {
   @Prop({ required: true }) sorghumSilageGrownForageTruckingCost: number;
   @Prop({ required: true }) smallGrainSilageGrownForageTruckingCost: number;
   @Prop({ required: true }) grassHayGrownForageTruckingCost: number;
-  @Prop({ required: true }) alfalfaHayEstablishmentGrownForageTruckingCost: number;
+  @Prop({ required: true })
+  alfalfaHayEstablishmentGrownForageTruckingCost: number;
   @Prop({ required: true }) alfalfaHayStandGrownForageTruckingCost: number;
 
   @Prop({ default: Date.now })
@@ -190,4 +191,5 @@ export class FeedDetailsOutput extends Document {
   updatedAt: Date;
 }
 
-export const FeedDetailsOutputSchema = SchemaFactory.createForClass(FeedDetailsOutput);
+export const FeedDetailsOutputSchema =
+  SchemaFactory.createForClass(FeedDetailsOutput);

@@ -1,4 +1,4 @@
-import { IsNumber, IsObject } from "class-validator";
+import { IsNumber, IsObject } from 'class-validator';
 
 class MilkingHerdFeedDetailsDto {
   @IsNumber()
@@ -197,200 +197,200 @@ class DryHerdFeedDetailsDto {
 }
 
 class BredHeifersFeedDetailsDto {
-    @IsNumber()
-    bredHeifersCornSilageLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersCornSilageDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersSorghumSilageLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersSorghumSilageDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersSmallGrainSilageLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersSmallGrainSilageDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersGrassHayLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersGrassHayDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersAlfalfaHayLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersAlfalfaHayDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersPeanutHullsLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersPeanutHullsDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersApplePomaceNoHullsLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersApplePomaceNoHullsDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersDistillersGrainWetLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersDistillersGrainWetDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersBrewersGrainWetLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersBrewersGrainWetDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersCitrusPulpDryLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersCitrusPulpDryDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersCornGlutenFeedLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersCornGlutenFeedDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersWholeCottonseedLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersWholeCottonseedDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersCottonseedHullsLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersCottonseedHullsDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersSoybeanMeal48LbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersSoybeanMeal48DaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersCustomFeedMixLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersCustomFeedMixDaysOnFeed: number;
-  
-    @IsNumber()
-    bredHeifersCustomMineralMixLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    bredHeifersCustomMineralMixDaysOnFeed: number;
+  @IsNumber()
+  bredHeifersCornSilageLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersCornSilageDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersSorghumSilageLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersSorghumSilageDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersSmallGrainSilageLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersSmallGrainSilageDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersGrassHayLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersGrassHayDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersAlfalfaHayLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersAlfalfaHayDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersPeanutHullsLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersPeanutHullsDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersApplePomaceNoHullsLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersApplePomaceNoHullsDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersDistillersGrainWetLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersDistillersGrainWetDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersBrewersGrainWetLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersBrewersGrainWetDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersCitrusPulpDryLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersCitrusPulpDryDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersCornGlutenFeedLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersCornGlutenFeedDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersWholeCottonseedLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersWholeCottonseedDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersCottonseedHullsLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersCottonseedHullsDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersSoybeanMeal48LbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersSoybeanMeal48DaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersCustomFeedMixLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersCustomFeedMixDaysOnFeed: number;
+
+  @IsNumber()
+  bredHeifersCustomMineralMixLbsAsFedPerDay: number;
+
+  @IsNumber()
+  bredHeifersCustomMineralMixDaysOnFeed: number;
 }
-  
+
 class YoungHeifersFeedDetailsDto {
-    @IsNumber()
-    youngHeifersCornSilageLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersCornSilageDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersSorghumSilageLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersSorghumSilageDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersSmallGrainSilageLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersSmallGrainSilageDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersGrassHayLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersGrassHayDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersAlfalfaHayLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersAlfalfaHayDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersPeanutHullsLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersPeanutHullsDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersApplePomaceNoHullsLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersApplePomaceNoHullsDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersDistillersGrainWetLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersDistillersGrainWetDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersBrewersGrainWetLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersBrewersGrainWetDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersCitrusPulpDryLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersCitrusPulpDryDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersCornGlutenFeedLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersCornGlutenFeedDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersWholeCottonseedLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersWholeCottonseedDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersCottonseedHullsLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersCottonseedHullsDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersSoybeanMeal48LbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersSoybeanMeal48DaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersCustomFeedMixLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersCustomFeedMixDaysOnFeed: number;
-  
-    @IsNumber()
-    youngHeifersCustomMineralMixLbsAsFedPerDay: number;
-  
-    @IsNumber()
-    youngHeifersCustomMineralMixDaysOnFeed: number;
-}  
+  @IsNumber()
+  youngHeifersCornSilageLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersCornSilageDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersSorghumSilageLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersSorghumSilageDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersSmallGrainSilageLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersSmallGrainSilageDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersGrassHayLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersGrassHayDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersAlfalfaHayLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersAlfalfaHayDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersPeanutHullsLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersPeanutHullsDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersApplePomaceNoHullsLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersApplePomaceNoHullsDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersDistillersGrainWetLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersDistillersGrainWetDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersBrewersGrainWetLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersBrewersGrainWetDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersCitrusPulpDryLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersCitrusPulpDryDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersCornGlutenFeedLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersCornGlutenFeedDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersWholeCottonseedLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersWholeCottonseedDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersCottonseedHullsLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersCottonseedHullsDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersSoybeanMeal48LbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersSoybeanMeal48DaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersCustomFeedMixLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersCustomFeedMixDaysOnFeed: number;
+
+  @IsNumber()
+  youngHeifersCustomMineralMixLbsAsFedPerDay: number;
+
+  @IsNumber()
+  youngHeifersCustomMineralMixDaysOnFeed: number;
+}
 
 class CalvesFeedDetailsDto {
   @IsNumber()
@@ -678,8 +678,6 @@ class CustomMineralMixTransportAndCostDetailsDto {
   customMineralMixAvgGrownForageMilesTruckedToDairy: number;
 }
 
-
-
 export class FeedDetailsInputDto {
   @IsObject()
   milkingHerd: MilkingHerdFeedDetailsDto;
@@ -721,7 +719,6 @@ export class FeedDetailsInputDto {
   //Commodity and Trucking Cost
   @IsNumber()
   averageCostOfTruckingPerTonMile: number;
-
 
   @IsObject()
   cornSilageTransportAndCost: CornSilageTransportAndCostDetailsDto;

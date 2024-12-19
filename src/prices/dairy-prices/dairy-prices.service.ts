@@ -5,15 +5,15 @@ import { Model } from 'mongoose';
 
 @Injectable()
 export class DairyPricesService {
-    constructor(
-        @InjectModel(DairyPrice.name) private dairyPriceModel: Model<DairyPrice>, 
-    ){}
+  constructor(
+    @InjectModel(DairyPrice.name) private dairyPriceModel: Model<DairyPrice>,
+  ) {}
 
-    async getAllDairyPrices(): Promise<DairyPrice[]>{
-        return await this.dairyPriceModel.find({}).exec()
-    }
+  async getAllDairyPrices(): Promise<DairyPrice[]> {
+    return await this.dairyPriceModel.find({}).exec();
+  }
 
-    async getDairyPricesByYear(reportYear: number): Promise<DairyPrice[]>{
-        return await this.dairyPriceModel.find({report_year: reportYear}).exec()
-    }
+  async getDairyPricesByYear(reportYear: number): Promise<DairyPrice[]> {
+    return await this.dairyPriceModel.find({ report_year: reportYear }).exec();
+  }
 }

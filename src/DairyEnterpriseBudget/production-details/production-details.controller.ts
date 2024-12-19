@@ -1,37 +1,43 @@
-import { Body, Controller, Get, Param, Patch, Post } from "@nestjs/common";
-import { ProductionDetailsService } from "./production-details.service";
-import { ProductionDetailsInputDto } from "../dto";
-import { ProductionDetailsOutput } from "../schemas/outputs/ProductionDetailsOutput.schema";
-import { ProductionDetailsInput } from "../schemas/inputs/ProductionDetailsInput.schema";
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { ProductionDetailsService } from './production-details.service';
+import { ProductionDetailsInputDto } from '../dto';
+import { ProductionDetailsOutput } from '../schemas/outputs/ProductionDetailsOutput.schema';
+import { ProductionDetailsInput } from '../schemas/inputs/ProductionDetailsInput.schema';
 
 @Controller('production-details')
-export class ProductionDetailsController{
-    constructor(private productionDetailsService: ProductionDetailsService){}
+export class ProductionDetailsController {
+  constructor(private productionDetailsService: ProductionDetailsService) {}
 
-    @Patch('updateInput/:email')
-    async updateInput(
-        @Param('email') email: string,
-        @Body() updateDto: ProductionDetailsInputDto
-    ){
-        console.log("Data got from client is ", updateDto);
-        return this.productionDetailsService.updateInput(email, updateDto)
-    }
+  @Patch('updateInput/:email')
+  async updateInput(
+    @Param('email') email: string,
+    @Body() updateDto: ProductionDetailsInputDto,
+  ) {
+    console.log('Data got from client is ', updateDto);
+    return this.productionDetailsService.updateInput(email, updateDto);
+  }
 
-    @Get('outputDetails/:email')
-    async getProductionDetailsOutput(@Param('email') email:string): Promise<ProductionDetailsOutput | null>{
-        console.log('Api got called');
-        return this.productionDetailsService.getProductionDetailsOutput(email);
-    }
+  @Get('outputDetails/:email')
+  async getProductionDetailsOutput(
+    @Param('email') email: string,
+  ): Promise<ProductionDetailsOutput | null> {
+    console.log('Api got called');
+    return this.productionDetailsService.getProductionDetailsOutput(email);
+  }
 
-    @Get('inputDetails/:email')
-    async getProductionDetailsInput(@Param('email') email:string): Promise<ProductionDetailsInput | null>{
-        console.log('Api got called');
-        return this.productionDetailsService.getProductionDetailsInput(email);
-    }
+  @Get('inputDetails/:email')
+  async getProductionDetailsInput(
+    @Param('email') email: string,
+  ): Promise<ProductionDetailsInput | null> {
+    console.log('Api got called');
+    return this.productionDetailsService.getProductionDetailsInput(email);
+  }
 
-    @Post('calculateProductionDetails')
-    async calculateOutputs(@Body() inputDto: ProductionDetailsInputDto) {
-      console.log("Calculating outputs for non-authenticated user");
-      return this.productionDetailsService.calculateProductionDetailsOutput(inputDto);
-    }
+  @Post('calculateProductionDetails')
+  async calculateOutputs(@Body() inputDto: ProductionDetailsInputDto) {
+    console.log('Calculating outputs for non-authenticated user');
+    return this.productionDetailsService.calculateProductionDetailsOutput(
+      inputDto,
+    );
+  }
 }

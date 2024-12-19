@@ -7,10 +7,10 @@ import { User } from './schemas/user.schema';
 @UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UserController {
-    constructor(private userService: UserService){}
+  constructor(private userService: UserService) {}
 
-    @Get()
-    getProfile(@GetUser() user: User){
-        return user;
-    }
+  @Get()
+  getProfile(@GetUser() user: User) {
+    return user;
+  }
 }

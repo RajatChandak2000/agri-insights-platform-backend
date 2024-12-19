@@ -61,4 +61,6 @@ export class MailboxAppalachianPrice extends Document {
   published_date: string;
 }
 
-export const MailboxAppalachianSchema = SchemaFactory.createForClass(MailboxAppalachianPrice);
+export const MailboxAppalachianSchema = SchemaFactory.createForClass(
+  MailboxAppalachianPrice,
+);

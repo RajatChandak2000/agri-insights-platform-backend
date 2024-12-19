@@ -15,11 +15,20 @@ import { FixedCostsModule } from './DairyEnterpriseBudget/fixed-costs/fixed-cost
 import { FeedDetailsModule } from './DairyEnterpriseBudget/feed-details/feed-details.module';
 
 @Module({
-  imports: [AuthModule,
+  imports: [
+    AuthModule,
     DairyPricesModule,
-    UserModule, TomatoPricesModule, WeatherModule, MailboxAppalachianPricesModule,
-    ProductionDetailsModule,OperatingCostsModule, ReceiptsModule, LabourCostModule, FixedCostsModule, FeedDetailsModule,
-    ConfigModule.forRoot({isGlobal: true}), 
+    UserModule,
+    TomatoPricesModule,
+    WeatherModule,
+    MailboxAppalachianPricesModule,
+    ProductionDetailsModule,
+    OperatingCostsModule,
+    ReceiptsModule,
+    LabourCostModule,
+    FixedCostsModule,
+    FeedDetailsModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule], // Ensure ConfigModule is available
       inject: [ConfigService],

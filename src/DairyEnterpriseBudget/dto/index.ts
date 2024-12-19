@@ -1,1 +1,1 @@
-export * from './production-details-input.dto'
+export * from './production-details-input.dto';
