@@ -512,7 +512,7 @@ export class FeedDetailsService{
         // Sorghum Silage
         const sorghumSilageExpectedYieldTonsPerAcre = updatedDocument.sorghumSilage.sorghumSilageExpectedYieldTonsPerAcre;
         const sorghumSilageHarvestedAcres = updatedDocument.sorghumSilage.sorghumSilageHarvestedAcres;
-        const sorghumSilageEstimatedTotalOperatingCost = updatedDocument.sorghumSilage.sorghumSilageHarvestedAcres;
+        const sorghumSilageEstimatedTotalOperatingCost = updatedDocument.sorghumSilage.sorghumSilageHarvestedAcres;//// Fix this it should be EstimatedTotalOperatingCost
         const sorghumSilagePercentOfForageFixedCostAllocated = updatedDocument.sorghumSilage.sorghumSilageHarvestedAcres;
         const sorghumSilageShrinkLossPercentage = updatedDocument.sorghumSilage.sorghumSilageShrinkLossPercentage;
 
@@ -633,6 +633,12 @@ export class FeedDetailsService{
         const cornSilageTonsProduced = cornSilageExpectedYieldTonsPerAcre * cornSilageHarvestedAcres;
         const cornSilageBalanceToBePurchasedOrSold = cornSilageTonsRequired - (cornSilageTonsProduced * (1 - (cornSilageShrinkLossPercentage / 100)));
         
+        console.log("milkingHerdCornSilageLbsAsFedPerDay * milkingHerdCornSilageDaysOnFeed * numberOfMilkingCowsOnFeed", milkingHerdCornSilageLbsAsFedPerDay * milkingHerdCornSilageDaysOnFeed * numberOfMilkingCowsOnFeed)
+
+        console.log("dryHerdCornSilageLbsAsFedPerDay * dryHerdCornSilageDaysOnFeed * numberOfDryCowsOnFeed",dryHerdCornSilageLbsAsFedPerDay * dryHerdCornSilageDaysOnFeed * numberOfDryCowsOnFeed)
+
+        console.log("bredHeifersCornSilageLbsAsFedPerDay * bredHeifersCornSilageDaysOnFeed * numberOfBredHeifersCowsOnFeed",bredHeifersCornSilageLbsAsFedPerDay * bredHeifersCornSilageDaysOnFeed * numberOfBredHeifersCowsOnFeed)
+        console.log("youngHeifersCornSilageLbsAsFedPerDay * youngHeifersCornSilageDaysOnFeed * numberOfYoungHeifersCowsOnFeed",youngHeifersCornSilageLbsAsFedPerDay * youngHeifersCornSilageDaysOnFeed * numberOfYoungHeifersCowsOnFeed)
         console.log("Corn Silage Tons Required:", cornSilageTonsRequired);
         console.log("Corn Silage Tons Produced:", cornSilageTonsProduced);
         console.log("Corn Silage Balance to be Purchased or Sold:", cornSilageBalanceToBePurchasedOrSold);
@@ -673,6 +679,7 @@ export class FeedDetailsService{
         const alfalfaHayTonsProduced = (alfalfaHayEstablishmentExpectedYieldTonsPerAcre * alfalfaHayEstablishmentHarvestedAcres) + (alfalfaHayStandExpectedYieldTonsPerAcre * alfalfaHayStandHarvestedAcres);
         const alfalfaHayBalanceToBePurchasedOrSold = alfalfaHayTonsRequired - (alfalfaHayTonsProduced * (1 - (alfalfaHayShrinkLossPercentage / 100)));
 
+        // Fix : alfalfaHayBalanceToBePurchasedOrSold,alfalfaHayTonsProduced
         // Peanut Hulls Calculations
         const peanutHullsTonsRequired = 
                     ((milkingHerdPeanutHullsLbsAsFedPerDay * milkingHerdPeanutHullsDaysOnFeed * numberOfMilkingCowsOnFeed) +
@@ -765,9 +772,12 @@ export class FeedDetailsService{
         const alfalfaHayStandTVCPerTon = (alfalfaHayStandTVC) / (alfalfaHayTonsProduced);
 
 
-        //TEMPPPPPP
-        const totalCroppingEconomicFixedCost = 100;
+        //Fix : TEMPPPPPPB
+        const totalCroppingEconomicFixedCost = 63201.52;
 
+
+
+        //Fix : Divide all the percents by 100
         //Raised Forage Fixed Costs
         const cornSilageFixedCostAllocation = (totalCroppingEconomicFixedCost) * (cornSilagePercentOfForageFixedCostAllocated);
         const cornSilageFixedCostPerTon = (cornSilageFixedCostAllocation) / (cornSilageTonsProduced);
@@ -886,45 +896,90 @@ export class FeedDetailsService{
 
         // Outputs calculated and rounded to 2 decimal points
         const updatedOutputDocument = {
-            cornSilageTonsRequired: cornSilageTonsRequired.toFixed(2),
-            cornSilageTonsProduced: cornSilageTonsProduced.toFixed(2),
-            cornSilageBalanceToBePurchasedOrSold: cornSilageBalanceToBePurchasedOrSold.toFixed(2),
+             // Feed Requirements and Production
+    cornSilageTonsRequired: Number(cornSilageTonsRequired.toFixed(2)),
+    cornSilageTonsProduced: Number(cornSilageTonsProduced.toFixed(2)),
+    cornSilageBalanceToBePurchasedOrSold: Number(cornSilageBalanceToBePurchasedOrSold.toFixed(2)),
+    sorghumSilageTonsRequired: Number(sorghumSilageTonsRequired.toFixed(2)),
+    sorghumSilageTonsProduced: Number(sorghumSilageTonsProduced.toFixed(2)),
+    sorghumSilageBalanceToBePurchasedOrSold: Number(sorghumSilageBalanceToBePurchasedOrSold.toFixed(2)),
+    smallGrainSilageTonsRequired: Number(smallGrainSilageTonsRequired.toFixed(2)),
+    smallGrainSilageTonsProduced: Number(smallGrainSilageTonsProduced.toFixed(2)),
+    smallGrainSilageBalanceToBePurchasedOrSold: Number(smallGrainSilageBalanceToBePurchasedOrSold.toFixed(2)),
+    grassHayTonsRequired: Number(grassHayTonsRequired.toFixed(2)),
+    grassHayTonsProduced: Number(grassHayTonsProduced.toFixed(2)),
+    grassHayBalanceToBePurchasedOrSold: Number(grassHayBalanceToBePurchasedOrSold.toFixed(2)),
+    alfalfaHayTonsRequired: Number(alfalfaHayTonsRequired.toFixed(2)),
+    alfalfaHayTonsProduced: Number(alfalfaHayTonsProduced.toFixed(2)),
+    alfalfaHayBalanceToBePurchasedOrSold: Number(alfalfaHayBalanceToBePurchasedOrSold.toFixed(2)),
 
-            sorghumSilageTonsRequired: sorghumSilageTonsRequired.toFixed(2),
-            sorghumSilageTonsProduced: sorghumSilageTonsProduced.toFixed(2),
-            sorghumSilageBalanceToBePurchasedOrSold: sorghumSilageBalanceToBePurchasedOrSold.toFixed(2),
+    // Other Feed Requirements
+    peanutHullsTonsRequired: Number(peanutHullsTonsRequired.toFixed(2)),
+    applePomaceTonsRequired: Number(applePomaceTonsRequired.toFixed(2)),
+    distillersGrainTonsRequired: Number(distillersGrainTonsRequired.toFixed(2)),
+    brewersGrainTonsRequired: Number(brewersGrainTonsRequired.toFixed(2)),
+    citrusPulpTonsRequired: Number(citrusPulpTonsRequired.toFixed(2)),
+    cornGlutenTonsRequired: Number(cornGlutenTonsRequired.toFixed(2)),
+    wholeCottonseedTonsRequired: Number(wholeCottonseedTonsRequired.toFixed(2)),
+    soybeanMeal48TonsRequired: Number(soybeanMeal48TonsRequired.toFixed(2)),
+    customFeedMixTonsRequired: Number(customFeedMixTonsRequired.toFixed(2)),
+    customMineralMixTonsRequired: Number(customMineralMixTonsRequired.toFixed(2)),
 
-            smallGrainSilageTonsRequired: smallGrainSilageTonsRequired.toFixed(2),
-            smallGrainSilageTonsProduced: smallGrainSilageTonsProduced.toFixed(2),
-            smallGrainSilageBalanceToBePurchasedOrSold: smallGrainSilageBalanceToBePurchasedOrSold.toFixed(2),
+    // Total Variable Costs
+    cornSilageTVC: Number(cornSilageTVC.toFixed(2)),
+    cornSilageTVCPerTon: Number(cornSilageTVCPerTon.toFixed(2)),
+    sorghumSilageTVC: Number(sorghumSilageTVC.toFixed(2)),
+    sorghumSilageTVCPerTon: Number(sorghumSilageTVCPerTon.toFixed(2)),
+    smallGrainSilageTVC: Number(smallGrainSilageTVC.toFixed(2)),
+    smallGrainSilageTVCPerTon: Number(smallGrainSilageTVCPerTon.toFixed(2)),
+    grassHayTVC: Number(grassHayTVC.toFixed(2)),
+    grassHayTVCPerTon: Number(grassHayTVCPerTon.toFixed(2)),
+    alfalfaHayEstablishmentTVC: Number(alfalfaHayEstablishmentTVC.toFixed(2)),
+    alfalfaHayEstablishmentTVCPerTon: Number(alfalfaHayEstablishmentTVCPerTon.toFixed(2)),
+    alfalfaHayStandTVC: Number(alfalfaHayStandTVC.toFixed(2)),
+    alfalfaHayStandTVCPerTon: Number(alfalfaHayStandTVCPerTon.toFixed(2)),
 
-            grassHayTonsRequired: grassHayTonsRequired.toFixed(2),
-            grassHayTonsProduced: grassHayTonsProduced.toFixed(2),
-            grassHayBalanceToBePurchasedOrSold: grassHayBalanceToBePurchasedOrSold.toFixed(2),
+    // Fixed Costs
+    cornSilageFixedCostAllocation: Number(cornSilageFixedCostAllocation.toFixed(2)),
+    cornSilageFixedCostPerTon: Number(cornSilageFixedCostPerTon.toFixed(2)),
+    sorghumSilageFixedCostAllocation: Number(sorghumSilageFixedCostAllocation.toFixed(2)),
+    sorghumSilageFixedCostPerTon: Number(sorghumSilageFixedCostPerTon.toFixed(2)),
+    smallGrainSilageFixedCostAllocation: Number(smallGrainSilageFixedCostAllocation.toFixed(2)),
+    smallGrainSilageFixedCostPerTon: Number(smallGrainSilageFixedCostPerTon.toFixed(2)),
+    grassHayFixedCostAllocation: Number(grassHayFixedCostAllocation.toFixed(2)),
+    grassHayFixedCostPerTon: Number(grassHayFixedCostPerTon.toFixed(2)),
+    alfalfaHayEstablishmentFixedCostAllocation: Number(alfalfaHayEstablishmentFixedCostAllocation.toFixed(2)),
+    alfalfaHayEstablishmentFixedCostPerTon: Number(alfalfaHayEstablishmentFixedCostPerTon.toFixed(2)),
+    alfalfaHayStandFixedCostAllocation: Number(alfalfaHayStandFixedCostAllocation.toFixed(2)),
+    alfalfaHayStandFixedCostPerTon: Number(alfalfaHayStandFixedCostPerTon.toFixed(2)),
 
-            alfalfaHayTonsRequired: alfalfaHayTonsRequired.toFixed(2),
-            alfalfaHayTonsProduced: alfalfaHayTonsProduced.toFixed(2),
-            alfalfaHayBalanceToBePurchasedOrSold: alfalfaHayBalanceToBePurchasedOrSold.toFixed(2),
+    // Total Costs
+    cornSilageTotalCost: Number(cornSilageTotalCost.toFixed(2)),
+    cornSilageTotalCostPerTon: Number(cornSilageTotalCostPerTon.toFixed(2)),
+    sorghumSilageTotalCost: Number(sorghumSilageTotalCost.toFixed(2)),
+    sorghumSilageTotalCostPerTon: Number(sorghumSilageTotalCostPerTon.toFixed(2)),
+    smallGrainSilageTotalCost: Number(smallGrainSilageTotalCost.toFixed(2)),
+    smallGrainSilageTotalCostPerTon: Number(smallGrainSilageTotalCostPerTon.toFixed(2)),
+    grassHayTotalCost: Number(grassHayTotalCost.toFixed(2)),
+    grassHayTotalCostPerTon: Number(grassHayTotalCostPerTon.toFixed(2)),
+    alfalfaHayEstablishmentTotalCost: Number(alfalfaHayEstablishmentTotalCost.toFixed(2)),
+    alfalfaHayEstablishmentTotalCostPerTon: Number(alfalfaHayEstablishmentTotalCostPerTon.toFixed(2)),
+    alfalfaHayStandTotalCost: Number(alfalfaHayStandTotalCost.toFixed(2)),
+    alfalfaHayStandTotalCostPerTon: Number(alfalfaHayStandTotalCostPerTon.toFixed(2)),
 
-            peanutHullsTonsRequired: peanutHullsTonsRequired.toFixed(2),
+    // Purchased Feed Expenses
+    cornSilageTonsToBePurchased: Number(cornSilageTonsToBePurchased.toFixed(2)),
+    cornSilageCostOfCommodity: Number(cornSilageCostOfCommodity.toFixed(2)),
+    cornSilageCostOfTrucking: Number(cornSilageCostOfTrucking.toFixed(2)),
+    purchasedCornSilageTotalCost: Number(purchasedCornSilageTotalCost.toFixed(2)),
 
-            applePomaceTonsRequired: applePomaceTonsRequired.toFixed(2),
-
-            distillersGrainTonsRequired: distillersGrainTonsRequired.toFixed(2),
-
-            brewersGrainTonsRequired: brewersGrainTonsRequired.toFixed(2),
-
-            citrusPulpTonsRequired: citrusPulpTonsRequired.toFixed(2),
-
-            cornGlutenTonsRequired: cornGlutenTonsRequired.toFixed(2),
-
-            wholeCottonseedTonsRequired: wholeCottonseedTonsRequired.toFixed(2),
-
-            soybeanMeal48TonsRequired: soybeanMeal48TonsRequired.toFixed(2),
-
-            customFeedMixTonsRequired: customFeedMixTonsRequired.toFixed(2),
-
-            customMineralMixTonsRequired: customMineralMixTonsRequired.toFixed(2),
+    // Grown Forage Trucking Cost
+    cornSilageGrownForageTruckingCost: Number(cornSilageGrownForageTruckingCost.toFixed(2)),
+    sorghumSilageGrownForageTruckingCost: Number(sorghumSilageGrownForageTruckingCost.toFixed(2)),
+    smallGrainSilageGrownForageTruckingCost: Number(smallGrainSilageGrownForageTruckingCost.toFixed(2)),
+    grassHayGrownForageTruckingCost: Number(grassHayGrownForageTruckingCost.toFixed(2)),
+  //  alfalfaHayEstablishmentGrownForageTruckingCost: Number(alfalfaHayEstablishmentGrownForageTruckingCost.toFixed(2)),
+  //  alfalfaHayStandGrownForageTruckingCost: Number(alfalfaHayStandGrownForageTruckingCost.toFixed(2))
         };
       
         try {
