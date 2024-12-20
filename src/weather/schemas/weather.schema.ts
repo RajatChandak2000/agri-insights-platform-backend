@@ -1,53 +1,53 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
 @Schema()
-export class Measurement extends Document{
-    @Prop()
-    location: string;
+export class Measurement extends Document {
+  @Prop()
+  location: string;
 
-    @Prop()
-    datetime: string;
+  @Prop()
+  datetime: string;
 
-    @Prop()
-    var: string;
+  @Prop()
+  var: string;
 
-    @Prop()
-    value: string;
+  @Prop()
+  value: string;
 
-    @Prop()
-    unit: string;
+  @Prop()
+  unit: string;
 
-    @Prop()
-    paramtype: string;
+  @Prop()
+  paramtype: string;
 
-    @Prop()
-    obnum: string;
+  @Prop()
+  obnum: string;
 
-    @Prop()
-    obavail: string;
+  @Prop()
+  obavail: string;
 
-    @Prop()
-    obtime: string;
+  @Prop()
+  obtime: string;
 
-    @Prop()
-    obmin: string;
+  @Prop()
+  obmin: string;
 
-    @Prop()
-    obmax: string;
+  @Prop()
+  obmax: string;
 
-    @Prop()
-    pdstart: string;
+  @Prop()
+  pdstart: string;
 
-    @Prop()
-    pdend: string;
+  @Prop()
+  pdend: string;
 }
 
-export const MeasurementSchema = SchemaFactory.createForClass(Measurement)
+export const MeasurementSchema = SchemaFactory.createForClass(Measurement);
 
 // Define the schema for the main document
 
-@Schema({collection: 'weather'})
+@Schema({ collection: 'weather' })
 export class Weather extends Document {
   @Prop()
   timestamp: string;

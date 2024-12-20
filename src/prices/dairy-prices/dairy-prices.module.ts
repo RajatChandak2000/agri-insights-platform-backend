@@ -5,10 +5,12 @@ import { DairyPrice, DairyPriceSchema } from '../schemas/dairy-prices.schema';
 import { DairyPricesController } from './dairy-prices.controller';
 
 @Module({
-  imports:[
-    MongooseModule.forFeature([{name: DairyPrice.name, schema: DairyPriceSchema}]),
+  imports: [
+    MongooseModule.forFeature([
+      { name: DairyPrice.name, schema: DairyPriceSchema },
+    ]),
   ],
   providers: [DairyPricesService],
-  controllers:[DairyPricesController]
+  controllers: [DairyPricesController],
 })
 export class DairyPricesModule {}

@@ -1,5 +1,5 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, Types } from 'mongoose';
 
 @Schema()
 export class FeedDetailsOutput extends Document {
@@ -7,7 +7,7 @@ export class FeedDetailsOutput extends Document {
   userId: Types.ObjectId;
 
   // Corn Silage
-  @Prop({ required: true }) ornSilageTonsRequired: number;
+  @Prop({ required: true }) cornSilageTonsRequired: number;
 
   @Prop({ required: true }) cornSilageTonsProduced: number;
 
@@ -130,10 +130,10 @@ export class FeedDetailsOutput extends Document {
   @Prop({ required: true }) grassHayCostOfCommodity: number;
   @Prop({ required: true }) grassHayCostOfTrucking: number;
   @Prop({ required: true }) purchasedGrassHayTotalCost: number;
-  @Prop({ required: true }) alfalfaLegumeHayTonsToBePurchased: number;
-  @Prop({ required: true }) alfalfaLegumeHayCostOfCommodity: number;
-  @Prop({ required: true }) alfalfaLegumeHayCostOfTrucking: number;
-  @Prop({ required: true }) purchasedAlfalfaLegumeHayTotalCost: number;
+  @Prop({ required: true }) alfalfaHayTonsToBePurchased: number;
+  @Prop({ required: true }) alfalfaHayCostOfCommodity: number;
+  @Prop({ required: true }) alfalfaHayCostOfTrucking: number;
+  @Prop({ required: true }) purchasedAlfalfaHayTotalCost: number;
   @Prop({ required: true }) peanutHullsTonsToBePurchased: number;
   @Prop({ required: true }) peanutHullsCostOfCommodity: number;
   @Prop({ required: true }) peanutHullsCostOfTrucking: number;
@@ -180,7 +180,8 @@ export class FeedDetailsOutput extends Document {
   @Prop({ required: true }) sorghumSilageGrownForageTruckingCost: number;
   @Prop({ required: true }) smallGrainSilageGrownForageTruckingCost: number;
   @Prop({ required: true }) grassHayGrownForageTruckingCost: number;
-  @Prop({ required: true }) alfalfaHayEstablishmentGrownForageTruckingCost: number;
+  @Prop({ required: true })
+  alfalfaHayEstablishmentGrownForageTruckingCost: number;
   @Prop({ required: true }) alfalfaHayStandGrownForageTruckingCost: number;
 
   @Prop({ default: Date.now })
@@ -190,4 +191,5 @@ export class FeedDetailsOutput extends Document {
   updatedAt: Date;
 }
 
-export const FeedDetailsOutputSchema = SchemaFactory.createForClass(FeedDetailsOutput);
+export const FeedDetailsOutputSchema =
+  SchemaFactory.createForClass(FeedDetailsOutput);
