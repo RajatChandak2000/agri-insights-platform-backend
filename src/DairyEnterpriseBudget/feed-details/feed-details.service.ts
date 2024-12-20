@@ -194,6 +194,8 @@ export class FeedDetailsService {
 
     // Handling Corn Silage Trucking Costs
     if (updateDto.cornSilageTransportAndCost) {
+      console.log("Entered corn silage trucking costs");
+      
       for (const [key, value] of Object.entries(
         updateDto.cornSilageTransportAndCost,
       )) {
@@ -988,24 +990,12 @@ export class FeedDetailsService {
 
     // ----> Calculating the outputs here
     const cornSilageTonsRequired =
-      (milkingHerdCornSilageLbsAsFedPerDay *
-        milkingHerdCornSilageDaysOnFeed *
-        numberOfMilkingCowsOnFeed +
-        dryHerdCornSilageLbsAsFedPerDay *
-          dryHerdCornSilageDaysOnFeed *
-          numberOfDryCowsOnFeed +
-        bredHeifersCornSilageLbsAsFedPerDay *
-          bredHeifersCornSilageDaysOnFeed *
-          numberOfBredHeifersCowsOnFeed +
-        youngHeifersCornSilageLbsAsFedPerDay *
-          youngHeifersCornSilageDaysOnFeed *
-          numberOfYoungHeifersCowsOnFeed) /
-      2000;
-    const cornSilageTonsProduced =
-      cornSilageExpectedYieldTonsPerAcre * cornSilageHarvestedAcres;
-    const cornSilageBalanceToBePurchasedOrSold =
-      cornSilageTonsRequired -
-      cornSilageTonsProduced * (1 - cornSilageShrinkLossPercentage / 100);
+      (milkingHerdCornSilageLbsAsFedPerDay * milkingHerdCornSilageDaysOnFeed * numberOfMilkingCowsOnFeed +
+        dryHerdCornSilageLbsAsFedPerDay * dryHerdCornSilageDaysOnFeed * numberOfDryCowsOnFeed +
+        bredHeifersCornSilageLbsAsFedPerDay * bredHeifersCornSilageDaysOnFeed * numberOfBredHeifersCowsOnFeed +
+        youngHeifersCornSilageLbsAsFedPerDay * youngHeifersCornSilageDaysOnFeed * numberOfYoungHeifersCowsOnFeed)/2000;
+    const cornSilageTonsProduced = cornSilageExpectedYieldTonsPerAcre * cornSilageHarvestedAcres;
+    const cornSilageBalanceToBePurchasedOrSold = cornSilageTonsRequired - cornSilageTonsProduced * (1 - cornSilageShrinkLossPercentage / 100);
 
     console.log(
       'milkingHerdCornSilageLbsAsFedPerDay * milkingHerdCornSilageDaysOnFeed * numberOfMilkingCowsOnFeed',
@@ -1041,25 +1031,26 @@ export class FeedDetailsService {
     );
 
     // Sorghum Silage Calculations
-    const sorghumSilageTonsRequired =
-      (milkingHerdSorghumSilageLbsAsFedPerDay *
-        milkingHerdSorghumSilageDaysOnFeed *
-        numberOfMilkingCowsOnFeed +
-        dryHerdSorghumSilageLbsAsFedPerDay *
-          dryHerdSorghumSilageDaysOnFeed *
-          numberOfDryCowsOnFeed +
-        bredHeifersSorghumSilageLbsAsFedPerDay *
-          bredHeifersSorghumSilageDaysOnFeed *
-          numberOfBredHeifersCowsOnFeed +
-        youngHeifersSorghumSilageLbsAsFedPerDay *
-          youngHeifersSorghumSilageDaysOnFeed *
-          numberOfYoungHeifersCowsOnFeed) /
-      2000;
-    const sorghumSilageTonsProduced =
-      sorghumSilageExpectedYieldTonsPerAcre * sorghumSilageHarvestedAcres;
-    const sorghumSilageBalanceToBePurchasedOrSold =
-      sorghumSilageTonsRequired -
-      sorghumSilageTonsProduced * (1 - sorghumSilageShrinkLossPercentage / 100);
+    const sorghumSilageTonsRequired = 
+      (milkingHerdSorghumSilageLbsAsFedPerDay * milkingHerdSorghumSilageDaysOnFeed * numberOfMilkingCowsOnFeed +
+        dryHerdSorghumSilageLbsAsFedPerDay * dryHerdSorghumSilageDaysOnFeed * numberOfDryCowsOnFeed +
+        bredHeifersSorghumSilageLbsAsFedPerDay * bredHeifersSorghumSilageDaysOnFeed * numberOfBredHeifersCowsOnFeed +
+        youngHeifersSorghumSilageLbsAsFedPerDay * youngHeifersSorghumSilageDaysOnFeed * numberOfYoungHeifersCowsOnFeed)/2000;
+    const sorghumSilageTonsProduced = sorghumSilageExpectedYieldTonsPerAcre * sorghumSilageHarvestedAcres;
+    const sorghumSilageBalanceToBePurchasedOrSold = sorghumSilageTonsRequired - sorghumSilageTonsProduced * (1 - sorghumSilageShrinkLossPercentage / 100);
+
+    console.log('milkingHerdSorghumSilageLbsAsFedPerDay * milkingHerdSorghumSilageDaysOnFeed * numberOfMilkingCowsOnFeed ',
+      (milkingHerdSorghumSilageLbsAsFedPerDay * milkingHerdSorghumSilageDaysOnFeed * numberOfMilkingCowsOnFeed)
+    );
+    console.log('dryHerdSorghumSilageLbsAsFedPerDay * dryHerdSorghumSilageDaysOnFeed * numberOfDryCowsOnFeed ',
+      (dryHerdSorghumSilageLbsAsFedPerDay * dryHerdSorghumSilageDaysOnFeed * numberOfDryCowsOnFeed)
+    );
+    console.log('bredHeifersSorghumSilageLbsAsFedPerDay * bredHeifersSorghumSilageDaysOnFeed * numberOfBredHeifersCowsOnFeed ',
+      (bredHeifersSorghumSilageLbsAsFedPerDay * bredHeifersSorghumSilageDaysOnFeed * numberOfBredHeifersCowsOnFeed)
+    );
+    console.log('youngHeifersSorghumSilageLbsAsFedPerDay * youngHeifersSorghumSilageDaysOnFeed * numberOfYoungHeifersCowsOnFeed ',
+      (youngHeifersSorghumSilageLbsAsFedPerDay * youngHeifersSorghumSilageDaysOnFeed * numberOfYoungHeifersCowsOnFeed)
+    );
 
     // Small Grain Silage Calculations
     const smallGrainSilageTonsRequired =
@@ -1383,166 +1374,100 @@ export class FeedDetailsService {
 
     // Purchased Feed Expenses
     const cornSilageTonsToBePurchased = cornSilageBalanceToBePurchasedOrSold;
-    const cornSilageCostOfCommodity =
-      cornSilageTonsToBePurchased * cornSilageCostOfCommodityPerTon;
-    const cornSilageCostOfTrucking =
-      cornSilageTonsToBePurchased *
-      cornSilageAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedCornSilageTotalCost =
-      cornSilageCostOfCommodity + cornSilageCostOfTrucking;
+    const cornSilageCostOfCommodity = cornSilageTonsToBePurchased * cornSilageCostOfCommodityPerTon;
+    const cornSilageCostOfTrucking = cornSilageTonsToBePurchased * 
+      cornSilageAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedCornSilageTotalCost = cornSilageCostOfCommodity + cornSilageCostOfTrucking;
 
-    const sorghumSilageTonsToBePurchased =
-      sorghumSilageBalanceToBePurchasedOrSold;
-    const sorghumSilageCostOfCommodity =
-      sorghumSilageTonsToBePurchased * sorghumSilageCostOfCommodityPerTon;
-    const sorghumSilageCostOfTrucking =
-      sorghumSilageTonsToBePurchased *
-      sorghumSilageAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedSorghumSilageTotalCost =
-      sorghumSilageCostOfCommodity + sorghumSilageCostOfTrucking;
+    const sorghumSilageTonsToBePurchased = sorghumSilageBalanceToBePurchasedOrSold;
+    const sorghumSilageCostOfCommodity = sorghumSilageTonsToBePurchased * sorghumSilageCostOfCommodityPerTon;
+    const sorghumSilageCostOfTrucking =sorghumSilageTonsToBePurchased *
+      sorghumSilageAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedSorghumSilageTotalCost = sorghumSilageCostOfCommodity + sorghumSilageCostOfTrucking;
 
-    const smallGrainSilageTonsToBePurchased =
-      smallGrainSilageBalanceToBePurchasedOrSold;
-    const smallGrainSilageCostOfCommodity =
-      smallGrainSilageTonsToBePurchased * smallGrainSilageCostOfCommodityPerTon;
-    const smallGrainSilageCostOfTrucking =
-      smallGrainSilageTonsToBePurchased *
-      smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedSmallGrainSilageTotalCost =
-      smallGrainSilageCostOfCommodity + smallGrainSilageCostOfTrucking;
+    const smallGrainSilageTonsToBePurchased =smallGrainSilageBalanceToBePurchasedOrSold;
+    const smallGrainSilageCostOfCommodity = smallGrainSilageTonsToBePurchased * smallGrainSilageCostOfCommodityPerTon;
+    const smallGrainSilageCostOfTrucking = smallGrainSilageTonsToBePurchased *
+      smallGrainSilageAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedSmallGrainSilageTotalCost = smallGrainSilageCostOfCommodity + smallGrainSilageCostOfTrucking;
 
     const grassHayTonsToBePurchased = grassHayBalanceToBePurchasedOrSold;
-    const grassHayCostOfCommodity =
-      grassHayTonsToBePurchased * grassHayCostOfCommodityPerTon;
-    const grassHayCostOfTrucking =
-      grassHayTonsToBePurchased *
-      grassHayAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedGrassHayTotalCost =
-      grassHayCostOfCommodity + grassHayCostOfTrucking;
+    const grassHayCostOfCommodity = grassHayTonsToBePurchased * grassHayCostOfCommodityPerTon;
+    const grassHayCostOfTrucking = grassHayTonsToBePurchased *
+      grassHayAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedGrassHayTotalCost = grassHayCostOfCommodity + grassHayCostOfTrucking;
 
     const alfalfaHayTonsToBePurchased = alfalfaHayBalanceToBePurchasedOrSold;
-    const alfalfaHayCostOfCommodity =
-      alfalfaHayTonsToBePurchased * alfalfaHayCostOfCommodityPerTon;
-    const alfalfaHayCostOfTrucking =
-      alfalfaHayTonsToBePurchased *
-      alfalfaHayAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedAlfalfaHayTotalCost =
-      alfalfaHayCostOfCommodity + alfalfaHayCostOfTrucking;
+    const alfalfaHayCostOfCommodity = alfalfaHayTonsToBePurchased * alfalfaHayCostOfCommodityPerTon;
+    const alfalfaHayCostOfTrucking = alfalfaHayTonsToBePurchased *
+      alfalfaHayAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedAlfalfaHayTotalCost = alfalfaHayCostOfCommodity + alfalfaHayCostOfTrucking;
 
     const peanutHullsTonsToBePurchased = peanutHullsTonsRequired;
-    const peanutHullsCostOfCommodity =
-      peanutHullsTonsToBePurchased * peanutHullsCostOfCommodityPerTon;
-    const peanutHullsCostOfTrucking =
-      peanutHullsTonsToBePurchased *
-      peanutHullsAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedPeanutHullsTotalCost =
-      peanutHullsCostOfCommodity + peanutHullsCostOfTrucking;
+    const peanutHullsCostOfCommodity = peanutHullsTonsToBePurchased * peanutHullsCostOfCommodityPerTon;
+    const peanutHullsCostOfTrucking = peanutHullsTonsToBePurchased *
+      peanutHullsAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedPeanutHullsTotalCost = peanutHullsCostOfCommodity + peanutHullsCostOfTrucking;
 
     const applePomaceNoHullsTonsToBePurchased = applePomaceTonsRequired;
-    const applePomaceNoHullsCostOfCommodity =
-      applePomaceNoHullsTonsToBePurchased * applePomaceCostOfCommodityPerTon;
-    const applePomaceNoHullsCostOfTrucking =
-      applePomaceNoHullsTonsToBePurchased *
-      applePomaceAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedApplePomaceNoHullsTotalCost =
-      applePomaceNoHullsCostOfCommodity + applePomaceNoHullsCostOfTrucking;
+    const applePomaceNoHullsCostOfCommodity = applePomaceNoHullsTonsToBePurchased * applePomaceCostOfCommodityPerTon;
+    const applePomaceNoHullsCostOfTrucking = applePomaceNoHullsTonsToBePurchased *
+      applePomaceAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedApplePomaceNoHullsTotalCost = applePomaceNoHullsCostOfCommodity + applePomaceNoHullsCostOfTrucking;
 
     const distillersGrainWetTonsToBePurchased = distillersGrainTonsRequired;
-    const distillersGrainWetCostOfCommodity =
-      distillersGrainWetTonsToBePurchased * brewersGrainCostOfCommodityPerTon;
-    const distillersGrainWetCostOfTrucking =
-      distillersGrainWetTonsToBePurchased *
-      brewersGrainAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedDistillersGrainWetTotalCost =
-      distillersGrainWetCostOfCommodity + distillersGrainWetCostOfTrucking;
+    const distillersGrainWetCostOfCommodity = distillersGrainWetTonsToBePurchased * brewersGrainCostOfCommodityPerTon;
+    const distillersGrainWetCostOfTrucking = distillersGrainWetTonsToBePurchased *
+      brewersGrainAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedDistillersGrainWetTotalCost = distillersGrainWetCostOfCommodity + distillersGrainWetCostOfTrucking;
 
     const brewersGrainWetTonsToBePurchased = brewersGrainTonsRequired;
-    const brewersGrainWetCostOfCommodity =
-      brewersGrainWetTonsToBePurchased * brewersGrainCostOfCommodityPerTon;
-    const brewersGrainWetCostOfTrucking =
-      brewersGrainWetTonsToBePurchased *
-      brewersGrainAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedBrewersGrainWetTotalCost =
-      brewersGrainWetCostOfCommodity + brewersGrainWetCostOfTrucking;
+    const brewersGrainWetCostOfCommodity = brewersGrainWetTonsToBePurchased * brewersGrainCostOfCommodityPerTon;
+    const brewersGrainWetCostOfTrucking = brewersGrainWetTonsToBePurchased *
+      brewersGrainAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedBrewersGrainWetTotalCost = brewersGrainWetCostOfCommodity + brewersGrainWetCostOfTrucking;
 
     const citrusPulpDryTonsToBePurchased = citrusPulpTonsRequired;
-    const citrusPulpDryCostOfCommodity =
-      citrusPulpDryTonsToBePurchased * citrusPulpCostOfCommodityPerTon;
-    const citrusPulpDryCostOfTrucking =
-      citrusPulpDryTonsToBePurchased *
-      citrusPulpAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedCitrusPulpDryTotalCost =
-      citrusPulpDryCostOfCommodity + citrusPulpDryCostOfTrucking;
+    const citrusPulpDryCostOfCommodity = citrusPulpDryTonsToBePurchased * citrusPulpCostOfCommodityPerTon;
+    const citrusPulpDryCostOfTrucking = citrusPulpDryTonsToBePurchased *
+      citrusPulpAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedCitrusPulpDryTotalCost = citrusPulpDryCostOfCommodity + citrusPulpDryCostOfTrucking;
 
     const cornGlutenFeedTonsToBePurchased = cornGlutenTonsRequired;
-    const cornGlutenFeedCostOfCommodity =
-      cornGlutenFeedTonsToBePurchased * cornGlutenCostOfCommodityPerTon;
-    const cornGlutenFeedCostOfTrucking =
-      cornGlutenFeedTonsToBePurchased *
-      cornGlutenAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedCornGlutenFeedTotalCost =
-      cornGlutenFeedCostOfCommodity + cornGlutenFeedCostOfTrucking;
+    const cornGlutenFeedCostOfCommodity = cornGlutenFeedTonsToBePurchased * cornGlutenCostOfCommodityPerTon;
+    const cornGlutenFeedCostOfTrucking =cornGlutenFeedTonsToBePurchased *
+      cornGlutenAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedCornGlutenFeedTotalCost = cornGlutenFeedCostOfCommodity + cornGlutenFeedCostOfTrucking;
 
     const wholeCottonseedTonsToBePurchased = wholeCottonseedTonsRequired;
-    const wholeCottonseedCostOfCommodity =
-      wholeCottonseedTonsToBePurchased * wholeCottonseedCostOfCommodityPerTon;
-    const wholeCottonseedCostOfTrucking =
-      wholeCottonseedTonsToBePurchased *
-      wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedWholeCottonseedTotalCost =
-      wholeCottonseedCostOfCommodity + wholeCottonseedCostOfTrucking;
+    const wholeCottonseedCostOfCommodity = wholeCottonseedTonsToBePurchased * wholeCottonseedCostOfCommodityPerTon;
+    const wholeCottonseedCostOfTrucking = wholeCottonseedTonsToBePurchased *
+      wholeCottonseedAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedWholeCottonseedTotalCost = wholeCottonseedCostOfCommodity + wholeCottonseedCostOfTrucking;
 
     const cottonseedHullsTonsToBePurchased = cottonseedHullsTonsRequired;
-    const cottonseedHullsCostOfCommodity =
-      cottonseedHullsTonsToBePurchased * cottonseedHullsCostOfCommodityPerTon;
-    const cottonseedHullsCostOfTrucking =
-      cottonseedHullsTonsToBePurchased *
-      cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedCottonseedHullsTotalCost =
-      cottonseedHullsCostOfCommodity + cottonseedHullsCostOfTrucking;
+    const cottonseedHullsCostOfCommodity = cottonseedHullsTonsToBePurchased * cottonseedHullsCostOfCommodityPerTon;
+    const cottonseedHullsCostOfTrucking = cottonseedHullsTonsToBePurchased *
+      cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedCottonseedHullsTotalCost = cottonseedHullsCostOfCommodity + cottonseedHullsCostOfTrucking;
 
     const soybeanMeal48TonsToBePurchased = soybeanMeal48TonsRequired;
-    const soybeanMeal48CostOfCommodity =
-      soybeanMeal48TonsToBePurchased * soybeanMealCostOfCommodityPerTon;
-    const soybeanMeal48CostOfTrucking =
-      soybeanMeal48TonsToBePurchased *
-      soybeanMealAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedSoybeanMeal48TotalCost =
-      soybeanMeal48CostOfCommodity + soybeanMeal48CostOfTrucking;
+    const soybeanMeal48CostOfCommodity = soybeanMeal48TonsToBePurchased * soybeanMealCostOfCommodityPerTon;
+    const soybeanMeal48CostOfTrucking = soybeanMeal48TonsToBePurchased *
+      soybeanMealAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedSoybeanMeal48TotalCost = soybeanMeal48CostOfCommodity + soybeanMeal48CostOfTrucking;
 
     const customFeedMixTonsToBePurchased = customFeedMixTonsRequired;
-    const customFeedMixCostOfCommodity =
-      customFeedMixTonsToBePurchased * customFeedMixCostOfCommodityPerTon;
-    const customFeedMixCostOfTrucking =
-      customFeedMixTonsToBePurchased *
-      customFeedMixAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedCustomFeedMixTotalCost =
-      customFeedMixCostOfCommodity + customFeedMixCostOfTrucking;
+    const customFeedMixCostOfCommodity = customFeedMixTonsToBePurchased * customFeedMixCostOfCommodityPerTon;
+    const customFeedMixCostOfTrucking = customFeedMixTonsToBePurchased *
+      customFeedMixAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedCustomFeedMixTotalCost = customFeedMixCostOfCommodity + customFeedMixCostOfTrucking;
 
     const customMineralMixTonsToBePurchased = customMineralMixTonsRequired;
-    const customMineralMixCostOfCommodity =
-      customMineralMixTonsToBePurchased * customMineralMixCostOfCommodityPerTon;
-    const customMineralMixCostOfTrucking =
-      customMineralMixTonsToBePurchased *
-      customMineralMixAvgPurchasedFeedMilesTruckedToDairy *
-      averageCostOfTruckingPerTonMile;
-    const purchasedCustomMineralMixTotalCost =
-      customMineralMixCostOfCommodity + customMineralMixCostOfTrucking;
+    const customMineralMixCostOfCommodity = customMineralMixTonsToBePurchased * customMineralMixCostOfCommodityPerTon;
+    const customMineralMixCostOfTrucking = customMineralMixTonsToBePurchased *
+      customMineralMixAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedCustomMineralMixTotalCost = customMineralMixCostOfCommodity + customMineralMixCostOfTrucking;
 
     // Growth Forage Trucking Costs
     const cornSilageGrownForageTruckingCost =
@@ -1571,51 +1496,36 @@ export class FeedDetailsService {
       // Feed Requirements and Production
       cornSilageTonsRequired: Number(cornSilageTonsRequired.toFixed(2)),
       cornSilageTonsProduced: Number(cornSilageTonsProduced.toFixed(2)),
-      cornSilageBalanceToBePurchasedOrSold: Number(
-        cornSilageBalanceToBePurchasedOrSold.toFixed(2),
-      ),
+      cornSilageBalanceToBePurchasedOrSold: Number(cornSilageBalanceToBePurchasedOrSold.toFixed(2)),
+
       sorghumSilageTonsRequired: Number(sorghumSilageTonsRequired.toFixed(2)),
       sorghumSilageTonsProduced: Number(sorghumSilageTonsProduced.toFixed(2)),
-      sorghumSilageBalanceToBePurchasedOrSold: Number(
-        sorghumSilageBalanceToBePurchasedOrSold.toFixed(2),
-      ),
-      smallGrainSilageTonsRequired: Number(
-        smallGrainSilageTonsRequired.toFixed(2),
-      ),
-      smallGrainSilageTonsProduced: Number(
-        smallGrainSilageTonsProduced.toFixed(2),
-      ),
-      smallGrainSilageBalanceToBePurchasedOrSold: Number(
-        smallGrainSilageBalanceToBePurchasedOrSold.toFixed(2),
-      ),
+      sorghumSilageBalanceToBePurchasedOrSold: Number(sorghumSilageBalanceToBePurchasedOrSold.toFixed(2)),
+
+      smallGrainSilageTonsRequired: Number(smallGrainSilageTonsRequired.toFixed(2)),
+      smallGrainSilageTonsProduced: Number(smallGrainSilageTonsProduced.toFixed(2)),
+      smallGrainSilageBalanceToBePurchasedOrSold: Number(smallGrainSilageBalanceToBePurchasedOrSold.toFixed(2)),
+      
       grassHayTonsRequired: Number(grassHayTonsRequired.toFixed(2)),
       grassHayTonsProduced: Number(grassHayTonsProduced.toFixed(2)),
-      grassHayBalanceToBePurchasedOrSold: Number(
-        grassHayBalanceToBePurchasedOrSold.toFixed(2),
-      ),
+      grassHayBalanceToBePurchasedOrSold: Number(grassHayBalanceToBePurchasedOrSold.toFixed(2)),
+      
       alfalfaHayTonsRequired: Number(alfalfaHayTonsRequired.toFixed(2)),
       alfalfaHayTonsProduced: Number(alfalfaHayTonsProduced.toFixed(2)),
-      alfalfaHayBalanceToBePurchasedOrSold: Number(
-        alfalfaHayBalanceToBePurchasedOrSold.toFixed(2),
-      ),
+      alfalfaHayBalanceToBePurchasedOrSold: Number(alfalfaHayBalanceToBePurchasedOrSold.toFixed(2)),
 
       // Other Feed Requirements
       peanutHullsTonsRequired: Number(peanutHullsTonsRequired.toFixed(2)),
       applePomaceTonsRequired: Number(applePomaceTonsRequired.toFixed(2)),
-      distillersGrainTonsRequired: Number(
-        distillersGrainTonsRequired.toFixed(2),
-      ),
+      distillersGrainTonsRequired: Number(distillersGrainTonsRequired.toFixed(2)),
+
       brewersGrainTonsRequired: Number(brewersGrainTonsRequired.toFixed(2)),
       citrusPulpTonsRequired: Number(citrusPulpTonsRequired.toFixed(2)),
       cornGlutenTonsRequired: Number(cornGlutenTonsRequired.toFixed(2)),
-      wholeCottonseedTonsRequired: Number(
-        wholeCottonseedTonsRequired.toFixed(2),
-      ),
+      wholeCottonseedTonsRequired: Number(wholeCottonseedTonsRequired.toFixed(2)),
       soybeanMeal48TonsRequired: Number(soybeanMeal48TonsRequired.toFixed(2)),
       customFeedMixTonsRequired: Number(customFeedMixTonsRequired.toFixed(2)),
-      customMineralMixTonsRequired: Number(
-        customMineralMixTonsRequired.toFixed(2),
-      ),
+      customMineralMixTonsRequired: Number(customMineralMixTonsRequired.toFixed(2)),
 
       // Total Variable Costs
       cornSilageTVC: Number(cornSilageTVC.toFixed(2)),
@@ -1627,9 +1537,7 @@ export class FeedDetailsService {
       grassHayTVC: Number(grassHayTVC.toFixed(2)),
       grassHayTVCPerTon: Number(grassHayTVCPerTon.toFixed(2)),
       alfalfaHayEstablishmentTVC: Number(alfalfaHayEstablishmentTVC.toFixed(2)),
-      alfalfaHayEstablishmentTVCPerTon: Number(
-        alfalfaHayEstablishmentTVCPerTon.toFixed(2),
-      ),
+      alfalfaHayEstablishmentTVCPerTon: Number(alfalfaHayEstablishmentTVCPerTon.toFixed(2)),
       alfalfaHayStandTVC: Number(alfalfaHayStandTVC.toFixed(2)),
       alfalfaHayStandTVCPerTon: Number(alfalfaHayStandTVCPerTon.toFixed(2)),
 
@@ -1692,14 +1600,86 @@ export class FeedDetailsService {
       ),
 
       // Purchased Feed Expenses
-      cornSilageTonsToBePurchased: Number(
-        cornSilageTonsToBePurchased.toFixed(2),
-      ),
+      cornSilageTonsToBePurchased: Number(cornSilageTonsToBePurchased.toFixed(2)),
       cornSilageCostOfCommodity: Number(cornSilageCostOfCommodity.toFixed(2)),
       cornSilageCostOfTrucking: Number(cornSilageCostOfTrucking.toFixed(2)),
-      purchasedCornSilageTotalCost: Number(
-        purchasedCornSilageTotalCost.toFixed(2),
-      ),
+      purchasedCornSilageTotalCost: Number(purchasedCornSilageTotalCost.toFixed(2)),
+
+      sorghumSilageTonsToBePurchased: Number(sorghumSilageTonsToBePurchased.toFixed(2)),
+      sorghumSilageCostOfCommodity: Number(sorghumSilageCostOfCommodity.toFixed(2)),
+      sorghumSilageCostOfTrucking: Number(sorghumSilageCostOfTrucking.toFixed(2)),
+      purchasedSorghumSilageTotalCost: Number(purchasedSorghumSilageTotalCost.toFixed(2)),
+
+      smallGrainSilageTonsToBePurchased: Number(smallGrainSilageTonsToBePurchased.toFixed(2)),
+      smallGrainSilageCostOfCommodity: Number(smallGrainSilageCostOfCommodity.toFixed(2)),
+      smallGrainSilageCostOfTrucking: Number(smallGrainSilageCostOfTrucking.toFixed(2)),
+      purchasedSmallGrainSilageTotalCost: Number(purchasedSmallGrainSilageTotalCost.toFixed(2)),
+
+      grassHayTonsToBePurchased: Number(grassHayTonsToBePurchased.toFixed(2)),
+      grassHayCostOfCommodity: Number(grassHayCostOfCommodity.toFixed(2)),
+      grassHayCostOfTrucking: Number(grassHayCostOfTrucking.toFixed(2)),
+      purchasedGrassHayTotalCost: Number(purchasedGrassHayTotalCost.toFixed(2)),
+
+      alfalfaHayTonsToBePurchased: Number(alfalfaHayTonsToBePurchased.toFixed(2)),
+      alfalfaHayCostOfCommodity: Number(alfalfaHayCostOfCommodity.toFixed(2)),
+      alfalfaHayCostOfTrucking: Number(alfalfaHayCostOfTrucking.toFixed(2)),
+      purchasedAlfalfaHayTotalCost: Number(purchasedAlfalfaHayTotalCost.toFixed(2)),
+
+      peanutHullsTonsToBePurchased: Number(peanutHullsTonsToBePurchased.toFixed(2)),
+      peanutHullsCostOfCommodity: Number(peanutHullsCostOfCommodity.toFixed(2)),
+      peanutHullsCostOfTrucking: Number(peanutHullsCostOfTrucking.toFixed(2)),
+      purchasedPeanutHullsTotalCost: Number(purchasedPeanutHullsTotalCost.toFixed(2)),
+
+      applePomaceNoHullsTonsToBePurchased: Number(applePomaceNoHullsTonsToBePurchased.toFixed(2)),
+      applePomaceNoHullsCostOfCommodity: Number(applePomaceNoHullsCostOfCommodity.toFixed(2)),
+      applePomaceNoHullsCostOfTrucking: Number(applePomaceNoHullsCostOfTrucking.toFixed(2)),
+      purchasedApplePomaceNoHullsTotalCost: Number(purchasedApplePomaceNoHullsTotalCost.toFixed(2)),
+
+      distillersGrainWetTonsToBePurchased: Number(distillersGrainWetTonsToBePurchased.toFixed(2)),
+      distillersGrainWetCostOfCommodity: Number(distillersGrainWetCostOfCommodity.toFixed(2)),
+      distillersGrainWetCostOfTrucking: Number(distillersGrainWetCostOfTrucking.toFixed(2)),
+      purchasedDistillersGrainWetTotalCost: Number(purchasedDistillersGrainWetTotalCost.toFixed(2)),
+
+      brewersGrainWetTonsToBePurchased: Number(brewersGrainWetTonsToBePurchased.toFixed(2)),
+      brewersGrainWetCostOfCommodity: Number(brewersGrainWetCostOfCommodity.toFixed(2)),
+      brewersGrainWetCostOfTrucking: Number(brewersGrainWetCostOfTrucking.toFixed(2)),
+      purchasedBrewersGrainWetTotalCost: Number(purchasedBrewersGrainWetTotalCost.toFixed(2)),
+
+      citrusPulpDryTonsToBePurchased: Number(citrusPulpDryTonsToBePurchased.toFixed(2)),
+      citrusPulpDryCostOfCommodity: Number(citrusPulpDryCostOfCommodity.toFixed(2)),
+      citrusPulpDryCostOfTrucking: Number(citrusPulpDryCostOfTrucking.toFixed(2)),
+      purchasedCitrusPulpDryTotalCost: Number(purchasedCitrusPulpDryTotalCost.toFixed(2)),
+
+      cornGlutenFeedTonsToBePurchased: Number(cornGlutenFeedTonsToBePurchased.toFixed(2)),
+      cornGlutenFeedCostOfCommodity: Number(cornGlutenFeedCostOfCommodity.toFixed(2)),
+      cornGlutenFeedCostOfTrucking: Number(cornGlutenFeedCostOfTrucking.toFixed(2)),
+      purchasedCornGlutenFeedTotalCost: Number(purchasedCornGlutenFeedTotalCost.toFixed(2)),
+
+      wholeCottonseedTonsToBePurchased: Number(wholeCottonseedTonsToBePurchased.toFixed(2)),
+      wholeCottonseedCostOfCommodity: Number(wholeCottonseedCostOfCommodity.toFixed(2)),
+      wholeCottonseedCostOfTrucking: Number(wholeCottonseedCostOfTrucking.toFixed(2)),
+      purchasedWholeCottonseedTotalCost: Number(purchasedWholeCottonseedTotalCost.toFixed(2)),
+
+      cottonseedHullsTonsToBePurchased: Number(cottonseedHullsTonsToBePurchased.toFixed(2)),
+      cottonseedHullsCostOfCommodity: Number(cottonseedHullsCostOfCommodity.toFixed(2)),
+      cottonseedHullsCostOfTrucking: Number(cottonseedHullsCostOfTrucking.toFixed(2)),
+      purchasedCottonseedHullsTotalCost: Number(purchasedCottonseedHullsTotalCost.toFixed(2)),
+
+      soybeanMeal48TonsToBePurchased: Number(soybeanMeal48TonsToBePurchased.toFixed(2)),
+      soybeanMeal48CostOfCommodity: Number(soybeanMeal48CostOfCommodity.toFixed(2)),
+      soybeanMeal48CostOfTrucking: Number(soybeanMeal48CostOfTrucking.toFixed(2)),
+      purchasedSoybeanMeal48TotalCost: Number(purchasedSoybeanMeal48TotalCost.toFixed(2)),
+
+      customFeedMixTonsToBePurchased: Number(customFeedMixTonsToBePurchased.toFixed(2)),
+      customFeedMixCostOfCommodity: Number(customFeedMixCostOfCommodity.toFixed(2)),
+      customFeedMixCostOfTrucking: Number(customFeedMixCostOfTrucking.toFixed(2)),
+      purchasedCustomFeedMixTotalCost: Number(purchasedCustomFeedMixTotalCost.toFixed(2)),
+
+      customMineralMixTonsToBePurchased: Number(customMineralMixTonsToBePurchased.toFixed(2)),
+      customMineralMixCostOfCommodity: Number(customMineralMixCostOfCommodity.toFixed(2)),
+      customMineralMixCostOfTrucking: Number(customMineralMixCostOfTrucking.toFixed(2)),
+      purchasedCustomMineralMixTotalCost: Number(purchasedCustomMineralMixTotalCost.toFixed(2)),
+
 
       // Grown Forage Trucking Cost
       cornSilageGrownForageTruckingCost: Number(
@@ -1738,7 +1718,6 @@ export class FeedDetailsService {
       );
     }
 
-    // return updatedOutputDocument;
   }
 
   async getFeedDetailsOutput(email: string): Promise<FeedDetailsOutput | null> {
@@ -1768,6 +1747,8 @@ export class FeedDetailsService {
   }
 
   async getFeedDetailsInput(email: string): Promise<FeedDetailsInput | null> {
+    console.log("Called feed details input");
+    
     //first find the user_id using the email, then find the document using the id
     const user = await this.userModel.findOne({ email }).exec();
     if (!user) {
@@ -1778,7 +1759,6 @@ export class FeedDetailsService {
     }
 
     const userId = user._id.toString();
-
     const inputDocument = this.feedDetailsInputModel.findOne({ userId }).exec();
 
     if (!inputDocument) {

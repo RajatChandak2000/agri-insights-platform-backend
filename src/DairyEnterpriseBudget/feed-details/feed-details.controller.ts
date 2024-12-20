@@ -21,7 +21,6 @@ export class FeedDetailsController {
   async getFeedDetailsOutput(
     @Param('email') email: string,
   ): Promise<FeedDetailsOutput | null> {
-    console.log('Calleddd feed o');
     return this.feedDetailsService.getFeedDetailsOutput(email);
   }
 
@@ -29,8 +28,6 @@ export class FeedDetailsController {
   async getFeedDetailsInput(
     @Param('email') email: string,
   ): Promise<FeedDetailsInput | null> {
-    console.log('Called feed i');
-
     return this.feedDetailsService.getFeedDetailsInput(email);
   }
 
