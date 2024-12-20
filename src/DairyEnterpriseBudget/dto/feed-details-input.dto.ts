@@ -590,6 +590,17 @@ class ApplePomaceTransportAndCostDetailsDto {
   applePomaceAvgGrownForageMilesTruckedToDairy: number;
 }
 
+class DistillersGrainTransportAndCostDetailsDto {
+  @IsNumber()
+  distillersGrainCostOfCommodityPerTon: number;
+
+  @IsNumber()
+  distillersGrainAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @IsNumber()
+  distillersGrainAvgGrownForageMilesTruckedToDairy: number;
+}
+
 class BrewersGrainTransportAndCostDetailsDto {
   @IsNumber()
   brewersGrainCostOfCommodityPerTon: number;
@@ -740,6 +751,9 @@ export class FeedDetailsInputDto {
 
   @IsObject()
   applePomaceTransportAndCost: ApplePomaceTransportAndCostDetailsDto;
+
+  @IsObject()
+  distillersGrainTransportAndCost: DistillersGrainTransportAndCostDetailsDto;
 
   @IsObject()
   brewersGrainTransportAndCost: BrewersGrainTransportAndCostDetailsDto;

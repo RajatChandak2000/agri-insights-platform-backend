@@ -118,58 +118,77 @@ export class FeedDetailsOutput extends Document {
   @Prop({ required: true }) cornSilageCostOfCommodity: number;
   @Prop({ required: true }) cornSilageCostOfTrucking: number;
   @Prop({ required: true }) purchasedCornSilageTotalCost: number;
+
   @Prop({ required: true }) sorghumSilageTonsToBePurchased: number;
   @Prop({ required: true }) sorghumSilageCostOfCommodity: number;
   @Prop({ required: true }) sorghumSilageCostOfTrucking: number;
   @Prop({ required: true }) purchasedSorghumSilageTotalCost: number;
+
   @Prop({ required: true }) smallGrainSilageTonsToBePurchased: number;
   @Prop({ required: true }) smallGrainSilageCostOfCommodity: number;
   @Prop({ required: true }) smallGrainSilageCostOfTrucking: number;
   @Prop({ required: true }) purchasedSmallGrainSilageTotalCost: number;
+
   @Prop({ required: true }) grassHayTonsToBePurchased: number;
   @Prop({ required: true }) grassHayCostOfCommodity: number;
   @Prop({ required: true }) grassHayCostOfTrucking: number;
   @Prop({ required: true }) purchasedGrassHayTotalCost: number;
+
   @Prop({ required: true }) alfalfaHayTonsToBePurchased: number;
   @Prop({ required: true }) alfalfaHayCostOfCommodity: number;
   @Prop({ required: true }) alfalfaHayCostOfTrucking: number;
   @Prop({ required: true }) purchasedAlfalfaHayTotalCost: number;
+
   @Prop({ required: true }) peanutHullsTonsToBePurchased: number;
   @Prop({ required: true }) peanutHullsCostOfCommodity: number;
   @Prop({ required: true }) peanutHullsCostOfTrucking: number;
   @Prop({ required: true }) purchasedPeanutHullsTotalCost: number;
+
   @Prop({ required: true }) applePomaceNoHullsTonsToBePurchased: number;
   @Prop({ required: true }) applePomaceNoHullsCostOfCommodity: number;
   @Prop({ required: true }) applePomaceNoHullsCostOfTrucking: number;
   @Prop({ required: true }) purchasedApplePomaceNoHullsTotalCost: number;
+
+  @Prop({ required: true }) distillersGrainWetTonsToBePurchased: number;
+  @Prop({ required: true }) distillersGrainWetCostOfCommodity: number;
+  @Prop({ required: true }) distillersGrainWetCostOfTrucking: number;
+  @Prop({ required: true }) purchasedDistillersGrainWetTotalCost: number;
+
   @Prop({ required: true }) brewersGrainWetTonsToBePurchased: number;
   @Prop({ required: true }) brewersGrainWetCostOfCommodity: number;
   @Prop({ required: true }) brewersGrainWetCostOfTrucking: number;
   @Prop({ required: true }) purchasedBrewersGrainWetTotalCost: number;
+
   @Prop({ required: true }) citrusPulpDryTonsToBePurchased: number;
   @Prop({ required: true }) citrusPulpDryCostOfCommodity: number;
   @Prop({ required: true }) citrusPulpDryCostOfTrucking: number;
   @Prop({ required: true }) purchasedCitrusPulpDryTotalCost: number;
+
   @Prop({ required: true }) cornGlutenFeedTonsToBePurchased: number;
   @Prop({ required: true }) cornGlutenFeedCostOfCommodity: number;
   @Prop({ required: true }) cornGlutenFeedCostOfTrucking: number;
   @Prop({ required: true }) purchasedCornGlutenFeedTotalCost: number;
+
   @Prop({ required: true }) wholeCottonseedTonsToBePurchased: number;
   @Prop({ required: true }) wholeCottonseedCostOfCommodity: number;
   @Prop({ required: true }) wholeCottonseedCostOfTrucking: number;
   @Prop({ required: true }) purchasedWholeCottonseedTotalCost: number;
+
   @Prop({ required: true }) cottonseedHullsTonsToBePurchased: number;
   @Prop({ required: true }) cottonseedHullsCostOfCommodity: number;
   @Prop({ required: true }) cottonseedHullsCostOfTrucking: number;
   @Prop({ required: true }) purchasedCottonseedHullsTotalCost: number;
+
   @Prop({ required: true }) soybeanMeal48TonsToBePurchased: number;
   @Prop({ required: true }) soybeanMeal48CostOfCommodity: number;
   @Prop({ required: true }) soybeanMeal48CostOfTrucking: number;
   @Prop({ required: true }) purchasedSoybeanMeal48TotalCost: number;
+
   @Prop({ required: true }) customFeedMixTonsToBePurchased: number;
   @Prop({ required: true }) customFeedMixCostOfCommodity: number;
   @Prop({ required: true }) customFeedMixCostOfTrucking: number;
   @Prop({ required: true }) purchasedCustomFeedMixTotalCost: number;
+
   @Prop({ required: true }) customMineralMixTonsToBePurchased: number;
   @Prop({ required: true }) customMineralMixCostOfCommodity: number;
   @Prop({ required: true }) customMineralMixCostOfTrucking: number;
@@ -180,9 +199,7 @@ export class FeedDetailsOutput extends Document {
   @Prop({ required: true }) sorghumSilageGrownForageTruckingCost: number;
   @Prop({ required: true }) smallGrainSilageGrownForageTruckingCost: number;
   @Prop({ required: true }) grassHayGrownForageTruckingCost: number;
-  @Prop({ required: true })
-  alfalfaHayEstablishmentGrownForageTruckingCost: number;
-  @Prop({ required: true }) alfalfaHayStandGrownForageTruckingCost: number;
+  @Prop({ required: true }) alfalfaHayGrownForageTruckingCost: number;
 
   @Prop({ default: Date.now })
   createdAt: Date;
