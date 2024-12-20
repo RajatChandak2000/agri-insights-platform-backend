@@ -611,6 +611,18 @@ class ApplePomaceTransportAndCostInputs {
 }
 
 @Schema()
+class DistillersGrainTransportAndCostInputs {
+  @Prop({ required: true })
+  distillersGrainCostOfCommodityPerTon: number;
+
+  @Prop({ required: true })
+  distillersGrainAvgPurchasedFeedMilesTruckedToDairy: number;
+
+  @Prop({ required: true })
+  distillersGrainAvgGrownForageMilesTruckedToDairy: number;
+}
+
+@Schema()
 class BrewersGrainTransportAndCostInputs {
   @Prop({ required: true })
   brewersGrainCostOfCommodityPerTon: number;
@@ -778,6 +790,9 @@ export class FeedDetailsInput extends Document {
 
   @Prop({ type: ApplePomaceTransportAndCostInputs, default: {} })
   applePomaceTransportAndCost: ApplePomaceTransportAndCostInputs;
+
+  @Prop({ type: DistillersGrainTransportAndCostInputs, default: {} })
+  distillersGrainTransportAndCost: DistillersGrainTransportAndCostInputs;
 
   @Prop({ type: BrewersGrainTransportAndCostInputs, default: {} })
   brewersGrainTransportAndCost: BrewersGrainTransportAndCostInputs;
