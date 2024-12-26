@@ -26,6 +26,9 @@ export class FixedCostsOutput extends Document {
 
   @Prop({ required: true })
   totalDairyFixedCost: number;
+
+  @Prop({ required: false })
+  totalCroppingAnnualEconomicCosts?: number;
 }
 
 export const FixedCostsOutputSchema =

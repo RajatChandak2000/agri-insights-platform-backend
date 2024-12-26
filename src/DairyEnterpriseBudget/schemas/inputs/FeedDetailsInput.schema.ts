@@ -739,6 +739,9 @@ export class FeedDetailsInput extends Document {
   calves: CalvesFeedPlanInputs;
 
   //Raised Forage Classes
+  @Prop({ type: Number, required: false })
+  totalCroppingAnnualEconomicCosts?: number;
+
   @Prop({ type: CornSilageInputs, default: {} })
   cornSilage: CornSilageInputs;
 

@@ -19,6 +19,7 @@ import {
   ProductionDetailsOutput,
   ProductionDetailsOutputSchema,
 } from '../schemas/outputs/ProductionDetailsOutput.schema';
+import { FixedCostsOutput, FixedCostsOutputSchema } from '../schemas/outputs/FixedCostsOutput.schema';
 @Module({
   providers: [FeedDetailsService],
   controllers: [FeedDetailsController],
@@ -34,6 +35,10 @@ import {
       {
         name: ProductionDetailsOutput.name,
         schema: ProductionDetailsOutputSchema,
+      },
+      {
+        name: FixedCostsOutput.name,
+        schema: FixedCostsOutputSchema,
       },
       { name: User.name, schema: UserSchema },
     ]),

@@ -88,15 +88,10 @@ export class ReceiptsService {
       this.logger.log(
         `Calculating recipts input details output for user: ${updatedDocument.userId}`,
       );
-      console.log(
-        'Here are the upadted document-----------------------------------------',
-        productionDetailsInputs,
-      );
+      console.log('Here are the upadted document-----------------------------------------',productionDetailsInputs);
       // Fetch production details using userId
       const userId = updatedDocument.userId;
-      fetchedproductionDetailsOutputs = await this.productionDetailsOutputModel
-        .findOne({ userId })
-        .exec();
+      fetchedproductionDetailsOutputs = await this.productionDetailsOutputModel.findOne({ userId }).exec();
 
       if (!fetchedproductionDetailsOutputs) {
         this.logger.error(`No production details found for user: ${userId}`);
@@ -104,10 +99,7 @@ export class ReceiptsService {
       }
     } else {
       // Calculate production details if userId is not present
-      fetchedproductionDetailsOutputs =
-        await this.ProductionDetailsService.calculateProductionDetailsOutput(
-          productionDetailsInputs,
-        );
+      fetchedproductionDetailsOutputs = await this.ProductionDetailsService.calculateProductionDetailsOutput(productionDetailsInputs);
     }
 
     // Ensure productionDetailsInputs has required structure

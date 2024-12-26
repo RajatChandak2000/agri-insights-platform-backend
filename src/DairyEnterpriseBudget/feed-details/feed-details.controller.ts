@@ -13,7 +13,7 @@ export class FeedDetailsController {
     @Param('email') email: string,
     @Body() updateDto: FeedDetailsInputDto,
   ) {
-    console.log('Data got from client is ', updateDto);
+    console.log('Data got from client is ', updateDto.totalCroppingAnnualEconomicCosts);
     return this.feedDetailsService.updateInput(email, updateDto);
   }
 
