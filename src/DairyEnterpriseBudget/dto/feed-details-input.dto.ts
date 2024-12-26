@@ -1,4 +1,4 @@
-import { IsNumber, IsObject } from 'class-validator';
+import { IsNumber, IsObject, IsOptional } from 'class-validator';
 
 class MilkingHerdFeedDetailsDto {
   @IsNumber()
@@ -706,6 +706,10 @@ export class FeedDetailsInputDto {
   calves: CalvesFeedDetailsDto;
 
   //Raised Forage Classes
+  @IsOptional()
+  @IsNumber()
+  totalCroppingAnnualEconomicCosts?: number
+
   @IsObject()
   cornSilage: CornSilageDetailsDto;
 

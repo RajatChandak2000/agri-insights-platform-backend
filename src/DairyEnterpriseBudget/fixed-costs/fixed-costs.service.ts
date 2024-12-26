@@ -1683,6 +1683,8 @@ export class FixedCostsService {
     const totalLandRentalCost = acres * rentalCost;
 
     let totalMachineryFixedCost: number = machineryFixedCostTotalEstimate;
+    let totalCroppingAnnualEconomicCosts: number = 0;
+
     if (updatedDocument.isDetailedMachineryCosts) {
       // DETAILED MACHINERY FIXED COSTS
       // Articulated Loaders
@@ -2431,18 +2433,9 @@ export class FixedCostsService {
         (powerRakeCroppingHoursOfUse / powerRakeTotalHoursOfUse);
 
       // 15’ Folding Rotary Mower
-      const foldingRotaryMower15InitialInvestment =
-        numberOfFoldingRotaryMower15 *
-        foldingRotaryMower15InitialInvestmentPerUnit;
-      const foldingRotaryMower15EstimatedCurrentSalvageValue =
-        foldingRotaryMower15InitialInvestment *
-        (ageCategories.get(foldingRotaryMower15EquipmentAge).HarvestingForage /
-          100);
-      const foldingRotaryMower15EstimatedFinalSalvageValue =
-        foldingRotaryMower15InitialInvestment *
-        (ageCategories.get(foldingRotaryMower15YearsOfUsefulLife)
-          .HarvestingForage /
-          100);
+      const foldingRotaryMower15InitialInvestment = numberOfFoldingRotaryMower15 * foldingRotaryMower15InitialInvestmentPerUnit;
+      const foldingRotaryMower15EstimatedCurrentSalvageValue = foldingRotaryMower15InitialInvestment * (ageCategories.get(foldingRotaryMower15EquipmentAge).HarvestingForage / 100);
+      const foldingRotaryMower15EstimatedFinalSalvageValue = foldingRotaryMower15InitialInvestment *(ageCategories.get(foldingRotaryMower15YearsOfUsefulLife).HarvestingForage / 100);
       const foldingRotaryMower15AnnualAmortization =
         ((foldingRotaryMower15EstimatedCurrentSalvageValue -
           foldingRotaryMower15EstimatedFinalSalvageValue) *
@@ -2584,14 +2577,9 @@ export class FixedCostsService {
         (roundBalerCroppingHoursOfUse / roundBalerTotalHoursOfUse);
 
       // Tub Grinder
-      const tubGrinderInitialInvestment =
-        numberOfTubGrinder * tubGrinderInitialInvestmentPerUnit;
-      const tubGrinderEstimatedCurrentSalvageValue =
-        tubGrinderInitialInvestment *
-        (ageCategories.get(tubGrinderEquipmentAge).Misc / 100);
-      const tubGrinderEstimatedFinalSalvageValue =
-        tubGrinderInitialInvestment *
-        (ageCategories.get(tubGrinderYearsOfUsefulLife).Misc / 100);
+      const tubGrinderInitialInvestment = numberOfTubGrinder * tubGrinderInitialInvestmentPerUnit;
+      const tubGrinderEstimatedCurrentSalvageValue = tubGrinderInitialInvestment * (ageCategories.get(tubGrinderEquipmentAge).Misc / 100);
+      const tubGrinderEstimatedFinalSalvageValue = tubGrinderInitialInvestment * (ageCategories.get(tubGrinderYearsOfUsefulLife).Misc / 100);
       const tubGrinderAnnualAmortization =
         ((tubGrinderEstimatedCurrentSalvageValue -
           tubGrinderEstimatedFinalSalvageValue) *
@@ -2602,8 +2590,7 @@ export class FixedCostsService {
               -(tubGrinderYearsOfUsefulLife - tubGrinderEquipmentAge),
             )) +
         tubGrinderEstimatedFinalSalvageValue * (longTermInterestRate / 100);
-      const tubGrinderPropertyTax =
-        tubGrinderEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
+      const tubGrinderPropertyTax = tubGrinderEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const tubGrinderPropertyInsurance =
         tubGrinderInitialInvestment * (machineryInsuranceRate / 100);
       const tubGrinderTotalAnnualEconomicCost =
@@ -2735,18 +2722,10 @@ export class FixedCostsService {
       const otherMachineryEquipment2PropertyInsurance =
         otherMachineryEquipment2InitialInvestment *
         (machineryInsuranceRate / 100);
-      const otherMachineryEquipment2TotalAnnualEconomicCost =
-        (otherMachineryEquipment2AnnualAmortization +
-          otherMachineryEquipment2PropertyTax +
-          otherMachineryEquipment2PropertyInsurance) *
-        (otherMachineryEquipment2DairyHoursOfUse /
-          otherMachineryEquipment2TotalHoursOfUse);
-      const otherMachineryEquipment2CroppingAnnualEconomicCost =
-        (otherMachineryEquipment2AnnualAmortization +
-          otherMachineryEquipment2PropertyTax +
-          otherMachineryEquipment2PropertyInsurance) *
-        (otherMachineryEquipment2CroppingHoursOfUse /
-          otherMachineryEquipment2TotalHoursOfUse);
+      const otherMachineryEquipment2TotalAnnualEconomicCost = (otherMachineryEquipment2AnnualAmortization + otherMachineryEquipment2PropertyTax + otherMachineryEquipment2PropertyInsurance) *
+        (otherMachineryEquipment2DairyHoursOfUse / otherMachineryEquipment2TotalHoursOfUse);
+      const otherMachineryEquipment2CroppingAnnualEconomicCost = (otherMachineryEquipment2AnnualAmortization + otherMachineryEquipment2PropertyTax + otherMachineryEquipment2PropertyInsurance) *
+        (otherMachineryEquipment2CroppingHoursOfUse / otherMachineryEquipment2TotalHoursOfUse);
 
       //Finally calculating the total machinery fixed cost from detailed machinery cost variables
       totalMachineryFixedCost =
@@ -2779,185 +2758,42 @@ export class FixedCostsService {
         otherMachineryEquipment1TotalAnnualEconomicCost +
         otherMachineryEquipment2TotalAnnualEconomicCost;
 
-      console.log(
-        'articulatedLoadersTotalAnnualEconomicCost:',
-        articulatedLoadersTotalAnnualEconomicCost,
-      );
-      console.log(
-        'skidSteerLoadersTotalAnnualEconomicCost:',
-        skidSteerLoadersTotalAnnualEconomicCost,
-      );
-      console.log(
-        'hpTractorMFWD130TotalAnnualEconomicCost:',
-        hpTractorMFWD130TotalAnnualEconomicCost,
-      );
-      console.log(
-        'hpTractor2wd75TotalAnnualEconomicCost:',
-        hpTractor2wd75TotalAnnualEconomicCost,
-      );
-      console.log(
-        'hpTractor2wd50TotalAnnualEconomicCost:',
-        hpTractor2wd50TotalAnnualEconomicCost,
-      );
-      console.log(
-        'mixerWagon650TotalAnnualEconomicCost:',
-        mixerWagon650TotalAnnualEconomicCost,
-      );
-      console.log(
-        'threeQuarterTonPickupTotalAnnualEconomicCost:',
-        threeQuarterTonPickupTotalAnnualEconomicCost,
-      );
-      console.log(
-        'halfTonPickupTotalAnnualEconomicCost:',
-        halfTonPickupTotalAnnualEconomicCost,
-      );
-      console.log(
-        'jdGatorTotalAnnualEconomicCost:',
-        jdGatorTotalAnnualEconomicCost,
-      );
-      console.log(
-        'sandSpreaderTotalAnnualEconomicCost:',
-        sandSpreaderTotalAnnualEconomicCost,
-      );
-      console.log(
-        'hpTractorMFWD300TotalAnnualEconomicCost:',
-        hpTractorMFWD300TotalAnnualEconomicCost,
-      );
-      console.log(
-        'hpTractorMFWD200TotalAnnualEconomicCost:',
-        hpTractorMFWD200TotalAnnualEconomicCost,
-      );
-      console.log(
-        'diskHarrow24TotalAnnualEconomicCost:',
-        diskHarrow24TotalAnnualEconomicCost,
-      );
-      console.log(
-        'stripTillPlanter8RowTotalAnnualEconomicCost:',
-        stripTillPlanter8RowTotalAnnualEconomicCost,
-      );
-      console.log(
-        'foldingSprayer40TotalAnnualEconomicCost:',
-        foldingSprayer40TotalAnnualEconomicCost,
-      );
-      console.log(
-        'fieldCultivatorTotalAnnualEconomicCost:',
-        fieldCultivatorTotalAnnualEconomicCost,
-      );
-      console.log(
-        'grainDrill15NoTillTotalAnnualEconomicCost:',
-        grainDrill15NoTillTotalAnnualEconomicCost,
-      );
-      console.log(
-        'mowerConditionerSelfPropelledTotalAnnualEconomicCost:',
-        mowerConditionerSelfPropelledTotalAnnualEconomicCost,
-      );
-      console.log(
-        'tedderTotalAnnualEconomicCost:',
-        tedderTotalAnnualEconomicCost,
-      );
-      console.log(
-        'powerRakeTotalAnnualEconomicCost:',
-        powerRakeTotalAnnualEconomicCost,
-      );
-      console.log(
-        'foldingRotaryMower15TotalAnnualEconomicCost:',
-        foldingRotaryMower15TotalAnnualEconomicCost,
-      );
-      console.log(
-        'deepRipperTotalAnnualEconomicCost:',
-        deepRipperTotalAnnualEconomicCost,
-      );
-      console.log(
-        'livestockTrailer24TotalAnnualEconomicCost:',
-        livestockTrailer24TotalAnnualEconomicCost,
-      );
-      console.log(
-        'roundBalerTotalAnnualEconomicCost:',
-        roundBalerTotalAnnualEconomicCost,
-      );
-      console.log(
-        'tubGrinderTotalAnnualEconomicCost:',
-        tubGrinderTotalAnnualEconomicCost,
-      );
-      console.log(
-        'miscellaneousEquipmentTotalAnnualEconomicCost:',
-        miscellaneousEquipmentTotalAnnualEconomicCost,
-      );
-      console.log(
-        'otherMachineryEquipment1TotalAnnualEconomicCost:',
-        otherMachineryEquipment1TotalAnnualEconomicCost,
-      );
-      console.log(
-        'otherMachineryEquipment2TotalAnnualEconomicCost:',
-        otherMachineryEquipment2TotalAnnualEconomicCost,
-      );
+      totalCroppingAnnualEconomicCosts = 
+        articulatedLoadersCroppingAnnualEconomicCost +
+        skidSteerLoadersCroppingAnnualEconomicCost +
+        hpTractorMFWD130CroppingAnnualEconomicCost +
+        hpTractor2wd75CroppingAnnualEconomicCost +
+        hpTractor2wd50CroppingAnnualEconomicCost +
+        mixerWagon650CroppingAnnualEconomicCost +
+        threeQuarterTonPickupCroppingAnnualEconomicCost +
+        halfTonPickupCroppingAnnualEconomicCost + 
+        jdGatorCroppingAnnualEconomicCost +
+        sandSpreaderCroppingAnnualEconomicCost + 
+        hpTractorMFWD300CroppingAnnualEconomicCost +
+        hpTractorMFWD200CroppingAnnualEconomicCost +
+        diskHarrow24CroppingAnnualEconomicCost +
+        stripTillPlanter8RowCroppingAnnualEconomicCost +
+        foldingSprayer40CroppingAnnualEconomicCost +
+        fieldCultivatorCroppingAnnualEconomicCost +
+        grainDrill15NoTillCroppingAnnualEconomicCost +
+        mowerConditionerSelfPropelledCroppingAnnualEconomicCost +
+        tedderCroppingAnnualEconomicCost +
+        powerRakeCroppingAnnualEconomicCost +
+        foldingRotaryMower15CroppingAnnualEconomicCost +
+        deepRipperCroppingAnnualEconomicCost +
+        livestockTrailer24CroppingAnnualEconomicCost +
+        roundBalerCroppingAnnualEconomicCost +
+        tubGrinderCroppingAnnualEconomicCost +
+        miscellaneousEquipmentCroppingAnnualEconomicCost +
+        otherMachineryEquipment1CroppingAnnualEconomicCost +
+        otherMachineryEquipment2CroppingAnnualEconomicCost
     }
 
     // -------->>>>Outputs calculated and rounded to 2 decimal points
     const totalCattleFixedCost =
       (cowTotalAnnualEconomicCost + bredHeiferTotalAnnualEconomicCost) *
       (1 + cowDeathLossRate / 100);
-    console.log(
-      'Farm Shop and General Roads Total Annual Economic Cost:',
-      farmShopandGeneralRoadsTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Milking Parlor and Equipment Total Annual Economic Cost:',
-      milkingParlorAndEquipmentTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Feeding Equipment Total Annual Economic Cost:',
-      feedingEquipmentTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Freestall Housing and Lanes Total Annual Economic Cost:',
-      freestallHousingandLanesTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Three-Phase Power Supply Total Annual Economic Cost:',
-      threePhasePowerSupplyTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Water System Total Annual Economic Cost:',
-      waterSystemTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Hay Shed Total Annual Economic Cost:',
-      hayShedTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Trench Silos Total Annual Economic Cost:',
-      trenchSilosTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Fences Total Annual Economic Cost:',
-      fencesTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Commodity Barn Total Annual Economic Cost:',
-      commodityBarnTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Calf or Heifer Barn Total Annual Economic Cost:',
-      calfOrHeiferBarnTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Tilt Table Total Annual Economic Cost:',
-      tiltTableTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Cattle Handling Facilities Total Annual Economic Cost:',
-      cattleHandlingFacilitiesTotalAnnualEconomicCost,
-    );
-    console.log(
-      'Other Facilities and Buildings 1 Total Annual Economic Cost:',
-      otherFacilitiesAndBuildings1TotalAnnualEconomicCost,
-    );
-    console.log(
-      'Other Facilities and Buildings 2 Total Annual Economic Cost:',
-      otherFacilitiesAndBuildings2TotalAnnualEconomicCost,
-    );
-
+    
     const totalFacilitiesAndBuildingsFixedCost =
       farmShopandGeneralRoadsTotalAnnualEconomicCost +
       milkingParlorAndEquipmentTotalAnnualEconomicCost +
@@ -2991,40 +2827,19 @@ export class FixedCostsService {
     const totalLandFixedCost = totalLandRentalCost;
     const overheadCost = overheadCostPerCow * totalNumberOfCows;
 
-    //
-    console.log('totalCattleFixedCost ', totalCattleFixedCost);
-    console.log(
-      'totalFacilitiesAndBuildingsFixedCost ',
-      totalFacilitiesAndBuildingsFixedCost,
-    );
-    console.log(
-      'totalWasteManagementSystemsFixedCost ',
-      totalWasteManagementSystemsFixedCost,
-    );
-    console.log('totalMachineryFixedCost ', totalMachineryFixedCost);
-    console.log('totalLandFixedCost ', totalLandFixedCost);
-    console.log('overheadCost ', overheadCost);
-    //
-
-    const totalDairyFixedCost =
-      totalCattleFixedCost +
-      totalFacilitiesAndBuildingsFixedCost +
-      totalWasteManagementSystemsFixedCost +
-      totalMachineryFixedCost +
-      totalLandFixedCost +
-      overheadCost;
+    const totalDairyFixedCost = totalCattleFixedCost + totalFacilitiesAndBuildingsFixedCost + totalWasteManagementSystemsFixedCost +
+      totalMachineryFixedCost + totalLandFixedCost + overheadCost;
 
     // Convert to document object
     const updatedOutputDocument = {
       totalCattleFixedCost: Math.round(totalCattleFixedCost * 100) / 100,
-      totalFacilitiesAndBuildingsFixedCost:
-        Math.round(totalFacilitiesAndBuildingsFixedCost * 100) / 100,
-      totalWasteManagementSystemsFixedCost:
-        Math.round(totalWasteManagementSystemsFixedCost * 100) / 100,
+      totalFacilitiesAndBuildingsFixedCost: Math.round(totalFacilitiesAndBuildingsFixedCost * 100) / 100,
+      totalWasteManagementSystemsFixedCost: Math.round(totalWasteManagementSystemsFixedCost * 100) / 100,
       totalMachineryFixedCost: Math.round(totalMachineryFixedCost * 100) / 100,
       totalLandFixedCost: Math.round(totalLandFixedCost * 100) / 100,
       overheadCost: Math.round(overheadCost * 100) / 100,
       totalDairyFixedCost: Math.round(totalDairyFixedCost * 100) / 100,
+      totalCroppingAnnualEconomicCosts: Math.round(totalCroppingAnnualEconomicCosts * 100) / 100
     };
 
     try {

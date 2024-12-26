@@ -7,6 +7,7 @@ import { User } from 'src/user/schemas/user.schema';
 import { FeedDetailsInputDto } from '../dto/feed-details-input.dto';
 import { ProductionDetailsInput } from '../schemas/inputs/ProductionDetailsInput.schema';
 import { ProductionDetailsOutput } from '../schemas/outputs/ProductionDetailsOutput.schema';
+import { FixedCostsOutput } from '../schemas/outputs/FixedCostsOutput.schema';
 
 @Injectable()
 export class FeedDetailsService {
@@ -21,6 +22,8 @@ export class FeedDetailsService {
     private productionDetailsInputModel: Model<ProductionDetailsInput>,
     @InjectModel(ProductionDetailsOutput.name)
     private productionDetailsOutputModel: Model<ProductionDetailsOutput>,
+    @InjectModel(FixedCostsOutput.name)
+    private fixedCostsOutputModel: Model<FixedCostsOutput>,
     @InjectModel(User.name) private userModel: Model<User>,
   ) {}
 
@@ -95,8 +98,21 @@ export class FeedDetailsService {
       this.logger.log(`Calves Data: ${JSON.stringify(updateDto.calves)}`);
     }
 
+    // ----> Raised Forage Inputs
+    //Handling TotalCroppingAnnualEconomicCosts Input Variable
+    if (updateDto.totalCroppingAnnualEconomicCosts !== undefined) {
+      console.log("Helloooo1");
+      
+      updateData['totalCroppingAnnualEconomicCosts'] = updateDto.totalCroppingAnnualEconomicCosts;
+      this.logger.log(
+        `Total Cropping Annual Economic Costs: ${updateDto.totalCroppingAnnualEconomicCosts}`,
+      );
+    }
+
     //Handling Corn Silage Inputs
     if (updateDto.cornSilage) {
+      console.log("Hellooooo2");
+      
       for (const [key, value] of Object.entries(updateDto.cornSilage)) {
         if (value !== undefined) {
           updateData[`cornSilage.${key}`] = value;
@@ -455,12 +471,32 @@ export class FeedDetailsService {
     );
 
     //Get any other required documents from other tables
-    const productionDetailsInputs = await this.productionDetailsInputModel
-      .findOne({ userId })
-      .exec();
-    const productionDetailsOutputs = await this.productionDetailsOutputModel
-      .findOne({ userId })
-      .exec();
+    const productionDetailsInputs = await this.productionDetailsInputModel.findOne({ userId }).exec();
+    const productionDetailsOutputs = await this.productionDetailsOutputModel.findOne({ userId }).exec();
+    const fixedCostsOutputs = await this.fixedCostsOutputModel.findOne({ userId }).exec();
+
+    //Fetch the totalCroppingAnnualEconomicCosts from the fixedCostsOutput Schema if it was calculated and stored, if not
+    //initialize with 0 and later it will be populated below from the i/ps section of feed model
+    let totalCroppingAnnualEconomicCosts: number = 0;
+    // Check if fixedCostsOutputs exists
+    if (fixedCostsOutputs) {
+      // Check if totalCroppingAnnualEconomicCosts exists in fixedCostsOutputs
+      if (fixedCostsOutputs.totalCroppingAnnualEconomicCosts !== undefined) {
+        totalCroppingAnnualEconomicCosts = fixedCostsOutputs.totalCroppingAnnualEconomicCosts;
+      } else {
+        // Initialize with 0 and mark for input from feed model
+        totalCroppingAnnualEconomicCosts = 0;
+        this.logger.log(
+          'totalCroppingAnnualEconomicCosts not found in fixedCostsOutputs, initializing to 0. It must be provided in the feed model input.'
+        );
+      }
+    } else {
+      // Handle case where fixedCostsOutputs itself is not present
+      totalCroppingAnnualEconomicCosts = 0;
+      this.logger.log(
+        'fixedCostsOutputs not found. totalCroppingAnnualEconomicCosts initialized to 0 and must be provided in the feed model input.'
+      );
+    }
 
     // ---->Temp variables required to calculate the outputs
     // const numberOfHeifersRaised = productionDetailsInputs.heiferProduction.numberOfHeifersRaised;
@@ -753,6 +789,16 @@ export class FeedDetailsService {
       updatedDocument.calves.calvesCalfStarterFeedDaysOnFeed;
 
     //Inputs for Forage Cost Production
+    // TotalCroppingAnnualEconomicCosts
+    if (!totalCroppingAnnualEconomicCosts) {
+      
+      // Assuming `updatedDocument` is the object that consolidates inputs
+      totalCroppingAnnualEconomicCosts = updatedDocument.totalCroppingAnnualEconomicCosts || 0;
+      console.log("Helloooo3 ", totalCroppingAnnualEconomicCosts);
+      this.logger.log(
+        `totalCroppingAnnualEconomicCosts populated from feed model input: ${totalCroppingAnnualEconomicCosts}`
+      );
+    }
     // Corn Silage
     const cornSilageExpectedYieldTonsPerAcre =
       updatedDocument.cornSilage.cornSilageExpectedYieldTonsPerAcre;
@@ -1236,36 +1282,38 @@ export class FeedDetailsService {
       alfalfaHayStandTVC / (alfalfaHayStandExpectedYieldTonsPerAcre * alfalfaHayStandHarvestedAcres);
 
     //Fix : TEMPPPPPPB
-    const totalCroppingEconomicFixedCost = 63201.52;
+    // totalCroppingAnnualEconomicCosts = 63201.52;
+    //43007.9
+    console.log("totalCroppingAnnualEconomicCosts ", totalCroppingAnnualEconomicCosts);
 
     //Raised Forage Fixed Costs
     const cornSilageFixedCostAllocation =
-      totalCroppingEconomicFixedCost *
+      totalCroppingAnnualEconomicCosts *
       cornSilagePercentOfForageFixedCostAllocated/100;
     const cornSilageFixedCostPerTon =
       cornSilageFixedCostAllocation / cornSilageTonsProduced;
     const sorghumSilageFixedCostAllocation =
-      totalCroppingEconomicFixedCost *
+      totalCroppingAnnualEconomicCosts *
       sorghumSilagePercentOfForageFixedCostAllocated/100;
     const sorghumSilageFixedCostPerTon =
       sorghumSilageFixedCostAllocation / sorghumSilageTonsProduced;
     const smallGrainSilageFixedCostAllocation =
-      totalCroppingEconomicFixedCost *
+      totalCroppingAnnualEconomicCosts *
       smallGrainSilagePercentOfForageFixedCostAllocated/100;
     const smallGrainSilageFixedCostPerTon =
       smallGrainSilageFixedCostAllocation / smallGrainSilageTonsProduced;
     const grassHayFixedCostAllocation =
-      totalCroppingEconomicFixedCost *
+      totalCroppingAnnualEconomicCosts *
       grassHayPercentOfForageFixedCostAllocated/100;
     const grassHayFixedCostPerTon =
       grassHayFixedCostAllocation / grassHayTonsProduced;
     const alfalfaHayEstablishmentFixedCostAllocation =
-      totalCroppingEconomicFixedCost *
+      totalCroppingAnnualEconomicCosts *
       alfalfaHayEstablishmentPercentOfForageFixedCostAllocated/100;
     const alfalfaHayEstablishmentFixedCostPerTon =
       alfalfaHayEstablishmentFixedCostAllocation / (alfalfaHayEstablishmentExpectedYieldTonsPerAcre * alfalfaHayEstablishmentHarvestedAcres);
     const alfalfaHayStandFixedCostAllocation =
-      totalCroppingEconomicFixedCost *
+      totalCroppingAnnualEconomicCosts *
       alfalfaHayStandPercentOfForageFixedCostAllocated/100;
     const alfalfaHayStandFixedCostPerTon =
       alfalfaHayStandFixedCostAllocation / (alfalfaHayStandExpectedYieldTonsPerAcre * alfalfaHayStandHarvestedAcres);
