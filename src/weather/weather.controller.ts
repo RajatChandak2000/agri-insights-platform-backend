@@ -10,6 +10,15 @@ export class weatherController {
   async getAllWeatherData(): Promise<Weather[]> {
     const weatherData = await this.weatherService.getAllWeatherData();
     console.log('weatherData ', weatherData);
+
     return weatherData;
+  }
+
+  @Get('/latestWeeks')
+  async getLatestWeatherData(): Promise<Weather[]>{
+    const latestWeatherData = await this.weatherService.getLatestWeatherData();
+    console.log("latestWeatherData ", latestWeatherData);
+    
+    return latestWeatherData;
   }
 }

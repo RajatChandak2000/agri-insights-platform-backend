@@ -45,9 +45,7 @@ export class Measurement extends Document {
 
 export const MeasurementSchema = SchemaFactory.createForClass(Measurement);
 
-// Define the schema for the main document
-
-@Schema({ collection: 'weather' })
+@Schema()
 export class Weather extends Document {
   @Prop()
   timestamp: string;

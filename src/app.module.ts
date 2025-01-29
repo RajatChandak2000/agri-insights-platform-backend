@@ -13,6 +13,7 @@ import { ReceiptsModule } from './DairyEnterpriseBudget/receipts/receipts.module
 import { LabourCostModule } from './DairyEnterpriseBudget/labour-cost/labour-cost.module';
 import { FixedCostsModule } from './DairyEnterpriseBudget/fixed-costs/fixed-costs.module';
 import { FeedDetailsModule } from './DairyEnterpriseBudget/feed-details/feed-details.module';
+import { AnalysisModule } from './analysis/analysis.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { FeedDetailsModule } from './DairyEnterpriseBudget/feed-details/feed-det
     LabourCostModule,
     FixedCostsModule,
     FeedDetailsModule,
+    AnalysisModule,
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule], // Ensure ConfigModule is available
