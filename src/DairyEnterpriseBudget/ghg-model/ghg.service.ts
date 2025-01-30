@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { GHGInput } from '../schemas/inputs/ghg-input.schema';
@@ -6,6 +6,8 @@ import { GHGOutput } from '../schemas/outputs/ghg-output.schema';
 import { FeedDetailsInput } from '../schemas/inputs/FeedDetailsInput.schema';
 import { ProductionDetailsInput } from '../schemas/inputs/ProductionDetailsInput.schema';
 import { FeedDetailsOutput } from '../schemas/outputs/FeedDetailsOutput.schema';
+import { GHGInputDto } from '../dto/ghg-model.dto';
+import { User } from 'src/user/schemas/user.schema';
 
 
 
@@ -14,9 +16,9 @@ export interface GHGCalculationInputs {
       fatPercentage: number;
       proteinPercentage: number;
     };
-    characterizationFactors: {
-      [key: string]: number;
-    };
+    // characterizationFactors: {
+    //   [key: string]: number;
+    // };
     averageUSTruckingEmissions: number;
   }
   
@@ -40,6 +42,8 @@ export interface GHGCalculationInputs {
   
 @Injectable()
 export class GHGService {
+  private readonly logger = new Logger(GHGService.name);
+
   // Dry matter percentages from nutrition table (as decimal)
   private readonly DRY_MATTER_PERCENTAGES = {
     cornSilage: 0.325,
@@ -58,6 +62,24 @@ export class GHGService {
     soybean48: 0.88,
   };
 
+  private readonly characterizationFactors = {
+    cornSilage: 0.26,
+    sorghumSilage: 0.28,
+    smallGrainSilage: 0.26,
+    grassHay: 0.47,
+    alfalfa: 0.27,
+    peanutHulls: 0.91,
+    applePomaceNoHulls: 0.91,
+    distillersGrain: 0.67,
+    brewersGrain: 0.67,
+    citrusPulpDry: 0.91,
+    cornGlutenFeed: 0.44,
+    wholeCottonseed: 0.59,
+    cottonseedHulls: 0.91,
+    soybeanMeal48: 0.54,
+    customFeedMix: 0.59
+  };
+
   private readonly ENTERIC_FACTOR = 0.46; // From GHG model document
 
   constructor(
@@ -69,11 +91,58 @@ export class GHGService {
     private productionDetailsModel: Model<ProductionDetailsInput>,
     @InjectModel(FeedDetailsOutput.name)
     private feedDetailsOutputModel: Model<FeedDetailsOutput>,
+    @InjectModel(User.name) private userModel: Model<User>,
   ) {}
+
+  async updateInput(email: string, updateDto: GHGInputDto) {
+    const user = await this.userModel.findOne({ email }).exec();
+    if (!user) {
+      throw new HttpException(
+        'User with this email does not exist',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    const userId = user._id.toString();
+    this.logger.log(`Updating inputs for user: ${userId}`);
+    const updateData: any = {};
+
+    for (const [key, value] of Object.entries(updateDto)) {
+      if (value !== undefined) {
+        updateData[key] = value;
+      }
+    }
+
+    try {
+      const updatedDocument = await this.ghgInputModel.findOneAndUpdate(
+        { userId },
+        { $set: updateData },
+        { new: true, upsert: true },
+      );
+
+      if (!updatedDocument) {
+        this.logger.warn(`User not found: ${userId}`);
+        throw new Error('User not found');
+      }
+
+      this.logger.log(`Successfully updated inputs for user: ${userId}`);
+
+      //If successful, we need to call another service that calculates the output
+      //and updates the output schema accordingly
+
+      return await this.calculateGHGMetrics(
+        userId,
+        updatedDocument
+      );
+    } catch (error) {
+      this.logger.error(`Failed to update user inputs: ${error.message}`);
+      throw new Error(`Failed to update user inputs: ${error.message}`);
+    }
+  }
 
   async calculateGHGMetrics(
     userId: string,
-    ghgInputs: GHGCalculationInputs,
+    ghgInputs: GHGInputDto,
   ): Promise<GHGOutput> {
     const [feedDetails, productionDetails, feedOutput] = await Promise.all([
       this.feedDetailsModel.findOne({ userId }).lean().exec(),
@@ -90,8 +159,8 @@ export class GHGService {
       productionDetails.milkProduction.expectedMilkProduction * 100;
     const annualFPCM = this.calculateFPCM(
       totalMilkProduced,
-      ghgInputs.fpcmInputs.fatPercentage,
-      ghgInputs.fpcmInputs.proteinPercentage,
+      ghgInputs.fatPercentage,
+      ghgInputs.proteinPercentage,
     );
 
     // Get herd population counts with explicit assumptions
@@ -103,7 +172,8 @@ export class GHGService {
     // Calculate emissions
     const feedEmissions = this.calculateFeedEmissions(
       herdTotalDMI,
-      ghgInputs.characterizationFactors,
+      // ghgInputs.characterizationFactors,
+      this.characterizationFactors,
       annualFPCM,
     );
 
@@ -123,6 +193,9 @@ export class GHGService {
     const ghgOutput = new this.ghgOutputModel({
       userId,
       annualFPCM,
+      //herd total
+
+      //feedEmissionObject = feedEmissions
       ...feedEmissions,
       ...entericEmissions,
       ...truckingEmissions,
@@ -237,6 +310,7 @@ export class GHGService {
 
   private calculateFeedEmissions(
     herdTotalDMI: Record<string, number>,
+    // factors: Record<string, number>,
     factors: Record<string, number>,
     annualFPCM: number,
   ): FeedEmissions {
@@ -249,6 +323,8 @@ export class GHGService {
       const factorKey = `${feedType}CharacterizationFactor`;
       const emissionsVal = dmi * (factors[factorKey] || 0);
       const perFPCM = emissionsVal / annualFPCM;
+
+      //emissions.feedEmissions[`${feedType}FeedEmissions`] = emissionsVal;
 
       emissions[`${feedType}FeedEmissions`] = emissionsVal;
       emissions[`${feedType}FeedEmissionsPerFPCM`] = perFPCM;
@@ -352,6 +428,31 @@ export class GHGService {
     };
 
     return transportMap[feedType] || feedType;
+  }
+
+  async getGHGInput(email: string): Promise<GHGInput | null> {
+    //first find the user_id using the email, then find the document using the id
+    const user = await this.userModel.findOne({ email }).exec();
+    if (!user) {
+      throw new HttpException(
+        'User with this email does not exist',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    const userId = user._id.toString();
+    console.log('userId ', userId);
+
+    const inputDocument = this.ghgInputModel.findOne({ userId }).exec();
+
+    if (!inputDocument) {
+      throw new HttpException(
+        'Input record for this user not found',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    return inputDocument;
   }
 
   async getGHGResults(userId: string): Promise<GHGOutput> {
