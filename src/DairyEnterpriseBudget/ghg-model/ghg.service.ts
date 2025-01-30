@@ -9,42 +9,11 @@ import { FeedDetailsOutput } from '../schemas/outputs/FeedDetailsOutput.schema';
 import { GHGInputDto } from '../dto/ghg-model.dto';
 import { User } from 'src/user/schemas/user.schema';
 
-
-
-export interface GHGCalculationInputs {
-    fpcmInputs: {
-      fatPercentage: number;
-      proteinPercentage: number;
-    };
-    // characterizationFactors: {
-    //   [key: string]: number;
-    // };
-    averageUSTruckingEmissions: number;
-  }
-  
-  export interface FeedEmissions {
-    ghgFeedTotal: number;
-    ghgFeedTotalPerFPCM: number;
-    [key: string]: number; // Allows dynamic feed type emissions properties
-  }
-  
-  export interface EntericEmissions {
-    totalEntericEmissions: number;
-    totalEntericEmissionsPerFPCM: number;
-    [key: string]: number; // Allows dynamic feed type emissions properties
-  }
-  
-  export interface TruckingEmissions {
-    totalTruckingEmissions: number;
-    ghgTruckingFootprint: number;
-    [key: string]: number; // Allows dynamic feed type emissions properties
-  }
-  
 @Injectable()
 export class GHGService {
   private readonly logger = new Logger(GHGService.name);
 
-  // Dry matter percentages from nutrition table (as decimal)
+  // Dry matter percentages (decimal)
   private readonly DRY_MATTER_PERCENTAGES = {
     cornSilage: 0.325,
     sorghumSilage: 0.284,
@@ -65,22 +34,21 @@ export class GHGService {
   private readonly characterizationFactors = {
     cornSilage: 0.26,
     sorghumSilage: 0.28,
-    smallGrainSilage: 0.26,
+    smallGrain: 0.26,
     grassHay: 0.47,
     alfalfa: 0.27,
     peanutHulls: 0.91,
-    applePomaceNoHulls: 0.91,
-    distillersGrain: 0.67,
-    brewersGrain: 0.67,
-    citrusPulpDry: 0.91,
-    cornGlutenFeed: 0.44,
+    applePomace: 0.91,
+    distillers: 0.67,
+    brewers: 0.67,
+    citrusPulp: 0.91,
+    cornGluten: 0.44,
     wholeCottonseed: 0.59,
     cottonseedHulls: 0.91,
-    soybeanMeal48: 0.54,
-    customFeedMix: 0.59
+    soybean48: 0.54,
   };
 
-  private readonly ENTERIC_FACTOR = 0.46; // From GHG model document
+  private readonly ENTERIC_FACTOR = 0.46; // from GHG model doc
 
   constructor(
     @InjectModel(GHGInput.name) private ghgInputModel: Model<GHGInput>,
@@ -107,6 +75,7 @@ export class GHGService {
     this.logger.log(`Updating inputs for user: ${userId}`);
     const updateData: any = {};
 
+    // Only update fields that are defined
     for (const [key, value] of Object.entries(updateDto)) {
       if (value !== undefined) {
         updateData[key] = value;
@@ -127,19 +96,17 @@ export class GHGService {
 
       this.logger.log(`Successfully updated inputs for user: ${userId}`);
 
-      //If successful, we need to call another service that calculates the output
-      //and updates the output schema accordingly
-
-      return await this.calculateGHGMetrics(
-        userId,
-        updatedDocument
-      );
+      // Recalculate GHG metrics and update GHGOutput
+      return await this.calculateGHGMetrics(userId, updatedDocument);
     } catch (error) {
       this.logger.error(`Failed to update user inputs: ${error.message}`);
       throw new Error(`Failed to update user inputs: ${error.message}`);
     }
   }
 
+  /**
+   * Calculates the GHG metrics and saves them to the GHGOutput schema.
+   */
   async calculateGHGMetrics(
     userId: string,
     ghgInputs: GHGInputDto,
@@ -151,10 +118,10 @@ export class GHGService {
     ]);
 
     if (!feedDetails || !productionDetails || !feedOutput) {
-      throw new Error('Required input data not found');
+      throw new Error('Required input data not found for GHG calculation.');
     }
 
-    // Calculate FPCM
+    // 1. Calculate FPCM
     const totalMilkProduced =
       productionDetails.milkProduction.expectedMilkProduction * 100;
     const annualFPCM = this.calculateFPCM(
@@ -163,25 +130,22 @@ export class GHGService {
       ghgInputs.proteinPercentage,
     );
 
-    // Get herd population counts with explicit assumptions
+    // 2. Herd population counts
     const herdCounts = this.getHerdPopulationCounts(productionDetails);
 
-    // Calculate DMI for each feed type across all herd groups
+    // 3. Herd total DMI for each feed type
     const herdTotalDMI = this.calculateTotalDMI(feedDetails, herdCounts);
 
-    // Calculate emissions
+    // 4. Calculate feed, enteric, trucking emissions
     const feedEmissions = this.calculateFeedEmissions(
       herdTotalDMI,
-      // ghgInputs.characterizationFactors,
       this.characterizationFactors,
       annualFPCM,
     );
-
     const entericEmissions = this.calculateEntericEmissions(
       herdTotalDMI,
       annualFPCM,
     );
-
     const truckingEmissions = this.calculateTruckingEmissions(
       feedDetails,
       feedOutput,
@@ -189,21 +153,34 @@ export class GHGService {
       annualFPCM,
     );
 
-    // Create and save GHG output
-    const ghgOutput = new this.ghgOutputModel({
+    // 5. Build the new GHGOutput doc
+    const now = new Date();
+    const newOutput = new this.ghgOutputModel({
       userId,
       annualFPCM,
-      //herd total
 
-      //feedEmissionObject = feedEmissions
-      ...feedEmissions,
-      ...entericEmissions,
-      ...truckingEmissions,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      // Totals
+      ghgFeedTotal: feedEmissions.ghgFeedTotal,
+      ghgFeedTotalPerFPCM: feedEmissions.ghgFeedTotalPerFPCM,
+      totalEntericEmissions: entericEmissions.totalEntericEmissions,
+      totalEntericEmissionsPerFPCM:
+        entericEmissions.totalEntericEmissionsPerFPCM,
+      totalTruckingEmissions: truckingEmissions.totalTruckingEmissions,
+      ghgTruckingFootprint: truckingEmissions.ghgTruckingFootprint,
+
+      // HerdTotalDMI sub-object
+      herdTotalDMI: this.buildHerdTotalDMIObject(herdTotalDMI),
+
+      // Nested objects
+      feedGHGEmissions: this.buildFeedGHGEmissionsObject(feedEmissions),
+      entericEmissions: this.buildEntericEmissionsObject(entericEmissions),
+      truckingEmissions: this.buildTruckingEmissionsObject(truckingEmissions),
+
+      // createdAt: now,
+      // updatedAt: now,
     });
 
-    return ghgOutput.save();
+    return newOutput.save();
   }
 
   private calculateFPCM(
@@ -222,10 +199,9 @@ export class GHGService {
   private getHerdPopulationCounts(
     productionDetails: ProductionDetailsInput,
   ): { lactating: number; dry: number; replacements: number; young: number } {
-    // ASSUMPTION MADE: Dry cows represent 15% of total milking herd
+    // 15% dry
     const DRY_COW_PERCENTAGE = 0.15;
-    
-    // ASSUMPTION MADE: Replacements are 70% of raised heifers, young are 30%
+    // 70% replacements, 30% young
     const REPLACEMENT_HEIFER_SPLIT = 0.7;
 
     const totalCows = productionDetails.milkProduction.totalNumberOfCows;
@@ -245,49 +221,36 @@ export class GHGService {
     herdCounts: ReturnType<typeof this.getHerdPopulationCounts>,
   ): Record<string, number> {
     const herdGroups = [
-      {
-        key: 'milkingHerd',
-        count: herdCounts.lactating,
-        populationSource: 'totalNumberOfCows',
-      },
-      {
-        key: 'dryHerd',
-        count: herdCounts.dry,
-        populationSource: 'totalNumberOfCows',
-      },
-      {
-        key: 'bredHeifers',
-        count: herdCounts.replacements,
-        populationSource: 'numberOfHeifersRaised',
-      },
-      {
-        key: 'youngHeifers',
-        count: herdCounts.young,
-        populationSource: 'numberOfHeifersRaised',
-      },
+      { key: 'milkingHerd', count: herdCounts.lactating },
+      { key: 'dryHerd', count: herdCounts.dry },
+      { key: 'bredHeifers', count: herdCounts.replacements },
+      { key: 'youngHeifers', count: herdCounts.young },
     ];
 
     const dmiResults: Record<string, number> = {};
 
-    Object.keys(this.DRY_MATTER_PERCENTAGES).forEach((feedType) => {
-      dmiResults[feedType] = herdGroups.reduce((total, herdGroup) => {
-        const feedKey = this.getFeedKey(feedType, herdGroup.key);
-        const lbsPerDay = feedDetails[herdGroup.key]?.[`${feedKey}LbsAsFedPerDay`] || 0;
-        const daysOnFeed = feedDetails[herdGroup.key]?.[`${feedKey}DaysOnFeed`] || 0;
-        const dmPercentage = this.DRY_MATTER_PERCENTAGES[feedType];
+    for (const feedType of Object.keys(this.DRY_MATTER_PERCENTAGES)) {
+      dmiResults[feedType] = 0;
 
-        return (
-          total +
-          lbsPerDay * daysOnFeed * dmPercentage * herdGroup.count
-        );
-      }, 0);
-    });
+      for (const group of herdGroups) {
+        const feedKey = this.getFeedKey(feedType, group.key);
+        const lbsPerDay =
+          feedDetails[group.key]?.[`${feedKey}LbsAsFedPerDay`] || 0;
+        const daysOnFeed =
+          feedDetails[group.key]?.[`${feedKey}DaysOnFeed`] || 0;
+
+        const dmPercentage = this.DRY_MATTER_PERCENTAGES[feedType];
+        const totalGroupDMI =
+          lbsPerDay * daysOnFeed * dmPercentage * group.count;
+
+        dmiResults[feedType] += totalGroupDMI;
+      }
+    }
 
     return dmiResults;
   }
 
   private getFeedKey(feedType: string, herdGroup: string): string {
-    // ASSUMPTION MADE: Mapping between feed types and schema property names
     const feedMap: Record<string, string> = {
       cornSilage: 'CornSilage',
       sorghumSilage: 'SorghumSilage',
@@ -310,51 +273,60 @@ export class GHGService {
 
   private calculateFeedEmissions(
     herdTotalDMI: Record<string, number>,
-    // factors: Record<string, number>,
     factors: Record<string, number>,
     annualFPCM: number,
-  ): FeedEmissions {
-    const emissions: FeedEmissions = {
+  ) {
+    const emissions: Record<string, number> = {
       ghgFeedTotal: 0,
       ghgFeedTotalPerFPCM: 0,
     };
 
-    Object.entries(herdTotalDMI).forEach(([feedType, dmi]) => {
-      const factorKey = `${feedType}CharacterizationFactor`;
-      const emissionsVal = dmi * (factors[factorKey] || 0);
-      const perFPCM = emissionsVal / annualFPCM;
+    for (const feedType of Object.keys(herdTotalDMI)) {
+      const dmi = herdTotalDMI[feedType] || 0;
+      const factor = factors[feedType] || 0;
 
-      //emissions.feedEmissions[`${feedType}FeedEmissions`] = emissionsVal;
+      const feedEmissionValue = dmi * factor;
+      const feedEmissionPerFPCM = annualFPCM
+        ? feedEmissionValue / annualFPCM
+        : 0;
 
-      emissions[`${feedType}FeedEmissions`] = emissionsVal;
-      emissions[`${feedType}FeedEmissionsPerFPCM`] = perFPCM;
-      emissions.ghgFeedTotal += emissionsVal;
-    });
+      emissions[`${feedType}FeedEmissions`] = feedEmissionValue;
+      emissions[`${feedType}FeedEmissionsPerFPCM`] = feedEmissionPerFPCM;
 
-    emissions.ghgFeedTotalPerFPCM = emissions.ghgFeedTotal / annualFPCM;
+      emissions.ghgFeedTotal += feedEmissionValue;
+    }
+
+    emissions.ghgFeedTotalPerFPCM = annualFPCM
+      ? emissions.ghgFeedTotal / annualFPCM
+      : 0;
+
     return emissions;
   }
 
   private calculateEntericEmissions(
     herdTotalDMI: Record<string, number>,
     annualFPCM: number,
-  ): EntericEmissions {
-    const emissions: EntericEmissions = {
+  ) {
+    const emissions: Record<string, number> = {
       totalEntericEmissions: 0,
       totalEntericEmissionsPerFPCM: 0,
     };
 
-    Object.entries(herdTotalDMI).forEach(([feedType, dmi]) => {
-      const emissionsVal = dmi * this.ENTERIC_FACTOR;
-      const perFPCM = emissionsVal / annualFPCM;
+    for (const feedType of Object.keys(herdTotalDMI)) {
+      const dmi = herdTotalDMI[feedType] || 0;
+      const entericVal = dmi * this.ENTERIC_FACTOR;
+      const entericPerFPCM = annualFPCM ? entericVal / annualFPCM : 0;
 
-      emissions[`${feedType}EntericEmissions`] = emissionsVal;
-      emissions[`${feedType}EntericEmissionsPerFPCM`] = perFPCM;
-      emissions.totalEntericEmissions += emissionsVal;
-    });
+      emissions[`${feedType}EntericEmissions`] = entericVal;
+      emissions[`${feedType}EntericEmissionsPerFPCM`] = entericPerFPCM;
 
-    emissions.totalEntericEmissionsPerFPCM =
-      emissions.totalEntericEmissions / annualFPCM;
+      emissions.totalEntericEmissions += entericVal;
+    }
+
+    emissions.totalEntericEmissionsPerFPCM = annualFPCM
+      ? emissions.totalEntericEmissions / annualFPCM
+      : 0;
+
     return emissions;
   }
 
@@ -363,38 +335,29 @@ export class GHGService {
     feedOutput: FeedDetailsOutput,
     emissionFactor: number,
     annualFPCM: number,
-  ): TruckingEmissions {
-    const emissions: TruckingEmissions = {
+  ) {
+    const emissions: Record<string, number> = {
       totalTruckingEmissions: 0,
       ghgTruckingFootprint: 0,
     };
 
-    const feedTypes = [
-      'cornSilage',
-      'sorghumSilage',
-      'smallGrain',
-      'grassHay',
-      'alfalfa',
-      'peanutHulls',
-      'applePomace',
-      'distillers',
-      'brewers',
-      'citrusPulp',
-      'cornGluten',
-      'wholeCottonseed',
-      'cottonseedHulls',
-      'soybean48',
-    ];
+    // same feed types
+    const feedTypes = Object.keys(this.DRY_MATTER_PERCENTAGES);
 
-    feedTypes.forEach((feedType) => {
+    for (const feedType of feedTypes) {
       const transportKey = this.getTransportKey(feedType);
-      const transportData = feedDetails[`${transportKey}TransportAndCost`] || {};
-      
-      // ASSUMPTION MADE: Fallback to 0 if values not found
-      const tonsProduced = feedOutput[`${feedType}TonsProduced`] || 0;
-      const tonsPurchased = feedOutput[`${feedType}TonsToBePurchased`] || 0;
-      const grownMiles = transportData[`${transportKey}AvgGrownForageMilesTruckedToDairy`] || 0;
-      const purchasedMiles = transportData[`${transportKey}AvgPurchasedFeedMilesTruckedToDairy`] || 0;
+      const transportData =
+        (feedDetails as any)[`${transportKey}TransportAndCost`] || {};
+
+      const tonsProduced = (feedOutput as any)[`${feedType}TonsProduced`] || 0;
+      const tonsPurchased =
+        (feedOutput as any)[`${feedType}TonsToBePurchased`] || 0;
+
+      const grownMiles =
+        transportData[`${transportKey}AvgGrownForageMilesTruckedToDairy`] || 0;
+      const purchasedMiles =
+        transportData[`${transportKey}AvgPurchasedFeedMilesTruckedToDairy`] ||
+        0;
 
       const grownEmissions = tonsProduced * grownMiles * emissionFactor;
       const purchasedEmissions = tonsPurchased * purchasedMiles * emissionFactor;
@@ -402,14 +365,16 @@ export class GHGService {
 
       emissions[`${feedType}TruckingEmissions`] = totalEmissions;
       emissions.totalTruckingEmissions += totalEmissions;
-    });
+    }
 
-    emissions.ghgTruckingFootprint = emissions.totalTruckingEmissions / annualFPCM;
+    emissions.ghgTruckingFootprint = annualFPCM
+      ? emissions.totalTruckingEmissions / annualFPCM
+      : 0;
+
     return emissions;
   }
 
   private getTransportKey(feedType: string): string {
-    // ASSUMPTION MADE: Transportation key mapping
     const transportMap: Record<string, string> = {
       cornSilage: 'cornSilage',
       sorghumSilage: 'sorghumSilage',
@@ -430,8 +395,70 @@ export class GHGService {
     return transportMap[feedType] || feedType;
   }
 
+  /**
+   * Build the "herdTotalDMI" object matching the HerdTotalDMI sub-schema
+   */
+  private buildHerdTotalDMIObject(
+    dmiResults: Record<string, number>,
+  ): Record<string, number> {
+    return {
+      cornSilageDMI: dmiResults.cornSilage ?? 0,
+      sorghumSilageDMI: dmiResults.sorghumSilage ?? 0,
+      smallGrainDMI: dmiResults.smallGrain ?? 0,
+      grassHayDMI: dmiResults.grassHay ?? 0,
+      alfalfaDMI: dmiResults.alfalfa ?? 0,
+      peanutHullsDMI: dmiResults.peanutHulls ?? 0,
+      applePomaceDMI: dmiResults.applePomace ?? 0,
+      distillersDMI: dmiResults.distillers ?? 0,
+      brewersDMI: dmiResults.brewers ?? 0,
+      citrusPulpDMI: dmiResults.citrusPulp ?? 0,
+      cornGlutenDMI: dmiResults.cornGluten ?? 0,
+      wholeCottonseedDMI: dmiResults.wholeCottonseed ?? 0,
+      cottonseedHullsDMI: dmiResults.cottonseedHulls ?? 0,
+      soybean48DMI: dmiResults.soybean48 ?? 0,
+    };
+  }
+
+  private buildFeedGHGEmissionsObject(
+    feedEmissions: Record<string, number>,
+  ): Record<string, number> {
+    const result: Record<string, number> = {};
+    for (const key of Object.keys(feedEmissions)) {
+      if (key.endsWith('FeedEmissions') || key.endsWith('FeedEmissionsPerFPCM')) {
+        result[key] = feedEmissions[key];
+      }
+    }
+    return result;
+  }
+
+  private buildEntericEmissionsObject(
+    enteric: Record<string, number>,
+  ): Record<string, number> {
+    const result: Record<string, number> = {};
+    for (const key of Object.keys(enteric)) {
+      if (
+        key.endsWith('EntericEmissions') ||
+        key.endsWith('EntericEmissionsPerFPCM')
+      ) {
+        result[key] = enteric[key];
+      }
+    }
+    return result;
+  }
+
+  private buildTruckingEmissionsObject(
+    trucking: Record<string, number>,
+  ): Record<string, number> {
+    const result: Record<string, number> = {};
+    for (const key of Object.keys(trucking)) {
+      if (key.endsWith('TruckingEmissions')) {
+        result[key] = trucking[key];
+      }
+    }
+    return result;
+  }
+
   async getGHGInput(email: string): Promise<GHGInput | null> {
-    //first find the user_id using the email, then find the document using the id
     const user = await this.userModel.findOne({ email }).exec();
     if (!user) {
       throw new HttpException(
@@ -439,12 +466,9 @@ export class GHGService {
         HttpStatus.NOT_FOUND,
       );
     }
-
     const userId = user._id.toString();
-    console.log('userId ', userId);
 
-    const inputDocument = this.ghgInputModel.findOne({ userId }).exec();
-
+    const inputDocument = await this.ghgInputModel.findOne({ userId }).exec();
     if (!inputDocument) {
       throw new HttpException(
         'Input record for this user not found',
@@ -457,7 +481,9 @@ export class GHGService {
 
   async getGHGResults(userId: string): Promise<GHGOutput> {
     const results = await this.ghgOutputModel.findOne({ userId }).exec();
-    if (!results) throw new Error('GHG results not found');
+    if (!results) {
+      throw new Error('GHG results not found');
+    }
     return results;
   }
 }

@@ -3,6 +3,51 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Types } from "mongoose";
 
 @Schema()
+export class HerdTotalDMI {
+  @Prop({ required: true })
+  cornSilageDMI: number;
+
+  @Prop({ required: true })
+  sorghumSilageDMI: number;
+
+  @Prop({ required: true })
+  smallGrainDMI: number;
+
+  @Prop({ required: true })
+  grassHayDMI: number;
+
+  @Prop({ required: true })
+  alfalfaDMI: number;
+
+  @Prop({ required: true })
+  peanutHullsDMI: number;
+
+  @Prop({ required: true })
+  applePomaceDMI: number;
+
+  @Prop({ required: true })
+  distillersDMI: number;
+
+  @Prop({ required: true })
+  brewersDMI: number;
+
+  @Prop({ required: true })
+  citrusPulpDMI: number;
+
+  @Prop({ required: true })
+  cornGlutenDMI: number;
+
+  @Prop({ required: true })
+  wholeCottonseedDMI: number;
+
+  @Prop({ required: true })
+  cottonseedHullsDMI: number;
+
+  @Prop({ required: true })
+  soybean48DMI: number;
+}
+
+@Schema()
 export class FeedGHGEmissions{
   // Individual Feed Emissions
   @Prop({ required: true })
@@ -211,7 +256,8 @@ export class GHGOutput extends Document {
   ghgTruckingFootprint: number;
 
   // Herd Total - TO DO
-  
+  @Prop({ type: HerdTotalDMI, default: {} })
+  herdTotalDMI: HerdTotalDMI;
 
   // Feed GHG Emissions
   @Prop({ type: FeedGHGEmissions, default: {} })
