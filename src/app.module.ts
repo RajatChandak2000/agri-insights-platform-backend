@@ -14,6 +14,7 @@ import { LabourCostModule } from './DairyEnterpriseBudget/labour-cost/labour-cos
 import { FixedCostsModule } from './DairyEnterpriseBudget/fixed-costs/fixed-costs.module';
 import { FeedDetailsModule } from './DairyEnterpriseBudget/feed-details/feed-details.module';
 import { AnalysisModule } from './analysis/analysis.module';
+import { GHGModule } from './DairyEnterpriseBudget/ghg-model/ghg.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { AnalysisModule } from './analysis/analysis.module';
     FixedCostsModule,
     FeedDetailsModule,
     AnalysisModule,
+    GHGModule,
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule], // Ensure ConfigModule is available

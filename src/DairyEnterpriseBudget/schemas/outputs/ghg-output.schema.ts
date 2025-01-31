@@ -3,21 +3,52 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Types } from "mongoose";
 
 @Schema()
-export class GHGOutput extends Document {
-  @Prop({type: Types.ObjectId, ref: 'User', required: true})
-  userId: Types.ObjectId;
-
-  // FPCM Output
+export class HerdTotalDMI {
   @Prop({ required: true })
-  annualFPCM: number;
-
-  // Feed Emissions Total
-  @Prop({ required: true })
-  ghgFeedTotal: number;
+  cornSilageDMI: number;
 
   @Prop({ required: true })
-  ghgFeedTotalPerFPCM: number;
+  sorghumSilageDMI: number;
 
+  @Prop({ required: true })
+  smallGrainDMI: number;
+
+  @Prop({ required: true })
+  grassHayDMI: number;
+
+  @Prop({ required: true })
+  alfalfaDMI: number;
+
+  @Prop({ required: true })
+  peanutHullsDMI: number;
+
+  @Prop({ required: true })
+  applePomaceDMI: number;
+
+  @Prop({ required: true })
+  distillersDMI: number;
+
+  @Prop({ required: true })
+  brewersDMI: number;
+
+  @Prop({ required: true })
+  citrusPulpDMI: number;
+
+  @Prop({ required: true })
+  cornGlutenDMI: number;
+
+  @Prop({ required: true })
+  wholeCottonseedDMI: number;
+
+  @Prop({ required: true })
+  cottonseedHullsDMI: number;
+
+  @Prop({ required: true })
+  soybean48DMI: number;
+}
+
+@Schema()
+export class FeedGHGEmissions{
   // Individual Feed Emissions
   @Prop({ required: true })
   cornSilageFeedEmissions: number;
@@ -88,13 +119,10 @@ export class GHGOutput extends Document {
   soybean48FeedEmissions: number;
   @Prop({ required: true })
   soybean48FeedEmissionsPerFPCM: number;
+}
 
-  // Total Enteric Emissions
-  @Prop({ required: true })
-  totalEntericEmissions: number;
-  @Prop({ required: true })
-  totalEntericEmissionsPerFPCM: number;
-
+@Schema()
+export class EntericEmissions{
   // Individual Enteric Emissions
   @Prop({ required: true })
   cornSilageEntericEmissions: number;
@@ -165,13 +193,10 @@ export class GHGOutput extends Document {
   soybean48EntericEmissions: number;
   @Prop({ required: true })
   soybean48EntericEmissionsPerFPCM: number;
+}
 
-  // Trucking Emissions
-  @Prop({ required: true })
-  totalTruckingEmissions: number;
-  @Prop({ required: true })
-  ghgTruckingFootprint: number;
-
+@Schema()
+export class TruckingEmissions{
   // Individual Trucking Emissions
   @Prop({ required: true })
   cornSilageTruckingEmissions: number;
@@ -201,6 +226,50 @@ export class GHGOutput extends Document {
   cottonseedHullsTruckingEmissions: number;
   @Prop({ required: true })
   soybean48TruckingEmissions: number;
+}
+
+@Schema()
+export class GHGOutput extends Document {
+  @Prop({type: Types.ObjectId, ref: 'User', required: true})
+  userId: Types.ObjectId;
+
+  // FPCM Output
+  @Prop({ required: true })
+  annualFPCM: number;
+
+  // Feed Emissions Total
+  @Prop({ required: true })
+  ghgFeedTotal: number;
+  @Prop({ required: true })
+  ghgFeedTotalPerFPCM: number;
+
+  // Total Enteric Emissions
+  @Prop({ required: true })
+  totalEntericEmissions: number;
+  @Prop({ required: true })
+  totalEntericEmissionsPerFPCM: number;
+
+  // Trucking Emissions
+  @Prop({ required: true })
+  totalTruckingEmissions: number;
+  @Prop({ required: true })
+  ghgTruckingFootprint: number;
+
+  // Herd Total - TO DO
+  @Prop({ type: HerdTotalDMI, default: {} })
+  herdTotalDMI: HerdTotalDMI;
+
+  // Feed GHG Emissions
+  @Prop({ type: FeedGHGEmissions, default: {} })
+  feedGHGEmissions = FeedGHGEmissions;
+
+  // Enteric Emissions
+  @Prop({ type: EntericEmissions, default: {}})
+  entericEmissions = EntericEmissions
+
+  // Individual Trucking Emissions
+  @Prop({type : TruckingEmissions, default: {}})
+  truckingEmissions: TruckingEmissions
 
   @Prop({ default: Date.now })
   createdAt: Date;

@@ -1,4 +1,4 @@
-import { IsNumber, IsObject, IsOptional } from 'class-validator';
+import { IsNumber, IsObject } from 'class-validator';
 
 class MilkProductionInputsDto {
   @IsNumber()
