@@ -70,9 +70,6 @@ export class GHGInput extends Document {
   @Prop({ required: true })
   proteinPercentage: number;
 
-  // @Prop({ type: CharacterizationFactors, required: true })
-  // characterizationFactors: CharacterizationFactors;
-
   @Prop({ required: true, default: 0.3567 })
   averageUSTruckingEmissions: number;
 

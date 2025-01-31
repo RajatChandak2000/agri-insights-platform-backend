@@ -7,7 +7,7 @@ import { GHGInputDto } from '../dto/ghg-model.dto';
 import { GHGInput } from '../schemas/inputs/ghg-input.schema';
 
 @Controller('ghg-emissions')
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class GHGController {
   constructor(private readonly ghgService: GHGService) {}
 
@@ -16,7 +16,7 @@ export class GHGController {
     @Param('email') email: string,
     @Body() updateDto: GHGInputDto,
   ) {
-    console.log('Data got from client is ', updateDto.fatPercentage, updateDto. proteinPercentage);
+    console.log('Data got from client is ', updateDto.fatPercentage, updateDto.proteinPercentage);
     return this.ghgService.updateInput(email, updateDto);
   }
 
@@ -32,26 +32,8 @@ export class GHGController {
   async calculateGHGMetrics(
     @Param('userId') userId: string,
     @Body() ghgInputs: {
-      // fpcmInputs: {
       fatPercentage: number;
       proteinPercentage: number;
-      // };
-      // characterizationFactors: {
-      //   cornSilageCharacterizationFactor: number;
-      //   sorghumSilageCharacterizationFactor: number;
-      //   smallGrainCharacterizationFactor: number;
-      //   grassHayCharacterizationFactor: number;
-      //   alfalfaCharacterizationFactor: number;
-      //   peanutHullsCharacterizationFactor: number;
-      //   applePomaceCharacterizationFactor: number;
-      //   distillersCharacterizationFactor: number;
-      //   brewersCharacterizationFactor: number;
-      //   citrusPulpCharacterizationFactor: number;
-      //   cornGlutenCharacterizationFactor: number;
-      //   wholeCottonseedCharacterizationFactor: number;
-      //   cottonseedHullsCharacterizationFactor: number;
-      //   soybean48CharacterizationFactor: number;
-      // };
       averageUSTruckingEmissions: number;
     }) {
     return this.ghgService.calculateGHGMetrics(userId, ghgInputs);

@@ -180,6 +180,7 @@ export class GHGService {
       // updatedAt: now,
     });
 
+    console.log("newOutput ", newOutput);
     return newOutput.save();
   }
 
@@ -286,9 +287,7 @@ export class GHGService {
       const factor = factors[feedType] || 0;
 
       const feedEmissionValue = dmi * factor;
-      const feedEmissionPerFPCM = annualFPCM
-        ? feedEmissionValue / annualFPCM
-        : 0;
+      const feedEmissionPerFPCM = annualFPCM ? feedEmissionValue / annualFPCM : 0;
 
       emissions[`${feedType}FeedEmissions`] = feedEmissionValue;
       emissions[`${feedType}FeedEmissionsPerFPCM`] = feedEmissionPerFPCM;
@@ -296,9 +295,7 @@ export class GHGService {
       emissions.ghgFeedTotal += feedEmissionValue;
     }
 
-    emissions.ghgFeedTotalPerFPCM = annualFPCM
-      ? emissions.ghgFeedTotal / annualFPCM
-      : 0;
+    emissions.ghgFeedTotalPerFPCM = annualFPCM ? emissions.ghgFeedTotal / annualFPCM: 0;
 
     return emissions;
   }
