@@ -39,8 +39,8 @@ export class GHGController {
     return this.ghgService.calculateGHGMetrics(userId, ghgInputs);
   }
 
-  @Get('outputDetails/:userId')
-  async getGHGResults(@Param('userId') userId: string) {
-    return this.ghgService.getGHGResults(userId);
+  @Get('outputDetails/:email')
+  async getGHGResults(@Param('email') email: string) {
+    return this.ghgService.getGHGResults(email);
   }
 }

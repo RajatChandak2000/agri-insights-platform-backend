@@ -116,11 +116,13 @@ export class GHGService {
       this.productionDetailsModel.findOne({ userId }).lean().exec(),
       this.feedDetailsOutputModel.findOne({ userId }).lean().exec(),
     ]);
-
+  
     if (!feedDetails || !productionDetails || !feedOutput) {
       throw new Error('Required input data not found for GHG calculation.');
     }
 
+    console.log("feedDetails.milkingHerd ", feedDetails.milkingHerd);
+  
     // 1. Calculate FPCM
     const totalMilkProduced =
       productionDetails.milkProduction.expectedMilkProduction * 100;
@@ -129,13 +131,15 @@ export class GHGService {
       ghgInputs.fatPercentage,
       ghgInputs.proteinPercentage,
     );
-
+  
     // 2. Herd population counts
     const herdCounts = this.getHerdPopulationCounts(productionDetails);
-
+    console.log("herdCounts ", herdCounts);
+  
     // 3. Herd total DMI for each feed type
     const herdTotalDMI = this.calculateTotalDMI(feedDetails, herdCounts);
-
+    console.log("herdTotalDMI ", herdTotalDMI);
+  
     // 4. Calculate feed, enteric, trucking emissions
     const feedEmissions = this.calculateFeedEmissions(
       herdTotalDMI,
@@ -152,37 +156,54 @@ export class GHGService {
       ghgInputs.averageUSTruckingEmissions,
       annualFPCM,
     );
-
-    // 5. Build the new GHGOutput doc
-    const now = new Date();
-    const newOutput = new this.ghgOutputModel({
+  
+    // 5. Build the update object for the GHGOutput doc
+    const updateData = {
       userId,
       annualFPCM,
-
+  
       // Totals
       ghgFeedTotal: feedEmissions.ghgFeedTotal,
       ghgFeedTotalPerFPCM: feedEmissions.ghgFeedTotalPerFPCM,
       totalEntericEmissions: entericEmissions.totalEntericEmissions,
-      totalEntericEmissionsPerFPCM:
-        entericEmissions.totalEntericEmissionsPerFPCM,
+      totalEntericEmissionsPerFPCM: entericEmissions.totalEntericEmissionsPerFPCM,
       totalTruckingEmissions: truckingEmissions.totalTruckingEmissions,
       ghgTruckingFootprint: truckingEmissions.ghgTruckingFootprint,
-
+  
       // HerdTotalDMI sub-object
       herdTotalDMI: this.buildHerdTotalDMIObject(herdTotalDMI),
-
+  
       // Nested objects
       feedGHGEmissions: this.buildFeedGHGEmissionsObject(feedEmissions),
       entericEmissions: this.buildEntericEmissionsObject(entericEmissions),
       truckingEmissions: this.buildTruckingEmissionsObject(truckingEmissions),
-
-      // createdAt: now,
-      // updatedAt: now,
-    });
-
-    console.log("newOutput ", newOutput);
-    return newOutput.save();
-  }
+    };
+  
+    // Define options for findOneAndUpdate
+    const options = {
+      new: true,               // Return the updated document.
+      upsert: true,            // Create the document if it doesn't exist.
+      setDefaultsOnInsert: true, // Apply default schema values on insert.
+    };
+  
+    try {
+      const result = await this.ghgOutputModel.findOneAndUpdate(
+        { userId },
+        { $set: updateData },
+        options,
+      ).exec();
+  
+      this.logger.log(
+        `Successfully calculated and updated GHG output for user: ${userId}`,
+      );
+      return result;
+    } catch (error) {
+      this.logger.error(
+        `Failed to calculate GHG output: ${error.message}`,
+      );
+      throw new Error(`Failed to calculate GHG output: ${error.message}`);
+    }
+  }  
 
   private calculateFPCM(
     totalMilk: number,
@@ -235,14 +256,11 @@ export class GHGService {
 
       for (const group of herdGroups) {
         const feedKey = this.getFeedKey(feedType, group.key);
-        const lbsPerDay =
-          feedDetails[group.key]?.[`${feedKey}LbsAsFedPerDay`] || 0;
-        const daysOnFeed =
-          feedDetails[group.key]?.[`${feedKey}DaysOnFeed`] || 0;
-
+        const lbsPerDay = feedDetails[group.key]?.[`${group.key}${feedKey}LbsAsFedPerDay`] || 0;
+        const daysOnFeed = feedDetails[group.key]?.[`${group.key}${feedKey}DaysOnFeed`] || 0;
+        
         const dmPercentage = this.DRY_MATTER_PERCENTAGES[feedType];
-        const totalGroupDMI =
-          lbsPerDay * daysOnFeed * dmPercentage * group.count;
+        const totalGroupDMI = lbsPerDay * daysOnFeed * dmPercentage * group.count;
 
         dmiResults[feedType] += totalGroupDMI;
       }
@@ -476,7 +494,20 @@ export class GHGService {
     return inputDocument;
   }
 
-  async getGHGResults(userId: string): Promise<GHGOutput> {
+  async getGHGResults(email: string): Promise<GHGOutput> {
+    //first find the user_id using the email, then find the document using the id
+    const user = await this.userModel.findOne({ email }).exec();
+    if (!user) {
+      throw new HttpException(
+        'User with this email does not exist',
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    const userId = user._id.toString();
+    console.log('userId ', userId);
+
+    
     const results = await this.ghgOutputModel.findOne({ userId }).exec();
     if (!results) {
       throw new Error('GHG results not found');
