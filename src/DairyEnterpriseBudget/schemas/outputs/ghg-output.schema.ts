@@ -255,7 +255,7 @@ export class GHGOutput extends Document {
   @Prop({ required: true })
   ghgTruckingFootprint: number;
 
-  // Herd Total - TO DO
+  // Herd Total
   @Prop({ type: HerdTotalDMI, default: {} })
   herdTotalDMI: HerdTotalDMI;
 
