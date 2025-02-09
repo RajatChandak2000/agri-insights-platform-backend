@@ -499,10 +499,8 @@ export class FeedDetailsService {
     }
 
     // ---->Temp variables required to calculate the outputs
-    // const numberOfHeifersRaised = productionDetailsInputs.heiferProduction.numberOfHeifersRaised;
-    const numberOfHeifersRaised = 110;
-    // const numberOfLactationsPerYear = productionDetailsOutputs.numberOfLactationsPerYear;
-    const numberOfLactationsPerYear = 180;
+    const numberOfHeifersRaised = productionDetailsInputs.heiferProduction.numberOfHeifersRaised;
+    const numberOfLactationsPerYear = productionDetailsOutputs.numberOfLactationsPerYear;
     const numberOfMilkingCowsOnFeed = numberOfLactationsPerYear;
     const numberOfDryCowsOnFeed = numberOfLactationsPerYear;
     const numberOfBredHeifersCowsOnFeed = numberOfHeifersRaised;
