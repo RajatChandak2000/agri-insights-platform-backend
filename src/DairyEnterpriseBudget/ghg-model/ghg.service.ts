@@ -8,6 +8,7 @@ import { ProductionDetailsInput } from '../schemas/inputs/ProductionDetailsInput
 import { FeedDetailsOutput } from '../schemas/outputs/FeedDetailsOutput.schema';
 import { GHGInputDto } from '../dto/ghg-model.dto';
 import { User } from 'src/user/schemas/user.schema';
+import { ProductionDetailsOutput } from '../schemas/outputs/ProductionDetailsOutput.schema';
 
 @Injectable()
 export class GHGService {
@@ -57,6 +58,8 @@ export class GHGService {
     private feedDetailsModel: Model<FeedDetailsInput>,
     @InjectModel(ProductionDetailsInput.name)
     private productionDetailsModel: Model<ProductionDetailsInput>,
+    @InjectModel(ProductionDetailsOutput.name)
+    private productionDetailsOutputModel: Model<ProductionDetailsOutput>,
     @InjectModel(FeedDetailsOutput.name)
     private feedDetailsOutputModel: Model<FeedDetailsOutput>,
     @InjectModel(User.name) private userModel: Model<User>,
@@ -111,9 +114,10 @@ export class GHGService {
     userId: string,
     ghgInputs: GHGInputDto,
   ): Promise<GHGOutput> {
-    const [feedDetails, productionDetails, feedOutput] = await Promise.all([
+    const [feedDetails, productionDetails, productionDetailsOutputs,feedOutput] = await Promise.all([
       this.feedDetailsModel.findOne({ userId }).lean().exec(),
       this.productionDetailsModel.findOne({ userId }).lean().exec(),
+      this.productionDetailsOutputModel.findOne({userId}).lean().exec(),
       this.feedDetailsOutputModel.findOne({ userId }).lean().exec(),
     ]);
   
@@ -133,7 +137,7 @@ export class GHGService {
     );
   
     // 2. Herd population counts
-    const herdCounts = this.getHerdPopulationCounts(productionDetails);
+    const herdCounts = this.getHerdPopulationCounts(productionDetails,productionDetailsOutputs);
     console.log("herdCounts ", herdCounts);
   
     // 3. Herd total DMI for each feed type
@@ -219,22 +223,29 @@ export class GHGService {
   }
 
   private getHerdPopulationCounts(
-    productionDetails: ProductionDetailsInput,
+    productionDetails: ProductionDetailsInput, productionDetailsOutputs: ProductionDetailsOutput
   ): { lactating: number; dry: number; replacements: number; young: number } {
     // 15% dry
-    const DRY_COW_PERCENTAGE = 0.15;
-    // 70% replacements, 30% young
-    const REPLACEMENT_HEIFER_SPLIT = 0.7;
+
+    const numberOfHeifersRaised = productionDetails.heiferProduction.numberOfHeifersRaised;
+    const numberOfLactationsPerYear = productionDetailsOutputs.numberOfLactationsPerYear;
+    const numberOfMilkingCowsOnFeed = Math.round(numberOfLactationsPerYear);
+    const numberOfDryCowsOnFeed = Math.round(numberOfLactationsPerYear);
+    const numberOfBredHeifersCowsOnFeed = numberOfHeifersRaised;
+    const numberOfYoungHeifersCowsOnFeed = numberOfHeifersRaised;
+
+
+  
 
     const totalCows = productionDetails.milkProduction.totalNumberOfCows;
     const totalHeifersRaised =
       productionDetails.heiferProduction.numberOfHeifersRaised;
 
     return {
-      lactating: Math.round(totalCows * (1 - DRY_COW_PERCENTAGE)),
-      dry: Math.round(totalCows * DRY_COW_PERCENTAGE),
-      replacements: Math.round(totalHeifersRaised * REPLACEMENT_HEIFER_SPLIT),
-      young: Math.round(totalHeifersRaised * (1 - REPLACEMENT_HEIFER_SPLIT)),
+      lactating: numberOfMilkingCowsOnFeed,
+      dry: numberOfMilkingCowsOnFeed,
+      replacements: numberOfYoungHeifersCowsOnFeed,
+      young: numberOfYoungHeifersCowsOnFeed,
     };
   }
 
