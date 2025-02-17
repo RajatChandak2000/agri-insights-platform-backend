@@ -17,7 +17,7 @@ export class AnalysisService {
         return await this.analysisModel
             .find({})
             .sort({ timestamp: -1 })
-            .limit(336)
+            .limit(168)
             .exec();
     }
 }

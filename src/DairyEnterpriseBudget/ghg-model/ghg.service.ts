@@ -163,15 +163,15 @@ export class GHGService {
     // 5. Build the update object for the GHGOutput doc
     const updateData = {
       userId,
-      annualFPCM,
-  
+      annualFPCM: Number(annualFPCM.toFixed(2)),
+
       // Totals
-      ghgFeedTotal: feedEmissions.ghgFeedTotal,
-      ghgFeedTotalPerFPCM: feedEmissions.ghgFeedTotalPerFPCM,
-      totalEntericEmissions: entericEmissions.totalEntericEmissions,
-      totalEntericEmissionsPerFPCM: entericEmissions.totalEntericEmissionsPerFPCM,
-      totalTruckingEmissions: truckingEmissions.totalTruckingEmissions,
-      ghgTruckingFootprint: truckingEmissions.ghgTruckingFootprint,
+      ghgFeedTotal: Number(feedEmissions.ghgFeedTotal.toFixed(2)),
+      ghgFeedTotalPerFPCM: Number(feedEmissions.ghgFeedTotalPerFPCM.toFixed(2)),
+      totalEntericEmissions: Number(entericEmissions.totalEntericEmissions.toFixed(2)),
+      totalEntericEmissionsPerFPCM: Number(entericEmissions.totalEntericEmissionsPerFPCM.toFixed(2)),
+      totalTruckingEmissions: Number(truckingEmissions.totalTruckingEmissions.toFixed(2)),
+      ghgTruckingFootprint: Number(truckingEmissions.ghgTruckingFootprint.toFixed(2)),
   
       // HerdTotalDMI sub-object
       herdTotalDMI: this.buildHerdTotalDMIObject(herdTotalDMI),
