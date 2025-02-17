@@ -135,6 +135,8 @@ export class GHGService {
       ghgInputs.proteinPercentage,
     );
   
+
+    console.log("Annual FPCM : ",annualFPCM)
     // 2. Herd population counts
     const herdCounts = this.getHerdPopulationCounts(productionDetails,productionDetailsOutputs);
     console.log("herdCounts ", herdCounts);
@@ -368,6 +370,7 @@ export class GHGService {
 
     // same feed types
     const feedTypes = Object.keys(this.DRY_MATTER_PERCENTAGES);
+    console.log("Calcualting trucking emmisions !")
 
     for (const feedType of feedTypes) {
       const transportKey = this.getTransportKey(feedType);
@@ -375,8 +378,15 @@ export class GHGService {
         (feedDetails as any)[`${transportKey}TransportAndCost`] || {};
 
       const tonsProduced = (feedOutput as any)[`${feedType}TonsProduced`] || 0;
-      const tonsPurchased =
+      let tonsPurchased =
         (feedOutput as any)[`${feedType}TonsToBePurchased`] || 0;
+        console.log("Feedtype : " ,feedType)
+        console.log("Tons Purchsed : " ,tonsPurchased)
+      
+        if (tonsPurchased<0){
+          console.log("I am less than 0!!")
+          tonsPurchased=0;
+        }
 
       const grownMiles =
         transportData[`${transportKey}AvgGrownForageMilesTruckedToDairy`] || 0;
