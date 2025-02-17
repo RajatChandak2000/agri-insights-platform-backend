@@ -128,8 +128,7 @@ export class GHGService {
     console.log("feedDetails.milkingHerd ", feedDetails.milkingHerd);
   
     // 1. Calculate FPCM
-    const totalMilkProduced =
-      productionDetails.milkProduction.expectedMilkProduction * 100;
+    const totalMilkProduced =productionDetailsOutputs.totalAnnualMilkProduction*100;
     const annualFPCM = this.calculateFPCM(
       totalMilkProduced,
       ghgInputs.fatPercentage,
