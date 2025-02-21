@@ -62,6 +62,8 @@ export class FeedDetailsOutput extends Document {
   // Whole Cottonseed
   @Prop({ required: true }) wholeCottonseedTonsRequired: number;
 
+  @Prop({ required: true }) cottonseedHullsTonsRequired: number;
+
   // Soybean Meal 48
   @Prop({ required: true }) soybeanMeal48TonsRequired: number;
 

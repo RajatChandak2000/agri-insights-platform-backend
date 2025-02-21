@@ -1014,15 +1014,9 @@ export class FeedDetailsService {
         .wholeCottonseedAvgGrownForageMilesTruckedToDairy;
 
     // Cottonseed Hulls Trucking Costs
-    const cottonseedHullsCostOfCommodityPerTon =
-      updatedDocument.cottonseedHullsTransportAndCost
-        .cottonseedHullsCostOfCommodityPerTon;
-    const cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy =
-      updatedDocument.cottonseedHullsTransportAndCost
-        .cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy;
-    const cottonseedHullsAvgGrownForageMilesTruckedToDairy =
-      updatedDocument.cottonseedHullsTransportAndCost
-        .cottonseedHullsAvgGrownForageMilesTruckedToDairy;
+    const cottonseedHullsCostOfCommodityPerTon = updatedDocument.cottonseedHullsTransportAndCost.cottonseedHullsCostOfCommodityPerTon;
+    const cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy = updatedDocument.cottonseedHullsTransportAndCost.cottonseedHullsAvgPurchasedFeedMilesTruckedToDairy;
+    const cottonseedHullsAvgGrownForageMilesTruckedToDairy = updatedDocument.cottonseedHullsTransportAndCost.cottonseedHullsAvgGrownForageMilesTruckedToDairy;
 
     // Soybean Meal Trucking Costs
     const soybeanMealCostOfCommodityPerTon =
@@ -1485,6 +1479,7 @@ export class FeedDetailsService {
       citrusPulpTonsRequired: Number(citrusPulpTonsRequired.toFixed(2)),
       cornGlutenTonsRequired: Number(cornGlutenTonsRequired.toFixed(2)),
       wholeCottonseedTonsRequired: Number(wholeCottonseedTonsRequired.toFixed(2)),
+      cottonseedHullsTonsRequired: Number(cottonseedHullsTonsRequired.toFixed(2)),
       soybeanMeal48TonsRequired: Number(soybeanMeal48TonsRequired.toFixed(2)),
       customFeedMixTonsRequired: Number(customFeedMixTonsRequired.toFixed(2)),
       customMineralMixTonsRequired: Number(customMineralMixTonsRequired.toFixed(2)),
