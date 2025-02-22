@@ -2,6 +2,30 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
 @Schema()
+class FinancialAssumptionsInputs{
+    @Prop({ required: true })
+    shortTermInterestRate?: number;
+  
+    @Prop({ required: true })
+    propertyTaxRate?: number;
+  
+    @Prop({ required: true })
+    propertyInsuranceRate?: number;
+  
+    @Prop({ required: true })
+    buildingAndStructuresInsuranceCoverageRequired?: number;
+  
+    @Prop({ required: true })
+    longTermInterestRate?: number;
+  
+    @Prop({ required: true })
+    livestockInsuranceRate?: number;
+  
+    @Prop({ required: true })
+    machineryAndEquipmentInsuranceRate?: number;
+}
+
+@Schema()
 class CattleFixedCostInputs {
   @Prop({ required: true })
   cowPurchaseValue: number;
@@ -806,6 +830,9 @@ class LandFixedCostsInputs {
 export class FixedCostsInput extends Document {
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
   userId: Types.ObjectId;
+
+  @Prop({ type: FinancialAssumptionsInputs, default: {} })
+  financialAssumptions: FinancialAssumptionsInputs;
 
   @Prop({ type: CattleFixedCostInputs, default: {} })
   cattleFixedCost: CattleFixedCostInputs;

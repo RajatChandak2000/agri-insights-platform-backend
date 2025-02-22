@@ -39,6 +39,18 @@ export class FixedCostsService {
     this.logger.log(`Updating inputs for user: ${userId}`);
     const updateData: any = {};
 
+    //Handling Financial Assumptions
+    if (updateDto.financialAssumptions) {
+      for (const [key, value] of Object.entries(updateDto.financialAssumptions)) {
+        if (value !== undefined) {
+          updateData[`financialAssumptions.${key}`] = value;
+        }
+      }
+      this.logger.log(
+        `Financial Assumptions Data: ${JSON.stringify(updateDto.financialAssumptions)}`,
+      );
+    }
+
     // Handling Cattle Fixed Costs
     if (updateDto.cattleFixedCost) {
       for (const [key, value] of Object.entries(updateDto.cattleFixedCost)) {
@@ -158,44 +170,35 @@ export class FixedCostsService {
     this.logger.log(`Calculating fixed costs output for user: ${userId}`);
 
     //Get any other required documents from other tables
-    const productionDetailsInputs = await this.productionDetailsInputModel
-      .findOne({ userId })
-      .exec();
-    const receiptsInput = await this.receiptsInputModel
-      .findOne({ userId })
-      .exec();
+    const productionDetailsInputs = await this.productionDetailsInputModel.findOne({ userId }).exec();
+    const receiptsInput = await this.receiptsInputModel.findOne({ userId }).exec();
 
-    // ------->>> Inputs from operating costs
+    // ------->>> Inputs from fixed costs
+    
+    // Financial Assumptions
+    const shortTermInterestRate = updatedDocument.financialAssumptions.shortTermInterestRate;
+    const propertyTaxRate = updatedDocument.financialAssumptions.propertyTaxRate;
+    const propertyInsuranceRate = updatedDocument.financialAssumptions.propertyInsuranceRate;
+    const buildingAndStructuresInsuranceCoverageRequired = updatedDocument.financialAssumptions.buildingAndStructuresInsuranceCoverageRequired;
+    const longTermInterestRate = updatedDocument.financialAssumptions.longTermInterestRate;
+    const livestockInsuranceRate = updatedDocument.financialAssumptions.livestockInsuranceRate;
+    const machineryAndEquipmentInsuranceRate = updatedDocument.financialAssumptions.machineryAndEquipmentInsuranceRate;
+
     const cowPurchaseValue = updatedDocument.cattleFixedCost.cowPurchaseValue;
-    const overheadCostPerCow =
-      updatedDocument.cattleFixedCost.overheadCostPerCow;
-    const numberOfBredHeifers =
-      updatedDocument.cattleFixedCost.numberOfBredHeifers;
-    const bredHeiferPurchaseValue =
-      updatedDocument.cattleFixedCost.bredHeiferPurchaseValue;
-    const numberOfOneYearOldHeifers =
-      updatedDocument.cattleFixedCost.numberOfOneYearOldHeifers;
-    const oneYearOldHeiferPurchaseValue =
-      updatedDocument.cattleFixedCost.oneYearOldHeiferPurchaseValue;
-    const numberOfWeanedHeiferCalves =
-      updatedDocument.cattleFixedCost.numberOfWeanedHeiferCalves;
-    const weanedHeiferCalvesPurchaseValue =
-      updatedDocument.cattleFixedCost.weanedHeiferCalvesPurchaseValue;
+    const overheadCostPerCow = updatedDocument.cattleFixedCost.overheadCostPerCow;
+    const numberOfBredHeifers = updatedDocument.cattleFixedCost.numberOfBredHeifers;
+    const bredHeiferPurchaseValue = updatedDocument.cattleFixedCost.bredHeiferPurchaseValue;
+    const numberOfOneYearOldHeifers = updatedDocument.cattleFixedCost.numberOfOneYearOldHeifers;
+    const oneYearOldHeiferPurchaseValue = updatedDocument.cattleFixedCost.oneYearOldHeiferPurchaseValue;
+    const numberOfWeanedHeiferCalves = updatedDocument.cattleFixedCost.numberOfWeanedHeiferCalves;
+    const weanedHeiferCalvesPurchaseValue = updatedDocument.cattleFixedCost.weanedHeiferCalvesPurchaseValue;
 
     //Facilities and Buildings
-    const farmShopAndGeneralRoadsInitialInvestment =
-      updatedDocument.facilitiesAndBuildingsFixedCost
-        .farmShopAndGeneralRoadsInitialInvestment;
-    const farmShopAndGeneralRoadsYearsOfUsefulLife =
-      updatedDocument.facilitiesAndBuildingsFixedCost
-        .farmShopAndGeneralRoadsYearsOfUsefulLife;
+    const farmShopAndGeneralRoadsInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.farmShopAndGeneralRoadsInitialInvestment;
+    const farmShopAndGeneralRoadsYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.farmShopAndGeneralRoadsYearsOfUsefulLife;
 
-    const milkingParlorAndEquipmentInitialInvestment =
-      updatedDocument.facilitiesAndBuildingsFixedCost
-        .milkingParlorAndEquipmentInitialInvestment;
-    const milkingParlorAndEquipmentYearsOfUsefulLife =
-      updatedDocument.facilitiesAndBuildingsFixedCost
-        .milkingParlorAndEquipmentYearsOfUsefulLife;
+    const milkingParlorAndEquipmentInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.milkingParlorAndEquipmentInitialInvestment;
+    const milkingParlorAndEquipmentYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.milkingParlorAndEquipmentYearsOfUsefulLife;
 
     const feedingEquipmentInitialInvestment =
       updatedDocument.facilitiesAndBuildingsFixedCost
@@ -237,10 +240,8 @@ export class FixedCostsService {
       updatedDocument.facilitiesAndBuildingsFixedCost
         .trenchSilosYearsOfUsefulLife;
 
-    const fencesInitialInvestment =
-      updatedDocument.facilitiesAndBuildingsFixedCost.fencesInitialInvestment;
-    const fencesYearsOfUsefulLife =
-      updatedDocument.facilitiesAndBuildingsFixedCost.fencesYearsOfUsefulLife;
+    const fencesInitialInvestment = updatedDocument.facilitiesAndBuildingsFixedCost.fencesInitialInvestment;
+    const fencesYearsOfUsefulLife = updatedDocument.facilitiesAndBuildingsFixedCost.fencesYearsOfUsefulLife;
 
     const commodityBarnInitialInvestment =
       updatedDocument.facilitiesAndBuildingsFixedCost
@@ -939,12 +940,12 @@ export class FixedCostsService {
       productionDetailsInputs.heiferProduction.cowDeathLossRate;
     const cullingRate = productionDetailsInputs.heiferProduction.cullingRate;
 
-    const livestockInsuranceRate = 0.35;
-    const propertyTaxRate = 0.7;
-    const propertyInsuranceRate = 0.25;
-    const machineryInsuranceRate = 0.286;
-    const longTermInterestRate = 4.5;
-    const shortTermInterestRate = 5.5;
+    // const livestockInsuranceRate = 0.35;
+    // const propertyTaxRate = 0.7;
+    // const propertyInsuranceRate = 0.25;
+    // const machineryAndEquipmentInsuranceRate = 0.286;
+    // const longTermInterestRate = 4.5;
+    // const shortTermInterestRate = 5.5;
 
     //Map for Age and its categories
     const ageCategories = new Map([
@@ -1714,7 +1715,7 @@ export class FixedCostsService {
         articulatedLoadersEstimatedCurrentSalvageValue *
         (propertyTaxRate / 100);
       const articulatedLoadersPropertyInsurance =
-        articulatedLoadersInitialInvestment * (machineryInsuranceRate / 100);
+        articulatedLoadersInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const articulatedLoadersTotalAnnualEconomicCost =
         (articulatedLoadersAnnualAmortization +
           articulatedLoadersPropertyTax +
@@ -1752,7 +1753,7 @@ export class FixedCostsService {
       const skidSteerLoadersPropertyTax =
         skidSteerLoadersEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const skidSteerLoadersPropertyInsurance =
-        skidSteerLoadersInitialInvestment * (machineryInsuranceRate / 100);
+        skidSteerLoadersInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const skidSteerLoadersTotalAnnualEconomicCost =
         (skidSteerLoadersAnnualAmortization +
           skidSteerLoadersPropertyTax +
@@ -1792,7 +1793,7 @@ export class FixedCostsService {
       const hpTractorMFWD130PropertyTax =
         hpTractorMFWD130EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const hpTractorMFWD130PropertyInsurance =
-        hpTractorMFWD130InitialInvestment * (machineryInsuranceRate / 100);
+        hpTractorMFWD130InitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const hpTractorMFWD130TotalAnnualEconomicCost =
         (hpTractorMFWD130AnnualAmortization +
           hpTractorMFWD130PropertyTax +
@@ -1827,7 +1828,7 @@ export class FixedCostsService {
       const hpTractor2wd75PropertyTax =
         hpTractor2wd75EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const hpTractor2wd75PropertyInsurance =
-        hpTractor2wd75InitialInvestment * (machineryInsuranceRate / 100);
+        hpTractor2wd75InitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const hpTractor2wd75TotalAnnualEconomicCost =
         (hpTractor2wd75AnnualAmortization +
           hpTractor2wd75PropertyTax +
@@ -1862,7 +1863,7 @@ export class FixedCostsService {
       const tractor50Hp2wdPropertyTax =
         tractor50Hp2wdEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const tractor50Hp2wdPropertyInsurance =
-        tractor50Hp2wdInitialInvestment * (machineryInsuranceRate / 100);
+        tractor50Hp2wdInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const hpTractor2wd50TotalAnnualEconomicCost =
         (tractor50Hp2wdAnnualAmortization +
           tractor50Hp2wdPropertyTax +
@@ -1896,7 +1897,7 @@ export class FixedCostsService {
       const mixerWagon650PropertyTax =
         mixerWagon650EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const mixerWagon650PropertyInsurance =
-        mixerWagon650InitialInvestment * (machineryInsuranceRate / 100);
+        mixerWagon650InitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const mixerWagon650TotalAnnualEconomicCost =
         (mixerWagon650AnnualAmortization +
           mixerWagon650PropertyTax +
@@ -1936,7 +1937,7 @@ export class FixedCostsService {
         threeQuarterTonPickupEstimatedCurrentSalvageValue *
         (propertyTaxRate / 100);
       const threeQuarterTonPickupPropertyInsurance =
-        threeQuarterTonPickupInitialInvestment * (machineryInsuranceRate / 100);
+        threeQuarterTonPickupInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const threeQuarterTonPickupTotalAnnualEconomicCost =
         (threeQuarterTonPickupAnnualAmortization +
           threeQuarterTonPickupPropertyTax +
@@ -1972,7 +1973,7 @@ export class FixedCostsService {
       const halfTonPickupPropertyTax =
         halfTonPickupEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const halfTonPickupPropertyInsurance =
-        halfTonPickupInitialInvestment * (machineryInsuranceRate / 100);
+        halfTonPickupInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const halfTonPickupTotalAnnualEconomicCost =
         (halfTonPickupAnnualAmortization +
           halfTonPickupPropertyTax +
@@ -2006,7 +2007,7 @@ export class FixedCostsService {
       const jdGatorPropertyTax =
         jdGatorEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const jdGatorPropertyInsurance =
-        jdGatorInitialInvestment * (machineryInsuranceRate / 100);
+        jdGatorInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const jdGatorTotalAnnualEconomicCost =
         (jdGatorAnnualAmortization +
           jdGatorPropertyTax +
@@ -2040,7 +2041,7 @@ export class FixedCostsService {
       const sandSpreaderPropertyTax =
         sandSpreaderEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const sandSpreaderPropertyInsurance =
-        sandSpreaderInitialInvestment * (machineryInsuranceRate / 100);
+        sandSpreaderInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const sandSpreaderTotalAnnualEconomicCost =
         (sandSpreaderAnnualAmortization +
           sandSpreaderPropertyTax +
@@ -2078,7 +2079,7 @@ export class FixedCostsService {
       const hpTractorMFWD300PropertyTax =
         hpTractorMFWD300EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const hpTractorMFWD300PropertyInsurance =
-        hpTractorMFWD300InitialInvestment * (machineryInsuranceRate / 100);
+        hpTractorMFWD300InitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const hpTractorMFWD300TotalAnnualEconomicCost =
         (hpTractorMFWD300AnnualAmortization +
           hpTractorMFWD300PropertyTax +
@@ -2116,7 +2117,7 @@ export class FixedCostsService {
       const hpTractorMFWD200PropertyTax =
         hpTractorMFWD200EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const hpTractorMFWD200PropertyInsurance =
-        hpTractorMFWD200InitialInvestment * (machineryInsuranceRate / 100);
+        hpTractorMFWD200InitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const hpTractorMFWD200TotalAnnualEconomicCost =
         (hpTractorMFWD200AnnualAmortization +
           hpTractorMFWD200PropertyTax +
@@ -2150,7 +2151,7 @@ export class FixedCostsService {
       const diskHarrow24PropertyTax =
         diskHarrow24EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const diskHarrow24PropertyInsurance =
-        diskHarrow24InitialInvestment * (machineryInsuranceRate / 100);
+        diskHarrow24InitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const diskHarrow24TotalAnnualEconomicCost =
         (diskHarrow24AnnualAmortization +
           diskHarrow24PropertyTax +
@@ -2191,7 +2192,7 @@ export class FixedCostsService {
         stripTillPlanter8RowEstimatedCurrentSalvageValue *
         (propertyTaxRate / 100);
       const stripTillPlanter8RowPropertyInsurance =
-        stripTillPlanter8RowInitialInvestment * (machineryInsuranceRate / 100);
+        stripTillPlanter8RowInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const stripTillPlanter8RowTotalAnnualEconomicCost =
         (stripTillPlanter8RowAnnualAmortization +
           stripTillPlanter8RowPropertyTax +
@@ -2230,7 +2231,7 @@ export class FixedCostsService {
       const foldingSprayer40PropertyTax =
         foldingSprayer40EstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const foldingSprayer40PropertyInsurance =
-        foldingSprayer40InitialInvestment * (machineryInsuranceRate / 100);
+        foldingSprayer40InitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const foldingSprayer40TotalAnnualEconomicCost =
         (foldingSprayer40AnnualAmortization +
           foldingSprayer40PropertyTax +
@@ -2265,7 +2266,7 @@ export class FixedCostsService {
       const fieldCultivatorPropertyTax =
         fieldCultivatorEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const fieldCultivatorPropertyInsurance =
-        fieldCultivatorInitialInvestment * (machineryInsuranceRate / 100);
+        fieldCultivatorInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const fieldCultivatorTotalAnnualEconomicCost =
         (fieldCultivatorAnnualAmortization +
           fieldCultivatorPropertyTax +
@@ -2304,7 +2305,7 @@ export class FixedCostsService {
         grainDrill15NoTillEstimatedCurrentSalvageValue *
         (propertyTaxRate / 100);
       const grainDrill15NoTillPropertyInsurance =
-        grainDrill15NoTillInitialInvestment * (machineryInsuranceRate / 100);
+        grainDrill15NoTillInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const grainDrill15NoTillTotalAnnualEconomicCost =
         (grainDrill15NoTillAnnualAmortization +
           grainDrill15NoTillPropertyTax +
@@ -2350,7 +2351,7 @@ export class FixedCostsService {
         (propertyTaxRate / 100);
       const mowerConditionerSelfPropelledPropertyInsurance =
         mowerConditionerSelfPropelledInitialInvestment *
-        (machineryInsuranceRate / 100);
+        (machineryAndEquipmentInsuranceRate / 100);
       const mowerConditionerSelfPropelledTotalAnnualEconomicCost =
         (mowerConditionerSelfPropelledAnnualAmortization +
           mowerConditionerSelfPropelledPropertyTax +
@@ -2386,7 +2387,7 @@ export class FixedCostsService {
       const tedderPropertyTax =
         tedderEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const tedderPropertyInsurance =
-        tedderInitialInvestment * (machineryInsuranceRate / 100);
+        tedderInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const tedderTotalAnnualEconomicCost =
         (tedderAnnualAmortization +
           tedderPropertyTax +
@@ -2420,7 +2421,7 @@ export class FixedCostsService {
       const powerRakePropertyTax =
         powerRakeEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const powerRakePropertyInsurance =
-        powerRakeInitialInvestment * (machineryInsuranceRate / 100);
+        powerRakeInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const powerRakeTotalAnnualEconomicCost =
         (powerRakeAnnualAmortization +
           powerRakePropertyTax +
@@ -2454,7 +2455,7 @@ export class FixedCostsService {
         foldingRotaryMower15EstimatedCurrentSalvageValue *
         (propertyTaxRate / 100);
       const foldingRotaryMower15PropertyInsurance =
-        foldingRotaryMower15InitialInvestment * (machineryInsuranceRate / 100);
+        foldingRotaryMower15InitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const foldingRotaryMower15TotalAnnualEconomicCost =
         (foldingRotaryMower15AnnualAmortization +
           foldingRotaryMower15PropertyTax +
@@ -2490,7 +2491,7 @@ export class FixedCostsService {
       const deepRipperPropertyTax =
         deepRipperEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const deepRipperPropertyInsurance =
-        deepRipperInitialInvestment * (machineryInsuranceRate / 100);
+        deepRipperInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const deepRipperTotalAnnualEconomicCost =
         (deepRipperAnnualAmortization +
           deepRipperPropertyTax +
@@ -2529,7 +2530,7 @@ export class FixedCostsService {
         livestockTrailer24EstimatedCurrentSalvageValue *
         (propertyTaxRate / 100);
       const livestockTrailer24PropertyInsurance =
-        livestockTrailer24InitialInvestment * (machineryInsuranceRate / 100);
+        livestockTrailer24InitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const livestockTrailer24TotalAnnualEconomicCost =
         (livestockTrailer24AnnualAmortization +
           livestockTrailer24PropertyTax +
@@ -2564,7 +2565,7 @@ export class FixedCostsService {
       const roundBalerPropertyTax =
         roundBalerEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const roundBalerPropertyInsurance =
-        roundBalerInitialInvestment * (machineryInsuranceRate / 100);
+        roundBalerInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const roundBalerTotalAnnualEconomicCost =
         (roundBalerAnnualAmortization +
           roundBalerPropertyTax +
@@ -2592,7 +2593,7 @@ export class FixedCostsService {
         tubGrinderEstimatedFinalSalvageValue * (longTermInterestRate / 100);
       const tubGrinderPropertyTax = tubGrinderEstimatedCurrentSalvageValue * (propertyTaxRate / 100);
       const tubGrinderPropertyInsurance =
-        tubGrinderInitialInvestment * (machineryInsuranceRate / 100);
+        tubGrinderInitialInvestment * (machineryAndEquipmentInsuranceRate / 100);
       const tubGrinderTotalAnnualEconomicCost =
         (tubGrinderAnnualAmortization +
           tubGrinderPropertyTax +
@@ -2633,7 +2634,7 @@ export class FixedCostsService {
         (propertyTaxRate / 100);
       const miscellaneousEquipmentPropertyInsurance =
         miscellaneousEquipmentInitialInvestment *
-        (machineryInsuranceRate / 100);
+        (machineryAndEquipmentInsuranceRate / 100);
       const miscellaneousEquipmentTotalAnnualEconomicCost =
         (miscellaneousEquipmentAnnualAmortization +
           miscellaneousEquipmentPropertyTax +
@@ -2677,7 +2678,7 @@ export class FixedCostsService {
         (propertyTaxRate / 100);
       const otherMachineryEquipment1PropertyInsurance =
         otherMachineryEquipment1InitialInvestment *
-        (machineryInsuranceRate / 100);
+        (machineryAndEquipmentInsuranceRate / 100);
       const otherMachineryEquipment1TotalAnnualEconomicCost =
         (otherMachineryEquipment1AnnualAmortization +
           otherMachineryEquipment1PropertyTax +
@@ -2721,7 +2722,7 @@ export class FixedCostsService {
         (propertyTaxRate / 100);
       const otherMachineryEquipment2PropertyInsurance =
         otherMachineryEquipment2InitialInvestment *
-        (machineryInsuranceRate / 100);
+        (machineryAndEquipmentInsuranceRate / 100);
       const otherMachineryEquipment2TotalAnnualEconomicCost = (otherMachineryEquipment2AnnualAmortization + otherMachineryEquipment2PropertyTax + otherMachineryEquipment2PropertyInsurance) *
         (otherMachineryEquipment2DairyHoursOfUse / otherMachineryEquipment2TotalHoursOfUse);
       const otherMachineryEquipment2CroppingAnnualEconomicCost = (otherMachineryEquipment2AnnualAmortization + otherMachineryEquipment2PropertyTax + otherMachineryEquipment2PropertyInsurance) *
