@@ -1,5 +1,35 @@
 import { IsNumber, IsObject, IsOptional, IsBoolean } from 'class-validator';
 
+class FinancialAssumptionsDto{
+  @IsOptional()
+  @IsNumber()
+  shortTermInterestRate?: number;
+
+  @IsOptional()
+  @IsNumber()
+  propertyTaxRate?: number;
+
+  @IsOptional()
+  @IsNumber()
+  propertyInsuranceRate?: number;
+
+  @IsOptional()
+  @IsNumber()
+  buildingAndStructuresInsuranceCoverageRequired?: number;
+
+  @IsOptional()
+  @IsNumber()
+  longTermInterestRate?: number;
+
+  @IsOptional()
+  @IsNumber()
+  livestockInsuranceRate?: number;
+
+  @IsOptional()
+  @IsNumber()
+  machineryAndEquipmentInsuranceRate?: number;
+}
+
 class CattleFixedCostDto {
   @IsOptional()
   @IsNumber()
@@ -979,6 +1009,10 @@ class LandFixedCostsDto {
 }
 
 export class FixedCostsInputDto {
+  @IsObject()
+  @IsOptional()
+  financialAssumptions?: FinancialAssumptionsDto;
+
   @IsObject()
   @IsOptional()
   cattleFixedCost?: CattleFixedCostDto;
