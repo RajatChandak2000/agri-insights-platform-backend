@@ -15,6 +15,8 @@ import { FixedCostsModule } from './DairyEnterpriseBudget/fixed-costs/fixed-cost
 import { FeedDetailsModule } from './DairyEnterpriseBudget/feed-details/feed-details.module';
 import { AnalysisModule } from './analysis/analysis.module';
 import { GHGModule } from './DairyEnterpriseBudget/ghg-model/ghg.module';
+import { ManureManagementModule } from './DairyEnterpriseBudget/manure-management/manure-management.module';
+import { EnergyFootprintModule } from './DairyEnterpriseBudget/energy-footprint/energy-footprint.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { GHGModule } from './DairyEnterpriseBudget/ghg-model/ghg.module';
     FeedDetailsModule,
     AnalysisModule,
     GHGModule,
+    ManureManagementModule,
+    EnergyFootprintModule,
     ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule], // Ensure ConfigModule is available

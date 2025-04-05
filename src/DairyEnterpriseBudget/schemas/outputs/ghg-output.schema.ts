@@ -48,6 +48,21 @@ export class HerdTotalDMI {
 }
 
 @Schema()
+export class HerdDMIGroup extends Document {
+  @Prop({ required: true, type: HerdTotalDMI })
+  milkingHerd: HerdTotalDMI;
+
+  @Prop({ required: true, type: HerdTotalDMI })
+  dryHerd: HerdTotalDMI;
+
+  @Prop({ required: true, type: HerdTotalDMI })
+  bredHeifers: HerdTotalDMI;
+
+  @Prop({ required: true, type: HerdTotalDMI })
+  youngHeifers: HerdTotalDMI;
+}
+
+@Schema()
 export class FeedGHGEmissions{
   // Individual Feed Emissions
   @Prop({ required: true })
@@ -258,6 +273,10 @@ export class GHGOutput extends Document {
   // Herd Total
   @Prop({ type: HerdTotalDMI, default: {} })
   herdTotalDMI: HerdTotalDMI;
+
+  //Herd DMI Group
+  @Prop({ type: HerdDMIGroup, default: {} })
+  herdDMIGroup: HerdDMIGroup;
 
   // Feed GHG Emissions
   @Prop({ type: FeedGHGEmissions, default: {} })
