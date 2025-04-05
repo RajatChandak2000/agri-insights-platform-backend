@@ -20,7 +20,7 @@ import { User, UserSchema } from "src/user/schemas/user.schema";
             {name: GHGInput.name, schema: GHGInputSchema},
             {name: GHGOutput.name, schema: GHGOutputSchema},
             {name: ProductionDetailsInput.name, schema: ProductionDetailsInputsSchema},
-            {name:ProductionDetailsOutput.name, schema:ProductionDetailsOutputSchema},
+            {name: ProductionDetailsOutput.name, schema:ProductionDetailsOutputSchema},
             {name: FeedDetailsInput.name, schema: FeedDetailsInputsSchema},
             {name: FeedDetailsOutput.name, schema: FeedDetailsOutputSchema},
             {name: User.name, schema: UserSchema}

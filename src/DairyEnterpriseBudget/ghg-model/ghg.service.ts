@@ -144,8 +144,12 @@ export class GHGService {
     // 3. Herd total DMI for each feed type
     const herdTotalDMI = this.calculateTotalDMI(feedDetails, herdCounts);
     console.log("herdTotalDMI ", herdTotalDMI);
+
+    // 4. Herd Group DMI for each feed type
+    const herdDMIGroup = this.calculateDMIGroup(feedDetails, herdCounts);
+    console.log("herdDMIGroup ", herdDMIGroup);
   
-    // 4. Calculate feed, enteric, trucking emissions
+    // 5. Calculate feed, enteric, trucking emissions
     const feedEmissions = this.calculateFeedEmissions(
       herdTotalDMI,
       this.characterizationFactors,
@@ -162,7 +166,7 @@ export class GHGService {
       annualFPCM,
     );
   
-    // 5. Build the update object for the GHGOutput doc
+    // 6. Build the update object for the GHGOutput doc
     const updateData = {
       userId,
       annualFPCM: Number(annualFPCM.toFixed(2)),
@@ -177,6 +181,9 @@ export class GHGService {
   
       // HerdTotalDMI sub-object
       herdTotalDMI: this.buildHerdTotalDMIObject(herdTotalDMI),
+
+      //HerdGroupDMI sub-object
+      herdDMIGroup: this.buildHerdDMIGroupObject(herdDMIGroup),
   
       // Nested objects
       feedGHGEmissions: this.buildFeedGHGEmissionsObject(feedEmissions),
@@ -279,6 +286,44 @@ export class GHGService {
     }
 
     return dmiResults;
+  }
+
+  private calculateDMIGroup(
+    feedDetails: FeedDetailsInput,
+    herdCounts: ReturnType<typeof this.getHerdPopulationCounts>
+  ): Record<string, Record<string, number>> {
+    const herdGroups = [
+      { key: 'milkingHerd', count: herdCounts.lactating },
+      { key: 'dryHerd', count: herdCounts.dry },
+      { key: 'bredHeifers', count: herdCounts.replacements },
+      { key: 'youngHeifers', count: herdCounts.young },
+    ];
+  
+    const dmiGroupResults: Record<string, Record<string, number>> = {};
+  
+    // For each feed type (e.g. "cornSilage", "sorghumSilage", etc.)
+    for (const feedType of Object.keys(this.DRY_MATTER_PERCENTAGES)) {
+      // Initialize the inner object for each feed type.
+      dmiGroupResults[feedType] = {};
+  
+      // For each herd group, calculate the DMI individually.
+      for (const group of herdGroups) {
+        // Assuming getFeedKey uses both feedType and group.key to generate the proper key
+        const feedKey = this.getFeedKey(feedType, group.key);
+        const lbsPerDay =
+          feedDetails[group.key]?.[`${group.key}${feedKey}LbsAsFedPerDay`] || 0;
+        const daysOnFeed =
+          feedDetails[group.key]?.[`${group.key}${feedKey}DaysOnFeed`] || 0;
+  
+        const dmPercentage = this.DRY_MATTER_PERCENTAGES[feedType];
+        const totalGroupDMI = lbsPerDay * daysOnFeed * dmPercentage * group.count;
+  
+        // Store the computed value for this herd group.
+        dmiGroupResults[feedType][group.key] = totalGroupDMI;
+      }
+    }
+  
+    return dmiGroupResults;
   }
 
   private getFeedKey(feedType: string, herdGroup: string): string {
@@ -453,6 +498,32 @@ export class GHGService {
       soybean48DMI: dmiResults.soybean48 ?? 0,
     };
   }
+
+  private buildHerdDMIGroupObject(
+    dmiGroupResults: Record<string, Record<string, number>>
+  ): Record<string, Record<string, number>> {
+    // Initialize the result object with empty objects for each herd group.
+    const result: Record<string, Record<string, number>> = {
+      milkingHerd: {},
+      dryHerd: {},
+      bredHeifers: {},
+      youngHeifers: {},
+    };
+  
+    // For each feed type in the dmiGroupResults,
+    // store its computed DMI for each herd group into the corresponding object.
+    for (const feedType in dmiGroupResults) {
+      const groupValues = dmiGroupResults[feedType];
+      // Use the feed type plus 'DMI' as the property key.
+      result.milkingHerd[`${feedType}DMI`] = groupValues.milkingHerd ?? 0;
+      result.dryHerd[`${feedType}DMI`] = groupValues.dryHerd ?? 0;
+      result.bredHeifers[`${feedType}DMI`] = groupValues.bredHeifers ?? 0;
+      result.youngHeifers[`${feedType}DMI`] = groupValues.youngHeifers ?? 0;
+    }
+  
+    return result;
+  }
+  
 
   private buildFeedGHGEmissionsObject(
     feedEmissions: Record<string, number>,
