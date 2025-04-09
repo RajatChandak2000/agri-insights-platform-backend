@@ -126,13 +126,13 @@ export class EnergyFootprintService{
         const percentBiodieselDairy = updatedDocument.dairyOperationsEnergyUse.biodiesel;
     
         // Outputs calculated
-        const electricGHG = (electricAnnualUse * electricEmissionFactor * percentElectricDairy) / annualFPCM;
-        const dieselGHG = (dieselAnnualUse * dieselEmissionFactor * percentDieselDairy) / annualFPCM;
-        const gasolineGHG = (gasolineAnnualUse * gasolineEmissionFactor * percentGasolineDairy) / annualFPCM;
-        const propaneGHG = (propaneAnnualUse * propaneEmissionFactor * percentPropaneDairy) / annualFPCM;
-        const naturalGasGHG = (naturalGasAnnualUse * naturalGasEmissionFactor * percentNaturalGasDairy) / annualFPCM;
-        const fuelOilGHG = (fuelOilAnnualUse * fuelOilEmissionFactor * percentFuelOilDairy) / annualFPCM;
-        const biodieselGHG = (biodieselAnnualUse * biodieselEmissionFactor * percentBiodieselDairy) / annualFPCM;
+        const electricGHG = (electricAnnualUse * electricEmissionFactor * (percentElectricDairy/100) ) / annualFPCM;
+        const dieselGHG = (dieselAnnualUse * dieselEmissionFactor * (percentDieselDairy/100) ) / annualFPCM;
+        const gasolineGHG = (gasolineAnnualUse * gasolineEmissionFactor * (percentGasolineDairy/100) ) / annualFPCM;
+        const propaneGHG = (propaneAnnualUse * propaneEmissionFactor * (percentPropaneDairy/100) ) / annualFPCM;
+        const naturalGasGHG = (naturalGasAnnualUse * naturalGasEmissionFactor * (percentNaturalGasDairy/100) ) / annualFPCM;
+        const fuelOilGHG = (fuelOilAnnualUse * fuelOilEmissionFactor * (percentFuelOilDairy/100) ) / annualFPCM;
+        const biodieselGHG = (biodieselAnnualUse * biodieselEmissionFactor * (percentBiodieselDairy/100) ) / annualFPCM;
     
         // Rounded to 2 decimal points
         const updatedOutputDocument = {
