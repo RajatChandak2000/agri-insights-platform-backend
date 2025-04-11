@@ -280,7 +280,64 @@ export class ManureManagementService {
             herdTotalRecoverableNExcreted,
             herdTotalPastureNonrecoverableNExcreted,
             ghgModelOutputs.annualFPCM
-        );        
+        );      
+        
+        // Build the update data to match the output schema
+        const updateData = {
+            userId,
+            methaneEmissions: {
+              ch4EmissionsMMS1: Number(emissions.ch4Emissions["ch4EmissionsMms1"].toFixed(2)),
+              ch4EmissionsMMS2: Number(emissions.ch4Emissions["ch4EmissionsMms2"].toFixed(2)),
+              ch4EmissionsMMS3: Number(emissions.ch4Emissions["ch4EmissionsMms3"].toFixed(2)),
+              ch4EmissionsMMS4: Number(emissions.ch4Emissions["ch4EmissionsMms4"].toFixed(2)),
+              ch4EmissionsPastureNonrecoverable: Number(emissions.ch4EmissionsPastureNonrecoverable.toFixed(2)),
+              ch4TotalEmissions: Number(emissions.ch4TotalEmissions.toFixed(2))
+            },
+            nitrousOxideEmissions: {
+              n2oDirectEmissionsMMS1: Number(emissions.n2oDirectEmissions["n2oDirectEmissionsMms1"].toFixed(2)),
+              n2oDirectEmissionsMMS2: Number(emissions.n2oDirectEmissions["n2oDirectEmissionsMms2"].toFixed(2)),
+              n2oDirectEmissionsMMS3: Number(emissions.n2oDirectEmissions["n2oDirectEmissionsMms3"].toFixed(2)),
+              n2oDirectEmissionsMMS4: Number(emissions.n2oDirectEmissions["n2oDirectEmissionsMms4"].toFixed(2)),
+              n2oDirectEmissionsPastureNonrecoverable: Number(emissions.n2oDirectEmissionsPastureNonrecoverable.toFixed(2)),
+              n2oIndirectVolatileEmissionsMMS1: Number(emissions.n2oIndirectVolatileEmissions["n2oIndirectVolatileEmissionsMms1"].toFixed(2)),
+              n2oIndirectVolatileEmissionsMMS2: Number(emissions.n2oIndirectVolatileEmissions["n2oIndirectVolatileEmissionsMms2"].toFixed(2)),
+              n2oIndirectVolatileEmissionsMMS3: Number(emissions.n2oIndirectVolatileEmissions["n2oIndirectVolatileEmissionsMms3"].toFixed(2)),
+              n2oIndirectVolatileEmissionsMMS4: Number(emissions.n2oIndirectVolatileEmissions["n2oIndirectVolatileEmissionsMms4"].toFixed(2)),
+              n2oIndirectVolatileEmissionsPastureNonrecoverable: Number(emissions.n2oIndirectVolatileEmissionsPastureNonrecoverable.toFixed(2)),
+              n2oIndirectLeachEmissionsMMS1: Number(emissions.n2oIndirectLeachEmissions["n2oIndirectLeachEmissionsMms1"].toFixed(2)),
+              n2oIndirectLeachEmissionsMMS2: Number(emissions.n2oIndirectLeachEmissions["n2oIndirectLeachEmissionsMms2"].toFixed(2)),
+              n2oIndirectLeachEmissionsMMS3: Number(emissions.n2oIndirectLeachEmissions["n2oIndirectLeachEmissionsMms3"].toFixed(2)),
+              n2oIndirectLeachEmissionsMMS4: Number(emissions.n2oIndirectLeachEmissions["n2oIndirectLeachEmissionsMms4"].toFixed(2)),
+              n2oIndirectLeachEmissionsPastureNonrecoverable: Number(emissions.n2oIndirectLeachEmissionsPastureNonrecoverable.toFixed(2)),
+              n2oTotalEmissions: Number(emissions.n2oTotalEmissions.toFixed(2))
+            },
+            manureManagementFootprint: {
+              totalCO2eFromCH4: Number(emissions.totalCo2eFromCh4.toFixed(2)),
+              totalCO2eFromN2O: Number(emissions.totalCo2eFromN2o.toFixed(2)),
+              totalCO2eFromManureManagement: Number(emissions.totalCo2eFromManureManagement.toFixed(2)),
+              footprintFromCH4: Number(emissions.footprintFromCh4.toFixed(2)),
+              footprintFromN2O: Number(emissions.footprintFromN2o.toFixed(2)),
+              footprintFromMMS: Number(emissions.footprintFromMms.toFixed(2))
+            }
+        };
+
+        // Options for findOneAndUpdate
+        const options = {
+            new: true,               // Return the updated document
+            upsert: true,            // Create if not found
+            setDefaultsOnInsert: true // Apply default schema values
+        };
+
+        try {
+            const result = await this.manureManagementOutputModel
+            .findOneAndUpdate({ userId }, { $set: updateData }, options)
+            .exec();
+            this.logger.log(`Successfully updated manure management output for user: ${userId}`);
+            return result;
+        } catch (error) {
+            this.logger.error(`Failed to update manure management output: ${error.message}`);
+            throw new Error(`Failed to update manure management output: ${error.message}`);
+        }
             
         return {
             lactatingVS,
@@ -411,6 +468,57 @@ export class ManureManagementService {
             footprintFromN2o,
             footprintFromMms
         };
+    }
+
+    async getManureManagementInput(email: string): Promise<ManureManagementInput | null> {
+        console.log("Called manure management input");
+        
+        //first find the user_id using the email, then find the document using the id
+        const user = await this.userModel.findOne({ email }).exec();
+        if (!user) {
+          throw new HttpException(
+            'User with this email does not exist',
+            HttpStatus.NOT_FOUND,
+          );
+        }
+    
+        const userId = user._id.toString();
+        const inputDocument = this.manureManagementInputModel.findOne({ userId }).exec();
+    
+        if (!inputDocument) {
+          throw new HttpException(
+            'Input record for this user not found',
+            HttpStatus.NOT_FOUND,
+          );
+        }
+    
+        return inputDocument;
+    }
+
+    async getManureManagementOutput(email: string): Promise<ManureManagementOutput | null> {
+        //first find the user_id using the email, then find the document using the id
+        const user = await this.userModel.findOne({ email }).exec();
+        if (!user) {
+          throw new HttpException(
+            'User with this email does not exist',
+            HttpStatus.NOT_FOUND,
+          );
+        }
+    
+        const userId = user._id.toString();
+    
+        const outputDocument = await this.manureManagementOutputModel
+          .findOne({ userId })
+          .exec();
+    
+        if (!outputDocument) {
+          throw new HttpException(
+            'Output record for this user not found',
+            HttpStatus.NOT_FOUND,
+          );
+        }
+    
+        return outputDocument;
     }
     
 }
