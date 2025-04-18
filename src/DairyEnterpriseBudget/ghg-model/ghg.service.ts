@@ -30,23 +30,27 @@ export class GHGService {
     wholeCottonseed: 0.923,
     cottonseedHulls: 0.906,
     soybean48: 0.88,
+    soyHulls: 0.891,
+    customGrainMix: 0.89
   };
 
   private readonly characterizationFactors = {
-    cornSilage: 0.192,
-    sorghumSilage: 0.192,
-    smallGrain: 0.192,
-    grassHay: 0.256,
-    alfalfa: 0.134,
-    peanutHulls: 0.587,
-    applePomace: 0.587,
-    distillers: 0.697,
-    brewers: 0.697,
-    citrusPulp: 0.587,
-    cornGluten: 0.391,
-    wholeCottonseed: 0.587,
-    cottonseedHulls: 0.587,
-    soybean48: 0.403,
+    cornSilage: 0.26,
+    sorghumSilage: 0.28,
+    smallGrain: 0.26,
+    grassHay: 0.47,
+    alfalfa: 0.27,
+    peanutHulls: 0.91,
+    applePomace: 0.91,
+    distillers: 0.67,
+    brewers: 0.67,
+    citrusPulp: 0.91,
+    cornGluten: 0.44,
+    wholeCottonseed: 0.59,
+    cottonseedHulls: 0.91,
+    soybean48: 0.54,
+    soyHulls: 0.587,
+    customGrainMix: 0.59
   };
 
   private readonly ENTERIC_FACTOR = 0.46; // from GHG model doc
@@ -342,6 +346,7 @@ export class GHGService {
       wholeCottonseed: 'WholeCottonseed',
       cottonseedHulls: 'CottonseedHulls',
       soybean48: 'SoybeanMeal48',
+      soyHulls: 'SoyHulls',
     };
 
     return feedMap[feedType] || feedType;
@@ -470,6 +475,7 @@ export class GHGService {
       wholeCottonseed: 'wholeCottonseed',
       cottonseedHulls: 'cottonseedHulls',
       soybean48: 'soybeanMeal',
+      soyHulls: 'soyHulls',
     };
 
     return transportMap[feedType] || feedType;
@@ -496,6 +502,8 @@ export class GHGService {
       wholeCottonseedDMI: dmiResults.wholeCottonseed ?? 0,
       cottonseedHullsDMI: dmiResults.cottonseedHulls ?? 0,
       soybean48DMI: dmiResults.soybean48 ?? 0,
+      soyHulls: dmiResults.soyHulls ?? 0,
+      customGrainMix: dmiResults.customGrainMix ?? 0
     };
   }
 

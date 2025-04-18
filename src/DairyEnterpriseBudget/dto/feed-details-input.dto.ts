@@ -86,16 +86,16 @@ class MilkingHerdFeedDetailsDto {
   milkingHerdSoybeanMeal48DaysOnFeed: number;
 
   @IsNumber()
-  milkingHerdCustomFeedMixLbsAsFedPerDay: number;
+  milkingHerdSoyHullsLbsAsFedPerDay: number;
 
   @IsNumber()
-  milkingHerdCustomFeedMixDaysOnFeed: number;
+  milkingHerdSoyHullsDaysOnFeed: number;
 
   @IsNumber()
-  milkingHerdCustomMineralMixLbsAsFedPerDay: number;
+  milkingHerdCustomGrainMixLbsAsFedPerDay: number;
 
   @IsNumber()
-  milkingHerdCustomMineralMixDaysOnFeed: number;
+  milkingHerdCustomGrainMixDaysOnFeed: number;
 }
 
 class DryHerdFeedDetailsDto {
@@ -184,16 +184,16 @@ class DryHerdFeedDetailsDto {
   dryHerdSoybeanMeal48DaysOnFeed: number;
 
   @IsNumber()
-  dryHerdCustomFeedMixLbsAsFedPerDay: number;
+  dryHerdSoyHullsLbsAsFedPerDay: number;
 
   @IsNumber()
-  dryHerdCustomFeedMixDaysOnFeed: number;
+  dryHerdSoyHullsDaysOnFeed: number;
 
   @IsNumber()
-  dryHerdCustomMineralMixLbsAsFedPerDay: number;
+  dryHerdCustomGrainMixLbsAsFedPerDay: number;
 
   @IsNumber()
-  dryHerdCustomMineralMixDaysOnFeed: number;
+  dryHerdCustomGrainMixDaysOnFeed: number;
 }
 
 class BredHeifersFeedDetailsDto {
@@ -282,16 +282,16 @@ class BredHeifersFeedDetailsDto {
   bredHeifersSoybeanMeal48DaysOnFeed: number;
 
   @IsNumber()
-  bredHeifersCustomFeedMixLbsAsFedPerDay: number;
+  bredHeifersSoyHullsLbsAsFedPerDay: number;
 
   @IsNumber()
-  bredHeifersCustomFeedMixDaysOnFeed: number;
+  bredHeifersSoyHullsDaysOnFeed: number;
 
   @IsNumber()
-  bredHeifersCustomMineralMixLbsAsFedPerDay: number;
+  bredHeifersCustomGrainMixLbsAsFedPerDay: number;
 
   @IsNumber()
-  bredHeifersCustomMineralMixDaysOnFeed: number;
+  bredHeifersCustomGrainMixDaysOnFeed: number;
 }
 
 class YoungHeifersFeedDetailsDto {
@@ -380,16 +380,16 @@ class YoungHeifersFeedDetailsDto {
   youngHeifersSoybeanMeal48DaysOnFeed: number;
 
   @IsNumber()
-  youngHeifersCustomFeedMixLbsAsFedPerDay: number;
+  youngHeifersSoyHullsLbsAsFedPerDay: number;
 
   @IsNumber()
-  youngHeifersCustomFeedMixDaysOnFeed: number;
+  youngHeifersSoyHullsDaysOnFeed: number;
 
   @IsNumber()
-  youngHeifersCustomMineralMixLbsAsFedPerDay: number;
+  youngHeifersCustomGrainMixLbsAsFedPerDay: number;
 
   @IsNumber()
-  youngHeifersCustomMineralMixDaysOnFeed: number;
+  youngHeifersCustomGrainMixDaysOnFeed: number;
 }
 
 class CalvesFeedDetailsDto {
@@ -667,26 +667,26 @@ class SoybeanMealTransportAndCostDetailsDto {
   soybeanMealAvgGrownForageMilesTruckedToDairy: number;
 }
 
-class CustomFeedMixTransportAndCostDetailsDto {
+class SoyHullsTransportAndCostDetailsDto {
   @IsNumber()
-  customFeedMixCostOfCommodityPerTon: number;
+  soyHullsCostOfCommodityPerTon: number;
 
   @IsNumber()
-  customFeedMixAvgPurchasedFeedMilesTruckedToDairy: number;
+  soyHullsAvgPurchasedFeedMilesTruckedToDairy: number;
 
   @IsNumber()
-  customFeedMixAvgGrownForageMilesTruckedToDairy: number;
+  soyHullsAvgGrownForageMilesTruckedToDairy: number;
 }
 
-class CustomMineralMixTransportAndCostDetailsDto {
+class CustomGrainMixTransportAndCostDetailsDto {
   @IsNumber()
-  customMineralMixCostOfCommodityPerTon: number;
+  customGrainMixCostOfCommodityPerTon: number;
 
   @IsNumber()
-  customMineralMixAvgPurchasedFeedMilesTruckedToDairy: number;
+  customGrainMixAvgPurchasedFeedMilesTruckedToDairy: number;
 
   @IsNumber()
-  customMineralMixAvgGrownForageMilesTruckedToDairy: number;
+  customGrainMixAvgGrownForageMilesTruckedToDairy: number;
 }
 
 export class FeedDetailsInputDto {
@@ -778,8 +778,8 @@ export class FeedDetailsInputDto {
   soybeanMealTransportAndCost: SoybeanMealTransportAndCostDetailsDto;
 
   @IsObject()
-  customFeedMixTransportAndCost: CustomFeedMixTransportAndCostDetailsDto;
+  soyHullsTransportAndCost: SoyHullsTransportAndCostDetailsDto;
 
   @IsObject()
-  customMineralMixTransportAndCost: CustomMineralMixTransportAndCostDetailsDto;
+  customGrainMixTransportAndCost: CustomGrainMixTransportAndCostDetailsDto;
 }

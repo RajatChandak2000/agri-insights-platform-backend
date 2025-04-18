@@ -29,6 +29,8 @@ export class ManureManagementService {
         ["WholeCottonseed", { CP: 21.80, P: 0.59, K: 1.20, DM: 92.30, DE: 64.00, Ash: 4.40 }],
         ["CottonseedHulls", { CP: 5.10, P: 0.10, K: 0.71, DM: 90.60, DE: 41.10, Ash: 2.90 }],
         ["SoybeanMeal48", { CP: 52.60, P: 0.71, K: 2.38, DM: 88.00, DE: 90.70, Ash: 7.10 }],
+        ["SoyHulls", { CP: 13.10, P: 0.16, K: 1.38, DM: 89.10, DE: 79.60, Ash: 5.20 }],
+        ["CustomGrainMix", { CP: 15.00, P: 0.50, K: 0.90, DM: 89.00, DE: 75.00, Ash: 5.00 }],
     ]);
 
     private readonly manureManagementMap = new Map([
@@ -121,6 +123,7 @@ export class ManureManagementService {
             wholeCottonseed: 'WholeCottonseed',
             cottonseedHulls: 'CottonseedHulls',
             soybean48: 'SoybeanMeal48',
+            soyHulls: 'SoyHulls',
         };
 
         return feedMap[feedType] || feedType; // Default fallback

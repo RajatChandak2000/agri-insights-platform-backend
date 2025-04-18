@@ -88,16 +88,17 @@ class MilkingHerdFeedPlanInputs {
   milkingHerdSoybeanMeal48DaysOnFeed: number;
 
   @Prop({ required: true })
-  milkingHerdCustomFeedMixLbsAsFedPerDay: number;
+  milkingHerdSoyHullsLbsAsFedPerDay: number;
 
   @Prop({ required: true })
-  milkingHerdCustomFeedMixDaysOnFeed: number;
+  milkingHerdSoyHullsDaysOnFeed: number;
 
   @Prop({ required: true })
-  milkingHerdCustomMineralMixLbsAsFedPerDay: number;
+  milkingHerdCustomGrainMixLbsAsFedPerDay: number;
 
   @Prop({ required: true })
-  milkingHerdCustomMineralMixDaysOnFeed: number;
+  milkingHerdCustomGrainMixDaysOnFeed: number;
+
 }
 
 @Schema()
@@ -187,16 +188,17 @@ class DryHerdFeedPlanInputs {
   dryHerdSoybeanMeal48DaysOnFeed: number;
 
   @Prop({ required: true })
-  dryHerdCustomFeedMixLbsAsFedPerDay: number;
+  dryHerdSoyHullsLbsAsFedPerDay: number;
 
   @Prop({ required: true })
-  dryHerdCustomFeedMixDaysOnFeed: number;
+  dryHerdSoyHullsDaysOnFeed: number;
 
   @Prop({ required: true })
-  dryHerdCustomMineralMixLbsAsFedPerDay: number;
+  dryHerdCustomGrainMixLbsAsFedPerDay: number;
 
   @Prop({ required: true })
-  dryHerdCustomMineralMixDaysOnFeed: number;
+  dryHerdCustomGrainMixDaysOnFeed: number;
+
 }
 
 @Schema()
@@ -286,16 +288,17 @@ class BredHeifersFeedPlanInputs {
   bredHeifersSoybeanMeal48DaysOnFeed: number;
 
   @Prop({ required: true })
-  bredHeifersCustomFeedMixLbsAsFedPerDay: number;
+  bredHeifersSoyHullsLbsAsFedPerDay: number;
 
   @Prop({ required: true })
-  bredHeifersCustomFeedMixDaysOnFeed: number;
+  bredHeifersSoyHullsDaysOnFeed: number;
 
   @Prop({ required: true })
-  bredHeifersCustomMineralMixLbsAsFedPerDay: number;
+  bredHeifersCustomGrainMixLbsAsFedPerDay: number;
 
   @Prop({ required: true })
-  bredHeifersCustomMineralMixDaysOnFeed: number;
+  bredHeifersCustomGrainMixDaysOnFeed: number;
+
 }
 
 @Schema()
@@ -385,16 +388,17 @@ class YoungHeifersFeedPlanInputs {
   youngHeifersSoybeanMeal48DaysOnFeed: number;
 
   @Prop({ required: true })
-  youngHeifersCustomFeedMixLbsAsFedPerDay: number;
+  youngHeifersSoyHullsLbsAsFedPerDay: number;
 
   @Prop({ required: true })
-  youngHeifersCustomFeedMixDaysOnFeed: number;
+  youngHeifersSoyHullsDaysOnFeed: number;
 
   @Prop({ required: true })
-  youngHeifersCustomMineralMixLbsAsFedPerDay: number;
+  youngHeifersCustomGrainMixLbsAsFedPerDay: number;
 
   @Prop({ required: true })
-  youngHeifersCustomMineralMixDaysOnFeed: number;
+  youngHeifersCustomGrainMixDaysOnFeed: number;
+
 }
 
 @Schema()
@@ -695,27 +699,27 @@ class SoybeanMealTransportAndCostInputs {
 }
 
 @Schema()
-class CustomFeedMixTransportAndCostInputs {
+class SoyHullsTransportAndCostInputs {
   @Prop({ required: true })
-  customFeedMixCostOfCommodityPerTon: number;
+  soyHullsCostOfCommodityPerTon: number;
 
   @Prop({ required: true })
-  customFeedMixAvgPurchasedFeedMilesTruckedToDairy: number;
+  soyHullsAvgPurchasedFeedMilesTruckedToDairy: number;
 
   @Prop({ required: true })
-  customFeedMixAvgGrownForageMilesTruckedToDairy: number;
+  soyHullsAvgGrownForageMilesTruckedToDairy: number;
 }
 
 @Schema()
-class CustomMineralMixTransportAndCostInputs {
+class CustomGrainMixTransportAndCostInputs {
   @Prop({ required: true })
-  customMineralMixCostOfCommodityPerTon: number;
+  customGrainMixCostOfCommodityPerTon: number;
 
   @Prop({ required: true })
-  customMineralMixAvgPurchasedFeedMilesTruckedToDairy: number;
+  customGrainMixAvgPurchasedFeedMilesTruckedToDairy: number;
 
   @Prop({ required: true })
-  customMineralMixAvgGrownForageMilesTruckedToDairy: number;
+  customGrainMixAvgGrownForageMilesTruckedToDairy: number;
 }
 
 @Schema()
@@ -815,11 +819,11 @@ export class FeedDetailsInput extends Document {
   @Prop({ type: SoybeanMealTransportAndCostInputs, default: {} })
   soybeanMealTransportAndCost: SoybeanMealTransportAndCostInputs;
 
-  @Prop({ type: CustomFeedMixTransportAndCostInputs, default: {} })
-  customFeedMixTransportAndCost: CustomFeedMixTransportAndCostInputs;
+  @Prop({ type: SoyHullsTransportAndCostInputs, default: {} })
+  soyHullsTransportAndCost: SoyHullsTransportAndCostInputs;
 
-  @Prop({ type: CustomMineralMixTransportAndCostInputs, default: {} })
-  customMineralMixTransportAndCost: CustomMineralMixTransportAndCostInputs;
+  @Prop({ type: CustomGrainMixTransportAndCostInputs, default: {} })
+  customGrainMixTransportAndCost: CustomGrainMixTransportAndCostInputs;
 }
 
 export const FeedDetailsInputsSchema =
