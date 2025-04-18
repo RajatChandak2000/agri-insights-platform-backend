@@ -67,11 +67,11 @@ export class FeedDetailsOutput extends Document {
   // Soybean Meal 48
   @Prop({ required: true }) soybeanMeal48TonsRequired: number;
 
-  // Custom Feed Mix
-  @Prop({ required: true }) customFeedMixTonsRequired: number;
+  // Soy Hulls
+  @Prop({ required: true }) soyHullsTonsRequired: number;
 
-  // Custom Mineral Mix
-  @Prop({ required: true }) customMineralMixTonsRequired: number;
+  // Custom Grain Mix
+  @Prop({ required: true }) customGrainMixTonsRequired: number;
 
   // Raised Forage Variable Costs
   @Prop({ required: true }) cornSilageTVC: number;
@@ -186,15 +186,15 @@ export class FeedDetailsOutput extends Document {
   @Prop({ required: true }) soybeanMeal48CostOfTrucking: number;
   @Prop({ required: true }) purchasedSoybeanMeal48TotalCost: number;
 
-  @Prop({ required: true }) customFeedMixTonsToBePurchased: number;
-  @Prop({ required: true }) customFeedMixCostOfCommodity: number;
-  @Prop({ required: true }) customFeedMixCostOfTrucking: number;
-  @Prop({ required: true }) purchasedCustomFeedMixTotalCost: number;
+  @Prop({ required: true }) soyHullsTonsToBePurchased: number;
+  @Prop({ required: true }) soyHullsCostOfCommodity: number;
+  @Prop({ required: true }) soyHullsCostOfTrucking: number;
+  @Prop({ required: true }) purchasedSoyHullsTotalCost: number;
 
-  @Prop({ required: true }) customMineralMixTonsToBePurchased: number;
-  @Prop({ required: true }) customMineralMixCostOfCommodity: number;
-  @Prop({ required: true }) customMineralMixCostOfTrucking: number;
-  @Prop({ required: true }) purchasedCustomMineralMixTotalCost: number;
+  @Prop({ required: true }) customGrainMixTonsToBePurchased: number;
+  @Prop({ required: true }) customGrainMixCostOfCommodity: number;
+  @Prop({ required: true }) customGrainMixCostOfTrucking: number;
+  @Prop({ required: true }) purchasedCustomGrainMixTotalCost: number;
 
   // Grown Forage Trucking Cost
   @Prop({ required: true }) cornSilageGrownForageTruckingCost: number;

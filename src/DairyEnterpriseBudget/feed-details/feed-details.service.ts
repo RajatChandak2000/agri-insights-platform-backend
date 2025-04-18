@@ -406,31 +406,31 @@ export class FeedDetailsService {
       );
     }
 
-    // Handling Custom Feed Mix Trucking Costs
-    if (updateDto.customFeedMixTransportAndCost) {
+    // Handling Soy Hulls Trucking Costs
+    if (updateDto.soyHullsTransportAndCost) {
       for (const [key, value] of Object.entries(
-        updateDto.customFeedMixTransportAndCost,
+        updateDto.soyHullsTransportAndCost,
       )) {
         if (value !== undefined) {
-          updateData[`customFeedMixTransportAndCost.${key}`] = value;
+          updateData[`soyHullsTransportAndCost.${key}`] = value;
         }
       }
       this.logger.log(
-        `Custom Feed Mix Trucking Costs: ${JSON.stringify(updateDto.customFeedMixTransportAndCost)}`,
+        `Soy Hulls Trucking Costs: ${JSON.stringify(updateDto.soyHullsTransportAndCost)}`,
       );
     }
 
-    // Handling Custom Mineral Mix Trucking Costs
-    if (updateDto.customMineralMixTransportAndCost) {
+    // Handling Custom Grain Mix Trucking Costs
+    if (updateDto.customGrainMixTransportAndCost) {
       for (const [key, value] of Object.entries(
-        updateDto.customMineralMixTransportAndCost,
+        updateDto.customGrainMixTransportAndCost,
       )) {
         if (value !== undefined) {
-          updateData[`customMineralMixTransportAndCost.${key}`] = value;
+          updateData[`customGrainMixTransportAndCost.${key}`] = value;
         }
       }
       this.logger.log(
-        `Custom Mineral Mix Trucking Costs: ${JSON.stringify(updateDto.customMineralMixTransportAndCost)}`,
+        `Custom Grain Mix Trucking Costs: ${JSON.stringify(updateDto.customGrainMixTransportAndCost)}`,
       );
     }
 
@@ -565,14 +565,14 @@ export class FeedDetailsService {
       updatedDocument.milkingHerd.milkingHerdSoybeanMeal48LbsAsFedPerDay;
     const milkingHerdSoybeanMeal48DaysOnFeed =
       updatedDocument.milkingHerd.milkingHerdSoybeanMeal48DaysOnFeed;
-    const milkingHerdCustomFeedMixLbsAsFedPerDay =
-      updatedDocument.milkingHerd.milkingHerdCustomFeedMixLbsAsFedPerDay;
-    const milkingHerdCustomFeedMixDaysOnFeed =
-      updatedDocument.milkingHerd.milkingHerdCustomFeedMixDaysOnFeed;
-    const milkingHerdCustomMineralMixLbsAsFedPerDay =
-      updatedDocument.milkingHerd.milkingHerdCustomMineralMixLbsAsFedPerDay;
-    const milkingHerdCustomMineralMixDaysOnFeed =
-      updatedDocument.milkingHerd.milkingHerdCustomMineralMixDaysOnFeed;
+    const milkingHerdSoyHullsLbsAsFedPerDay =
+      updatedDocument.milkingHerd.milkingHerdSoyHullsLbsAsFedPerDay;
+    const milkingHerdSoyHullsDaysOnFeed =
+      updatedDocument.milkingHerd.milkingHerdSoyHullsDaysOnFeed;
+    const milkingHerdCustomGrainMixLbsAsFedPerDay =
+      updatedDocument.milkingHerd.milkingHerdCustomGrainMixLbsAsFedPerDay;
+    const milkingHerdCustomGrainMixDaysOnFeed =
+      updatedDocument.milkingHerd.milkingHerdCustomGrainMixDaysOnFeed;
 
     // Dry Herd inputs
     const dryHerdCornSilageLbsAsFedPerDay =
@@ -631,14 +631,14 @@ export class FeedDetailsService {
       updatedDocument.dryHerd.dryHerdSoybeanMeal48LbsAsFedPerDay;
     const dryHerdSoybeanMeal48DaysOnFeed =
       updatedDocument.dryHerd.dryHerdSoybeanMeal48DaysOnFeed;
-    const dryHerdCustomFeedMixLbsAsFedPerDay =
-      updatedDocument.dryHerd.dryHerdCustomFeedMixLbsAsFedPerDay;
-    const dryHerdCustomFeedMixDaysOnFeed =
-      updatedDocument.dryHerd.dryHerdCustomFeedMixDaysOnFeed;
-    const dryHerdCustomMineralMixLbsAsFedPerDay =
-      updatedDocument.dryHerd.dryHerdCustomMineralMixLbsAsFedPerDay;
-    const dryHerdCustomMineralMixDaysOnFeed =
-      updatedDocument.dryHerd.dryHerdCustomMineralMixDaysOnFeed;
+    const dryHerdSoyHullsLbsAsFedPerDay =
+      updatedDocument.dryHerd.dryHerdSoyHullsLbsAsFedPerDay;
+    const dryHerdSoyHullsDaysOnFeed =
+      updatedDocument.dryHerd.dryHerdSoyHullsDaysOnFeed;
+    const dryHerdCustomGrainMixLbsAsFedPerDay =
+      updatedDocument.dryHerd.dryHerdCustomGrainMixLbsAsFedPerDay;
+    const dryHerdCustomGrainMixDaysOnFeed =
+      updatedDocument.dryHerd.dryHerdCustomGrainMixDaysOnFeed;
 
     // Bred Heifers inputs
     const bredHeifersCornSilageLbsAsFedPerDay =
@@ -697,14 +697,14 @@ export class FeedDetailsService {
       updatedDocument.bredHeifers.bredHeifersSoybeanMeal48LbsAsFedPerDay;
     const bredHeifersSoybeanMeal48DaysOnFeed =
       updatedDocument.bredHeifers.bredHeifersSoybeanMeal48DaysOnFeed;
-    const bredHeifersCustomFeedMixLbsAsFedPerDay =
-      updatedDocument.bredHeifers.bredHeifersCustomFeedMixLbsAsFedPerDay;
-    const bredHeifersCustomFeedMixDaysOnFeed =
-      updatedDocument.bredHeifers.bredHeifersCustomFeedMixDaysOnFeed;
-    const bredHeifersCustomMineralMixLbsAsFedPerDay =
-      updatedDocument.bredHeifers.bredHeifersCustomMineralMixLbsAsFedPerDay;
-    const bredHeifersCustomMineralMixDaysOnFeed =
-      updatedDocument.bredHeifers.bredHeifersCustomMineralMixDaysOnFeed;
+    const bredHeifersSoyHullsLbsAsFedPerDay =
+      updatedDocument.bredHeifers.bredHeifersSoyHullsLbsAsFedPerDay;
+    const bredHeifersSoyHullsDaysOnFeed =
+      updatedDocument.bredHeifers.bredHeifersSoyHullsDaysOnFeed;
+    const bredHeifersCustomGrainMixLbsAsFedPerDay =
+      updatedDocument.bredHeifers.bredHeifersCustomGrainMixLbsAsFedPerDay;
+    const bredHeifersCustomGrainMixDaysOnFeed =
+      updatedDocument.bredHeifers.bredHeifersCustomGrainMixDaysOnFeed;
 
     // Young Heifers inputs
     const youngHeifersCornSilageLbsAsFedPerDay =
@@ -763,14 +763,14 @@ export class FeedDetailsService {
       updatedDocument.youngHeifers.youngHeifersSoybeanMeal48LbsAsFedPerDay;
     const youngHeifersSoybeanMeal48DaysOnFeed =
       updatedDocument.youngHeifers.youngHeifersSoybeanMeal48DaysOnFeed;
-    const youngHeifersCustomFeedMixLbsAsFedPerDay =
-      updatedDocument.youngHeifers.youngHeifersCustomFeedMixLbsAsFedPerDay;
-    const youngHeifersCustomFeedMixDaysOnFeed =
-      updatedDocument.youngHeifers.youngHeifersCustomFeedMixDaysOnFeed;
-    const youngHeifersCustomMineralMixLbsAsFedPerDay =
-      updatedDocument.youngHeifers.youngHeifersCustomMineralMixLbsAsFedPerDay;
-    const youngHeifersCustomMineralMixDaysOnFeed =
-      updatedDocument.youngHeifers.youngHeifersCustomMineralMixDaysOnFeed;
+    const youngHeifersSoyHullsLbsAsFedPerDay =
+      updatedDocument.youngHeifers.youngHeifersSoyHullsLbsAsFedPerDay;
+    const youngHeifersSoyHullsDaysOnFeed =
+      updatedDocument.youngHeifers.youngHeifersSoyHullsDaysOnFeed;
+    const youngHeifersCustomGrainMixLbsAsFedPerDay =
+      updatedDocument.youngHeifers.youngHeifersCustomGrainMixLbsAsFedPerDay;
+    const youngHeifersCustomGrainMixDaysOnFeed =
+      updatedDocument.youngHeifers.youngHeifersCustomGrainMixDaysOnFeed;
 
     // Calves inputs
     const calvesMilkReplacerLbsAsFedPerDay =
@@ -1029,27 +1029,28 @@ export class FeedDetailsService {
       updatedDocument.soybeanMealTransportAndCost
         .soybeanMealAvgGrownForageMilesTruckedToDairy;
 
-    // Custom Feed Mix Trucking Costs
-    const customFeedMixCostOfCommodityPerTon =
-      updatedDocument.customFeedMixTransportAndCost
-        .customFeedMixCostOfCommodityPerTon;
-    const customFeedMixAvgPurchasedFeedMilesTruckedToDairy =
-      updatedDocument.customFeedMixTransportAndCost
-        .customFeedMixAvgPurchasedFeedMilesTruckedToDairy;
-    const customFeedMixAvgGrownForageMilesTruckedToDairy =
-      updatedDocument.customFeedMixTransportAndCost
-        .customFeedMixAvgGrownForageMilesTruckedToDairy;
+    // Soy Hulls Trucking Costs
+    const soyHullsCostOfCommodityPerTon =
+      updatedDocument.soyHullsTransportAndCost
+        .soyHullsCostOfCommodityPerTon;
+    const soyHullsAvgPurchasedFeedMilesTruckedToDairy =
+      updatedDocument.soyHullsTransportAndCost
+        .soyHullsAvgPurchasedFeedMilesTruckedToDairy;
+    const soyHullsAvgGrownForageMilesTruckedToDairy =
+      updatedDocument.soyHullsTransportAndCost
+        .soyHullsAvgGrownForageMilesTruckedToDairy;
 
-    // Custom Mineral Mix Trucking Costs
-    const customMineralMixCostOfCommodityPerTon =
-      updatedDocument.customMineralMixTransportAndCost
-        .customMineralMixCostOfCommodityPerTon;
-    const customMineralMixAvgPurchasedFeedMilesTruckedToDairy =
-      updatedDocument.customMineralMixTransportAndCost
-        .customMineralMixAvgPurchasedFeedMilesTruckedToDairy;
-    const customMineralMixAvgGrownForageMilesTruckedToDairy =
-      updatedDocument.customMineralMixTransportAndCost
-        .customMineralMixAvgGrownForageMilesTruckedToDairy;
+    // Custom Grain Mix Trucking Costs
+    const customGrainMixCostOfCommodityPerTon =
+      updatedDocument.customGrainMixTransportAndCost
+        .customGrainMixCostOfCommodityPerTon;
+    const customGrainMixAvgPurchasedFeedMilesTruckedToDairy =
+      updatedDocument.customGrainMixTransportAndCost
+        .customGrainMixAvgPurchasedFeedMilesTruckedToDairy;
+    const customGrainMixAvgGrownForageMilesTruckedToDairy =
+      updatedDocument.customGrainMixTransportAndCost
+        .customGrainMixAvgGrownForageMilesTruckedToDairy;
+
 
     // ----> Calculating the outputs here
     const cornSilageTonsRequired =
@@ -1223,35 +1224,35 @@ export class FeedDetailsService {
           numberOfYoungHeifersCowsOnFeed) /
       2000;
 
-    // Custom Feed Mix Calculations
-    const customFeedMixTonsRequired =
-      (milkingHerdCustomFeedMixLbsAsFedPerDay *
-        milkingHerdCustomFeedMixDaysOnFeed *
+    // Soy Hulls Calculations
+    const soyHullsTonsRequired =
+      (milkingHerdSoyHullsLbsAsFedPerDay *
+        milkingHerdSoyHullsDaysOnFeed *
         numberOfMilkingCowsOnFeed +
-        dryHerdCustomFeedMixLbsAsFedPerDay *
-          dryHerdCustomFeedMixDaysOnFeed *
+        dryHerdSoyHullsLbsAsFedPerDay *
+          dryHerdSoyHullsDaysOnFeed *
           numberOfDryCowsOnFeed +
-        bredHeifersCustomFeedMixLbsAsFedPerDay *
-          bredHeifersCustomFeedMixDaysOnFeed *
+        bredHeifersSoyHullsLbsAsFedPerDay *
+          bredHeifersSoyHullsDaysOnFeed *
           numberOfBredHeifersCowsOnFeed +
-        youngHeifersCustomFeedMixLbsAsFedPerDay *
-          youngHeifersCustomFeedMixDaysOnFeed *
+        youngHeifersSoyHullsLbsAsFedPerDay *
+          youngHeifersSoyHullsDaysOnFeed *
           numberOfYoungHeifersCowsOnFeed) /
       2000;
 
-    // Custom Mineral Mix Calculations
-    const customMineralMixTonsRequired =
-      (milkingHerdCustomMineralMixLbsAsFedPerDay *
-        milkingHerdCustomMineralMixDaysOnFeed *
+    // Custom Grain Mix Calculations
+    const customGrainMixTonsRequired =
+      (milkingHerdCustomGrainMixLbsAsFedPerDay *
+        milkingHerdCustomGrainMixDaysOnFeed *
         numberOfMilkingCowsOnFeed +
-        dryHerdCustomMineralMixLbsAsFedPerDay *
-          dryHerdCustomMineralMixDaysOnFeed *
+        dryHerdCustomGrainMixLbsAsFedPerDay *
+          dryHerdCustomGrainMixDaysOnFeed *
           numberOfDryCowsOnFeed +
-        bredHeifersCustomMineralMixLbsAsFedPerDay *
-          bredHeifersCustomMineralMixDaysOnFeed *
+        bredHeifersCustomGrainMixLbsAsFedPerDay *
+          bredHeifersCustomGrainMixDaysOnFeed *
           numberOfBredHeifersCowsOnFeed +
-        youngHeifersCustomMineralMixLbsAsFedPerDay *
-          youngHeifersCustomMineralMixDaysOnFeed *
+        youngHeifersCustomGrainMixLbsAsFedPerDay *
+          youngHeifersCustomGrainMixDaysOnFeed *
           numberOfYoungHeifersCowsOnFeed) /
       2000;
 
@@ -1413,17 +1414,17 @@ export class FeedDetailsService {
       soybeanMealAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
     const purchasedSoybeanMeal48TotalCost = soybeanMeal48CostOfCommodity + soybeanMeal48CostOfTrucking;
 
-    const customFeedMixTonsToBePurchased = customFeedMixTonsRequired;
-    const customFeedMixCostOfCommodity = customFeedMixTonsToBePurchased * customFeedMixCostOfCommodityPerTon;
-    const customFeedMixCostOfTrucking = customFeedMixTonsToBePurchased *
-      customFeedMixAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-    const purchasedCustomFeedMixTotalCost = customFeedMixCostOfCommodity + customFeedMixCostOfTrucking;
+    const soyHullsTonsToBePurchased = soyHullsTonsRequired;
+    const soyHullsCostOfCommodity = soyHullsTonsToBePurchased * soyHullsCostOfCommodityPerTon;
+    const soyHullsCostOfTrucking = soyHullsTonsToBePurchased *
+      soyHullsAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedSoyHullsTotalCost = soyHullsCostOfCommodity + soyHullsCostOfTrucking;
 
-    const customMineralMixTonsToBePurchased = customMineralMixTonsRequired;
-    const customMineralMixCostOfCommodity = customMineralMixTonsToBePurchased * customMineralMixCostOfCommodityPerTon;
-    const customMineralMixCostOfTrucking = customMineralMixTonsToBePurchased *
-      customMineralMixAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
-    const purchasedCustomMineralMixTotalCost = customMineralMixCostOfCommodity + customMineralMixCostOfTrucking;
+    const customGrainMixTonsToBePurchased = customGrainMixTonsRequired;
+    const customGrainMixCostOfCommodity = customGrainMixTonsToBePurchased * customGrainMixCostOfCommodityPerTon;
+    const customGrainMixCostOfTrucking = customGrainMixTonsToBePurchased *
+      customGrainMixAvgPurchasedFeedMilesTruckedToDairy * averageCostOfTruckingPerTonMile;
+    const purchasedCustomGrainMixTotalCost = customGrainMixCostOfCommodity + customGrainMixCostOfTrucking;
 
     // Growth Forage Trucking Costs
     const cornSilageGrownForageTruckingCost =
@@ -1481,8 +1482,8 @@ export class FeedDetailsService {
       wholeCottonseedTonsRequired: Number(wholeCottonseedTonsRequired.toFixed(2)),
       cottonseedHullsTonsRequired: Number(cottonseedHullsTonsRequired.toFixed(2)),
       soybeanMeal48TonsRequired: Number(soybeanMeal48TonsRequired.toFixed(2)),
-      customFeedMixTonsRequired: Number(customFeedMixTonsRequired.toFixed(2)),
-      customMineralMixTonsRequired: Number(customMineralMixTonsRequired.toFixed(2)),
+      soyHullsTonsRequired: Number(soyHullsTonsRequired.toFixed(2)),
+      customGrainMixTonsRequired: Number(customGrainMixTonsRequired.toFixed(2)),
 
       // Total Variable Costs
       cornSilageTVC: Number(cornSilageTVC.toFixed(2)),
@@ -1627,16 +1628,15 @@ export class FeedDetailsService {
       soybeanMeal48CostOfTrucking: Number(soybeanMeal48CostOfTrucking.toFixed(2)),
       purchasedSoybeanMeal48TotalCost: Number(purchasedSoybeanMeal48TotalCost.toFixed(2)),
 
-      customFeedMixTonsToBePurchased: Number(customFeedMixTonsToBePurchased.toFixed(2)),
-      customFeedMixCostOfCommodity: Number(customFeedMixCostOfCommodity.toFixed(2)),
-      customFeedMixCostOfTrucking: Number(customFeedMixCostOfTrucking.toFixed(2)),
-      purchasedCustomFeedMixTotalCost: Number(purchasedCustomFeedMixTotalCost.toFixed(2)),
+      soyHullsTonsToBePurchased: Number(soyHullsTonsToBePurchased.toFixed(2)),
+      soyHullsCostOfCommodity: Number(soyHullsCostOfCommodity.toFixed(2)),
+      soyHullsCostOfTrucking: Number(soyHullsCostOfTrucking.toFixed(2)),
+      purchasedSoyHullsTotalCost: Number(purchasedSoyHullsTotalCost.toFixed(2)),
 
-      customMineralMixTonsToBePurchased: Number(customMineralMixTonsToBePurchased.toFixed(2)),
-      customMineralMixCostOfCommodity: Number(customMineralMixCostOfCommodity.toFixed(2)),
-      customMineralMixCostOfTrucking: Number(customMineralMixCostOfTrucking.toFixed(2)),
-      purchasedCustomMineralMixTotalCost: Number(purchasedCustomMineralMixTotalCost.toFixed(2)),
-
+      customGrainMixTonsToBePurchased: Number(customGrainMixTonsToBePurchased.toFixed(2)),
+      customGrainMixCostOfCommodity: Number(customGrainMixCostOfCommodity.toFixed(2)),
+      customGrainMixCostOfTrucking: Number(customGrainMixCostOfTrucking.toFixed(2)),
+      purchasedCustomGrainMixTotalCost: Number(purchasedCustomGrainMixTotalCost.toFixed(2)),
 
       // Grown Forage Trucking Cost
       cornSilageGrownForageTruckingCost: Number(

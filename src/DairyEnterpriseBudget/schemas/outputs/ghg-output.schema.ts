@@ -45,6 +45,12 @@ export class HerdTotalDMI {
 
   @Prop({ required: true })
   soybean48DMI: number;
+
+  @Prop({ required: true })
+  soyHullsDMI: number;
+
+  @Prop({ required: true })
+  customGrainMixDMI: number;
 }
 
 @Schema()
@@ -134,6 +140,16 @@ export class FeedGHGEmissions{
   soybean48FeedEmissions: number;
   @Prop({ required: true })
   soybean48FeedEmissionsPerFPCM: number;
+
+  @Prop({ required: true })
+  soyHullsFeedEmissions: number;
+  @Prop({ required: true })
+  soyHullsFeedEmissionsPerFPCM: number;
+
+  @Prop({ required: true })
+  customGrainMixFeedEmissions: number;
+  @Prop({ required: true })
+  customGrainMixFeedEmissionsPerFPCM: number;
 }
 
 @Schema()
@@ -208,6 +224,16 @@ export class EntericEmissions{
   soybean48EntericEmissions: number;
   @Prop({ required: true })
   soybean48EntericEmissionsPerFPCM: number;
+
+  @Prop({ required: true })
+  soyHullsEntericEmissions: number;
+  @Prop({ required: true })
+  soyHullsEntericEmissionsPerFPCM: number;
+
+  @Prop({ required: true })
+  customGrainMixEntericEmissions: number;
+  @Prop({ required: true })
+  customGrainMixEntericEmissionsPerFPCM: number;
 }
 
 @Schema()
@@ -241,6 +267,10 @@ export class TruckingEmissions{
   cottonseedHullsTruckingEmissions: number;
   @Prop({ required: true })
   soybean48TruckingEmissions: number;
+  @Prop({ required: true })
+  soyHullsTruckingEmissions: number;
+  @Prop({ required: true })
+  customGrainTruckingEmissions: number;
 }
 
 @Schema()
