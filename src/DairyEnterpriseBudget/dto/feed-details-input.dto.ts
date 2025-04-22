@@ -392,6 +392,14 @@ class YoungHeifersFeedDetailsDto {
   youngHeifersCustomGrainMixDaysOnFeed: number;
 }
 
+class WeanedHeifersFeedDetailsDto {
+  @IsNumber()
+  weanedHeifersCustomGrainMixLbsAsFedPerDay: number;
+
+  @IsNumber()
+  weanedHeifersCustomGrainMixDaysOnFeed: number;
+}
+
 class CalvesFeedDetailsDto {
   @IsNumber()
   calvesMilkReplacerLbsAsFedPerDay: number;
@@ -701,6 +709,9 @@ export class FeedDetailsInputDto {
 
   @IsObject()
   youngHeifers: YoungHeifersFeedDetailsDto;
+
+  @IsObject()
+  weanedHeifers: WeanedHeifersFeedDetailsDto;
 
   @IsObject()
   calves: CalvesFeedDetailsDto;

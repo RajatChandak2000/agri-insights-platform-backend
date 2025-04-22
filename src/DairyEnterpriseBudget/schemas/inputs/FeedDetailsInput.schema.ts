@@ -402,6 +402,15 @@ class YoungHeifersFeedPlanInputs {
 }
 
 @Schema()
+class WeanedHeifersFeedPlanInputs {
+  @Prop({ required: true })
+  weanedHeifersCustomGrainMixLbsAsFedPerDay: number;
+
+  @Prop({ required: true})
+  weanedHeifersCustomGrainMixDaysOnFeed: number;
+}
+
+@Schema()
 class CalvesFeedPlanInputs {
   @Prop({ required: true })
   calvesMilkReplacerLbsAsFedPerDay: number;
@@ -739,6 +748,9 @@ export class FeedDetailsInput extends Document {
   @Prop({ type: YoungHeifersFeedPlanInputs, default: {} })
   youngHeifers: YoungHeifersFeedPlanInputs;
 
+  @Prop({ type: WeanedHeifersFeedPlanInputs, default: {} })
+  weanedHeifers: WeanedHeifersFeedPlanInputs;
+
   @Prop({ type: CalvesFeedPlanInputs, default: {} })
   calves: CalvesFeedPlanInputs;
 
@@ -826,5 +838,4 @@ export class FeedDetailsInput extends Document {
   customGrainMixTransportAndCost: CustomGrainMixTransportAndCostInputs;
 }
 
-export const FeedDetailsInputsSchema =
-  SchemaFactory.createForClass(FeedDetailsInput);
+export const FeedDetailsInputsSchema = SchemaFactory.createForClass(FeedDetailsInput);

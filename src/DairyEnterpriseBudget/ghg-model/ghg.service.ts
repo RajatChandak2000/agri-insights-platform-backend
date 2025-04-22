@@ -236,7 +236,7 @@ export class GHGService {
 
   private getHerdPopulationCounts(
     productionDetails: ProductionDetailsInput, productionDetailsOutputs: ProductionDetailsOutput
-  ): { lactating: number; dry: number; replacements: number; young: number } {
+  ): { lactating: number; dry: number; replacements: number; young: number; weaned: number } {
     // 15% dry
 
     const numberOfHeifersRaised = productionDetails.heiferProduction.numberOfHeifersRaised;
@@ -245,9 +245,6 @@ export class GHGService {
     const numberOfDryCowsOnFeed = Math.round(numberOfLactationsPerYear);
     const numberOfBredHeifersCowsOnFeed = numberOfHeifersRaised;
     const numberOfYoungHeifersCowsOnFeed = numberOfHeifersRaised;
-
-
-  
 
     const totalCows = productionDetails.milkProduction.totalNumberOfCows;
     const totalHeifersRaised =
@@ -258,6 +255,7 @@ export class GHGService {
       dry: numberOfMilkingCowsOnFeed,
       replacements: numberOfYoungHeifersCowsOnFeed,
       young: numberOfYoungHeifersCowsOnFeed,
+      weaned: numberOfYoungHeifersCowsOnFeed,
     };
   }
 
@@ -270,6 +268,7 @@ export class GHGService {
       { key: 'dryHerd', count: herdCounts.dry },
       { key: 'bredHeifers', count: herdCounts.replacements },
       { key: 'youngHeifers', count: herdCounts.young },
+      { key: 'weanedHeifers', count: herdCounts.weaned}
     ];
 
     const dmiResults: Record<string, number> = {};
@@ -301,6 +300,7 @@ export class GHGService {
       { key: 'dryHerd', count: herdCounts.dry },
       { key: 'bredHeifers', count: herdCounts.replacements },
       { key: 'youngHeifers', count: herdCounts.young },
+      { key: 'weanedHeifers', count: herdCounts.weaned },
     ];
   
     const dmiGroupResults: Record<string, Record<string, number>> = {};
@@ -516,6 +516,7 @@ export class GHGService {
       dryHerd: {},
       bredHeifers: {},
       youngHeifers: {},
+      weanedHeifers: {},
     };
   
     // For each feed type in the dmiGroupResults,
@@ -527,6 +528,7 @@ export class GHGService {
       result.dryHerd[`${feedType}DMI`] = groupValues.dryHerd ?? 0;
       result.bredHeifers[`${feedType}DMI`] = groupValues.bredHeifers ?? 0;
       result.youngHeifers[`${feedType}DMI`] = groupValues.youngHeifers ?? 0;
+      result.weanedHeifers[`${feedType}DMI`] = groupValues.weanedHeifers ?? 0;
     }
   
     return result;
