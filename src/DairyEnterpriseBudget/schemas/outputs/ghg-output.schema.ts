@@ -66,6 +66,9 @@ export class HerdDMIGroup extends Document {
 
   @Prop({ required: true, type: HerdTotalDMI })
   youngHeifers: HerdTotalDMI;
+
+  @Prop({ required: true, type: HerdTotalDMI })
+  weanedHeifers: HerdTotalDMI;
 }
 
 @Schema()

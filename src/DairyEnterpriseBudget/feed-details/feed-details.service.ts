@@ -88,6 +88,18 @@ export class FeedDetailsService {
       );
     }
 
+    // Handling Weaned Heifers Inputs
+    if (updateDto.weanedHeifers) {
+      for (const [key, value] of Object.entries(updateDto.weanedHeifers)) {
+        if (value !== undefined) {
+          updateData[`weanedHeifers.${key}`] = value;
+        }
+      }
+      this.logger.log(
+        `Weaned Heifers Data: ${JSON.stringify(updateDto.weanedHeifers)}`,
+      );
+    }
+
     // Handling Calves Inputs
     if (updateDto.calves) {
       for (const [key, value] of Object.entries(updateDto.calves)) {
@@ -772,6 +784,10 @@ export class FeedDetailsService {
     const youngHeifersCustomGrainMixDaysOnFeed =
       updatedDocument.youngHeifers.youngHeifersCustomGrainMixDaysOnFeed;
 
+    // Weaned Heifers inputs
+    const weanedHeifersCustomGrainMixLbsAsFedPerDay =  updatedDocument.weanedHeifers.weanedHeifersCustomGrainMixLbsAsFedPerDay;
+    const weanedHeifersCustomGrainMixDaysOnFeed = updatedDocument.weanedHeifers.weanedHeifersCustomGrainMixDaysOnFeed;
+
     // Calves inputs
     const calvesMilkReplacerLbsAsFedPerDay =
       updatedDocument.calves.calvesMilkReplacerLbsAsFedPerDay;
@@ -1051,7 +1067,6 @@ export class FeedDetailsService {
       updatedDocument.customGrainMixTransportAndCost
         .customGrainMixAvgGrownForageMilesTruckedToDairy;
 
-
     // ----> Calculating the outputs here
     const cornSilageTonsRequired =
       (milkingHerdCornSilageLbsAsFedPerDay * milkingHerdCornSilageDaysOnFeed * numberOfMilkingCowsOnFeed +
@@ -1253,8 +1268,10 @@ export class FeedDetailsService {
           numberOfBredHeifersCowsOnFeed +
         youngHeifersCustomGrainMixLbsAsFedPerDay *
           youngHeifersCustomGrainMixDaysOnFeed *
-          numberOfYoungHeifersCowsOnFeed) /
-      2000;
+          numberOfYoungHeifersCowsOnFeed +
+        weanedHeifersCustomGrainMixLbsAsFedPerDay *
+          weanedHeifersCustomGrainMixDaysOnFeed *
+            numberOfYoungHeifersCowsOnFeed) / 2000;
 
     //Raised Forage Variable Costs
     const cornSilageTVC = cornSilageEstimatedTotalOperatingCost;

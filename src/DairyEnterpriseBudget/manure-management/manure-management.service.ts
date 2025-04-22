@@ -225,6 +225,7 @@ export class ManureManagementService {
         const dryDmiValues = JSON.parse(JSON.stringify(ghgModelOutputs.herdDMIGroup.dryHerd));
         const bredHeifersDmiValues = JSON.parse(JSON.stringify(ghgModelOutputs.herdDMIGroup.bredHeifers));
         const youngHeifersDmiValues = JSON.parse(JSON.stringify(ghgModelOutputs.herdDMIGroup.youngHeifers));
+        const weanedHeifersDmiValues = JSON.parse(JSON.stringify(ghgModelOutputs.herdDMIGroup.weanedHeifers));
 
         const numberOfLactationsPerYear = productionDetailsOutputs.numberOfLactationsPerYear;
         const lactatingNumberOfCowsOnFeed = Math.round(numberOfLactationsPerYear);
@@ -235,12 +236,14 @@ export class ManureManagementService {
         const dryVS = this.calculateVSProduction("Dry", dryDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentDryManureRecoverable / 100);
         const bredHeiferVS = this.calculateVSProduction("BredHeifer", bredHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentBredManureRecoverable / 100);
         const youngHeiferVS = this.calculateVSProduction("YoungHeifer", youngHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
+        const weanedHeiferVS = this.calculateVSProduction("YoungHeifer", weanedHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
 
         // Compute Nitrogen Intake & Excretion
         const lactatingN = this.calculateNIntakeAndExcretion("Lactating", lactatingDmiValues, lactatingNumberOfCowsOnFeed, updatedDocument.percentLactatingManureRecoverable / 100);
         const dryN = this.calculateNIntakeAndExcretion("Dry", dryDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentDryManureRecoverable / 100);
         const bredHeiferN = this.calculateNIntakeAndExcretion("BredHeifer", bredHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentBredManureRecoverable / 100);
         const youngHeiferN = this.calculateNIntakeAndExcretion("YoungHeifer", youngHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
+        const weanedHeiferN = this.calculateNIntakeAndExcretion("YoungHeifer", weanedHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
         
         // Calculate Herd Total VS
         const herdTotalRecoverableVs =
