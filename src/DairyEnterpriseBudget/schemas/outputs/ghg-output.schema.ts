@@ -273,7 +273,7 @@ export class TruckingEmissions{
   @Prop({ required: true })
   soyHullsTruckingEmissions: number;
   @Prop({ required: true })
-  customGrainTruckingEmissions: number;
+  customGrainMixTruckingEmissions: number;
 }
 
 @Schema()
