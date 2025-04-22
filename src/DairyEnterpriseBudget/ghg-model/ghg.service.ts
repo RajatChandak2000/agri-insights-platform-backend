@@ -276,10 +276,15 @@ export class GHGService {
     for (const feedType of Object.keys(this.DRY_MATTER_PERCENTAGES)) {
       dmiResults[feedType] = 0;
 
+      console.log("feedType ", feedType);
+
       for (const group of herdGroups) {
         const feedKey = this.getFeedKey(feedType, group.key);
         const lbsPerDay = feedDetails[group.key]?.[`${group.key}${feedKey}LbsAsFedPerDay`] || 0;
         const daysOnFeed = feedDetails[group.key]?.[`${group.key}${feedKey}DaysOnFeed`] || 0;
+
+        console.log("lbsPerDay ", lbsPerDay);
+        console.log("daysOnFeed ", daysOnFeed);
         
         const dmPercentage = this.DRY_MATTER_PERCENTAGES[feedType];
         const totalGroupDMI = lbsPerDay * daysOnFeed * dmPercentage * group.count;
@@ -347,6 +352,7 @@ export class GHGService {
       cottonseedHulls: 'CottonseedHulls',
       soybean48: 'SoybeanMeal48',
       soyHulls: 'SoyHulls',
+      customGrainMix: 'CustomGrainMix'
     };
 
     return feedMap[feedType] || feedType;
@@ -476,6 +482,7 @@ export class GHGService {
       cottonseedHulls: 'cottonseedHulls',
       soybean48: 'soybeanMeal',
       soyHulls: 'soyHulls',
+      customGrainMix: 'customGrainMix'
     };
 
     return transportMap[feedType] || feedType;
@@ -487,6 +494,7 @@ export class GHGService {
   private buildHerdTotalDMIObject(
     dmiResults: Record<string, number>,
   ): Record<string, number> {
+    console.log("dmiResults ", dmiResults);
     return {
       cornSilageDMI: dmiResults.cornSilage ?? 0,
       sorghumSilageDMI: dmiResults.sorghumSilage ?? 0,
@@ -502,8 +510,8 @@ export class GHGService {
       wholeCottonseedDMI: dmiResults.wholeCottonseed ?? 0,
       cottonseedHullsDMI: dmiResults.cottonseedHulls ?? 0,
       soybean48DMI: dmiResults.soybean48 ?? 0,
-      soyHulls: dmiResults.soyHulls ?? 0,
-      customGrainMix: dmiResults.customGrainMix ?? 0
+      soyHullsDMI: dmiResults.soyHulls ?? 0,
+      customGrainMixDMI: dmiResults.customGrainMix ?? 0
     };
   }
 
