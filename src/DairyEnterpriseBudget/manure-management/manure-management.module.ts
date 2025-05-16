@@ -9,6 +9,7 @@ import { GHGOutput, GHGOutputSchema } from "../schemas/outputs/ghg-output.schema
 import { ProductionDetailsOutput, ProductionDetailsOutputSchema } from "../schemas/outputs/ProductionDetailsOutput.schema";
 import { ManureManagementInput, ManureManagementInputSchema } from "../schemas/inputs/ManureManagementInput.schema";
 import { ManureManagementOutput, ManureManagementOutputSchema } from "../schemas/outputs/ManureManagementOutput.schema";
+import { ProductionDetailsInput, ProductionDetailsInputsSchema } from "../schemas/inputs/ProductionDetailsInput.schema";
 
 @Module({
     providers: [ManureManagementService],
@@ -20,6 +21,7 @@ import { ManureManagementOutput, ManureManagementOutputSchema } from "../schemas
             {name: FeedDetailsInput.name, schema: FeedDetailsInputsSchema},
             {name: FeedDetailsOutput.name, schema: FeedDetailsOutputSchema},
             {name: ProductionDetailsOutput.name, schema: ProductionDetailsOutputSchema},
+            {name: ProductionDetailsInput.name, schema: ProductionDetailsInputsSchema},
             {name: GHGOutput.name, schema: GHGOutputSchema},
             {name: User.name, schema: UserSchema}
         ])

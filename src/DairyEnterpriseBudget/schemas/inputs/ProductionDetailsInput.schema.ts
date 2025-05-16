@@ -38,12 +38,24 @@ class HeiferProductionInputs {
 
   @Prop({ required: true })
   expectedPercentMaleWithConventional: number;
+
+  @Prop({ required: true })
+  heifersBredConventionalPercent: number;
+
+  @Prop({ required: true })
+  heifersBredSexedPercent: number;
+
+  @Prop({ required: true })
+  avgAgeofFirstCalving: number;
 }
 
 @Schema()
 class BeefCrossProductionDetails {
   @Prop({ required: true })
-  beefCrossPercent: number;
+  heifersBredBeefCrossPercent: number;
+
+  @Prop({ required: true })
+  expectedPercentMaleWithBeef: number;
 
   @Prop({ required: true })
   beefCrossDeathRate: number;

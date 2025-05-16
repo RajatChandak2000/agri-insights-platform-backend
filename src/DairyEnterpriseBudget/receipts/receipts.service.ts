@@ -136,8 +136,11 @@ export class ReceiptsService {
       heiferRaisingDeathLossRate,
       bullCalfDeath,
       numberOfHeifersRaised,
+      heifersBredConventionalPercent,
+      heifersBredSexedPercent,
+      avgAgeofFirstCalving
     } = productionDetailsInputs.heiferProduction;
-    const { beefCrossPercent, beefCrossDeathRate } =
+    const { heifersBredBeefCrossPercent, expectedPercentMaleWithBeef , beefCrossDeathRate } =
       productionDetailsInputs.beefCrossDetails;
     const expectedAnnualMilkSales =
       fetchedproductionDetailsOutputs.expectedAnnualMilkSales;
@@ -151,26 +154,18 @@ export class ReceiptsService {
       (cullingRate / 100) * totalNumberOfCows * (1 - cowDeathLossRate / 100),
     );
     const heifersProduced = Math.round(
-      (2 / 3) * lactations * (1 - expectedPercentMaleWithSexedSemen / 100) +
-        (1 / 3) * lactations * (1 - expectedPercentMaleWithConventional / 100),
+      (heifersBredSexedPercent / 100) * lactations * (1 - expectedPercentMaleWithSexedSemen / 100) +
+        (heifersBredConventionalPercent / 100) * lactations * (1 - expectedPercentMaleWithConventional / 100),
     );
     const bullCalvesProduced = Math.round(
-      (2 / 3) * lactations * (expectedPercentMaleWithSexedSemen / 100) +
-        (1 / 3) * lactations * (expectedPercentMaleWithConventional / 100),
+      (heifersBredSexedPercent / 100) * lactations * (expectedPercentMaleWithSexedSemen / 100) +
+        (heifersBredConventionalPercent / 100) * lactations * (expectedPercentMaleWithConventional / 100),
     );
     const beefCrossBullsProduced = Math.round(
-      (1 / 3) *
-        lactations *
-        (expectedPercentMaleWithConventional / 100) *
-        (beefCrossPercent / 100),
+      (heifersBredBeefCrossPercent / 100) * lactations * (expectedPercentMaleWithBeef / 100),
     );
     const beefCrossHeifersProduced = Math.round(
-      ((2 / 3) * lactations * (1 - expectedPercentMaleWithSexedSemen / 100) -
-        numberOfHeifersRaised +
-        (1 / 3) *
-          lactations *
-          (1 - expectedPercentMaleWithConventional / 100)) *
-        (beefCrossPercent / 100),
+      (heifersBredBeefCrossPercent / 100) * lactations * (1 - expectedPercentMaleWithBeef / 100),
     );
 
     console.log('cullcows: ', cullcows);
@@ -182,21 +177,9 @@ export class ReceiptsService {
     // Calculate sales
     const milkSales = expectedAnnualMilkSales;
     const cullCowsSales = cullcows * cullCowsPrice;
-    const heifersSales =
-      Math.round(
-        (heifersProduced - numberOfHeifersRaised - beefCrossHeifersProduced) *
-          (1 - heiferRaisingDeathLossRate / 100),
-      ) * heifersPrice;
-    const bullCalvesSales =
-      Math.round(
-        (bullCalvesProduced - beefCrossBullsProduced) *
-          (1 - bullCalfDeath / 100),
-      ) * bullCalvesPrice;
-    const beefCrossSales =
-      Math.round(
-        beefCrossBullsProduced * (1 - beefCrossDeathRate / 100) +
-          beefCrossHeifersProduced * (1 - beefCrossDeathRate / 100),
-      ) * beefCrossPrice;
+    const heifersSales = Math.round((heifersProduced - numberOfHeifersRaised) * (1 - heiferRaisingDeathLossRate / 100)) * heifersPrice;
+    const bullCalvesSales = Math.round((bullCalvesProduced) * (1 - bullCalfDeath / 100)) * bullCalvesPrice;
+    const beefCrossSales = Math.round(beefCrossBullsProduced * (1 - beefCrossDeathRate / 100) + beefCrossHeifersProduced * (1 - beefCrossDeathRate / 100)) * beefCrossPrice;
 
     //calculate the total receipts
     const totalReceipts =

@@ -35,11 +35,23 @@ class HeiferProductionInputsDto {
 
   @IsNumber()
   expectedPercentMaleWithConventional?: number;
+
+  @IsNumber()
+  heifersBredConventionalPercent: number;
+
+  @IsNumber()
+  heifersBredSexedPercent: number;
+
+  @IsNumber()
+  avgAgeofFirstCalving: number;
 }
 
 class BeefCrossProductionDetailsDto {
   @IsNumber()
-  beefCrossPercent?: number;
+  heifersBredBeefCrossPercent: number;
+
+  @IsNumber()
+  expectedPercentMaleWithBeef: number;
 
   @IsNumber()
   beefCrossDeathRate?: number;
