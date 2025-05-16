@@ -114,6 +114,17 @@ export class ProductionDetailsService {
     const cowDeathLossRate = updatedDocument.heiferProduction.cowDeathLossRate;
     const heiferRaisingDeathLossRate =
       updatedDocument.heiferProduction.heiferRaisingDeathLossRate;
+    const heifersBredConventionalPercent =
+      updatedDocument.heiferProduction.heifersBredConventionalPercent;
+    const heifersBredSexedPercent =
+      updatedDocument.heiferProduction.heifersBredSexedPercent;
+    const avgAgeofFirstCalving =
+      updatedDocument.heiferProduction.avgAgeofFirstCalving;
+    const heifersBredBeefCrossPercent =
+      updatedDocument.beefCrossDetails.heifersBredBeefCrossPercent;
+    const expectedPercentMaleWithBeef =
+      updatedDocument.beefCrossDetails.expectedPercentMaleWithBeef;
+
     const numberOfLactationsPerYear =
       (totalNumberOfCows * 12) / calvingInterval; //Stored in database in output for a particular user if logged  in.
     const expectedMilkPrice = 22; // default, will change later, need to automate with data collected
@@ -134,14 +145,12 @@ export class ProductionDetailsService {
     ).toFixed(2);
     const numberOfReplacementHeifersNeeded = Math.round(
       totalNumberOfCows *
-        (cullingRate / 100 +
-          cowDeathLossRate / 100 +
-          heiferRaisingDeathLossRate / 100),
+        (cullingRate / 100 + cowDeathLossRate / 100) * (1 + heiferRaisingDeathLossRate / 100) * (avgAgeofFirstCalving/24),
     );
 
     // Convert to numbers for storage
     const updatedOutputDocument = {
-      numberOfLactationsPerYear: numberOfLactationsPerYear,
+      numberOfLactationsPerYear: Math.round(numberOfLactationsPerYear),
       rollingHerdAverage: parseFloat(rollingHerdAverage),
       totalAnnualMilkProduction: parseFloat(totalAnnualMilkProduction),
       expectedAnnualMilkSales: parseFloat(expectedAnnualMilkSales),

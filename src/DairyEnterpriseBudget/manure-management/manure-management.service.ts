@@ -9,6 +9,7 @@ import { FeedDetailsInput } from "../schemas/inputs/FeedDetailsInput.schema";
 import { FeedDetailsOutput } from "../schemas/outputs/FeedDetailsOutput.schema";
 import { User } from "src/user/schemas/user.schema";
 import { ManureManagementOutput } from "../schemas/outputs/ManureManagementOutput.schema";
+import { ProductionDetailsInput } from "../schemas/inputs/ProductionDetailsInput.schema";
 
 @Injectable()
 export class ManureManagementService {
@@ -60,6 +61,7 @@ export class ManureManagementService {
         @InjectModel(ManureManagementOutput.name) private manureManagementOutputModel: Model<ManureManagementOutput>,
         @InjectModel(GHGOutput.name) private ghgOutputModel: Model<GHGOutput>,
         @InjectModel(ProductionDetailsOutput.name) private productionDetailsOutputModel: Model<ProductionDetailsOutput>,
+        @InjectModel(ProductionDetailsInput.name) private productionDetailsInputModel: Model<ProductionDetailsInput>,
         @InjectModel(FeedDetailsInput.name) private feedDetailsInputModel: Model<FeedDetailsInput>,
         @InjectModel(FeedDetailsOutput.name) private feedDetailsOutputModel: Model<FeedDetailsOutput>,
         @InjectModel(User.name) private userModel: Model<User>,
@@ -215,10 +217,15 @@ export class ManureManagementService {
 
         const ghgModelOutputs = await this.ghgOutputModel.findOne({ userId }).exec();
         const productionDetailsOutputs = await this.productionDetailsOutputModel.findOne({ userId }).exec();
+        const productionDetailsInputs = await this.productionDetailsInputModel.findOne({ userId }).exec();
 
         if (!ghgModelOutputs || !ghgModelOutputs.herdTotalDMI) {
             throw new Error("GHG Model Outputs or herdTotalDMI not found.");
         }
+        
+        // Values required from production details inputs
+        const heifersRaised = productionDetailsInputs.heiferProduction.numberOfHeifersRaised;
+        const heiferDeath = productionDetailsInputs.heiferProduction.heiferRaisingDeathLossRate;
 
         //Fetch the Herd DMI group from GHG Model and get all individual Herd DMI valies
         const lactatingDmiValues = JSON.parse(JSON.stringify(ghgModelOutputs.herdDMIGroup.milkingHerd));
@@ -227,23 +234,39 @@ export class ManureManagementService {
         const youngHeifersDmiValues = JSON.parse(JSON.stringify(ghgModelOutputs.herdDMIGroup.youngHeifers));
         const weanedHeifersDmiValues = JSON.parse(JSON.stringify(ghgModelOutputs.herdDMIGroup.weanedHeifers));
 
+        console.log("lactatingDmiValues ", lactatingDmiValues);
+        console.log("dryDmiValues ", dryDmiValues);
+        console.log("bredHeifersDmiValues ", bredHeifersDmiValues);
+        console.log("youngHeifersDmiValues ", youngHeifersDmiValues);
+        console.log("weanedHeifersDmiValues ", weanedHeifersDmiValues);
+
         const numberOfLactationsPerYear = productionDetailsOutputs.numberOfLactationsPerYear;
         const lactatingNumberOfCowsOnFeed = Math.round(numberOfLactationsPerYear);
         const dryNumberOfCowsOnFeed = Math.round(numberOfLactationsPerYear);
+        const bredHeiferNumberOfCowsOnFeed = heifersRaised*(1 - (12/24)*(heiferDeath/100));
+        const youngHeiferNumberOfCowsOnFeed = heifersRaised*(1 - (6/24)*(heiferDeath/100));
+        const weanedHeiferNumberOfCowsOnFeed = heifersRaised*(1 - (2/24)*(heiferDeath/100));
+
 
         // Compute Volatile Solids
         const lactatingVS = this.calculateVSProduction("Lactating", lactatingDmiValues, lactatingNumberOfCowsOnFeed, updatedDocument.percentLactatingManureRecoverable / 100);
         const dryVS = this.calculateVSProduction("Dry", dryDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentDryManureRecoverable / 100);
-        const bredHeiferVS = this.calculateVSProduction("BredHeifer", bredHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentBredManureRecoverable / 100);
-        const youngHeiferVS = this.calculateVSProduction("YoungHeifer", youngHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
-        const weanedHeiferVS = this.calculateVSProduction("YoungHeifer", weanedHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
+        const bredHeiferVS = this.calculateVSProduction("BredHeifer", bredHeifersDmiValues, bredHeiferNumberOfCowsOnFeed, updatedDocument.percentBredManureRecoverable / 100);
+        const youngHeiferVS = this.calculateVSProduction("YoungHeifer", youngHeifersDmiValues, youngHeiferNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
+        const weanedHeiferVS = this.calculateVSProduction("YoungHeifer", weanedHeifersDmiValues, weanedHeiferNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
+
+        // console.log("lactatingVS ", lactatingVS);
+        // console.log("dryVS ", dryVS);
+        // console.log("bredHeiferVS ", bredHeiferVS);
+        // console.log("youngHeiferVS ", youngHeiferVS);
+        // console.log("weanedHeiferVS ", weanedHeiferVS);
 
         // Compute Nitrogen Intake & Excretion
         const lactatingN = this.calculateNIntakeAndExcretion("Lactating", lactatingDmiValues, lactatingNumberOfCowsOnFeed, updatedDocument.percentLactatingManureRecoverable / 100);
         const dryN = this.calculateNIntakeAndExcretion("Dry", dryDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentDryManureRecoverable / 100);
-        const bredHeiferN = this.calculateNIntakeAndExcretion("BredHeifer", bredHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentBredManureRecoverable / 100);
-        const youngHeiferN = this.calculateNIntakeAndExcretion("YoungHeifer", youngHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
-        const weanedHeiferN = this.calculateNIntakeAndExcretion("YoungHeifer", weanedHeifersDmiValues, dryNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
+        const bredHeiferN = this.calculateNIntakeAndExcretion("BredHeifer", bredHeifersDmiValues, bredHeiferNumberOfCowsOnFeed, updatedDocument.percentBredManureRecoverable / 100);
+        const youngHeiferN = this.calculateNIntakeAndExcretion("YoungHeifer", youngHeifersDmiValues, youngHeiferNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
+        const weanedHeiferN = this.calculateNIntakeAndExcretion("YoungHeifer", weanedHeifersDmiValues, weanedHeiferNumberOfCowsOnFeed, updatedDocument.percentYoungManureRecoverable / 100);
         
         // Calculate Herd Total VS
         const herdTotalRecoverableVs =
@@ -386,6 +409,7 @@ export class ManureManagementService {
             if (!mmsData) return;
     
             const ch4Key = `ch4EmissionsMms${index + 1}`;
+            console.log("ch4Key ", ch4Key);
             console.log("herdTotalRecoverableVs ..... ", herdTotalRecoverableVs);
             console.log("methaneProductionCapacity ..... ", methaneProductionCapacity);
             console.log("ch4Density ..... ", ch4Density);

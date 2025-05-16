@@ -35,25 +35,25 @@ export class GHGService {
   };
 
   private readonly characterizationFactors = {
-    cornSilage: 0.26,
-    sorghumSilage: 0.28,
-    smallGrain: 0.26,
-    grassHay: 0.47,
-    alfalfa: 0.27,
-    peanutHulls: 0.91,
-    applePomace: 0.91,
-    distillers: 0.67,
-    brewers: 0.67,
-    citrusPulp: 0.91,
-    cornGluten: 0.44,
-    wholeCottonseed: 0.59,
-    cottonseedHulls: 0.91,
-    soybean48: 0.54,
-    soyHulls: 0.587,
-    customGrainMix: 0.59
+    cornSilage: 0.087,
+    sorghumSilage: 0.087,
+    smallGrain: 0.087,
+    grassHay: 0.116,
+    alfalfa: 0.061,
+    peanutHulls: 0.266,
+    applePomace: 0.266,
+    distillers: 0.316,
+    brewers: 0.316,
+    citrusPulp: 0.266,
+    cornGluten: 0.177,
+    wholeCottonseed: 0.266,
+    cottonseedHulls: 0.266,
+    soybean48: 0.183,
+    soyHulls: 0.266,
+    customGrainMix: 0.268
   };
 
-  private readonly ENTERIC_FACTOR = 0.46; // from GHG model doc
+  private readonly ENTERIC_FACTOR = 0.20865; // from GHG model doc
 
   constructor(
     @InjectModel(GHGInput.name) private ghgInputModel: Model<GHGInput>,
@@ -228,8 +228,8 @@ export class GHGService {
   ): number {
     return (
       totalMilk *
-      (0.1226 * (fatPercentage / 100) +
-        0.0776 * (proteinPercentage / 100) +
+      (0.1226 * (fatPercentage) +
+        0.0776 * (proteinPercentage) +
         0.2534)
     );
   }

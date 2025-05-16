@@ -512,11 +512,13 @@ export class FeedDetailsService {
 
     // ---->Temp variables required to calculate the outputs
     const numberOfHeifersRaised = productionDetailsInputs.heiferProduction.numberOfHeifersRaised;
+    const heiferDeath = productionDetailsInputs.heiferProduction.heiferRaisingDeathLossRate;
     const numberOfLactationsPerYear = productionDetailsOutputs.numberOfLactationsPerYear;
     const numberOfMilkingCowsOnFeed = Math.round(numberOfLactationsPerYear);
     const numberOfDryCowsOnFeed = Math.round(numberOfLactationsPerYear);
-    const numberOfBredHeifersCowsOnFeed = numberOfHeifersRaised;
-    const numberOfYoungHeifersCowsOnFeed = numberOfHeifersRaised;
+    const numberOfBredHeifersCowsOnFeed = numberOfHeifersRaised*(1 - (12/24)*(heiferDeath/100));
+    const numberOfYoungHeifersCowsOnFeed = numberOfHeifersRaised*(1 - (6/24)*(heiferDeath/100));
+    const numberOfWeanedHeifersCowsOnFeed = numberOfHeifersRaised*(1 - (2/24)*(heiferDeath/100));
 
     // ----> Feed Details Input variables required to calculate the outputs
 
@@ -1271,7 +1273,7 @@ export class FeedDetailsService {
           numberOfYoungHeifersCowsOnFeed +
         weanedHeifersCustomGrainMixLbsAsFedPerDay *
           weanedHeifersCustomGrainMixDaysOnFeed *
-            numberOfYoungHeifersCowsOnFeed) / 2000;
+          numberOfWeanedHeifersCowsOnFeed) / 2000;
 
     //Raised Forage Variable Costs
     const cornSilageTVC = cornSilageEstimatedTotalOperatingCost;
